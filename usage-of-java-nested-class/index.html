@@ -1,23 +1,1372 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Design,Design Pattern,Java,Open Source," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java的类对外而言只有一种面貌，但封装在类内部的形态却可以丰富多彩。嵌套类在这其中，扮演了极为重要的角色。它既丰富了类的层次，又可以灵活控制内部结构的访问限制与粒度，使得我们在开放性与封闭性之间、公开接口与内部实现之间取得适度的平衡。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读开源框架，遍览Java嵌套类的用法">
+<meta property="og:url" content="http://zhangyi.xyz/usage-of-java-nested-class/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="Java的类对外而言只有一种面貌，但封装在类内部的形态却可以丰富多彩。嵌套类在这其中，扮演了极为重要的角色。它既丰富了类的层次，又可以灵活控制内部结构的访问限制与粒度，使得我们在开放性与封闭性之间、公开接口与内部实现之间取得适度的平衡。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-03-19T07:24:45.000Z">
+<meta property="article:modified_time" content="2018-03-19T10:16:48.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Design">
+<meta property="article:tag" content="Design Pattern">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Open Source">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/usage-of-java-nested-class/"/>
+
+
+
+
+
+  <title>阅读开源框架，遍览Java嵌套类的用法 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/usage-of-java-nested-class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">阅读开源框架，遍览Java嵌套类的用法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T15:24:45+08:00">
+                2018-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/usage-of-java-nested-class/" class="leancloud_visitors" data-flag-title="阅读开源框架，遍览Java嵌套类的用法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Java的类对外而言只有一种面貌，但封装在类内部的形态却可以丰富多彩。嵌套类在这其中，扮演了极为重要的角色。它既丰富了类的层次，又可以灵活控制内部结构的访问限制与粒度，使得我们在开放性与封闭性之间、公开接口与内部实现之间取得适度的平衡。</p>
+<span id="more"></span>
+
+<p>嵌套类之所以能扮演这样的<strong>设计平衡角色</strong>，是因为嵌套类与其主类的关系不同，主类的所有成员对嵌套类而言都是完全开放的，主类的私有成员可以被嵌套类访问，而嵌套类则可以被看做是类边界中自成一体的高内聚类而被主类调用。因此，嵌套类的定义其实就是对类内部成员的进一步封装。虽然在一个类中定义嵌套类并不能减小类定义的规模，但由于嵌套类体现了不同层次的封装，使得一个相对较大的主类可以显得更有层次感，不至于因为成员过多而显得过于混乱。</p>
+<p>当一个类的业务逻辑非常复杂，且它承担的职责却又不足以单独分离为另外的类型时，内部嵌套类尤其是静态嵌套类就会变得非常有用。它是帮助我们组织类内部代码的利器。通过阅读顶级的Java开源项目，我们发现内部嵌套类通常用于几种情况。</p>
+<h3 id="封装Builder"><a href="#封装Builder" class="headerlink" title="封装Builder"></a>封装Builder</h3><p>Builder模式常常用于组装一个类，它通过更加流畅的接口形式简化构建组成元素的逻辑。在Java中，除非必要，我们一般会将一个类的Builder定义为内部嵌套类。这几乎已经成为一种惯有模式了。</p>
+<p>例如<strong>框架airlift</strong>定义了<code>Request</code>类，它是客户端请求对象的一个封装。组成一个<code>Request</code>对象需要诸如Uri、header、http verb、body等元素，且这些元素的组成会因为客户请求的不同而调用不同的组装方法。这是典型的Builder模式应用场景。让我们看看在<strong>Presto框架</strong>下，它如何调用airlift提供的<code>Request</code>及对应的<code>Builder</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ThreadSafe</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StatementClient</span> <span class="keyword">implements</span> <span class="title">Closeable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> Request <span class="title">buildQueryRequest</span><span class="params">(ClientSession session, String query)</span>    </span>&#123;</span><br><span class="line">        Request.Builder builder = prepareRequest(preparePost(), uriBuilderFrom(session.getServer()).replacePath(<span class="string">&quot;/v1/statement&quot;</span>).build())</span><br><span class="line">                .setBodyGenerator(createStaticBodyGenerator(query, UTF_8));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (session.getSource() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            builder.setHeader(PrestoHeaders.PRESTO_SOURCE, session.getSource());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (session.getClientInfo() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            builder.setHeader(PrestoHeaders.PRESTO_CLIENT_INFO, session.getClientInfo());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (session.getCatalog() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            builder.setHeader(PrestoHeaders.PRESTO_CATALOG, session.getCatalog());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (session.getSchema() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            builder.setHeader(PrestoHeaders.PRESTO_SCHEMA, session.getSchema());</span><br><span class="line">        &#125;</span><br><span class="line">        builder.setHeader(PrestoHeaders.PRESTO_TIME_ZONE, session.getTimeZone().getId());</span><br><span class="line">        <span class="keyword">if</span> (session.getLocale() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            builder.setHeader(PrestoHeaders.PRESTO_LANGUAGE, session.getLocale().toLanguageTag());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; property = session.getProperties();</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : property.entrySet()) &#123;</span><br><span class="line">            builder.addHeader(PrestoHeaders.PRESTO_SESSION, entry.getKey() + <span class="string">&quot;=&quot;</span> + entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Map&lt;String, String&gt; statements = session.getPreparedStatements();</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : statements.entrySet()) &#123;</span><br><span class="line">            builder.addHeader(PrestoHeaders.PRESTO_PREPARED_STATEMENT, urlEncode(entry.getKey()) + <span class="string">&quot;=&quot;</span> + urlEncode(entry.getValue()));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        builder.setHeader(PrestoHeaders.PRESTO_TRANSACTION_ID, session.getTransactionId() == <span class="keyword">null</span> ? <span class="string">&quot;NONE&quot;</span> : session.getTransactionId());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> builder.build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Request.<span class="function">Builder <span class="title">prepareRequest</span><span class="params">(Request.Builder builder, URI nextUri)</span>    </span>&#123;</span><br><span class="line">        builder.setHeader(PrestoHeaders.PRESTO_USER, user);</span><br><span class="line">        builder.setHeader(USER_AGENT, USER_AGENT_VALUE)</span><br><span class="line">                .setUri(nextUri);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> builder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>显然，<code>StatementClient</code>会根据<code>ClientSession</code>对象的不同情况，构造不同的<code>Request</code>。由于引入了Builder模式，则这种构造<code>Request</code>对象的职责到<code>Request.Builder</code>对象。观察该对象的使用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Request.Builder builder = prepareRequest(...);</span><br></pre></td></tr></table></figure>
+
+<p><code>Builder</code>类被定义为<code>Request</code>的静态嵌套类，以下为airlift框架的源代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> URI uri;</span><br><span class="line">        <span class="keyword">private</span> String method;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> ListMultimap&lt;String, String&gt; headers = ArrayListMultimap.create();</span><br><span class="line">        <span class="keyword">private</span> BodyGenerator bodyGenerator;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Builder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Request.<span class="function">Builder <span class="title">prepareHead</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">new</span> Request.Builder()).setMethod(<span class="string">&quot;HEAD&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Request.<span class="function">Builder <span class="title">prepareGet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">new</span> Request.Builder()).setMethod(<span class="string">&quot;GET&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Request.<span class="function">Builder <span class="title">preparePost</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">new</span> Request.Builder()).setMethod(<span class="string">&quot;POST&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Request.<span class="function">Builder <span class="title">preparePut</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">new</span> Request.Builder()).setMethod(<span class="string">&quot;PUT&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Request.<span class="function">Builder <span class="title">prepareDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">new</span> Request.Builder()).setMethod(<span class="string">&quot;DELETE&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> Request.<span class="function">Builder <span class="title">fromRequest</span><span class="params">(Request request)</span> </span>&#123;</span><br><span class="line">            Request.Builder requestBuilder = <span class="keyword">new</span> Request.Builder();</span><br><span class="line">            requestBuilder.setMethod(request.getMethod());</span><br><span class="line">            requestBuilder.setBodyGenerator(request.getBodyGenerator());</span><br><span class="line">            requestBuilder.setUri(request.getUri());</span><br><span class="line">            Iterator var2 = request.getHeaders().entries().iterator();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (var2.hasNext()) &#123;</span><br><span class="line">                Entry entry = (Entry)var2.next();</span><br><span class="line">                requestBuilder.addHeader((String)entry.getKey(), (String)entry.getValue());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> requestBuilder;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Request.<span class="function">Builder <span class="title">setUri</span><span class="params">(URI uri)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.uri = Request.validateUri(uri);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Request.<span class="function">Builder <span class="title">setMethod</span><span class="params">(String method)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.method = method;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Request.<span class="function">Builder <span class="title">setHeader</span><span class="params">(String name, String value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.headers.removeAll(name);</span><br><span class="line">            <span class="keyword">this</span>.headers.put(name, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Request.<span class="function">Builder <span class="title">addHeader</span><span class="params">(String name, String value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.headers.put(name, value);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Request.<span class="function">Builder <span class="title">setBodyGenerator</span><span class="params">(BodyGenerator bodyGenerator)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.bodyGenerator = bodyGenerator;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Request <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Request(<span class="keyword">this</span>.uri, <span class="keyword">this</span>.method, <span class="keyword">this</span>.headers, <span class="keyword">this</span>.bodyGenerator);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当一个类的构建逻辑非常复杂，并有多种不同的组合可能性时，我们会倾向于使用Builder模式来封装这种变化的组装逻辑。惯用的模式是将Builder类定义为公有静态嵌套类，很多Java实践证实了这一做法。</p>
+<h3 id="封装Iterator"><a href="#封装Iterator" class="headerlink" title="封装Iterator"></a>封装Iterator</h3><p>当我们需要在类中提供自定义的迭代器，且又不需要将该迭代器的实现对外公开时，都可以通过嵌套类实现一个内部迭代器。这是迭代器模式的一种惯用法。例如在<strong>Presto框架</strong>中，定义了属于自己的<code>PrestoResultSet</code>类，继承自JDBC的<code>ResultSet</code>，并重写了父类的迭代方法<code>next()</code>。<code>next</code>方法的迭代职责又委派给了一个内部迭代器<code>results</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrestoResultSet</span> <span class="keyword">implements</span> <span class="title">ResultSet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Iterator&lt;List&lt;Object&gt;&gt; results;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">next</span><span class="params">()</span> <span class="keyword">throws</span> SQLException  </span>&#123;</span><br><span class="line">        checkOpen();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!results.hasNext()) &#123;</span><br><span class="line">                row.set(<span class="keyword">null</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            row.set(results.next());</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (RuntimeException e) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e.getCause() <span class="keyword">instanceof</span> SQLException) &#123;</span><br><span class="line">                <span class="keyword">throw</span> (SQLException) e.getCause();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">&quot;Error fetching results&quot;</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而这个<code>results</code>实则是一个内部迭代器：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrestoResultSet</span> <span class="keyword">implements</span> <span class="title">ResultSet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ResultsPageIterator</span></span></span><br><span class="line"><span class="class">            <span class="keyword">extends</span> <span class="title">AbstractIterator</span>&lt;<span class="title">Iterable</span>&lt;<span class="title">List</span>&lt;<span class="title">Object</span>&gt;&gt;&gt; </span>&#123;</span><br><span class="line">        <span class="comment">//......</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ResultsPageIterator</code>迭代器继承自<strong>Guava框架</strong>定义的<code>AbstractIterator&lt;T&gt;</code>，间接实现了接口<code>Iterator&lt;T&gt;</code>。</p>
+<h3 id="封装内部概念"><a href="#封装内部概念" class="headerlink" title="封装内部概念"></a>封装内部概念</h3><p>编写整洁代码的实践告诉我们：类的定义要满足“单一职责原则”，这样的类才是专注的。编写可扩展代码的实践也告诉我们：类的定义要满足“单一职责原则”，如此才能保证只有一个引起变化的原因。然而，即使类只履行一个专注的职责，也可能因为过于复杂的业务逻辑而导致设计出相对比较庞大的类（真实项目总是要比玩具项目复杂100倍）。这时，我们会面临左右为难的选择。倘若不将职责分离到另外的单独类中，则该类就过于庞大，导致内部逻辑过于复杂；倘若将部分逻辑分离出去，又会导致类的数量过多，导致系统复杂度增加。这时，我们可以用嵌套类来封装内部概念，定义属于自己的数据与行为，在主类内部形成更加清晰的职责边界，却没有引起系统类数量的增加，算是一种折中的设计手法。</p>
+<p>当然，我们必须谨记的一点是：<strong>究竟职责应该定义在独立类中，还是定义在附属的嵌套类，判断标准不是看代码量以及类的规模，而是看这些需要封装的逻辑究竟属于内部概念，还是外部概念。</strong></p>
+<p>例如<strong>Presto框架</strong>的<code>HiveWriterFactory</code>类。它是一个工厂类，创建的产品为<code>HiveWriter</code>。在创建过程中，需要根据列名、列类型以及列的Hive类型进行组合，并将组合后的结果赋值给<code>Properties</code>类型的<code>schema</code>。</p>
+<p>这些值并不需要公开，如果不对其进行封装，则存在问题：</p>
+<ul>
+<li>没有体现领域概念，只有散乱的三种类型的变量</li>
+<li>无法将其作为整体放入到集合中，因而也无法调用集合的API对其进行转换</li>
+</ul>
+<p>针对Hive所要操作的数据，列名、列类型以及列的Hive类型这三个散乱概念实际上表达的是<strong>数据列</strong>的概念，于是就可以在这个工厂类中定义嵌套类来封装这些概念与逻辑：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HiveWriterFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DataColumn</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type type;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> HiveType hiveType;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DataColumn</span><span class="params">(String name, Type type, HiveType hiveType)</span>  </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = requireNonNull(name, <span class="string">&quot;name is null&quot;</span>);</span><br><span class="line">            <span class="keyword">this</span>.type = requireNonNull(type, <span class="string">&quot;type is null&quot;</span>);</span><br><span class="line">            <span class="keyword">this</span>.hiveType = requireNonNull(hiveType, <span class="string">&quot;hiveType is null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span>   </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Type <span class="title">getType</span><span class="params">()</span>   </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> type;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> HiveType <span class="title">getHiveType</span><span class="params">()</span>  </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> hiveType;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在封装为<code>DataColumn</code>嵌套类后，就可以将其放入到<code>List&lt;DataColumn&gt;</code>集合中，然后像如下代码那样对其进行操作：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">schema.setProperty(META_TABLE_COLUMNS, dataColumns.stream()</span><br><span class="line">       .map(DataColumn::getName)</span><br><span class="line">       .collect(joining(<span class="string">&quot;,&quot;</span>)));</span><br><span class="line">schema.setProperty(META_TABLE_COLUMN_TYPES, dataColumns.stream()</span><br><span class="line">       .map(DataColumn::getHiveType)</span><br><span class="line">       .map(HiveType::getHiveTypeName)</span><br><span class="line">       .collect(joining(<span class="string">&quot;:&quot;</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>在开发过程中，我们还会经常遇见一种典型的数据结构，它需要将两个值对应起来形成一种映射。这种数据结构通常称之为tuple。虽然在Java 7已经提供了这种简便的结构（Scala在一开始就提供了tuple结构，而且还提供了<code>._1</code>和<code>._2</code>的快捷访问方式），但这种结构是通用的，不利于体现出业务概念。当这种结构仅仅在一个类的内部使用时，就是嵌套类登上舞台的时候了。</p>
+<p>例如我们要建立<code>Type</code>与<code>Object</code>之间的映射关系，并被用在一个SQL语句的解析器中充当解析过程中的元数据，就可以定义为类<code>TypeAndValue</code>，命名直白，清晰可见：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SQLStatementParser</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;TypeAndValue&gt; accumulator = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PreparedStatement <span class="title">buildSql</span><span class="params">(JdbcClient client, Connection connection, String catalog, String schema, String table, List&lt;JdbcColumnHandle&gt; columns)</span> </span>&#123;</span><br><span class="line">        StringBuilder sql = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"></span><br><span class="line">        String columnNames = columns.stream()</span><br><span class="line">                .map(JdbcColumnHandle::getColumnName)</span><br><span class="line">                .map(<span class="keyword">this</span>::quote)</span><br><span class="line">                .collect(joining(<span class="string">&quot;, &quot;</span>));</span><br><span class="line"></span><br><span class="line">        sql.append(<span class="string">&quot;SELECT &quot;</span>);</span><br><span class="line">        sql.append(columnNames);</span><br><span class="line">        <span class="keyword">if</span> (columns.isEmpty()) &#123;</span><br><span class="line">            sql.append(<span class="string">&quot;null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sql.append(<span class="string">&quot; FROM &quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!isNullOrEmpty(catalog)) &#123;</span><br><span class="line">            sql.append(quote(catalog)).append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!isNullOrEmpty(schema)) &#123;</span><br><span class="line">            sql.append(quote(schema)).append(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        sql.append(quote(table));</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; clauses = toConjuncts(columns, accumulator);</span><br><span class="line">        <span class="keyword">if</span> (!clauses.isEmpty()) &#123;</span><br><span class="line">            sql.append(<span class="string">&quot; WHERE &quot;</span>)</span><br><span class="line">                    .append(Joiner.on(<span class="string">&quot; AND &quot;</span>).join(clauses));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        PreparedStatement statement = client.getPreparedStatement(connection, sql.toString());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; accumulator.size(); i++) &#123;</span><br><span class="line">            TypeAndValue typeAndValue = accumulator.get(i);</span><br><span class="line">            <span class="keyword">if</span> (typeAndValue.getType().equals(BigintType.BIGINT)) &#123;</span><br><span class="line">                statement.setLong(i + <span class="number">1</span>, (<span class="keyword">long</span>) typeAndValue.getValue());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(IntegerType.INTEGER)) &#123;</span><br><span class="line">                statement.setInt(i + <span class="number">1</span>, ((Number) typeAndValue.getValue()).intValue());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(SmallintType.SMALLINT)) &#123;</span><br><span class="line">                statement.setShort(i + <span class="number">1</span>, ((Number) typeAndValue.getValue()).shortValue());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(TinyintType.TINYINT)) &#123;</span><br><span class="line">                statement.setByte(i + <span class="number">1</span>, ((Number) typeAndValue.getValue()).byteValue());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(DoubleType.DOUBLE)) &#123;</span><br><span class="line">                statement.setDouble(i + <span class="number">1</span>, (<span class="keyword">double</span>) typeAndValue.getValue());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(RealType.REAL)) &#123;</span><br><span class="line">                statement.setFloat(i + <span class="number">1</span>, intBitsToFloat(((Number) typeAndValue.getValue()).intValue()));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(BooleanType.BOOLEAN)) &#123;</span><br><span class="line">                statement.setBoolean(i + <span class="number">1</span>, (<span class="keyword">boolean</span>) typeAndValue.getValue());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(DateType.DATE)) &#123;</span><br><span class="line">                <span class="keyword">long</span> millis = DAYS.toMillis((<span class="keyword">long</span>) typeAndValue.getValue());</span><br><span class="line">                statement.setDate(i + <span class="number">1</span>, <span class="keyword">new</span> Date(UTC.getMillisKeepLocal(DateTimeZone.getDefault(), millis)));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(TimeType.TIME)) &#123;</span><br><span class="line">                statement.setTime(i + <span class="number">1</span>, <span class="keyword">new</span> Time((<span class="keyword">long</span>) typeAndValue.getValue()));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(TimeWithTimeZoneType.TIME_WITH_TIME_ZONE)) &#123;</span><br><span class="line">                statement.setTime(i + <span class="number">1</span>, <span class="keyword">new</span> Time(unpackMillisUtc((<span class="keyword">long</span>) typeAndValue.getValue())));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(TimestampType.TIMESTAMP)) &#123;</span><br><span class="line">                statement.setTimestamp(i + <span class="number">1</span>, <span class="keyword">new</span> Timestamp((<span class="keyword">long</span>) typeAndValue.getValue()));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType().equals(TimestampWithTimeZoneType.TIMESTAMP_WITH_TIME_ZONE)) &#123;</span><br><span class="line">                statement.setTimestamp(i + <span class="number">1</span>, <span class="keyword">new</span> Timestamp(unpackMillisUtc((<span class="keyword">long</span>) typeAndValue.getValue())));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.getType() <span class="keyword">instanceof</span> VarcharType) &#123;</span><br><span class="line">                statement.setString(i + <span class="number">1</span>, ((Slice) typeAndValue.getValue()).toStringUtf8());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">&quot;Can&#x27;t handle type: &quot;</span> + typeAndValue.getType());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> statement;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeAndValue</span>    </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type type;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Object value;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TypeAndValue</span><span class="params">(Type type, Object value)</span>   </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.type = requireNonNull(type, <span class="string">&quot;type is null&quot;</span>);</span><br><span class="line">            <span class="keyword">this</span>.value = requireNonNull(value, <span class="string">&quot;value is null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Type <span class="title">getType</span><span class="params">()</span>   </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> type;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">getValue</span><span class="params">()</span>   </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>TypeAndValue</code>内部类的封装，有效地体现了类型与值之间的映射关系，改进了代码的可读性。事实上，以上代码还有可堪改进的空间，例如我们可以利用类的封装性，将类型判断的语句封装为方法，例如<code>isBigInt()</code>、<code>isInteger()</code>、<code>isDouble()</code>、<code>isTimeWithTimeZone()</code>、<code>isVarcharType()</code>等方法，则前面的一系列分支语句会变得更流畅一些：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; accumulator.size(); i++) &#123;</span><br><span class="line">    TypeAndValue typeAndValue = accumulator.get(i);</span><br><span class="line">    <span class="keyword">if</span> (typeAndValue.isBigInt())) &#123;</span><br><span class="line">        statement.setLong(i + <span class="number">1</span>, (<span class="keyword">long</span>) typeAndValue.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.isInteger())) &#123;</span><br><span class="line">        statement.setInt(i + <span class="number">1</span>, ((Number) typeAndValue.getValue()).intValue());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (typeAndValue.isSmallInt())) &#123;</span><br><span class="line">        statement.setShort(i + <span class="number">1</span>, ((Number) typeAndValue.getValue()).shortValue());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//……</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException(<span class="string">&quot;Can&#x27;t handle type: &quot;</span> + typeAndValue.getType());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="作为内部Map的Key"><a href="#作为内部Map的Key" class="headerlink" title="作为内部Map的Key"></a>作为内部Map的Key</h3><p>假定一个类的内部需要用到<code>Map</code>集合，而该集合对象又仅仅在内部使用，并不会公开给外部调用者。对于这样的Map集合，倘若Java基本类型或者字符串无法承担key的作用，就可以定义一个内部静态嵌套类作为该Map的key。注意，由于嵌套类要作为唯一不重复的key，且该类型为引用类型，因而需要重写<code>equals()</code>方法与<code>hashCode()</code>方法，视情况还应该重写<code>toString()</code>方法。</p>
+<p>例如在一个类中需要创建一个Map用以存储多个指标对象，但该指标的key由两个<code>ByteBuffer</code>对象联合组成，就可以封装为一个内部嵌套类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;MetricsKey, Metric&gt; metrics = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MetricsKey</span>    </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ByteBuffer row;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> ByteBuffer family;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MetricsKey</span><span class="params">(ByteBuffer row, ByteBuffer family)</span>   </span>&#123;</span><br><span class="line">        requireNonNull(row, <span class="string">&quot;row is null&quot;</span>);</span><br><span class="line">        requireNonNull(family, <span class="string">&quot;family is null&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.row = row;</span><br><span class="line">        <span class="keyword">this</span>.family = family;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span>   </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == obj) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((obj == <span class="keyword">null</span>) || (getClass() != obj.getClass())) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        MetricsKey other = (MetricsKey) obj;</span><br><span class="line">        <span class="keyword">return</span> Objects.equals(<span class="keyword">this</span>.row, other.row)</span><br><span class="line">                &amp;&amp; Objects.equals(<span class="keyword">this</span>.family, other.family);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span>    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(row, family);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span>    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> toStringHelper(<span class="keyword">this</span>)</span><br><span class="line">                    .add(<span class="string">&quot;row&quot;</span>, <span class="keyword">new</span> String(row.array(), UTF_8))</span><br><span class="line">                    .add(<span class="string">&quot;family&quot;</span>, <span class="keyword">new</span> String(row.array(), UTF_8))</span><br><span class="line">                    .toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现外部接口"><a href="#实现外部接口" class="headerlink" title="实现外部接口"></a>实现外部接口</h3><p>当我们在一个类的内部需要使用一个外部接口，且该接口的实现逻辑又比较复杂，而在类的外部又不存在重用的可能，此时就可以定义一个私有的内部嵌套类去实现该接口。</p>
+<p>在<strong>Presto框架</strong>的<code>BenchmarkSuite</code>类内部，调用了<code>AbstractBenchmark</code>类的<code>runBenchmark()</code>方法，该方法需要传入<code>BenchmarkResultHook</code>接口类型的对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runBenchmark</span><span class="params">(<span class="meta">@Nullable</span> BenchmarkResultHook benchmarkResultHook)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而<code>BenchmarkResultHook</code>是一个独立定义的接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BenchmarkResultHook</span> </span>&#123;</span><br><span class="line">    <span class="function">BenchmarkResultHook <span class="title">addResults</span><span class="params">(Map&lt;String, Long&gt; results)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">finished</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在类的内部，定义了实现<code>BenchmarkResultHook</code>接口的内部嵌套类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ForwardingBenchmarkResultWriter</span> <span class="keyword">implements</span> <span class="title">BenchmarkResultHook</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在<code>BenchmarkSuite</code>中就可以使用它：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">benchmark.runBenchmark(</span><br><span class="line">    <span class="keyword">new</span> ForwardingBenchmarkResultWriter(</span><br><span class="line">            ImmutableList.of(</span><br><span class="line">                    <span class="keyword">new</span> JsonBenchmarkResultWriter(jsonOut),</span><br><span class="line">                        <span class="keyword">new</span> JsonAvgBenchmarkResultWriter(jsonAvgOut),</span><br><span class="line">                        <span class="keyword">new</span> SimpleLineBenchmarkResultWriter(csvOut),</span><br><span class="line">                        <span class="keyword">new</span> OdsBenchmarkResultWriter(<span class="string">&quot;presto.benchmark.&quot;</span> + benchmark.getBenchmarkName(), odsOut)</span><br><span class="line">                )</span><br><span class="line">        )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>实现外部接口还有一种特殊情况是利用嵌套类实现一个函数接口。虽然在多数情况下，当我们在使用函数接口时，会使用Lambda表达式来实现该接口，其本质其实是一个函数。然而，当一个函数的实现相对比较复杂，且有可能被类的内部多处重用时，就不能使用Lambda表达式了。可是针对这种情形，确乎又没有必要定义单独的类去实现该函数接口，这时就是嵌套类的用武之地了。</p>
+<p>例如在<strong>Presto框架</strong>的<code>HivePageSource</code>类中有一个方法<code>createCoercer()</code>，它返回的类型是一个函数接口类型<code>Function&lt;Block, Block&gt;</code>。方法的实现会根据hive的类型决定返回的函数究竟是什么。目前支持以下四种情形：</p>
+<ul>
+<li>Integer数字转换为Varchar</li>
+<li>Varchar转换为Integer数字</li>
+<li>Integer数字的提升</li>
+<li>Float转换为Double</li>
+</ul>
+<p>这四种情形对应的Coercer其实都是一个函数<code>Block -&gt; Block</code>，但这个转换的逻辑比较复杂，尤其针对“Integer数字的提升”情形，还存在多个条件分支的判断。于是，Presto就在<code>HivePageSource</code>定义了如下四个嵌套类，并且都实现了函数接口<code>Function&lt;Block, Block&gt;</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HivePageSource</span> <span class="keyword">implements</span> <span class="title">ConnectorPageSource</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerNumberUpscaleCoercer</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">Block</span>, <span class="title">Block</span>&gt;  </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type fromType;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type toType;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">IntegerNumberUpscaleCoercer</span><span class="params">(Type fromType, Type toType)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.fromType = requireNonNull(fromType, <span class="string">&quot;fromType is null&quot;</span>);</span><br><span class="line">            <span class="keyword">this</span>.toType = requireNonNull(toType, <span class="string">&quot;toType is null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Block <span class="title">apply</span><span class="params">(Block block)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerNumberToVarcharCoercer</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">Block</span>, <span class="title">Block</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type fromType;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type toType;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">IntegerNumberToVarcharCoercer</span><span class="params">(Type fromType, Type toType)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.fromType = requireNonNull(fromType, <span class="string">&quot;fromType is null&quot;</span>);</span><br><span class="line">            <span class="keyword">this</span>.toType = requireNonNull(toType, <span class="string">&quot;toType is null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Block <span class="title">apply</span><span class="params">(Block block)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">VarcharToIntegerNumberCoercer</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">Block</span>, <span class="title">Block</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type fromType;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Type toType;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> minValue;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span> maxValue;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">VarcharToIntegerNumberCoercer</span><span class="params">(Type fromType, Type toType)</span> </span>&#123;</span><br><span class="line">              <span class="comment">//... </span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Block <span class="title">apply</span><span class="params">(Block block)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FloatToDoubleCoercer</span> <span class="keyword">implements</span> <span class="title">Function</span>&lt;<span class="title">Block</span>, <span class="title">Block</span>&gt; </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Block <span class="title">apply</span><span class="params">(Block block)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="封装内部常量"><a href="#封装内部常量" class="headerlink" title="封装内部常量"></a>封装内部常量</h3><p>如果一个类的内部需要用到大量常量，而这些常量却没有重用的可能，换言之，这些常量无需公开，仅作为内部使用。这时，我们可以通过嵌套类对这些常量进行归类，既便于调用，又提高了可读性，形成一种组织良好的代码结构。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MetadataLoader</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IpAddressConstants</span>    </span>&#123;</span><br><span class="line">        <span class="comment">// IPv4: 255.255.255.255 - 15 characters</span></span><br><span class="line">        <span class="comment">// IPv6: FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF - 39 characters</span></span><br><span class="line">        <span class="comment">// IPv4 embedded into IPv6: FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:255.255.255.255 - 45 characters</span></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IPV4_STRING_MAX_LENGTH = <span class="number">15</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IPV6_STRING_MAX_LENGTH = <span class="number">39</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> EMBEDDED_IP_ADDRESS_STRING_MAX_LENGTH = <span class="number">45</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeConstants</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BigintType BIGINT = <span class="keyword">new</span> BigintType();</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BooleanType BOOLEAN = <span class="keyword">new</span> BooleanType();</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DoubleType DOUBLE = <span class="keyword">new</span> DoubleType();</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> TimestampType TIMESTAMP = <span class="keyword">new</span> TimestampType();            </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//……</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="内部重用"><a href="#内部重用" class="headerlink" title="内部重用"></a>内部重用</h3><p>有些重用代码块，它的重用单元比方法要多一些，却又不成其为单独的类，因为它只在类的内部被重用，这时就可以将其定义为嵌套类，以利于内部重用。</p>
+<p>例如，在一个并发处理程序的<code>Query</code>类中，我们需要根据一个布尔标志来判断当前线程是否需要中断。中断线程的逻辑无法封装在一个私有方法中。如果将这个逻辑直接写到调用方法中，有可能干扰到主要逻辑的阅读，为了提供代码的可读性，<code>Query</code>类定义了一个内部嵌套类<code>ThreadInterruptor</code>，用以封装中断当前线程的逻辑：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Query</span> <span class="keyword">implements</span> <span class="title">Closeable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicBoolean ignoreUserInterrupt = <span class="keyword">new</span> AtomicBoolean();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicBoolean userAbortedQuery = <span class="keyword">new</span> AtomicBoolean();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pageOutput</span><span class="params">(OutputFormat format, List&lt;String&gt; fieldNames)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (Pager pager = Pager.create(); </span><br><span class="line">              ThreadInterruptor clientThread = <span class="keyword">new</span> ThreadInterruptor(); </span><br><span class="line">              Writer writer = createWriter(pager); </span><br><span class="line">              OutputHandler handler = createOutputHandler(format, writer, filedNames)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!pager.isNullPager()) &#123;</span><br><span class="line">                ignoreUserInterrupt.set(<span class="keyword">true</span>);</span><br><span class="line">                pager.getFinishFuture().thenRun(() -&gt; &#123;</span><br><span class="line">                    userAbortedQuery.set(<span class="keyword">true</span>);</span><br><span class="line">                    ignoreUserInterrupt.set(<span class="keyword">false</span>);</span><br><span class="line">                    clientThread.interrupt();</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            handler.processRow(client);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RuntimeException | IOException e) &#123;</span><br><span class="line">            <span class="keyword">if</span> (userAbortedQuery.get() &amp;&amp; !(e instanceOf QueryAbortedException)) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> QueryAbortedException(e);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadInterruptor</span> <span class="keyword">implements</span> <span class="title">Closeable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Thread thread = Thread.currentThread();</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> AtomicBoolean processing = <span class="keyword">new</span> AtomicBoolean(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">interrupt</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (processing.get()) &#123;</span><br><span class="line">                thread.interrupt();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            processing.set(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，由于<code>ThreadInterruptor</code>对象要放到try语句块中，因而需要实现<code>Closeable</code>接口，且需要通过try调用<code>close()</code>方法时，将<code>processing</code>标志变量置为<code>false</code>。</p>
+<h3 id="内部异常"><a href="#内部异常" class="headerlink" title="内部异常"></a>内部异常</h3><p>这算是内部重用的一种特殊情形，即对异常的内部重用。当我们需要抛出一个异常，且希望抛出的消息能够体现该异常场景，又或者该异常需要携带的内容不仅仅包括消息或错误原因时，都需要我们自定义异常。倘若该自定义异常没有外部公开的必要，就可以通过嵌套类定义一个内部异常。</p>
+<p>例如我们希望一个异常在抛出时能够携带类型信息，且该异常仅为内部使用，就可以这样来定义：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FailureInfo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FailureException</span></span></span><br><span class="line"><span class="class">            <span class="keyword">extends</span> <span class="title">RuntimeException</span>    </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> String type;</span><br><span class="line"></span><br><span class="line">        FailureException(String type, String message, FailureException cause)   &#123;</span><br><span class="line">            <span class="keyword">super</span>(message, cause, <span class="keyword">true</span>, <span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">this</span>.type = requireNonNull(type, <span class="string">&quot;type is null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">()</span>   </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> type;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span>    </span>&#123;</span><br><span class="line">            String message = getMessage();</span><br><span class="line">            <span class="keyword">if</span> (message != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> type + <span class="string">&quot;: &quot;</span> + message;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> type;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>无论嵌套类的使用形式如何多样，体现的价值又如何地梅兰秋菊各擅胜场，根本的原理还是逃不开面向对象设计的基本思想，即通过封装体现内聚的概念，从而利于重用，应对变化，或者就是单纯地组织代码，让代码的结构变得更加清晰。尤其是在相对复杂的真实项目中，如何控制对象类型的数量，又不至于违背“单一职责原则”，使用嵌套类是一条不错的中间路线选择。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/usage-of-java-nested-class/" title="阅读开源框架，遍览Java嵌套类的用法">http://zhangyi.xyz/usage-of-java-nested-class/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Design/" rel="tag"># Design</a>
+          
+            <a href="/tags/Design-Pattern/" rel="tag"># Design Pattern</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Open-Source/" rel="tag"># Open Source</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/about-just-enough-soft-arch/" rel="next" title="关于《恰如其分的软件架构》">
+                <i class="fa fa-chevron-left"></i> 关于《恰如其分的软件架构》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/mongodb-schema-design-using-aggregate/" rel="prev" title="利用聚合概念指导MongoDB的Schema设计">
+                利用聚合概念指导MongoDB的Schema设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85Builder"><span class="nav-number">1.</span> <span class="nav-text">封装Builder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85Iterator"><span class="nav-number">2.</span> <span class="nav-text">封装Iterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%86%85%E9%83%A8%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">封装内部概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%BA%E5%86%85%E9%83%A8Map%E7%9A%84Key"><span class="nav-number">4.</span> <span class="nav-text">作为内部Map的Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%A4%96%E9%83%A8%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">实现外部接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%86%85%E9%83%A8%E5%B8%B8%E9%87%8F"><span class="nav-number">6.</span> <span class="nav-text">封装内部常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E9%87%8D%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">内部重用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E5%BC%82%E5%B8%B8"><span class="nav-number">8.</span> <span class="nav-text">内部异常</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

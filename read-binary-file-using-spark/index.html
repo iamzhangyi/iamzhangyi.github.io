@@ -1,23 +1,1365 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spark,Scala,Python,Big Data" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="需求客户希望通过spark来分析二进制文件中0和1的数量以及占比。如果要分析的是目录，则针对目录下的每个文件单独进行分析。分析后的结果保存与被分析文件同名的日志文件中，内容包括0和1字符的数量与占比。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Spark读取并分析二进制文件">
+<meta property="og:url" content="http://zhangyi.xyz/read-binary-file-using-spark/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="需求客户希望通过spark来分析二进制文件中0和1的数量以及占比。如果要分析的是目录，则针对目录下的每个文件单独进行分析。分析后的结果保存与被分析文件同名的日志文件中，内容包括0和1字符的数量与占比。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/read-binary-file-using-spark/to-binary-string.png">
+<meta property="article:published_time" content="2018-02-01T04:40:40.000Z">
+<meta property="article:modified_time" content="2018-03-15T03:27:25.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Big Data">
+<meta property="article:tag" content="Spark">
+<meta property="article:tag" content="Scala">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/read-binary-file-using-spark/to-binary-string.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/read-binary-file-using-spark/"/>
+
+
+
+
+
+  <title>使用Spark读取并分析二进制文件 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/read-binary-file-using-spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Spark读取并分析二进制文件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T12:40:40+08:00">
+                2018-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/" itemprop="url" rel="index">
+                    <span itemprop="name">BigData</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/read-binary-file-using-spark/" class="leancloud_visitors" data-flag-title="使用Spark读取并分析二进制文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>客户希望通过spark来分析二进制文件中0和1的数量以及占比。如果要分析的是目录，则针对目录下的每个文件单独进行分析。分析后的结果保存与被分析文件同名的日志文件中，内容包括0和1字符的数量与占比。</p>
+<span id="more"></span>
+
+<p>要求：如果值换算为二进制不足八位，则需要在左侧填充0。</p>
+<p>可以在linux下查看二进制文件的内容。命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xxd –b –c 1 filename</span><br></pre></td></tr></table></figure>
+
+<p><code>-c 1</code>是显示1列1个字符，<code>-b</code>是显示二进制</p>
+<h2 id="Python版本"><a href="#Python版本" class="headerlink" title="Python版本"></a>Python版本</h2><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># This Python file uses the following encoding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> pyspark <span class="keyword">import</span> SparkConf, SparkContext</span><br><span class="line"></span><br><span class="line">APP_NAME = <span class="string">&quot;Load Bin Files&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>(<span class="params">spark_context, path</span>):</span></span><br><span class="line">    file_paths = fetch_files(path)</span><br><span class="line">    <span class="keyword">for</span> file_path <span class="keyword">in</span> file_paths:</span><br><span class="line">        outputs = analysis_file_content(spark_context, path + <span class="string">&quot;/&quot;</span> + file_path)</span><br><span class="line">        print_outputs(outputs)</span><br><span class="line">        save_outputs(file_path, outputs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fetch_files</span>(<span class="params">path</span>):</span></span><br><span class="line">    <span class="keyword">if</span> os.path.isfile(path):</span><br><span class="line">        <span class="keyword">return</span> [path]</span><br><span class="line">    <span class="keyword">return</span> os.listdir(path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analysis_file_content</span>(<span class="params">spark_context, file_path</span>):</span></span><br><span class="line">    data = spark_context.binaryRecords(file_path, <span class="number">1</span>)</span><br><span class="line">    records = data.flatMap(<span class="keyword">lambda</span> d: <span class="built_in">list</span>(<span class="built_in">bin</span>(<span class="built_in">ord</span>(d)).replace(<span class="string">&#x27;0b&#x27;</span>, <span class="string">&#x27;&#x27;</span>).zfill(<span class="number">8</span>)))</span><br><span class="line">    mapped_with_key = records.<span class="built_in">map</span>(<span class="keyword">lambda</span> d: (<span class="string">&#x27;0&#x27;</span>, <span class="number">1</span>) <span class="keyword">if</span> d == <span class="string">&#x27;0&#x27;</span> <span class="keyword">else</span> (<span class="string">&#x27;1&#x27;</span>, <span class="number">1</span>))</span><br><span class="line">    result = mapped_with_key.reduceByKey(<span class="keyword">lambda</span> x, y: x + y)</span><br><span class="line"></span><br><span class="line">    total = result.<span class="built_in">map</span>(<span class="keyword">lambda</span> r: r[<span class="number">1</span>]).<span class="built_in">sum</span>()</span><br><span class="line">    <span class="keyword">return</span> result.<span class="built_in">map</span>(<span class="keyword">lambda</span> r: format_outputs(r, total)).collect()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_outputs</span>(<span class="params">value_with_key, total</span>):</span></span><br><span class="line">    tu = (value_with_key[<span class="number">0</span>], value_with_key[<span class="number">1</span>], value_with_key[<span class="number">1</span>] / total * <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;字符&#123;0&#125;的数量为&#123;1&#125;, 占比为&#123;2:.2f&#125;%&quot;</span>.<span class="built_in">format</span>(*tu)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_outputs</span>(<span class="params">outputs</span>):</span></span><br><span class="line">    <span class="keyword">for</span> output <span class="keyword">in</span> outputs:</span><br><span class="line">        <span class="built_in">print</span> output</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_outputs</span>(<span class="params">file_path, outputs</span>):</span></span><br><span class="line">    result_dir = <span class="string">&quot;result&quot;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(result_dir):</span><br><span class="line">        os.mkdir(result_dir)</span><br><span class="line"></span><br><span class="line">    output_file_name = <span class="string">&quot;result/&quot;</span> + file_name_with_extension(file_path) + <span class="string">&quot;.output&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(output_file_name, <span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> result_file:</span><br><span class="line">        <span class="keyword">for</span> output <span class="keyword">in</span> outputs:</span><br><span class="line">            result_file.write(output + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        result_file.write(<span class="string">&quot;统计于&#123;0&#125;\n\n&quot;</span>.<span class="built_in">format</span>(format_logging_time()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">format_logging_time</span>():</span></span><br><span class="line">    <span class="keyword">return</span> time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%m:%s&#x27;</span>, time.localtime(time.time()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_name_with_extension</span>(<span class="params">path</span>):</span></span><br><span class="line">    last_index = path.rfind(<span class="string">&quot;/&quot;</span>) + <span class="number">1</span></span><br><span class="line">    length = <span class="built_in">len</span>(path)</span><br><span class="line">    <span class="keyword">return</span> path[last_index:length]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    conf = SparkConf().setMaster(<span class="string">&quot;local[*]&quot;</span>)</span><br><span class="line">    conf = conf.setAppName(APP_NAME)</span><br><span class="line">    sc = SparkContext(conf=conf)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) != <span class="number">2</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请输入正确的文件或目录路径&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        main(sc, sys.argv[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>核心逻辑都在<code>analysis_file_content</code>方法中。</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>python是脚本文件，无需编译。不过运行的前提是要安装好pyspark。运行命令为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./bin/spark-submit /Users/zhangyi/PycharmProjects/spark_binary_files_demo/parse_files_demo.py &quot;files&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h3><h4 id="开发环境的问题"><a href="#开发环境的问题" class="headerlink" title="开发环境的问题"></a>开发环境的问题</h4><p>要在spark下使用python，需要事先使用pip安装pyspark。结果安装总是失败。python的第三方库地址是<code>https://pypi.python.org/simple/</code>，在国内访问很慢。通过搜索问题，许多文章提到了国内的镜像库，例如豆瓣的库，结果安装时都提示找不到pyspark。</p>
+<p>查看安装错误原因，并非不能访问该库，仅仅是访问较慢，下载了不到8%的时候就提示下载失败。这实际上是连接超时的原因。因而可以修改连接超时值。可以在<code>~/.pip/pip.conf</code>下增加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[global]</span><br><span class="line">timeout = 6000</span><br></pre></td></tr></table></figure>
+
+<p>虽然安装依然缓慢，但至少能保证pyspark安装完毕。但是在安装py4j时，又提示如下错误信息（安装环境为mac）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">OSError: [Errno 1] Operation not permitted: &#x27;/System/Library/Frameworks/Python.framework/Versions/2.7/share&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>即使这个安装方式是采用sudo，且在管理员身份下安装，仍然提示该错误。解决办法是执行如下安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install --upgrade pip</span><br><span class="line"></span><br><span class="line">sudo pip install numpy --upgrade --ignore-installed</span><br><span class="line"></span><br><span class="line">sudo pip install scipy --upgrade --ignore-installed</span><br><span class="line"></span><br><span class="line">sudo pip install scikit-learn --upgrade --ignore-installed</span><br></pre></td></tr></table></figure>
+
+<p>然后再重新执行<code>sudo pip install pyspark</code>，安装正确。</p>
+<h4 id="字符编码的坑"><a href="#字符编码的坑" class="headerlink" title="字符编码的坑"></a>字符编码的坑</h4><p>在提示信息以及最后分析的结果中都包含了中文。运行代码时，会提示如下错误信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SyntaxError: Non-ASCII character &#x27;\xe5&#x27; in file /Users/zhangyi/PycharmProjects/spark_binary_files_demo/parse_files_demo.py on line 36, but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details</span><br></pre></td></tr></table></figure>
+
+<p>需要在代码文件的首行添加如下编码声明：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># This Python file uses the following encoding: utf-8</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="SparkConf的坑"><a href="#SparkConf的坑" class="headerlink" title="SparkConf的坑"></a>SparkConf的坑</h4><p>初始化SparkContext的代码如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conf = SparkConf().setMaster(<span class="string">&quot;local[*]&quot;</span>)</span><br><span class="line">conf = conf.setAppName(APP_NAME)</span><br><span class="line">sc = SparkContext(conf)</span><br></pre></td></tr></table></figure>
+
+<p>结果报告运行错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error initializing SparkContext.</span><br><span class="line">org.apache.spark.SparkException: Could not parse Master URL: &#x27;&lt;pyspark.conf.SparkConf object at 0x106666390&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>根据错误提示，以为是Master的设置有问题，实际上是实例化<code>SparkContext</code>有问题。阅读代码，发现它的构造函数声明如下所示：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, master=<span class="literal">None</span>, appName=<span class="literal">None</span>, sparkHome=<span class="literal">None</span>, pyFiles=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">            environment=<span class="literal">None</span>, batchSize=<span class="number">0</span>, serializer=PickleSerializer(<span class="params"></span>), conf=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">            gateway=<span class="literal">None</span>, jsc=<span class="literal">None</span>, profiler_cls=BasicProfiler</span>):</span></span><br></pre></td></tr></table></figure>
+
+<p>而前面的代码仅仅是简单的将conf传递给<code>SparkContext</code>构造函数，这就会导致Spark会将conf看做是<code>master</code>参数的值，即默认为第一个参数。所以这里要带名参数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sc = SparkContext(conf = conf)</span><br></pre></td></tr></table></figure>
+
+<h4 id="sys-argv的坑"><a href="#sys-argv的坑" class="headerlink" title="sys.argv的坑"></a>sys.argv的坑</h4><p>我需要在使用spark-submit命令执行python脚本文件时，传入我需要分析的文件路径。与scala和java不同。scala的<code>main</code>函数参数argv实际上可以接受命令行传来的参数。python不能这样，只能使用sys模块来接收命令行参数，即<code>sys.argv</code>。</p>
+<p>argv是一个list类型，当我们通过<code>sys.argv</code>获取传递进来的参数值时，一定要明白它会默认将spark-submit后要执行的python脚本文件路径作为第一个参数，而之后的参数则放在第二个。例如命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./bin/spark-submit /Users/zhangyi/PycharmProjects/spark_binary_files_demo/parse_files_demo.py &quot;files&quot;</span><br></pre></td></tr></table></figure>
+
+<p>则：</p>
+<ul>
+<li><code>argv[0]</code>: /Users/zhangyi/PycharmProjects/spark_binary_files_demo/parse_files_demo.py</li>
+<li><code>argv[1]</code>: files</li>
+</ul>
+<p>因此，我需要获得files文件夹名，就应该通过<code>argv[1]</code>来获得。</p>
+<p>此外，由于argv是一个list，没有<code>size</code>属性，而应该通过<code>len()</code>方法来获得它的长度，且期待的长度为2。</p>
+<h4 id="整数参与除法的坑"><a href="#整数参与除法的坑" class="headerlink" title="整数参与除法的坑"></a>整数参与除法的坑</h4><p>在python 2.7中，如果直接对整数执行除法，结果为去掉小数。因此<code>4 / 5</code>得到的结果却是0。在python 3中，这种运算会自动转型为浮点型。</p>
+<p>要解决这个问题，最简单的办法是导入一个现成的模块：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>这个import的声明应该放在所有import声明前面。</p>
+<h2 id="Scala版本"><a href="#Scala版本" class="headerlink" title="Scala版本"></a>Scala版本</h2><h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> bigdata.demo</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.<span class="type">File</span></span><br><span class="line"><span class="keyword">import</span> java.text.<span class="type">SimpleDateFormat</span></span><br><span class="line"><span class="keyword">import</span> java.util.<span class="type">Calendar</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.io.&#123;<span class="type">Files</span> =&gt; <span class="type">GoogleFiles</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.<span class="type">Charsets</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.rdd.<span class="type">RDD</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">&quot;Binary Files&quot;</span>).setMaster(<span class="string">&quot;local[*]&quot;</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (args.size != <span class="number">1</span>) &#123;</span><br><span class="line">      println(<span class="string">&quot;请输入正确的文件或目录路径&quot;</span>)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">analyseFileContent</span></span>(filePath: <span class="type">String</span>): <span class="type">RDD</span>[<span class="type">String</span>] = &#123;</span><br><span class="line">      <span class="keyword">val</span> data = sc.binaryRecords(filePath, <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">val</span> records = data.flatMap(x =&gt; x.flatMap(x =&gt; toBinaryStr(byteToShort(x)).toCharArray))</span><br><span class="line">      <span class="keyword">val</span> mappedWithKey = records.map(i =&gt; <span class="keyword">if</span> (i == &#x27;<span class="number">0</span>&#x27;) (&#x27;<span class="number">0</span>&#x27;, <span class="number">1</span>L) <span class="keyword">else</span> (&#x27;<span class="number">1</span>&#x27;, <span class="number">1</span>L))</span><br><span class="line">      <span class="keyword">val</span> result = mappedWithKey.reduceByKey(_ + _)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">val</span> sum = result.map(_._2).sum()</span><br><span class="line">      result.map &#123; <span class="keyword">case</span> (key, count) =&gt; formatOutput(key, count, sum)&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> path = args.head</span><br><span class="line">    <span class="keyword">val</span> filePaths = fetchFiles(path)</span><br><span class="line">    filePaths.par.foreach &#123; filePath =&gt;</span><br><span class="line">      <span class="keyword">val</span> outputs = analyseFileContent(filePath)</span><br><span class="line">      printOutputs(outputs)</span><br><span class="line">      saveOutputs(filePath, outputs)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">byteToShort</span></span>(b: <span class="type">Byte</span>): <span class="type">Short</span> =</span><br><span class="line">    <span class="keyword">if</span> (b &lt; <span class="number">0</span>) (b + <span class="number">256</span>).toShort <span class="keyword">else</span> b.toShort</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">toBinaryStr</span></span>(i: <span class="type">Short</span>, digits: <span class="type">Int</span> = <span class="number">8</span>): <span class="type">String</span> =</span><br><span class="line">    <span class="type">String</span>.format(<span class="string">&quot;%&quot;</span> + digits + <span class="string">&quot;s&quot;</span>, i.toBinaryString).replace(&#x27; &#x27;, &#x27;<span class="number">0</span>&#x27;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">printOutputs</span></span>(outputs: <span class="type">RDD</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    outputs.foreach(println)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">saveOutputs</span></span>(filePath: <span class="type">String</span>, outputs: <span class="type">RDD</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> resultDir = <span class="keyword">new</span> <span class="type">File</span>(<span class="string">&quot;result&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> (!resultDir.exists()) resultDir.mkdir()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> resultFile = <span class="keyword">new</span> <span class="type">File</span>(<span class="string">&quot;result/&quot;</span> + getFileNameWithExtension(filePath) + <span class="string">&quot;.output&quot;</span>)</span><br><span class="line">    outputs.foreach(line =&gt; <span class="type">GoogleFiles</span>.append(line + <span class="string">&quot;\n&quot;</span>, resultFile, <span class="type">Charsets</span>.<span class="type">UTF_8</span>))</span><br><span class="line">    <span class="type">GoogleFiles</span>.append(<span class="string">s&quot;统计于：<span class="subst">$&#123;formatLoggingTime()&#125;</span>\n\n&quot;</span>, resultFile, <span class="type">Charsets</span>.<span class="type">UTF_8</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">formatLoggingTime</span></span>(): <span class="type">String</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> formatter = <span class="keyword">new</span> <span class="type">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>)</span><br><span class="line">    formatter.format(<span class="type">Calendar</span>.getInstance().getTime)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">getFileNameWithExtension</span></span>(filePath: <span class="type">String</span>): <span class="type">String</span> = &#123;</span><br><span class="line">    filePath.substring(filePath.lastIndexOf(<span class="string">&quot;/&quot;</span>) + <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">fetchFiles</span></span>(path: <span class="type">String</span>): <span class="type">List</span>[<span class="type">String</span>] = &#123;</span><br><span class="line">    <span class="keyword">val</span> fileOrDirectory = <span class="keyword">new</span> <span class="type">File</span>(path)</span><br><span class="line">    fileOrDirectory.isFile <span class="keyword">match</span> &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="literal">true</span> =&gt; <span class="type">List</span>(path)</span><br><span class="line">      <span class="keyword">case</span> <span class="literal">false</span> =&gt; fileOrDirectory.listFiles().filter(_.isFile).map(_.getPath).toList</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">formatPercent</span></span>(number: <span class="type">Double</span>): <span class="type">String</span> = &#123;</span><br><span class="line">    <span class="keyword">val</span> percent = <span class="string">&quot;%1.2f&quot;</span> format number * <span class="number">100</span></span><br><span class="line">    <span class="string">s&quot;<span class="subst">$&#123;percent&#125;</span>%&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">formatOutput</span></span>(key: <span class="type">Char</span>, count: <span class="type">Long</span>, sum: <span class="type">Double</span>): <span class="type">String</span> = &#123;</span><br><span class="line">    <span class="string">s&quot;字符<span class="subst">$&#123;key&#125;</span>的数量为<span class="subst">$&#123;count&#125;</span>, 占比为<span class="subst">$&#123;formatPercent(count/sum)&#125;</span>&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行-1"><a href="#运行-1" class="headerlink" title="运行"></a>运行</h3><p>通过sbt对代码进行编译、打包后，生成jar文件。然后在spark主目录下运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$SPARK_HOME/bin/spark-submit --class bigdata.demo.Main --master spark://&lt;ip&gt;  $SPARK_HOME/jars/binaryfilesstastistics_2.11-1.0.jar file:///share/spark-2.2.0-bin-hadoop2.7/derby.log</span><br></pre></td></tr></table></figure>
+
+<p>最后的参数”file:///share/spark-2.2.0-bin-hadoop2.7/derby.log”就是main函数接收的参数，即要分析的文件目录。如果为本地目录，需要指定文件协议<code>file://</code>，如果为HDFS目录，则指定协议<code>hdfs://</code>。</p>
+<h3 id="遇到的坑-1"><a href="#遇到的坑-1" class="headerlink" title="遇到的坑"></a>遇到的坑</h3><h4 id="byte类型的值"><a href="#byte类型的值" class="headerlink" title="byte类型的值"></a>byte类型的值</h4><p>在Scala中，Byte类型为8位有符号补码整数。数值区间为 -128 到 127。倘若二进制值为<code>11111111</code>，通过SparkContext的binaryRecords()方法读进Byte数据后，其值为-1，而非255。原因就是补码的缘故。如果十进制为128，转换为Byte类型后，值为-128。</p>
+<p>而对于-1，如果执行toBinaryString()，则得到的字符串为”11111111111111111111111111111111”，而非我们期待的”11111111”。如下图所示：</p>
+<img src="/read-binary-file-using-spark/to-binary-string.png" class="">
+
+<p>针对八位的二进制数值，可以编写一个方法，将Byte类型转为Short类型，然后再调用toBinaryString()方法转换为对应的二进制字符串。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">byteToShort</span></span>(b: <span class="type">Byte</span>): <span class="type">Short</span> =</span><br><span class="line">  <span class="keyword">if</span> (b &lt; <span class="number">0</span>) (b + <span class="number">256</span>).toShort <span class="keyword">else</span> b.toShort</span><br></pre></td></tr></table></figure>
+
+<p>而对于不足八位的二进制数值，如果直接调用toBinaryString()方法，则二进制字符串将不到八位。可以利用String的format进行格式化：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">toBinaryStr</span></span>(i: <span class="type">Short</span>, digits: <span class="type">Int</span> = <span class="number">8</span>): <span class="type">String</span> =</span><br><span class="line">  <span class="type">String</span>.format(<span class="string">&quot;%&quot;</span> + digits + <span class="string">&quot;s&quot;</span>, i.toBinaryString).replace(&#x27; &#x27;, &#x27;<span class="number">0</span>&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>当然，可以将这两个方法定义为Byte与Short的隐式方法。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/read-binary-file-using-spark/" title="使用Spark读取并分析二进制文件">http://zhangyi.xyz/read-binary-file-using-spark/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Big-Data/" rel="tag"># Big Data</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/restart-from-2018/" rel="next" title="2018，重新开始">
+                <i class="fa fa-chevron-left"></i> 2018，重新开始
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/thinking-rule-of-rp/" rel="prev" title="面向流的设计思想">
+                面向流的设计思想 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E7%89%88%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">Python版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91"><span class="nav-number">2.3.</span> <span class="nav-text">遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.1.</span> <span class="nav-text">开发环境的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E5%9D%91"><span class="nav-number">2.3.2.</span> <span class="nav-text">字符编码的坑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SparkConf%E7%9A%84%E5%9D%91"><span class="nav-number">2.3.3.</span> <span class="nav-text">SparkConf的坑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sys-argv%E7%9A%84%E5%9D%91"><span class="nav-number">2.3.4.</span> <span class="nav-text">sys.argv的坑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%8F%82%E4%B8%8E%E9%99%A4%E6%B3%95%E7%9A%84%E5%9D%91"><span class="nav-number">2.3.5.</span> <span class="nav-text">整数参与除法的坑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scala%E7%89%88%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">Scala版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">3.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-1"><span class="nav-number">3.2.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91-1"><span class="nav-number">3.3.</span> <span class="nav-text">遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#byte%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%80%BC"><span class="nav-number">3.3.1.</span> <span class="nav-text">byte类型的值</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

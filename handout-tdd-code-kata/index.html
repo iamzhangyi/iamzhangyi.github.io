@@ -1,23 +1,1606 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OO,Java,TDD," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="说明：本讲义是我在ThoughtWorks作为咨询师时，为客户开展TDD Code Kata而编写。案例为Guess Number，案例需求来自当时的同事王瑜珩。当时，我们共同在ThoughtWorks的Zynx交付团队，为培养团队TDD能力进行训练时，引入了本案例。讲义中给出的代码问题则来自客户方的受训学员，可谓“真实的代码坏味道”。个人认为TDD不只是开发方法，还应该是设计方法，因此讲义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TDD编码实战讲义">
+<meta property="og:url" content="http://zhangyi.xyz/handout-tdd-code-kata/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="说明：本讲义是我在ThoughtWorks作为咨询师时，为客户开展TDD Code Kata而编写。案例为Guess Number，案例需求来自当时的同事王瑜珩。当时，我们共同在ThoughtWorks的Zynx交付团队，为培养团队TDD能力进行训练时，引入了本案例。讲义中给出的代码问题则来自客户方的受训学员，可谓“真实的代码坏味道”。个人认为TDD不只是开发方法，还应该是设计方法，因此讲义">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/handout-tdd-code-kata/logo.jpg">
+<meta property="article:published_time" content="2018-04-01T12:24:31.000Z">
+<meta property="article:modified_time" content="2018-04-01T12:46:32.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="OO">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="TDD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/handout-tdd-code-kata/logo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/handout-tdd-code-kata/"/>
+
+
+
+
+
+  <title>TDD编码实战讲义 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/handout-tdd-code-kata/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TDD编码实战讲义</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T20:24:31+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/handout-tdd-code-kata/" class="leancloud_visitors" data-flag-title="TDD编码实战讲义">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/handout-tdd-code-kata/logo.jpg" class="">
+
+<blockquote>
+<p><strong>说明：</strong>本讲义是我在ThoughtWorks作为咨询师时，为客户开展TDD Code Kata而编写。案例为Guess Number，案例需求来自当时的同事王瑜珩。当时，我们共同在ThoughtWorks的Zynx交付团队，为培养团队TDD能力进行训练时，引入了本案例。讲义中给出的代码问题则来自客户方的受训学员，可谓“真实的代码坏味道”。个人认为TDD不只是开发方法，还应该是设计方法，因此讲义中包含了诸多设计原理、思想和原则。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="目标收益"><a href="#目标收益" class="headerlink" title="目标收益"></a>目标收益</h2><ul>
+<li>熟悉IDE快捷键；</li>
+<li>掌握TDD基本知识；</li>
+<li>识别代码坏味道，熟练运用重构手法；</li>
+<li>熟悉JUnit与Mockito框架；</li>
+<li>了解Google Guice框架；</li>
+</ul>
+<h2 id="整体需求"><a href="#整体需求" class="headerlink" title="整体需求"></a>整体需求</h2><p>实现猜数字的游戏。游戏有四个格子，每个格子有一个0到9的数字，任意两个格子的数字都不一样。你有6次猜测的机会，如果猜对则获胜，否则失败。每次猜测时需依序输入4个数字，程序会根据猜测的情况给出xAxB的反馈，A前面的数字代表位置和数字都对的个数，B前面的数字代表数字对但是位置不对的个数。</p>
+<p>例如：答案是1 2 3 4， 那么对于不同的输入，有如下的输出</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>输出</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 5 6 7</td>
+<td>1A0B</td>
+<td>1位置正确</td>
+</tr>
+<tr>
+<td>2 4 7 8</td>
+<td>0A2B</td>
+<td>2和4位置都不正确</td>
+</tr>
+<tr>
+<td>0 3 2 4</td>
+<td>1A2B</td>
+<td>4位置正确，2和3位置不正确</td>
+</tr>
+<tr>
+<td>5 6 7 8</td>
+<td>0A0B</td>
+<td>没有任何一个数字正确</td>
+</tr>
+<tr>
+<td>4 3 2 1</td>
+<td>0A4B</td>
+<td>4个数字位置都不对</td>
+</tr>
+<tr>
+<td>1 2 3 4</td>
+<td>4A0B</td>
+<td>胜出  全中</td>
+</tr>
+<tr>
+<td>1 1 2 3</td>
+<td>输入不正确，重新输入</td>
+<td></td>
+</tr>
+<tr>
+<td>1 2</td>
+<td>输入不正确，重新输入</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>答案在游戏开始时随机生成。输入只有6次机会，在每次猜测时，程序应给出当前猜测的结果，以及之前所有猜测的数字和结果以供玩家参考。输入界面为控制台（Console），以避免太多与问题无关的界面代码。输入时，用空格分隔数字。</p>
+<h2 id="任务分解"><a href="#任务分解" class="headerlink" title="任务分解"></a>任务分解</h2><p>TDD的一个重要步骤是在分析需求之后，对其进行任务分解。每个任务相当于一个功能点，它们都是可以验证的。在进行TDD时，可以根据具体情况，对任务再进行分解，或者增加一些我们之前未曾发现的任务。</p>
+<hr>
+<h4 id="练习：分解任务"><a href="#练习：分解任务" class="headerlink" title="练习：分解任务"></a>练习：分解任务</h4><p>我们对Guess Number分解的任务为：</p>
+<ul>
+<li>随机生成答案</li>
+<li>判断每次猜测的结果</li>
+<li>检查输入是否合法</li>
+<li>记录并显示历史猜测数据</li>
+<li>判断游戏结果。判断猜测次数，如果满6次但是未猜对则判负；如果在6次内猜测的4个数字值与位置都正确，则判胜 </li>
+</ul>
+<hr>
+<h4 id="讨论：选择开始的任务"><a href="#讨论：选择开始的任务" class="headerlink" title="讨论：选择开始的任务"></a>讨论：选择开始的任务</h4><p>在分解好任务开始测试驱动开发时，我们应该优先选择哪一个任务？ 选择的标准包括：</p>
+<ul>
+<li>任务的依赖性</li>
+<li>任务的重要性</li>
+</ul>
+<p>从依赖的角度看，并不一定需要优先选择前序任务，因为我们可以使用Mock的方式驱动出当前任务需要依赖的接口，而不用考虑实现。例如，“随机生成答案”任务与“判断每次猜测的结果”任务之间存在前后序的依赖关系，但实现的顺序却并不需要按照此顺序。</p>
+<p>对于任务的重要性，主要是判断任务是否整个系统（模块）的核心功能。一个判断标准是确定任务是功能的主要流程还是异常流程。例如任务“检查输入是否合法”即为异常流程，可以考虑后做。</p>
+<hr>
+<h2 id="测试驱动开发"><a href="#测试驱动开发" class="headerlink" title="测试驱动开发"></a>测试驱动开发</h2><h3 id="开始第一个任务"><a href="#开始第一个任务" class="headerlink" title="开始第一个任务"></a>开始第一个任务</h3><p>我们认为，任务“判断每次的猜测结果”可以作为起始的核心任务。</p>
+<h4 id="任务：判断每次的猜测结果"><a href="#任务：判断每次的猜测结果" class="headerlink" title="任务：判断每次的猜测结果"></a>任务：判断每次的猜测结果</h4><p>在进行测试驱动时，选择好任务后，就需要对测试用例进行分析。可以假设该任务就是你要实现的一个完整功能，然后从外部调用的角度去思考用例。这体现为两个方面：</p>
+<ul>
+<li>选择测试样本；</li>
+<li>驱动承担该职责的对象，根据意图设计接口；</li>
+</ul>
+<p>选择测试样本的方法请参考实例化需求。例如，这里可以选择全中或全错等样本。通常情况下，编写的第一个测试应该选择最简单的样本。</p>
+<hr>
+<h4 id="知识：Specification-By-Example"><a href="#知识：Specification-By-Example" class="headerlink" title="知识：Specification By Example"></a>知识：Specification By Example</h4><p>由Gojko Adzic的著作Specification By Example（实例化需求），介绍了如何通过实例去分析和沟通需求。它是一组过程模式，可以协助软件产品的变更，确保有效地交付正确的产品。实例化需求的过程分为：</p>
+<ul>
+<li>从目标中获取范围</li>
+<li>用实例进行描述</li>
+<li>精炼需求说明</li>
+<li>自动化验证，无须改变需求说明</li>
+<li>频繁验证</li>
+<li>演进出一个文档系统</li>
+</ul>
+<p>更多内容，请参考该书。</p>
+<hr>
+<p><strong>注意：单元测试不能针对方法编写测试，而应根据业务编写测试用例。一个测试方法只能做一件事情，代表一个测试样本和一个业务规则。</strong></p>
+<hr>
+<h4 id="思考：测试驱动开发的驱动力"><a href="#思考：测试驱动开发的驱动力" class="headerlink" title="思考：测试驱动开发的驱动力"></a>思考：测试驱动开发的驱动力</h4><p>设计接口是体现测试驱动开发“驱动力”的重要一点。之所以先编写测试，就是希望开发人员<strong>站在调用者的角度去思考</strong>，即所谓“<strong>意图导向编程</strong>”。从调用的角度思考，可以驱动我们思考并达到如下目的： </p>
+<ul>
+<li>如何命名被测试类以及方法，才能更好地表达设计者的意图，使得测试具有更好的可读性；</li>
+<li>被测对象的创建必须简单，这样才符合测试哲学，从而使得设计具有良好的可测试性；</li>
+<li>测试使我们只关注接口，而非实现；</li>
+</ul>
+<hr>
+<h4 id="知识：Given-When-Then模式"><a href="#知识：Given-When-Then模式" class="headerlink" title="知识：Given-When-Then模式"></a>知识：Given-When-Then模式</h4><p>在编写测试方法时，应遵循Given-When-Then模式，这种方式描述了测试的准备，期待的行为，以及相关的验收条件。Given-When-Then模式体现了TDD对设计的驱动力：</p>
+<ul>
+<li>编写Given时，“驱动”我们思考被测对象的创建，以及它与其他对象的协作；</li>
+<li>编写When时，“驱动”我们思考被测接口的方法命名，以及它需要接收的传入参数；考虑行为方式，究竟是<strong>命令式</strong>还是<strong>查询式</strong>方法(CQS原则)；</li>
+<li>编写Then时，“驱动”我们分析被测接口的返回值；</li>
+</ul>
+<hr>
+<h4 id="知识：CQS原则"><a href="#知识：CQS原则" class="headerlink" title="知识：CQS原则"></a>知识：CQS原则</h4><p>CQS原则，即命令-查询分离原则（Command-Query Separation），是指一个函数要么是一个命令来执行动作，要么是一个查询来给调用者返回数据。但是不能两者都是。</p>
+<hr>
+<p>对于任务“判断每次的猜测结果”，我们<strong>首先要考虑由谁来执行此任务</strong>。从面向对象设计的角度来讲，这里的任务即“职责”，我们要找到职责的承担者。<strong>从拟人化的角度去思考所谓“对象”</strong>，就是要找到<strong>能够彻底理解（Understand）该职责的对象</strong>。遵循信息专家模式，大多数情况下，承担职责的对象常常是拥有与该职责相关信息的信息持有者，即所谓“信息专家”。 </p>
+<hr>
+<h4 id="知识：信息专家模式"><a href="#知识：信息专家模式" class="headerlink" title="知识：信息专家模式"></a>知识：信息专家模式</h4><p>信息专家模式（Information Expert）是GRASP模式中解决类的职责分配问题的最基本的模式。 </p>
+<p><strong>问题：</strong></p>
+<p>当我们为系统发现完对象和职责之后，职责的分配原则（职责将分配给哪个对象执行）是什么？</p>
+<p><strong>解决方案：</strong></p>
+<p>职责的执行需要某些信息（information），把职责分配给该信息的拥有者。换句话说，某项职责的执行需要某些资源，只有拥有这些资源的对象才有资格执行职责。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>信息的拥有者类同时就是信息的操作者类，可以减少不必要的类之间的关联。</li>
+<li>各类的职责单一明确，容易理解。</li>
+</ul>
+<hr>
+<h4 id="思考：寻找承担职责“判断每次的猜测结果”的对象"><a href="#思考：寻找承担职责“判断每次的猜测结果”的对象" class="headerlink" title="思考：寻找承担职责“判断每次的猜测结果”的对象"></a>思考：寻找承担职责“判断每次的猜测结果”的对象</h4><p>可能的答案：Game，Player，Round  </p>
+<p>提示：应让学员充分思考承担职责的角色，不能在未经分析之前就开始编写测试，从而忽略测试带来的驱动力，甚至忘记一些基本的命名原则和面向对象设计思想。例如，学员可能会将被测类命名为<code>Guess</code>、<code>Check</code>，而被测方法也被命名为<code>guess()</code>、<code>check()</code>。</p>
+<hr>
+<h4 id="知识：命名规则"><a href="#知识：命名规则" class="headerlink" title="知识：命名规则"></a>知识：命名规则</h4><p><strong>类命名规则：</strong>测试类与被测类的命名应保持一致，通常情况下，测试类的名称为：被测类名称+Test后缀。例如这里的Game类为被测类，则测试类命名为GameTest。</p>
+<p><strong>方法命名规则：</strong>测试方法应表述业务含义，这样就能使得测试类可以成为文档。测试方法可以足够长，以便于清晰地表述业务。为了更好地辨别方法名表达的含义，ThoughtWorks提倡用Ruby风格的命名方法，即下划线分隔方法的每个单词，而非Java传统的驼峰风格。建议测试方法名以should开头，此时，默认的主语为被测类。例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span>     </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_return_0A0B_when_no_number_guessed_correctly</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="comment">//...     </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的方法可以阅读为：Game should return 0A0B when no number guessed correctly。显然，这是一条描述了业务规则的自然语言。 </p>
+<hr>
+<p>现在编写测试。由于事先已经明确被测类为Game，编写测试的Given部分，让我们思考如何创建Game对象？是否可以简单地创建？ </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Game game = <span class="keyword">new</span> Game(); </span><br></pre></td></tr></table></figure>
+
+<p>分析任务，需要判断猜测结果，则必然要求获知游戏的答案。这个答案与Game的关系是什么呢？这里产生的驱动力是如何创建Game对象？为了创建该对象，需要提供哪些准备？这使得我们驱动出<code>Answer</code>类的定义。 </p>
+<h4 id="讨论：由4个数字组成的答案是否需要封装？"><a href="#讨论：由4个数字组成的答案是否需要封装？" class="headerlink" title="讨论：由4个数字组成的答案是否需要封装？"></a>讨论：由4个数字组成的答案是否需要封装？</h4><p>学员容易写出的代码，以如下方式表现答案(Answer)： </p>
+<ul>
+<li>整数数组 </li>
+<li>整数类型的可变参数 </li>
+<li>字符串 </li>
+</ul>
+<p>第一种方式除了缺乏对整数值的限制外，一个问题还在于暴露了实现细节。第二种方式甚至无法对答案的个数进行限制。第三种方式则与输入有关，使得Game类还要承担解析输入字符串的职责，违背了单一职责原则（说明：在后面，我们为Answer类提供了工厂方法，可以将传入的字符串解析为Answer对象，也即是由Answer承担解析输入字符串的职责，这同时也遵循“信息专家模式”。） </p>
+<hr>
+<h4 id="思考：Answer的定义"><a href="#思考：Answer的定义" class="headerlink" title="思考：Answer的定义"></a>思考：Answer的定义</h4><p>我们可以从如何构造一个Answer对象着手，看看该如何定义<code>Answer</code>类。  </p>
+<h4 id="知识：单一职责原则"><a href="#知识：单一职责原则" class="headerlink" title="知识：单一职责原则"></a>知识：单一职责原则</h4><p>由Robert Martin提出，该原则指出：就一个类而言，应该只专注于做一件事和仅有一个引起变化的原因。</p>
+<hr>
+<p>编写When可以帮助开发者思考类的行为。一定要从业务而非实现的角度去思考接口。例如： </p>
+<ul>
+<li>实现角度的设计：<code>check()</code> </li>
+<li>业务角度的设计：<code>guess()</code>  </li>
+</ul>
+<p>注意两个方法命名表达意图的不同。 </p>
+<p>编写Then实际上是考虑如何验证。没有任何验证的测试不能称其为测试。由于该任务为判断输入答案是否正确，并获得猜测结果，因而必然需要返回值。从需求来看，只需要返回一个形如xAxB的字符串即可。</p>
+<hr>
+<h4 id="思考：是否需要将猜测结果封装为类？"><a href="#思考：是否需要将猜测结果封装为类？" class="headerlink" title="思考：是否需要将猜测结果封装为类？"></a>思考：是否需要将猜测结果封装为类？</h4><p>至少就目前而言，并没有必要。因为从需求来看，仅仅需要返回一个形如xAxB的字符串而言。这是需要遵循简单设计的要求，不必过度设计。</p>
+<hr>
+<p>如前所述，任务“判断每次的猜测结果”存在多个测试样本，例如一个都不对，或者全部正确，又或者值正确而位置不正确等，因而需要编写多个测试。在编写第一个测试时，可以简单实现使得测试快速通过，然后随着多个测试的编写，再驱动出检查输入数值的算法。</p>
+<p>根据以上的分析，我们编写的第一个测试如下所示，它遵循了Given-When-Then模式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span>    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_return_0A0B_when_no_number_is_correct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//given</span></span><br><span class="line">    Answer actualAnswer = Answer.createAnswer(<span class="string">&quot;1 2 3 4&quot;</span>);        </span><br><span class="line">    Game game = <span class="keyword">new</span> Game(actualAnswer);        </span><br><span class="line">    Answer inputAnswer = Answer.createAnswer(<span class="string">&quot;5 6 7 8&quot;</span>);      </span><br><span class="line"></span><br><span class="line">     <span class="comment">//when        </span></span><br><span class="line">     String result = game.guess(inputAnswer);        </span><br><span class="line"></span><br><span class="line">    <span class="comment">//then        </span></span><br><span class="line">    assertThat(result , is(<span class="string">&quot;0A0B&quot;</span>));    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个测试已经驱动出了<code>Answer</code>的创建，<code>Game</code>类的定义，<code>guess()</code>接口的定义。在保证编译通过后，应该首先运行该测试。此时测试必然是失败的。为了使该测试快速通过，我们可以简单实现guess()方法，例如直接返回“0A0B”字符串。接着，就可以编写第二个测试。</p>
+<hr>
+<h4 id="思考：为何要先运行一个失败的测试？"><a href="#思考：为何要先运行一个失败的测试？" class="headerlink" title="思考：为何要先运行一个失败的测试？"></a>思考：为何要先运行一个失败的测试？</h4><p>首先，它能够保证测试框架是没有问题的；其次，它可以避免偶然的成功，因为测试通过不等于实现一定是正确的。</p>
+<hr>
+<p>在编写第二个测试时，由于测试样本与之前的测试完全不一样，之前的简单实现就不能满足新增的测试了。事实上，测试就是要去验证实现逻辑，这其中最重要的测试目标就是分支。不同的分支可能会返回不同的结果，如果我们根据分支来设计测试，就能有效保障实现的正确性。这称为“三角测试法”。</p>
+<p>常见问题：</p>
+<ul>
+<li>没有将测试代码看做是代码的一部分。当编写多个测试方法时，没有及时重构；例如，应及时将<code>game</code>对象与<code>actualAnswer</code>对象提取为字段，以避免不必要的声明。</li>
+<li>直接暴露表达式，而未对表达式进行方法提取，以表达业务意义；</li>
+<li><code>guess()</code>方法过长；应该通过提取方法来改进代码的可读性；</li>
+<li><code>Game</code>类与<code>Answer</code>类的职责分配不合理，将<code>Answer</code>类设计为仅具有<code>get()</code>和<code>set()</code>的数据对象，而将判断数值是否正确、位置是否正确的逻辑分配给了<code>Game</code>。没有考虑<code>get()</code>和<code>set()</code>是否真正有必要；如果我们对<code>guess()</code>方法进行了方法提取，可以识别出代码的坏味道“Feature Envy”，即<code>Game</code>的方法用到的都是<code>Answer</code>的属性。这时，应该采用移动方法的重构手法对其进行重构。</li>
+</ul>
+<h3 id="开始第二个任务"><a href="#开始第二个任务" class="headerlink" title="开始第二个任务"></a>开始第二个任务</h3><p>我们选择的第二个任务为“随机生成答案”，这是一个独立的职责。编写测试类时，很容易驱动出AnswerGenerator类。关键在于，我们该如何编写单元测试来验证生成的结果。我们对结果的要求是： </p>
+<ul>
+<li>数字必须是0…9之间； </li>
+<li>产生的四个数字不能相同； </li>
+</ul>
+<hr>
+<h4 id="讨论：究竟由谁来承担“随机生成答案”的职责？"><a href="#讨论：究竟由谁来承担“随机生成答案”的职责？" class="headerlink" title="讨论：究竟由谁来承担“随机生成答案”的职责？"></a>讨论：究竟由谁来承担“随机生成答案”的职责？</h4><p>学员容易将此职责直接分配给<code>Answer</code>。然而，随机生成答案与创建一个答案适用于不同的场景，这对于<code>Answer</code>的调用者而言，并不友好。尤其对于只需要答案的场景，还需要无端地引入对随机数的依赖，显然是不合理的。 </p>
+<hr>
+<p>编写测试方法的过程与前相似，仍然按照Given-When-Then模式来编写（若测试方法比较简单，可以不遵循这一模式，但思考的过程却应该按照该模式）。</p>
+<p>在编写then部分的测试时，可能出现疑问。 </p>
+<p><strong>问题：如何验证生成的答案是否正确？</strong></p>
+<p>我们已经将答案建模为<code>Answer</code>，因此<code>AnswerGenerator</code>的generate()方法要返回的对象类型为<code>Answer</code>。那么，我们怎么知道返回的<code>Answer</code>对象是合法的呢？一种做法是获取Answer的属性，然后再进行验证。那么，<strong>为了测试的验证而暴露这些属性，是否适合</strong>？  </p>
+<p>要完成对答案正确性的验证，直接暴露答案的属性是不妥当的，至少目前没有获取答案属性的需求。我们的做法是定义一个验证方法。这是否仍然属于为测试而定义行为的做法呢？这个问题有点像鸡与鸡蛋的哲学问题。<strong>我们应该还原到设计，看看这种手法是否改善了设计</strong>，如此即可。毕竟，这种对答案正确性的校验，也可以说是业务逻辑的一种。</p>
+<p><strong>说明：</strong>在开始编写“检查输入是否合法”任务时，你会发现，这里所谓多余的验证，就会派上用场。 </p>
+<p>这个验证方法可以是单纯的返回true或者false，但从需求来看，这个返回结果并没有很好地展现验证要求：究竟是因为数字超出了范围，还是出现了相同的数字？我个人更倾向于用自定义异常来表示生成的答案违背了这两条规则。因此，我们可以为<code>Answer</code>定义一个<code>validate()</code>方法，以验证生成的Answer是否满足规则要求；如果不符合，就抛出对应的异常。</p>
+<hr>
+<h4 id="知识：JUnit中对异常的验证"><a href="#知识：JUnit中对异常的验证" class="headerlink" title="知识：JUnit中对异常的验证"></a>知识：JUnit中对异常的验证</h4><p>随着JUnit版本的演化，先后提供了三种验证异常的机制。</p>
+<ul>
+<li>一种是传统的在测试代码中通过编写<code>try... catch</code>结合<code>fail()</code>方法进行验证。这种方法带来的问题是验证逻辑太繁琐。</li>
+<li>第二种方法是利用<code>@Test</code>的<code>expected</code>方法，通过指定异常类型值来验证。它的好处是简单直接，缺点是只能验证抛出异常的类型。</li>
+<li>第三种方法是利用ExpectedException Rule。Rule可以更灵活地验证异常，包括异常类型和异常消息。我们也可以通过定义派生自<code>TypeSafeMatcher</code>的<code>Matcher</code>类，来验证异常的更多信息。</li>
+</ul>
+<hr>
+<p><strong>问题：如何确定测试通过就意味着实现正确？</strong></p>
+<p>第二个任务看似简单，实则不然。原因在于这里产生了一个随机数。随机数带来了不确定性，它可能偶然地让测试通过了。也许，运行测试100次，前面的99次都通过了，最后一次失败，仍然视为失败。</p>
+<p>生成随机数自然是调用Java的JDK。<strong>在单元测试环节中，倘若我们要测试的单元需要调用别的API，则在这个测试中，我们可以假定这个API是正确的。</strong>我们对Java JDK的正确性自然信心十足。那么，为何我们还要考虑测试的随机失败？这是因为在这个任务的测试中，我们测试的并非随机数的生成逻辑，而在于随机数的种子是否恰当，实现逻辑中是否判断了可能出现的错误数字？</p>
+<p>由于生成随机数的逻辑并非确定无疑的，测试时我们就不能依赖于它。这正是Mock可以派上用场的时候。为此，我们需要将生成随机数的功能提取为类<code>RandomIntGenerator</code>，再注入到<code>AnswerGenerator</code>中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnswerGenerator</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> RandomIntGenerator randomIntGenerator;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AnswerGenerator</span><span class="params">(RandomIntGenerator randomIntGenerator)</span> </span>&#123;         </span><br><span class="line">        <span class="keyword">this</span>.randomIntGenerator = randomIntGenerator;     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该类的实现调用了Java提供的<code>Random</code>类，但在测试时，我们却可以通过Mock它的行为，使得返回的结果变为确定的数字：     </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test(expected = OutOfRangeAnswerException.class)</span>     </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_throw_OutOfRangeAnswerException_which_is_not_between_0_and_9</span><span class="params">()</span> </span>&#123;         </span><br><span class="line">    RandomIntGenerator randomIntGenerator = mock(RandomIntGenerator.class);         </span><br><span class="line">    when(randomIntGenerator.nextInt()).thenReturn(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">10</span>);         </span><br><span class="line">    AnswerGenerator answerGenerator = <span class="keyword">new</span> AnswerGenerator(randomIntGenerator);</span><br><span class="line"></span><br><span class="line">    answerGenerator.generate(); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="重构：组合Game与AnswerGenerator"><a href="#重构：组合Game与AnswerGenerator" class="headerlink" title="重构：组合Game与AnswerGenerator"></a>重构：组合Game与AnswerGenerator</h4><p>在实现第一个任务时，我们定义的Game接受了Answer对象作为游戏的答案。现在，我们定义了AnswerGenerator用以生成符合条件的随机答案。我们当然可以在调用该对象的generate()方法生成答案后，再将该答案作为构造函数参数传递给Game对象。但更好的做法是直接将AnswerGenerator作为构造函数参数传递给Game，在其内部调用它的generate()方法。</p>
+<h3 id="开始第三个任务"><a href="#开始第三个任务" class="headerlink" title="开始第三个任务"></a>开始第三个任务</h3><p>之所以将“验证输入是否合法”放在第三个任务，是因为它不属于happy path的范畴。它属于辅助业务，重要性相对次之。</p>
+<p><strong>提示：</strong>对于第三个任务，可以采用Specification By Example的方式来考虑测试用例。</p>
+<p><strong>问题：参数 vs. 字段</strong></p>
+<p>学员在定义执行该任务的类时，一种可能性是将输入的答案作为类的构造函数参数。例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> InputValidator(<span class="string">&quot;1 2 3 5&quot;</span>).validate();</span><br></pre></td></tr></table></figure>
+
+<p>存在两个错误：</p>
+<ul>
+<li>错误地判断了输入值的生命周期。什么内容应该放在构造函数中作为参数？换言之，构造函数参数与对象之间的关系是什么？之所以要作为构造函数参数，就是意味着在某种场景下这些参数值应该在创建该对象时就存在。这些参数值与对象“生死与共”，它们的生命周期是保持一致的。如果不是，就不应该作为构造函数的参数。你觉得输入应该作为构造函数吗？如果我要验证另一条输入应该怎么办？再创建一个<code>InputValidator</code>对象吗？</li>
+<li>违反了阅读直觉。<code>validate()</code>方法验证谁？验证空吗？显然这样的接口违反了主-谓-宾的语法。</li>
+</ul>
+<p><strong>问题：封装的Answer与输入</strong></p>
+<p>既然已经封装了Answer对象，为何<code>validate()</code>方法还是要接收字符串类型的输入？阅读需求，已可寻求到答案。</p>
+<p><strong>问题：引入<code>InputValidator</code>类型是否有必要？</strong></p>
+<p>多数人会认为这里的验证逻辑与Answer相关，根据前面提到的“信息专家模式”，似乎应该将验证逻辑放到Answer中。然而，这里的需求明确地表示了，如果输入不符合要求，就不允许创建该Answer，而是抛出异常。所以，这里的部分验证逻辑是在创建Answer之前就应该存在，当然就不应该由Answer承担了。</p>
+<p>针对第三个任务，验证结果的逻辑不应该由boolean型或错误码来表现。对于表达一种错误规则来说，如果你将其看做是一种业务规则，最好的表达方式是采用自定义异常，除非这门语言允许返回两个值（例如Go语言支持返回多个字，但并不支持异常）。对此，在第二个任务中已有描述，这里不再赘述。</p>
+<hr>
+<h4 id="重构：Answer的验证逻辑"><a href="#重构：Answer的验证逻辑" class="headerlink" title="重构：Answer的验证逻辑"></a>重构：Answer的验证逻辑</h4><p>在开发第二个任务时，我们已经在<code>Answer</code>类中定义了<code>validate()</code>方法。现在，<code>InputValidator</code>类又提供了<code>validate()</code>方法，且其中部分逻辑是相同的。在实现时，应该如何重构现有代码？</p>
+<hr>
+<h3 id="开始第四个任务"><a href="#开始第四个任务" class="headerlink" title="开始第四个任务"></a>开始第四个任务</h3><p>还剩下两个任务：</p>
+<ul>
+<li>记录并显示历史猜测数据</li>
+<li>判断游戏结果</li>
+</ul>
+<p>究竟应该选择哪一个任务作为第四个任务，并没有定论。从业务逻辑看，“判断游戏结果”任务更重要，它才是整个游戏的核心逻辑。可从技术实现看，“判断游戏结果”可以依赖“记录并显示历史猜测数据”。因为分析“判断游戏结果”任务，实际上做了两件事：其一是判断猜测次数是否超过指定的6次；其二是判断每次猜测的结果。第二件事已经被我们开发的第二个任务覆盖。而对于测试次数而言，如果我们记录了历史猜测数据，那么这个次数也可以唾手可得。</p>
+<hr>
+<h4 id="讨论：测试驱动开发需要事先设计吗？"><a href="#讨论：测试驱动开发需要事先设计吗？" class="headerlink" title="讨论：测试驱动开发需要事先设计吗？"></a>讨论：测试驱动开发需要事先设计吗？</h4><p>Martin Fowler的文章Is Design Dead?其实就是对此问题的正本清源。由于测试驱动开发提倡“测试先行，简单设计”，许多人就误认为TDD不需要设计，以讹传讹之下，甚至导致许多优秀的设计者抛弃了设计去实践TDD，最后得出TDD不可行的结论。</p>
+<p>我个人认为，<strong>视场景而定，测试驱动开发仍可进行事先设计</strong>。设计并不仅包含技术层面的设计如对OO思想乃至设计模式的运用，它本身还包括对需求的分析与建模。若不分析需求就开始编写测试，就好像没有搞清楚要去的地方，就开始快步前行，最后发现南辕北辙。测试驱动开发提倡的任务分解，实际上就是一种需求的分析。而如何寻找职责，以及识别职责的承担者则可以视为建模设计。测试驱动更像是一种培养设计专注力的手段，就像冥想者通过盘腿静坐的手段来体悟天地一样，测试驱动可以强迫你站在测试的角度（就是使用者的角度）去思考接口，如此才能设计出表现意图的接口。但编写测试自身并不能取代设计，正如盘腿静坐并不等于就是冥想。</p>
+<p>在开始测试驱动开发之前，做适度的事先设计，还有利于我们仔细思考技术实现的解决方案。它与测试驱动接口的设计并不相悖。解决方案或许属于实现层面，若过早思考实现，会干扰我们对接口的判断；但完全不理会实现，又可能导致设计方向的走偏。举例来说，如果我们要实现XML消息到Java对象的转换。一种解决方案是通过jaxb将消息转换为Java对象，然后再定义转换映射的<code>Transformer</code>，通过硬编码或者反射的方式将其转换为相关的领域对象。然后在执行了业务操作后，再将返回的结果转换为另一个Jaxb对象。而另一种解决方案则是通过引入模板，例如StringTemplate或者Velocity，定义转换的模板，然后进行替换实现。这两种解决方案的区别，直接影响了我们划分任务的方式。</p>
+<hr>
+<p>我们选择“记录并显示历史猜测数据”作为第四个任务。同样，对于此任务，我们要事先考虑清楚，究竟应该由谁来承担这个职责？恩，注意，这里其实包含了两项任务：记录与显示。当我们看到类似“和”、“或者”等并列连接词时，都应该思考它是否表达了多个职责？因此，对于第四个任务，我们应该稍稍拆分一下，分解成两个任务：</p>
+<ul>
+<li>记录历史猜测数据；</li>
+<li>显示历史猜测数据；</li>
+</ul>
+<p>那么应该谁来“记录历史猜测数据”？我们应该寻找承担该职责的对象。</p>
+<hr>
+<h4 id="知识：寻找职责的承担者"><a href="#知识：寻找职责的承担者" class="headerlink" title="知识：寻找职责的承担者"></a>知识：寻找职责的承担者</h4><p>寻找职责的承担者，其实就是寻找某个可以承担该职责的角色。角色又是什么？想象我们现实世界中的角色。看看我们身边，是否角色遍地可寻？BA角色负责分析需求，DEV角色负责实现功能，QA角色负责测试功能是否正确，PM角色负责管理整个项目的进度与项目成员。我们是依据什么来划分角色的？——能力。能力的体现是什么？除了诸多素质要求，最直接的体现就是“知识”。因此，所谓“角色”，就是拥有了相关“知识”从而具有相关“能力”的人。</p>
+<hr>
+<p>什么角色应该记录历史猜测数据呢？那就是要寻找谁具有记录历史猜测数据的能力。于是推之于知识，就是谁拥有每一次猜测的数据。显然，<code>Game</code>拥有当前猜测的数据，因此承担责任的应该为<code>Game</code>。</p>
+<p>现在，开始编写测试。既然已经辨别出<code>Game</code>对象，就应该针对它编写测试方法，让我们还是从测试方法的业务逻辑描述开始吧：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameTest</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Answer actualAnswer = Answer.createAnswer(<span class="string">&quot;1 2 3 4&quot;</span>);     </span><br><span class="line">    <span class="keyword">private</span> Game game;     </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;         </span><br><span class="line">        AnswerGenerator answerGenerator = mock(AnswerGenerator.class);         </span><br><span class="line">        when(answerGenerator.generate()).thenReturn(actualAnswer);         </span><br><span class="line">        game = <span class="keyword">new</span> Game(answerGenerator);     </span><br><span class="line">    &#125;     </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_record_every_guess_result</span><span class="params">()</span> </span>&#123;       </span><br><span class="line">        game.guess(Answer.createAnswer(<span class="string">&quot;2 1 6 7&quot;</span>));       </span><br><span class="line">        game.guess(Answer.createAnswer(<span class="string">&quot;1 2 3 4&quot;</span>));       </span><br><span class="line"></span><br><span class="line">        List&lt;GuessResult&gt; guessHistory = game.guessHistory();         </span><br><span class="line"></span><br><span class="line">        assertThat(guessResults.size(), is(<span class="number">2</span>));         </span><br><span class="line">        assertThat(guessResults.get(<span class="number">0</span>).result(), is(<span class="string">&quot;0A2B&quot;</span>));         </span><br><span class="line">        assertThat(guessResults.get(<span class="number">0</span>).inputAnswer().toString(), is(<span class="string">&quot;2 1 6 7&quot;</span>));         </span><br><span class="line">        assertThat(guessResults.get(<span class="number">1</span>).result(), is(<span class="string">&quot;4A0B&quot;</span>));         </span><br><span class="line">        assertThat(guessResults.get(<span class="number">1</span>).inputAnswer().toString(), is(<span class="string">&quot;1 2 3 4&quot;</span>));     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这里，实际上我驱动出了<code>Game</code>的<code>guessHistory()</code>方法，同时还得到了一个封装了猜测结果的<code>GuessResult</code>对象。与第一个任务不同的是，我没有使用字符串来表示猜测结果，这是因为这里的历史猜测数据不仅包含了猜测结果，还包含了当前的测测数据。</p>
+<p>现在，应该考虑“显示历史猜测记录”的任务了。这个功能就是要在猜测了数字之后，在控制台显示历史猜测记录。虽然是控制台，我们仍然认为这属于界面的工作。<strong>TDD根本就不应该用来驱动界面设计</strong>，还是将注意力放到业务逻辑上来吧。抛开界面，这里的逻辑就转换为：</p>
+<ul>
+<li>当用户猜测了数字后，应该显示历史猜测记录。</li>
+</ul>
+<p>将界面与业务逻辑分开体现了“关注点分离”原则，也是表现层设计的常用做法。最常见的处理界面设计的模式就是MVC模式。因此在这里可以引入<code>GameController</code>类，就目前而言，它可以负责<code>Game</code>与<code>GameView</code>的协作，所以相应的还可以为界面显示定义一个专属的View对象。</p>
+<p>虽然在这里是用控制台显示历史猜测数据信息，实现非常简单，直接调用<code>System.out.println()</code>方法即可，然而我们却很难测试控制台是否显示了该信息。虽然有一些框架也提供了Mock控制台的功能，但就TDD而言，这样的测试并无实际意义。<strong>我们需要合理地辨别在功能实现中，哪些内容适合编写自动化测试，哪些内容适合人工测试。</strong>因此，这里可以引入Mock框架来模拟<code>GameView</code>，我们只需验证<code>Controller</code>与<code>View</code>之间的协作即可。这时，测试还有助于我们设计出可测试性好的类。</p>
+<p>因为是<code>Controller</code>，需要接受用户输入，而非直接传入答案的字符串值。同理，我们在TDD中也不可能测试业务逻辑与控制台的交互。因此，同样需要引入<code>InputCommand</code>类型来封装输入逻辑，然后以Mock框架来模拟<code>InputCommand</code>。 故而，我们为该功能编写的测试为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameControllerTest</span> </span>&#123;     </span><br><span class="line">    <span class="meta">@Mock</span>     </span><br><span class="line">    <span class="keyword">private</span> GameView mockGameView;     </span><br><span class="line">    <span class="meta">@Mock</span>     </span><br><span class="line">    <span class="keyword">private</span> InputCommand mockCommand;     </span><br><span class="line">    <span class="meta">@Mock</span>     </span><br><span class="line">    <span class="keyword">private</span> AnswerGenerator mockGenerator;     </span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Game game;     </span><br><span class="line">    <span class="keyword">private</span> Answer correctAnswer;     </span><br><span class="line">    <span class="keyword">private</span> Answer errorAnswer;     </span><br><span class="line">    <span class="keyword">private</span> GameController gameController;     </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;         </span><br><span class="line">        MockitoAnnotations.initMocks(<span class="keyword">this</span>);      </span><br><span class="line">   </span><br><span class="line">        correctAnswer = Answer.createAnswer(<span class="string">&quot;1 2 3 4&quot;</span>);         </span><br><span class="line">        errorAnswer = Answer.createAnswer(<span class="string">&quot;1 2 5 6&quot;</span>);   </span><br><span class="line">      </span><br><span class="line">        when(mockGenerator.generate()).thenReturn(correctAnswer);         </span><br><span class="line">        game = <span class="keyword">new</span> Game(mockGenerator);         </span><br><span class="line">        gameController = <span class="keyword">new</span> GameController(game, mockGameView);     </span><br><span class="line">    &#125;         </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_display_guess_history_message_when_guess_number_twice</span><span class="params">()</span> </span>&#123;         </span><br><span class="line">        <span class="comment">//given         </span></span><br><span class="line">        when(mockCommand.input()).thenReturn(errorAnswer);         </span><br><span class="line">        GameController gameController = <span class="keyword">new</span> GameController(game, mockGameView);  </span><br><span class="line"></span><br><span class="line">        <span class="comment">//when         </span></span><br><span class="line">        gameController.play(mockCommand);         </span><br><span class="line"></span><br><span class="line">        <span class="comment">//then       </span></span><br><span class="line">        verify(mockGameView).showGuessHistory(anyList());     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在编写该测试之前，我们实则做了一部分设计与分析工作，辨别各种职责以及承担这些职责的对象，尤其重要的是，要分辨出它们之间的协作方式。对协作的分析应以被测对象为主。一旦分析清楚，就应该编写测试，通过测试来驱动对象之间的协作方式。在编写的测试中，参与协作的其他对象都可以通过Mock来模拟，不一定要有实现，只需体现它们的接口即可。 </p>
+<p>例如，在当前这个测试中，除了之前已经处理过的<code>Game</code>与<code>AnswerGenerator</code>之间的协作外，我主要考虑了<code>InputCommand</code>与<code>GameView</code>之间的协作方式，其中包括：三者之间的依赖注入，例如<code>GameView</code>作为构造函数的参数，因为一个<code>GameController</code>对象应对应一个<code>GameView</code>对象；而<code>InputCommand</code>则作为<code>play()</code>方法的输入参数。这里的<code>GameController</code>的接口就是通过测试驱动获得的。由于我们测试的是历史猜测结果是否显示，因此使用了Mockito框架的<code>verify</code>方法对这种对象之间的协作进行了验证。之所以在验证逻辑中没有验证具体的猜测结果是否正确，是因为这个逻辑已经在<code>Game</code>的测试中覆盖；而对于<code>GameController</code>，我们需要验证的逻辑只限于“是否显示历史猜测数据”，而非“显示了什么样的历史猜测数据”。 </p>
+<p><strong>注意：</strong>这里创建了多个Mock对象，因此使用了Mockito提供的<code>@Mock</code>便捷方式来创建这些Mock对象。 </p>
+<p><code>InputCommand</code>可以定义为接口，真正的控制台实现交给了<code>ConsoleInputCommand</code>类。实现如下： </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsoleInputCommand</span> <span class="keyword">implements</span> <span class="title">InputCommand</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> BufferedReader bufferedReader;     </span><br><span class="line"></span><br><span class="line">    &#123;         </span><br><span class="line">        bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));     </span><br><span class="line">    &#125;     </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Answer <span class="title">input</span><span class="params">()</span> </span>&#123;         </span><br><span class="line">        <span class="keyword">try</span> &#123;             </span><br><span class="line">            String inputAnswer = bufferedReader.readLine();             </span><br><span class="line">            <span class="keyword">return</span> Answer.createAnswer(inputAnswer);         </span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;             </span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e.getMessage());         </span><br><span class="line">        &#125;     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="开始第五个任务"><a href="#开始第五个任务" class="headerlink" title="开始第五个任务"></a>开始第五个任务</h3><p>在开始编写测试之前，先要深入分析该任务表达的需求信息。“判断游戏结果。判断猜测次数，如果满6次但是未猜对则判负；如果在6次内猜测的4个数字值与位置都正确，则判胜。”实际上这里引入了对游戏猜测的控制逻辑，主要是对猜测次数的控制。这样的控制逻辑应该交给谁呢？ </p>
+<p>多数时候，程序员容易将这样的控制逻辑放到主程序入口处，即main()函数中。这并非恰当的方式。一方面，这里的控制逻辑仍然属于业务逻辑的范畴，不应该暴露给调用者，同时也加大了调用者的负担；另一方面，倘若程序不再作为控制台程序时，例如编写Web Application，主程序入口的内容就要调整，甚至导致这一逻辑的重复。 </p>
+<p>有了编写第四个任务作为基础，我们很容易判断出该控制逻辑应该交给<code>GameController</code>。编写测试也变得简单： </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameControllerTest</span> </span>&#123;     </span><br><span class="line">    <span class="meta">@Test</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_end_game_and_display_sucessful_message_when_number_is_correct_in_first_round</span><span class="params">()</span> </span>&#123;         </span><br><span class="line">        <span class="comment">//given         </span></span><br><span class="line">        when(mockCommand.input()).thenReturn(correctAnswer);         </span><br><span class="line"></span><br><span class="line">        <span class="comment">//when       </span></span><br><span class="line">        gameController.play(mockCommand);         </span><br><span class="line"></span><br><span class="line">        <span class="comment">//then         </span></span><br><span class="line">        verify(mockCommand, times(<span class="number">1</span>)).input();         </span><br><span class="line">        verify(mockGameView).showMessage(<span class="string">&quot;successful&quot;</span>);     </span><br><span class="line">    &#125;     </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">should_end_game_and_display_failure_message_once_times_reach_max_times</span><span class="params">()</span> </span>&#123;         </span><br><span class="line">        <span class="comment">//given         </span></span><br><span class="line">        when(mockCommand.input()).thenReturn(errorAnswer);         </span><br><span class="line">        GameController gameController = <span class="keyword">new</span> GameController(game, mockGameView);         </span><br><span class="line"></span><br><span class="line">        <span class="comment">//when         </span></span><br><span class="line">        gameController.play(mockCommand);         </span><br><span class="line"></span><br><span class="line">        <span class="comment">//then         </span></span><br><span class="line">        verify(mockCommand, times(<span class="number">6</span>)).input();         </span><br><span class="line">        verify(mockGameView).showMessage(<span class="string">&quot;failed&quot;</span>);     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的两个测试与第四个任务测试“显示历史猜测数据”任务的测试相似，唯一不同的是我们添加了对<code>InputCommand</code>协作的验证，并以Mockito提供的<code>times()</code>方法准确的验证了调用的次数。默认情况下，<code>verify</code>验证的次数为1，但我在第一个测试中仍然给出了times(1)，是希望在测试中明确的表示它被执行了一次。 </p>
+<p>通过编写测试，我们驱动出了<code>GameController</code>、<code>InputCommand</code>与<code>GameView</code>之间的协作关系，并且还驱动出<code>showMessage()</code>方法。如果你觉得<code>showMessage()</code>方法的定义太过宽泛，也可以定义<code>showFailure()</code>和<code>showSuccess()</code>方法来体现这里表达的业务逻辑。 </p>
+<p><code>GameController</code>的实现就变简单了： </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameController</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_TIMES = <span class="number">6</span>;     </span><br><span class="line">    <span class="keyword">private</span> Game game;     </span><br><span class="line">    <span class="keyword">private</span> GameView gameView;     </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GameController</span><span class="params">(Game game, GameView gameView)</span> </span>&#123;         </span><br><span class="line">        <span class="keyword">this</span>.game = game;         </span><br><span class="line">        <span class="keyword">this</span>.gameView = gameView;     </span><br><span class="line">    &#125;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">(InputCommand inputCommand)</span> </span>&#123;         </span><br><span class="line">        GuessResult guessResult;         </span><br><span class="line">        <span class="keyword">do</span> &#123;             </span><br><span class="line">            Answer inputAnswer = inputCommand.input();             </span><br><span class="line">            guessResult = game.guess(inputAnswer);             </span><br><span class="line">            gameView.showCurrentResult(guessResult);             </span><br><span class="line">            gameView.showGuessHistory(game.guessHistory());         </span><br><span class="line">        &#125; <span class="keyword">while</span> (!guessResult.correct() &amp;&amp; game.guessHistory().size() &lt; MAX_TIMES);  </span><br><span class="line">       </span><br><span class="line">        gameView.showMessage(guessResult.correct() ? <span class="string">&quot;successful&quot;</span> : <span class="string">&quot;failed&quot;</span>);         </span><br><span class="line">        gameView.showMessage(<span class="string">&quot;The correct number is &quot;</span> + game.actualAnswer());     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="运用依赖注入框架"><a href="#运用依赖注入框架" class="headerlink" title="运用依赖注入框架"></a>运用依赖注入框架</h2><p>至此，我们的程序基本完成。我们定义并实现了各个参与协作的类，但是，我们需要管理类之间的依赖，组合这些相关的对象。由于我们采用了测试驱动，因此比较好的保证了各个类的可测试性，而达成可测试性的诀窍就是“依赖注入”。 </p>
+<hr>
+<h4 id="知识：依赖注入"><a href="#知识：依赖注入" class="headerlink" title="知识：依赖注入"></a>知识：依赖注入</h4><p>依赖注入模式体现了“面向接口设计”原则，即分离接口与实现，并通过构造函数注入、设值方法注入或接口注入等手法将外部依赖注入到一个类中，从而解除该类与它协作的外部类之间的依赖。具体类型参考Martin Fowler的文章Inversion of Control Containers and the Dependency Injection pattern(<a target="_blank" rel="noopener" href="http://martinfowler.com/articles/injection.html)%E3%80%82">http://martinfowler.com/articles/injection.html)。</a></p>
+<hr>
+<p>在我们的例子中，主要通过构造函数注入的方式实现依赖注入。我们当然可以自己来组合这些类，但也可以运用现有的框架，例如Java平台下的Spring以及更轻量级的Guice(<a target="_blank" rel="noopener" href="https://code.google.com/p/google-guice/)%E3%80%82">https://code.google.com/p/google-guice/)。</a> </p>
+<p>在目前的设计中，我们仅仅针对<code>GameView</code>以及<code>InputCommand</code>进行了接口与实现分离。由于<code>InputCommand</code>是作为<code>play()</code>方法的传入参数，不在依赖管理范围之内。至于<code>RandomIntGenerator</code>以及<code>AnswerGenerator</code>则是通过类直接注入的，因此，我们仅需做如下调整。 </p>
+<p>首先为那些运用了构造函数注入的类配置Guice提供的<code>@Inject</code>，如下所示： </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnswerGenerator</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> RandomIntGenerator randomIntGenerator;     </span><br><span class="line">    <span class="meta">@Inject</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AnswerGenerator</span><span class="params">(RandomIntGenerator randomIntGenerator)</span> </span>&#123;         </span><br><span class="line">        <span class="keyword">this</span>.randomIntGenerator = randomIntGenerator;     </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Game</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> Answer actualAnswer;     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ArrayList&lt;GuessResult&gt; guessHistory;     </span><br><span class="line">    <span class="meta">@Inject</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Game</span><span class="params">(AnswerGenerator answerGenerator)</span> </span>&#123;         </span><br><span class="line">        <span class="keyword">this</span>.actualAnswer = answerGenerator.generate();         </span><br><span class="line">        guessHistory = <span class="keyword">new</span> ArrayList&lt;GuessResult&gt;();     </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GameController</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_TIMES = <span class="number">6</span>;     </span><br><span class="line">    <span class="keyword">private</span> Game game;     </span><br><span class="line">    <span class="keyword">private</span> GameView gameView;     </span><br><span class="line">    <span class="meta">@Inject</span>     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GameController</span><span class="params">(Game game, GameView gameView)</span> </span>&#123;         </span><br><span class="line">        <span class="keyword">this</span>.game = game;         </span><br><span class="line">        <span class="keyword">this</span>.gameView = gameView;     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于<code>GameView</code>接口，在默认情况下，Guice框架并不知道该注入它的哪个实现类（即使此时只有一个实现类），因此需要创建一个Module，它派生自Guice提供的<code>AbstractModule</code>，能够将接口与实现类进行绑定： </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuessNumberModule</span> <span class="keyword">extends</span> <span class="title">AbstractModule</span> </span>&#123;     </span><br><span class="line">    <span class="meta">@Override</span>     </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">()</span> </span>&#123;         </span><br><span class="line">        bind(GameView.class).to(ConsoleGameView.class);     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在在<code>main()</code>函数中就无需进行繁琐的类型间组合，Guice框架会帮我们完成依赖对象之间的注入。唯一需要做的是创建一个<code>Injector</code>对象，通过它可以获得我们需要的<code>GameController</code>实例： </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuessNumber</span> </span>&#123;     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;         </span><br><span class="line">        Injector injector = createInjector(<span class="keyword">new</span> GuessNumberModule());         </span><br><span class="line">        GameController gameController = injector.getInstance(GameController.class);</span><br><span class="line">        InputCommand command = <span class="keyword">new</span> ConsoleInputCommand();     </span><br><span class="line">    </span><br><span class="line">        System.out.println(<span class="string">&quot;Please input four numbers following by X X X X(0--9)&quot;</span>);         </span><br><span class="line">        gameController.play(command);     </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h2 id="TDD知识"><a href="#TDD知识" class="headerlink" title="TDD知识"></a>TDD知识</h2><h3 id="TDD核心"><a href="#TDD核心" class="headerlink" title="TDD核心"></a>TDD核心</h3><ul>
+<li>红：测试失败 </li>
+<li>绿：测试通过 </li>
+<li>重构：优化代码和测试 </li>
+</ul>
+<h3 id="TDD三大定律"><a href="#TDD三大定律" class="headerlink" title="TDD三大定律"></a>TDD三大定律</h3><p>该定律由Robert Martin提出： </p>
+<ul>
+<li>没有测试之前不要写任何功能代码 </li>
+<li>只编写恰好能够体现一个失败情况的测试代码 </li>
+<li>只编写恰好能通过测试的功能代码 </li>
+</ul>
+<h3 id="FIRST原则"><a href="#FIRST原则" class="headerlink" title="FIRST原则"></a>FIRST原则</h3><ul>
+<li>Fast: 测试要非常快，每秒能执行几百或几千个 </li>
+<li>Isolated：测试应能够清楚的隔离一个失败</li>
+<li>Repeatable：测试应可重复运行，且每次都以同样的方式成功或失败 </li>
+<li>Self-verifying：测试要无歧义的表达成功或失败 </li>
+<li>Timely：频繁、小规模的修改代码 </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/handout-tdd-code-kata/" title="TDD编码实战讲义">http://zhangyi.xyz/handout-tdd-code-kata/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OO/" rel="tag"># OO</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/TDD/" rel="tag"># TDD</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/brief-introduce-bdd/" rel="next" title="行为驱动开发的简要介绍">
+                <i class="fa fa-chevron-left"></i> 行为驱动开发的简要介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/micro-service-based-on-spring-cloud/" rel="prev" title="基于Spring Cloud的微服务落地">
+                基于Spring Cloud的微服务落地 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%94%B6%E7%9B%8A"><span class="nav-number">1.</span> <span class="nav-text">目标收益</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E9%9C%80%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">整体需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%86%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">任务分解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%EF%BC%9A%E5%88%86%E8%A7%A3%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.0.1.</span> <span class="nav-text">练习：分解任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%EF%BC%9A%E9%80%89%E6%8B%A9%E5%BC%80%E5%A7%8B%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.0.2.</span> <span class="nav-text">讨论：选择开始的任务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">测试驱动开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.1.</span> <span class="nav-text">开始第一个任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%EF%BC%9A%E5%88%A4%E6%96%AD%E6%AF%8F%E6%AC%A1%E7%9A%84%E7%8C%9C%E6%B5%8B%E7%BB%93%E6%9E%9C"><span class="nav-number">4.1.1.</span> <span class="nav-text">任务：判断每次的猜测结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9ASpecification-By-Example"><span class="nav-number">4.1.2.</span> <span class="nav-text">知识：Specification By Example</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83%EF%BC%9A%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E7%9A%84%E9%A9%B1%E5%8A%A8%E5%8A%9B"><span class="nav-number">4.1.3.</span> <span class="nav-text">思考：测试驱动开发的驱动力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9AGiven-When-Then%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.4.</span> <span class="nav-text">知识：Given-When-Then模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9ACQS%E5%8E%9F%E5%88%99"><span class="nav-number">4.1.5.</span> <span class="nav-text">知识：CQS原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%BF%A1%E6%81%AF%E4%B8%93%E5%AE%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.6.</span> <span class="nav-text">知识：信息专家模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83%EF%BC%9A%E5%AF%BB%E6%89%BE%E6%89%BF%E6%8B%85%E8%81%8C%E8%B4%A3%E2%80%9C%E5%88%A4%E6%96%AD%E6%AF%8F%E6%AC%A1%E7%9A%84%E7%8C%9C%E6%B5%8B%E7%BB%93%E6%9E%9C%E2%80%9D%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.1.7.</span> <span class="nav-text">思考：寻找承担职责“判断每次的猜测结果”的对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">4.1.8.</span> <span class="nav-text">知识：命名规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%EF%BC%9A%E7%94%B14%E4%B8%AA%E6%95%B0%E5%AD%97%E7%BB%84%E6%88%90%E7%9A%84%E7%AD%94%E6%A1%88%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E5%B0%81%E8%A3%85%EF%BC%9F"><span class="nav-number">4.1.9.</span> <span class="nav-text">讨论：由4个数字组成的答案是否需要封装？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83%EF%BC%9AAnswer%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.10.</span> <span class="nav-text">思考：Answer的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3%E5%8E%9F%E5%88%99"><span class="nav-number">4.1.11.</span> <span class="nav-text">知识：单一职责原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83%EF%BC%9A%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E5%B0%86%E7%8C%9C%E6%B5%8B%E7%BB%93%E6%9E%9C%E5%B0%81%E8%A3%85%E4%B8%BA%E7%B1%BB%EF%BC%9F"><span class="nav-number">4.1.12.</span> <span class="nav-text">思考：是否需要将猜测结果封装为类？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%80%83%EF%BC%9A%E4%B8%BA%E4%BD%95%E8%A6%81%E5%85%88%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="nav-number">4.1.13.</span> <span class="nav-text">思考：为何要先运行一个失败的测试？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%AC%AC%E4%BA%8C%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.2.</span> <span class="nav-text">开始第二个任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%EF%BC%9A%E7%A9%B6%E7%AB%9F%E7%94%B1%E8%B0%81%E6%9D%A5%E6%89%BF%E6%8B%85%E2%80%9C%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E7%AD%94%E6%A1%88%E2%80%9D%E7%9A%84%E8%81%8C%E8%B4%A3%EF%BC%9F"><span class="nav-number">4.2.1.</span> <span class="nav-text">讨论：究竟由谁来承担“随机生成答案”的职责？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9AJUnit%E4%B8%AD%E5%AF%B9%E5%BC%82%E5%B8%B8%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-number">4.2.2.</span> <span class="nav-text">知识：JUnit中对异常的验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%EF%BC%9A%E7%BB%84%E5%90%88Game%E4%B8%8EAnswerGenerator"><span class="nav-number">4.2.3.</span> <span class="nav-text">重构：组合Game与AnswerGenerator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%AC%AC%E4%B8%89%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.3.</span> <span class="nav-text">开始第三个任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%EF%BC%9AAnswer%E7%9A%84%E9%AA%8C%E8%AF%81%E9%80%BB%E8%BE%91"><span class="nav-number">4.3.1.</span> <span class="nav-text">重构：Answer的验证逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%AC%AC%E5%9B%9B%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.4.</span> <span class="nav-text">开始第四个任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A8%E8%AE%BA%EF%BC%9A%E6%B5%8B%E8%AF%95%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91%E9%9C%80%E8%A6%81%E4%BA%8B%E5%85%88%E8%AE%BE%E8%AE%A1%E5%90%97%EF%BC%9F"><span class="nav-number">4.4.1.</span> <span class="nav-text">讨论：测试驱动开发需要事先设计吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%AF%BB%E6%89%BE%E8%81%8C%E8%B4%A3%E7%9A%84%E6%89%BF%E6%8B%85%E8%80%85"><span class="nav-number">4.4.2.</span> <span class="nav-text">知识：寻找职责的承担者</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E7%AC%AC%E4%BA%94%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-number">4.5.</span> <span class="nav-text">开始第五个任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%94%A8%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%A1%86%E6%9E%B6"><span class="nav-number">5.</span> <span class="nav-text">运用依赖注入框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">5.0.1.</span> <span class="nav-text">知识：依赖注入</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TDD%E7%9F%A5%E8%AF%86"><span class="nav-number">6.</span> <span class="nav-text">TDD知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TDD%E6%A0%B8%E5%BF%83"><span class="nav-number">6.1.</span> <span class="nav-text">TDD核心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TDD%E4%B8%89%E5%A4%A7%E5%AE%9A%E5%BE%8B"><span class="nav-number">6.2.</span> <span class="nav-text">TDD三大定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FIRST%E5%8E%9F%E5%88%99"><span class="nav-number">6.3.</span> <span class="nav-text">FIRST原则</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

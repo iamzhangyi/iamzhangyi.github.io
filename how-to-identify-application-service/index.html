@@ -1,23 +1,1356 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,Architecture," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="判断什么时候应该定义领域服务，什么时候应该定义应用服务，一个根本的判断依据是看需要封装的职责是否与领域相关。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何分辨应用服务与领域服务">
+<meta property="og:url" content="http://zhangyi.xyz/how-to-identify-application-service/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="判断什么时候应该定义领域服务，什么时候应该定义应用服务，一个根本的判断依据是看需要封装的职责是否与领域相关。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-application-service/logo.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-application-service/ppp-of-ddd.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-application-service/clean-arch.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-application-service/layered-arch.jpg">
+<meta property="article:published_time" content="2018-03-14T06:26:57.000Z">
+<meta property="article:modified_time" content="2018-09-05T06:56:43.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Architecture">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/how-to-identify-application-service/logo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/how-to-identify-application-service/"/>
+
+
+
+
+
+  <title>如何分辨应用服务与领域服务 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/how-to-identify-application-service/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何分辨应用服务与领域服务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-14T14:26:57+08:00">
+                2018-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index">
+                    <span itemprop="name">DDD</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/how-to-identify-application-service/" class="leancloud_visitors" data-flag-title="如何分辨应用服务与领域服务">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/how-to-identify-application-service/logo.jpg" class="">
+<p>判断什么时候应该定义领域服务，什么时候应该定义应用服务，一个根本的判断依据是看<strong>需要封装的职责是否与领域相关</strong>。</p>
+<span id="more"></span>
+
+<h3 id="横切关注点"><a href="#横切关注点" class="headerlink" title="横切关注点"></a>横切关注点</h3><p>在应用服务中，我们往往需要和如下逻辑进行协作：</p>
+<ul>
+<li>消息验证</li>
+<li>错误处理</li>
+<li>监控</li>
+<li>事务</li>
+<li>认证与授权</li>
+</ul>
+<p>在《领域驱动设计模式、原理与实践》一书中，将以上内容视为<strong>基础架构问题</strong>。这些关注点与具体的业务逻辑无关，且在整个系统中，可能会被诸多服务调用（以便于重用），因此可以认为这些关注点为<strong>横切关注点</strong>。</p>
+<img src="/how-to-identify-application-service/ppp-of-ddd.jpg" class="">
+
+<p>从AOP的角度看，所谓“横切关注点”就是那些在职责上是内聚的，但在使用上又会散布在所有对象层次中，且与所散布到的对象的核心功能毫无关系的关注点。与“横切关注点”对应的是“核心关注点”，就是与系统业务有关的领域逻辑。例如订单业务是核心关注点，插入订单时的事务管理则是横切关注点。</p>
+<p>横切关注点与核心关注点是分离的，因此与具体的业务无关。于是，我们可以得到应用服务设计的第一条原则：<strong>与横切关注点协作的服务应被定义为应用服务</strong>。</p>
+<h3 id="Clean-Architecture"><a href="#Clean-Architecture" class="headerlink" title="Clean Architecture"></a>Clean Architecture</h3><p>如果参考Robert Martin的Clean Architecture以及Cockburn的六边形架构，我们可以将分层架构的应用层对应到Clean Architecture内核中的Use Case层，如下图所示：</p>
+<img src="/how-to-identify-application-service/clean-arch.jpg" class="">
+
+<p>据上图，Robert Martin认为Use Case层封装了“Application Business Rules”。我们在分析建模时，一个Use Case往往代表一个完整的业务场景。</p>
+<p>对外部的客户而言，DDD的应用层代表了与客户协作的应用服务，接口表达的其实是业务的含义。DDD分层架构的主要目的是要将业务复杂度与技术复杂度分离，应用层扮演的正是这样的一条分界线。从设计模式的角度讲，应用层的应用服务就是一个Facade：对外，它提供代表Use Case的整体应用；对内，它负责整合领域层的领域逻辑与其他基础架构层面的横切关注点。应用服务封装的业务含义，其实仅仅是一个转手的买卖，并不真正具有领域逻辑。因此可以得到应用服务设计的第二条准则：<strong>不包含领域逻辑的业务服务应被定义为应用服务</strong>。</p>
+<h3 id="与领域的交互"><a href="#与领域的交互" class="headerlink" title="与领域的交互"></a>与领域的交互</h3><p>第二条设计准则容易造成困惑。虽然单个领域行为确定无误地属于领域逻辑，然而将多个领域行为组合起来的协调行为，算不算是领域逻辑呢？例如对于“下订单”用例而言，如果我们在各自的领域对象中定义了如下行为：</p>
+<ul>
+<li>验证订单是否有效</li>
+<li>提交订单</li>
+<li>移除购物车中已购商品</li>
+<li>发送邮件通知买家</li>
+</ul>
+<p>这些行为的组合正好满足了“下订单”这个完整用例的需求，同时也为了保证客户调用的简便性，我们需要对这四个领域行为进行封装。由于这些行为可能牵涉到不同的领域对象，因此只能定义为服务。那么，这个服务应该是应用服务，还是领域服务？</p>
+<p>《领域驱动设计模式、原理与实践》一书将这种封装认为是<strong>与领域的交互</strong>。该书作者给出了自己的一个判断标准：</p>
+<blockquote>
+<p>决定一系列交互是否属于领域的一种方式是提出“这种情况总是会出现吗？”或者“这些步骤无法分开吗？”的问题。如果答案是肯定的，那么这看起来就是一个领域策略，因为那些步骤总是必须一起发生。然而，如果那些步骤可以用若干方式重新组合，那么可能它就不是一个领域概念。</p>
+</blockquote>
+<p>但我认为这种判断标准并不准确，至少并非充分必要条件。也就是说，可以分开的领域行为组合在一起未必一定就是应用服务；反过来，一个应用服务封装的领域行为组合也未必一定具有高内聚性。</p>
+<p>如果这个判断标准不成立，在牵涉到领域逻辑的协调与交互时，领域逻辑与应用服务的边界就变得非常模糊了。一种观点是在微服务架构中，由于一个Bounded Context的粒度变得越来越小，且代表了跨进程的物理边界，使得区分领域服务与应用服务变得不再那么重要了。换言之，因为微服务的粒度较小，又有着严格的边界控制，业务复杂度与技术复杂度二者的混合产生的负面影响也变得越来越小。</p>
+<p>然而，我们不能轻言妥协。只要在微服务边界内依然采用了DDD设计过程，则提炼出一个专门的应用层仍有必要。结合我对DDD的认识，我觉得可以<strong>给应用服务做如下边界定义</strong>：</p>
+<ul>
+<li>与横切关注点进行协作的只能是应用服务</li>
+<li>若应用服务要与领域交互，则尽可能将与横切关注点无关的纯领域行为往领域服务下推</li>
+</ul>
+<p>基于这个定义，以前面的“下订单”用例为例，对这四个领域行为的封装就应该放在领域服务中（关于邮件通知功能是否属于领域服务，后面有深入讨论）。倘若封装在领域服务中的整体逻辑还需要事务管理，又或者在执行下订单任务之前，需要进行身份认证与授权，则需要将这些逻辑的整合放到应用服务中。</p>
+<h3 id="纠结的横切关注点"><a href="#纠结的横切关注点" class="headerlink" title="纠结的横切关注点"></a>纠结的横切关注点</h3><p>假设这个定义是切实可行的，可以作为判断一个服务是否为应用服务的标准，则需要先明确什么是“横切关注点”。前面已经明确给出了“横切关注点”的定义，且说明它应该与业务逻辑无关。但是在判断横切关注点以及整合横切关注点时，除了前面提到的事务、监控、身份验证与授权没有争议之外，DDD社区对如下关注点普遍存在困惑与纠结。</p>
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>毫无疑问，日志属于横切关注点的范畴。然而，倘若将日志功能仅仅放在应用层，又可能无法准确详细地记录操作行为与错误信息。很多语言都提供了基础的日志框架，将日志混杂在领域对象中，会影响领域的纯粹性，也带来了系统与日志框架的耦合，除非采用AOP的方式。目前看来，这是一种编码取舍，即倾向于代码的纯粹性，还是代码的高质量。我个人还是更看重代码的质量，尤其是丰富的日志内容还有助于运维时的排错，因此建议将对日志共的调用放在领域服务中，算是上述应用服务边界定义的特例。</p>
+<p>当然，这个划分并非排他性的。在应用服务中，同样需要调用日志功能，这是记录的信息与粒度与领域服务不尽相同罢了。</p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>如果是验证外部客户传递过来的消息，例如对RESTful服务的Request请求的验证，则该验证功能属于横切关注点，对它的调用就应该放在应用服务边界。如果验证逻辑属于领域范畴，例如验证订单有效性，这种验证体现的是一种业务规则，则验证逻辑的实现就应该放在领域层，对验证逻辑的调用也应该属于领域对象，包括领域服务。</p>
+<h4 id="分布式通信"><a href="#分布式通信" class="headerlink" title="分布式通信"></a>分布式通信</h4><p>微服务缩小了架构设计上的物理边界，使得分布式通信变得更为常见。对于分布式通信的实现毫无疑问属于基础设置层，但在很多情况下，在当前领域中，需要通过分布式通信去访问别的领域提供的服务接口。例如针对“下订单用例”，假设订单、购物车、库存属于不同的微服务，那么在验证订单有效性时，就需要分布式调用库存提供的服务；在提交了订单后，需要分布式调用购物车提供的服务。</p>
+<p>这种调用属于对横切关注点的调用吗？<strong>显然不是。</strong>因为从抽象层面讲，这个调用其实是一个业务行为；从实现层面讲，又属于基础设施的技术内容。因此，正确的做法是在领域层定义一个抽象的服务接口，然后通过依赖注入的方式注入到领域服务中。微服务框架Spring Cloud的Feign就支持这种形式的协作。</p>
+<p>针对这种分布式通信，Martin Fowler的建议是将消息协议的转换部分（包括验证）放在Gateway模块，而将对外部服务的调用放在Http Client模块中，如下图所示：</p>
+<img src="/how-to-identify-application-service/layered-arch.jpg" class="">
+
+<p>从分层的角度讲，Gateway与HTTP Client两个模块都应该属于基础设施层，但代表外部服务业务的接口，应该定义在领域层中。</p>
+<h4 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h4><p>与领域逻辑有关的错误与异常，应该以自定义异常形式表达业务含义，并被定义在领域层。此外，如果该异常表达了业务含义，那么在领域层中，可以将异常定义为Checked Exception，以保证业务的健壮性。由于该异常与业务有关，即使被定义在方法接口中，也不存在异常对接口的污染，即可以将异常视为接口契约的一部分。但是，在领域服务中，不应该将与业务无关的Checked Exception定义在领域服务的方法中，否则就会导致业务逻辑（领域）与技术实现（基础设施）的混合。</p>
+<p>在应用层中，应尽可能保证应用服务的通用性，因而需要在应用服务中将与业务有关的自定义异常转换成标准格式的异常，例如统一定义为ApplicationException，然后在message或cause中包含具体的业务含义。因此，针对异常处理，只有这部分与业务无关的处理与转换功能，才属于横切关注点的范畴，并放在应用层中，其余异常处理逻辑都属于领域层。</p>
+<h4 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h4><p>通知关注点包括邮件通知、短信通知等功能。对于通知服务的实现，由于需要用到邮件或短信网关等具体技术，因此实现细节属于基础设施层。但是，对通知功能的调用，究竟算不算领域行为，却存在着争议。</p>
+<p>由于身份验证服务确定属于应用服务，因此我们可以对比身份验证服务与通知服务，或许能从二者的区别中发现蛛丝马迹。分为如下三个角度去对比：</p>
+<ul>
+<li>DDD的设计角度：通知服务属于Support SubDomain，而身份验证服务则属于Generic SubDomain。</li>
+<li>微服务的设计角度：在微服务架构中，通知服务与身份验证服务相同，都属于Infrastructure Service的范畴。从这个角度讲，似乎应该将通知功能视为关注点。不同之处在于，身份验证服务通常会在服务网关中被调用，且实现方式都是被定义为一个filter，放到对Request进行处理的管道上。通知服务则不同，总是与具体业务绑定在一起，只是它的应用范围更加广泛，不特定在某个具体的业务。</li>
+<li>用例的设计角度：我们通常将身份验证视为主用例的包含用例（include use case），而将通知服务视为主用例的扩展用例（extend use case）。</li>
+</ul>
+<p>显然，通知服务与身份验证服务都具有一定的通用性，但本质上又存在一定的区别。</p>
+<p>此外，客户对通知服务的调用可能还存在变化，例如针对不同的业务场景，有的需要邮件通知，有的需要短信通知，有的需要组合两种形式。因此，通知服务体现了某种似是而非的朦胧感：</p>
+<ul>
+<li>与领域相关，但并非核心领域</li>
+<li>实现可能存在变化</li>
+<li>往往被实现为单独的服务</li>
+<li>通知服务自身可能与主业务强相关</li>
+</ul>
+<p>因为这一点朦胧感，我们不能武断地认为对通知服务的调用一定应该放在领域服务或应用服务。我个人倾向于<strong>将调用通知服务的逻辑放在应用服务中，除非通知服务自身可能与主业务强相关</strong>。例如在“下订单”用例中，假设通知逻辑为：当订单总额达到实现设置的阈值时，应采用邮件通知和短信通知两种形式通知买家发货，否则仅采用邮件通知。这时，通知服务自己形成了业务逻辑，且与下订单主业务直接相关，那么，对通知服务的调用就应该被定义在领域服务中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/how-to-identify-application-service/" title="如何分辨应用服务与领域服务">http://zhangyi.xyz/how-to-identify-application-service/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"># DDD</a>
+          
+            <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/foreachrdd-of-spark-streaming/" rel="next" title="Spark Streaming中foreachRDD的陷阱">
+                <i class="fa fa-chevron-left"></i> Spark Streaming中foreachRDD的陷阱
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/about-just-enough-soft-arch/" rel="prev" title="关于《恰如其分的软件架构》">
+                关于《恰如其分的软件架构》 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%AA%E5%88%87%E5%85%B3%E6%B3%A8%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">横切关注点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clean-Architecture"><span class="nav-number">2.</span> <span class="nav-text">Clean Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E9%A2%86%E5%9F%9F%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="nav-number">3.</span> <span class="nav-text">与领域的交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A0%E7%BB%93%E7%9A%84%E6%A8%AA%E5%88%87%E5%85%B3%E6%B3%A8%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">纠结的横切关注点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">4.1.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">4.2.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%80%9A%E4%BF%A1"><span class="nav-number">4.3.</span> <span class="nav-text">分布式通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">4.4.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5"><span class="nav-number">4.5.</span> <span class="nav-text">通知</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

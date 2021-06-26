@@ -1,23 +1,1363 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,Architecture,Micro Service," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="我在Martin Fowler网站上读到一篇名为How to break a Monolith into Microservices的微服务文章，作者为ThoughtWorks的咨询师Zhamak Dehghani，介绍了如何从单体架构演进到微服务架构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从单体架构到微服务架构">
+<meta property="og:url" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="我在Martin Fowler网站上读到一篇名为How to break a Monolith into Microservices的微服务文章，作者为ThoughtWorks的咨询师Zhamak Dehghani，介绍了如何从单体架构演进到微服务架构。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/cover.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/01.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/02.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/03.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/04.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/05.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/06.png">
+<meta property="article:published_time" content="2019-02-26T08:40:20.000Z">
+<meta property="article:modified_time" content="2019-02-26T09:14:50.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Micro Service">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/how-to-break-monolith-into-microservices/cover.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/how-to-break-monolith-into-microservices/"/>
+
+
+
+
+
+  <title>从单体架构到微服务架构 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/how-to-break-monolith-into-microservices/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从单体架构到微服务架构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T16:40:20+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index">
+                    <span itemprop="name">Architecture</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/how-to-break-monolith-into-microservices/" class="leancloud_visitors" data-flag-title="从单体架构到微服务架构">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/how-to-break-monolith-into-microservices/cover.jpg" class="">
+<p>我在Martin Fowler网站上读到一篇名为<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/break-monolith-into-microservices.html">How to break a Monolith into Microservices</a>的微服务文章，作者为ThoughtWorks的咨询师Zhamak Dehghani，介绍了如何从单体架构演进到微服务架构。</p>
+<span id="more"></span>
+
+<h3 id="微服务生态系统"><a href="#微服务生态系统" class="headerlink" title="微服务生态系统"></a>微服务生态系统</h3><p>在讲解如何拆分之前，Dehghani首先介绍了微服务生态系统（microservices ecosystem），她认为微服务生态系统是“封装了<strong>业务能力</strong>的服务平台”。Martin Fowler与James Lewis总结的微服务特征中，也提及“通过业务能力组织服务”。认识到这一点，对于微服务拆分而言非常重要。<strong>微服务首先是业务手段，然后才是技术手段。</strong>Dehghani定义了“业务能力”：</p>
+<blockquote>
+<p>A business capability represents what a business does in a particular domain to fulfill its objectives and responsibilities. 业务能力体现为在特定领域为达成其目标与职责的相关业务。</p>
+</blockquote>
+<p>微服务生态系统如下图所示：</p>
+<img src="/how-to-break-monolith-into-microservices/01.png" class="">
+
+<p>该生态系统牵涉到微服务的特征，团队的职责和组织结构，开发实践等，这些因素横跨业务、组织与技术诸方面，说明系统的微服务架构迁移不仅仅需要在技术层面做好准备，还需要在整个企业或团队层面做好充分准备，否则就可能“出师未捷身先死”！</p>
+<h3 id="旅程的开始"><a href="#旅程的开始" class="headerlink" title="旅程的开始"></a>旅程的开始</h3><p>从单体架构到微服务架构是一个漫长的旅程。在开始演进之前，Dehghani建议最好结合Martin Fowler给出的<a target="_blank" rel="noopener" href="https://martinfowler.com/bliki/MicroservicePrerequisites.html">微服务前提条件</a>对系统和团队进行评估。在开始拆分第一个服务之前，开发与运维团队应该事先准备好系统的基础设施、持续交付管道以及API的管理系统。这样可以尽可能地保证单体系统的客户端不会受到服务拆分的影响。</p>
+<p>在开始拆分单体架构的服务时，需得小心行事。如果从一开始就选择拆分核心领域的微服务，风险就太大了。Dehghani建议从一些边界服务（edge services）开始着手，例如认证服务。拆分这样的服务难度低，对整个系统的影响也较小，方便团队快速上手，算是拆分服务的一次“热身”。一旦拆分出一个微服务，就开始了架构风格的转换，与此同时，就可以测试微服务的整体架构是否正确。这就好像在单元测试中运行第一个测试一般，哪怕测试变红了，它也是有价值的，因为通过它的成功运行可以确认测试环境是正确的。这个演进过程如下图所示：</p>
+<img src="/how-to-break-monolith-into-microservices/02.png" class="">
+
+<h3 id="降低对单体系统的依赖"><a href="#降低对单体系统的依赖" class="headerlink" title="降低对单体系统的依赖"></a>降低对单体系统的依赖</h3><p>在拆分微服务时，处理依赖是至关重要的一点。我们必须确保一个微服务<strong>具有快速而独立的发布周期</strong>。由于单体架构与微服务架构粒度的不同，必然会导致二者在相当长的一段时间内存在依赖关系。要注意彼此之间的依赖方向！Dehghani认为应该<strong>减少微服务对单体系统的依赖</strong>。换言之，对付依赖的原则是：</p>
+<ul>
+<li>首先尽可能去掉二者之间不必要的依赖关系</li>
+<li>如果需要依赖，应优先考虑单体系统依赖微服务，而不是微服务依赖单体系统</li>
+</ul>
+<p>例如针对一个零售在线系统，“购买”和“促销”都是系统的核心业务能力，在顾客付款的过程中，“购买”会调用“促销”以获得最佳的促销优惠。如果我们需要将这两个核心能力作为微服务从单体系统中拆分出来，那么拆分的顺序应该怎样？Dehghani认为应该先拆分“促销”，此时“购买”服务仍然在单体系统中，且依赖于新分离出来的“促销”服务。这样的拆分顺序可以减少对单体系统的依赖。</p>
+<p>为何要遵循这样的原则？正如文中所说：“微服务需要具有快速而独立的发布周期”，如果让微服务依赖单体系统，就会让微服务变得很笨重。这就好似一只本该灵活飞翔的蝴蝶，正摇摇欲坠地拉着一头笨重的大象。</p>
+<p>倘若无法避免新的微服务对单体系统的依赖呢？这就需要引入领域驱动设计介绍的防腐层（anti-corruption layer），即在单体系统中定义一个新的API，然后让新的微服务通过这个新API访问单体系统。新的API应遵循微服务API的设计原则，体现该服务的领域概念和结构。之所以引入防腐层，目标有二：</p>
+<ul>
+<li>避免单体系统的代码实现直接泄漏给微服务</li>
+<li>便于在未来用新的微服务实现替换单体系统的实现</li>
+</ul>
+<p>这两种依赖方向如下图所示：</p>
+<img src="/how-to-break-monolith-into-microservices/03.png" class="">
+
+<h3 id="优先分离黏合逻辑"><a href="#优先分离黏合逻辑" class="headerlink" title="优先分离黏合逻辑"></a>优先分离黏合逻辑</h3><p>单体架构为人诟病的一点在于它太容易随着时间推移而变成一个高度耦合的“毛线球”。各个功能纠缠在一起，没有体现出清晰的领域逻辑，这会给微服务拆分带来很大的障碍。因此，Dehghani建议优先识别出单体系统中的这些黏合逻辑（Sticky Capabilities），分解它们，并定义出良好的领域概念，然后再将这些领域概念分解到各自独立的微服务中。</p>
+<p>如何来理解“黏合逻辑（Sticky Capabilities）”？我个人认为文中提到的“黏合逻辑”，并非系统的核心业务能力，而是一种近乎于横切关注点的功能，又或者说是一个全局的数据结构（变量）。文中以session为例，单体系统中的客户属性、期望列表、支付偏好等信息都放在session之中。这时，我们就应该从具有session的这段黏合逻辑中识别领域逻辑，然后依次将这些领域逻辑分离出来形成独立的微服务：</p>
+<img src="/how-to-break-monolith-into-microservices/04.png" class="">
+
+<p>注意，这块黏合逻辑并不需要分解为专门的微服务，例如分解为会话服务。</p>
+<p>我在为客户做的一次微服务迁移时，也遭遇了同等问题。在原有的单体架构中，定义了诸多全局变量，并被系统中的大多数业务功能使用。这些全局变量就像一个公共澡堂，谁都可以进来泡澡。微服务是独立而私有的，当然应该在自家宅里修建自己的浴室了。所以这一原则的确立，其实是从解耦的角度思考的。</p>
+<p>解耦的一个前提是识别依赖，Dehghani推荐诸如<a target="_blank" rel="noopener" href="http://structure101.com/">Structure101</a>这样的依赖分析工具来识别单体系统中耦合最为紧密的代码。</p>
+<h3 id="纵向解耦并尽早发布数据"><a href="#纵向解耦并尽早发布数据" class="headerlink" title="纵向解耦并尽早发布数据"></a>纵向解耦并尽早发布数据</h3><p>这里所谓的“纵向（Vertically）”解耦，就是从客户端发起调用的服务API到数据库进行“一刀切”。这一原则颇让我出乎意料，因为我个人认为：数据库共享架构可以作为从单体架构到微服务架构的一个过渡；但是，Dehghani认为从微服务的“<a target="_blank" rel="noopener" href="https://martinfowler.com/articles/microservices.html#DecentralizedDataManagement">去中心化数据管理（Decentralized Data Management）</a>”特征看，应尽早解耦数据库。</p>
+<p>在解耦数据库时，若单体系统中的多个功能都需要访问一些共享数据，这部分功能就会制造障碍。在拆分之前，与这些功能相关的所有团队需要讨论确定数据迁移的策略，然后再对服务加数据进行拆分：</p>
+<img src="/how-to-break-monolith-into-microservices/05.png" class="">
+
+<p>注意，在拆分服务和数据时，需要确定数据访问的边界。一个原则是<strong>数据库中的数据只能被一个微服务调用</strong>，如果其他微服务也需要访问这些数据，则应该通过拥有这些数据的微服务进行访问。因此，我们需要在拆分时弄清楚数据的归属权。</p>
+<h3 id="解耦核心领域和变化频繁的领域"><a href="#解耦核心领域和变化频繁的领域" class="headerlink" title="解耦核心领域和变化频繁的领域"></a>解耦核心领域和变化频繁的领域</h3><p>从单体系统演进到微服务时，需要叩问自身：为什么要演进到微服务？不能为了拆分而拆分，而应该在拆分微服务时，随时<strong>权衡拆分的成本与收益</strong>。这就充分地解答了本原则的缘由。为何要重点解耦核心领域以及变化频繁的领域？因为核心领域的价值要远超其他子领域，因为变化频繁的领域在单体架构中的维护成本太高。前者是因为拆分后的收益高，后者是因为不拆分带来的成本高。</p>
+<p>要应用这一原则，可以引入领域驱动设计的战略设计，通过识别系统的核心领域与子领域，由此确定提取微服务的边界和目标。领域是否为核心领域，与痛点和价值有关，这需要结合客户的愿景、目标和经营模式等因素综合考量。例如在文中，Dehghani认为“客户个性化”是核心领域，因为它能够为客户提供更好的用户体验，有助于提高客户的黏度。</p>
+<h3 id="依据能力而非代码去解耦"><a href="#依据能力而非代码去解耦" class="headerlink" title="依据能力而非代码去解耦"></a>依据能力而非代码去解耦</h3><p>当开发人员从已有系统中提取服务时，无非两种形式：提取代码或重写能力。多数情况下，技术人员往往采用提取方式来重用现有实现。这其实是一种感知偏见（cognitive bias），对于自己设计和编写的代码抱有偏执的热爱。这种感知偏见在心理学中被称之为“<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IKEA_effect">宜家效应</a>”。</p>
+<p>我们应该抛开这种偏见，重新审视这二者带来的成本和价值。重写未必代价高昂，毕竟我们可以抛开过去的技术债务轻装前行，正所谓“无债一身轻”嘛。所以Dehghani给出了一个原则：<strong>重用和提取高价值低毒性的代码，重写和废弃低价值高毒性的代码。</strong>什么是代码毒性（code toxicity）？我想，应该就是Martin Fowler在《重构》一书中提及的代码坏味道。若需评估代码毒性的高低，可以使用CheckStyle等工具。</p>
+<h3 id="先宏观再微观"><a href="#先宏观再微观" class="headerlink" title="先宏观再微观"></a>先宏观再微观</h3><p>识别微服务边界的常见方法是运用领域驱动设计的限界上下文（Bounded Context）。虽然名为微服务，但服务的粒度不能没有原则的追求“微小”。过于微小的服务既会带来服务的“大爆炸”，还会出现大量只有CRUD操作的贫血服务（<a target="_blank" rel="noopener" href="https://www.martinfowler.com/bliki/AnemicDomainModel.html">anemic service</a>）。</p>
+<p>微服务到底有多“微”，这是一个问题。衡量的指标包括团队的规模、重写一个服务花费的时间、服务封装了多少行为。但这些指标并无客观的量化值，同时，还得取决于这个系统自身的规模与业务复杂性。例如，我们自己开发一个学习型电商系统，它所拆分的微服务粒度与数量显然不能与天猫、京东这样的大型电商系统相提并论。在没有量化指标的指导下，若需要凭经验设计，就应该遵循Dehghani给出的建议：先从更大的服务开始，直到微服务的基础条件都满足了，再寻求对大的服务进行拆分。这些基本条件包括团队对业务的理解、对单体系统的理解、持续交付环境的准备等。</p>
+<p>例如，在解耦零售系统时，团队最初提取的“购买”服务包含了购物车与结账功能。随着团队的微服务成熟度越来越高，也能够轻易地分解团队，形成小快灵的微服务团队，这时就可以考虑将购物车与结账功能分解出来，形成专门的微服务：</p>
+<img src="/how-to-break-monolith-into-microservices/06.png" class="">
+
+<h3 id="架构演化的原子步伐迁移"><a href="#架构演化的原子步伐迁移" class="headerlink" title="架构演化的原子步伐迁移"></a>架构演化的原子步伐迁移</h3><p>重构教导我们要“小步前行”，但真正的意图是要保持重构步伐的原子性（atomic），这样就能保证进可攻退可守的态势。单体架构向微服务架构的演进也需要遵循这一原则。若前进的步伐是正确的，且演进的内容是完整的，则意味着我们向着演进目标又靠近了一步；若前进的步伐出现了偏差，我们也能够轻易回滚。</p>
+<p>Dehghani在文中给出了一个案例来阐释这一理念。假定微服务架构的目标是提高开发人员修改整个系统的速度，快速交付价值。团队决定将用户认证分解为一个服务，并基于OAuth 2.0协议来实现。该服务的目的是替换单体系统中的认证功能，那么演进的步骤就分为：</p>
+<ul>
+<li>构建一个Auth服务，采用OAuth 2.0来实现</li>
+<li>在单体系统中添加一个新的认证路径，然后调用新实现的认证服务</li>
+</ul>
+<p>如果演进到这一步，团队的工作暂时停止，那么这个演进步伐就不是原子的，因为它使得系统处于一种不稳定的“中间状态”，单体系统的开发人员需要同时维护两条认证路径，增加了开发、测试和维护的成本。因此，我们不应该停下演进的步伐，而应继续前行：</p>
+<ul>
+<li>用新服务替换单体系统中旧有的基于用户名/密码的认证</li>
+<li>从单体系统中去掉旧有的认证实现代码</li>
+</ul>
+<p>文中总结了单体系统分解的原子单元：</p>
+<ul>
+<li>解耦新服务</li>
+<li>将所有消费者指向新服务</li>
+<li>废弃单体系统中的旧代码</li>
+</ul>
+<p>2013年，我在Scrum Gathering大会上的演讲《引入敏捷实践完成技术栈迁移》讲述了类似步骤，遵循的原则其实就是“<a target="_blank" rel="noopener" href="https://www.martinfowler.com/bliki/BranchByAbstraction.html">抽象分支（Branch of Abstraction）</a>”，在针对遗留系统进行解耦或旧代码替换时，往往会采用这种手法。故而步骤不是关键的，关键的是如何认识“原子性”。我认为，原子性就应该保证演进的功能是最小粒度的完整，且不允许新旧代码同时存在。</p>
+<p><strong>说明：</strong>本文中的插图全部来自于Zhamak Dehghani的原文。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/how-to-break-monolith-into-microservices/" title="从单体架构到微服务架构">http://zhangyi.xyz/how-to-break-monolith-into-microservices/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"># DDD</a>
+          
+            <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          
+            <a href="/tags/Micro-Service/" rel="tag"># Micro Service</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/basic-concepts-of-ddd/" rel="next" title="领域驱动设计基本概念答疑">
+                <i class="fa fa-chevron-left"></i> 领域驱动设计基本概念答疑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/process-of-domain-driven-tactic-design/" rel="prev" title="领域驱动战术设计进度说明">
+                领域驱动战术设计进度说明 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">微服务生态系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%85%E7%A8%8B%E7%9A%84%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">旅程的开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E4%BD%8E%E5%AF%B9%E5%8D%95%E4%BD%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="nav-number">3.</span> <span class="nav-text">降低对单体系统的依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E5%88%86%E7%A6%BB%E9%BB%8F%E5%90%88%E9%80%BB%E8%BE%91"><span class="nav-number">4.</span> <span class="nav-text">优先分离黏合逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%B5%E5%90%91%E8%A7%A3%E8%80%A6%E5%B9%B6%E5%B0%BD%E6%97%A9%E5%8F%91%E5%B8%83%E6%95%B0%E6%8D%AE"><span class="nav-number">5.</span> <span class="nav-text">纵向解耦并尽早发布数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E8%80%A6%E6%A0%B8%E5%BF%83%E9%A2%86%E5%9F%9F%E5%92%8C%E5%8F%98%E5%8C%96%E9%A2%91%E7%B9%81%E7%9A%84%E9%A2%86%E5%9F%9F"><span class="nav-number">6.</span> <span class="nav-text">解耦核心领域和变化频繁的领域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E6%8D%AE%E8%83%BD%E5%8A%9B%E8%80%8C%E9%9D%9E%E4%BB%A3%E7%A0%81%E5%8E%BB%E8%A7%A3%E8%80%A6"><span class="nav-number">7.</span> <span class="nav-text">依据能力而非代码去解耦</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%88%E5%AE%8F%E8%A7%82%E5%86%8D%E5%BE%AE%E8%A7%82"><span class="nav-number">8.</span> <span class="nav-text">先宏观再微观</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96%E7%9A%84%E5%8E%9F%E5%AD%90%E6%AD%A5%E4%BC%90%E8%BF%81%E7%A7%BB"><span class="nav-number">9.</span> <span class="nav-text">架构演化的原子步伐迁移</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

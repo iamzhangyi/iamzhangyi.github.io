@@ -1,23 +1,1383 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Refactoring,Clean Code,Legacy," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在一个产品长期的研发过程中，必须时刻对代码保持警惕，一旦发现代码有腐烂的迹象，就需要考虑及时重构，剔除代码的坏味道，让代码焕然一新。然而，在进度的逼迫下，我们承受了及时交付功能的压力，团队成员对糟糕代码的敏感度又不够高，在这二者的夹击之下，稍有疏忽，整个代码库就有可能变得积重难返。 多数时候，我们疲于应对各种需求。一方面，我们发布的版本正在支撑着客户的生产应用；另一方面，我们还需要不断地开发新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重构加重写保证版本功能的空中加油">
+<meta property="og:url" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="在一个产品长期的研发过程中，必须时刻对代码保持警惕，一旦发现代码有腐烂的迹象，就需要考虑及时重构，剔除代码的坏味道，让代码焕然一新。然而，在进度的逼迫下，我们承受了及时交付功能的压力，团队成员对糟糕代码的敏感度又不够高，在这二者的夹击之下，稍有疏忽，整个代码库就有可能变得积重难返。 多数时候，我们疲于应对各种需求。一方面，我们发布的版本正在支撑着客户的生产应用；另一方面，我们还需要不断地开发新">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/cover.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/01.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/02.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/03.png">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/04.png">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/05.png">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/06.png">
+<meta property="og:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/07.png">
+<meta property="article:published_time" content="2019-01-21T04:57:47.000Z">
+<meta property="article:modified_time" content="2019-01-21T18:46:53.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Refactoring">
+<meta property="article:tag" content="Clean Code">
+<meta property="article:tag" content="Legacy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/rewrite-and-refactoring-policy/cover.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/rewrite-and-refactoring-policy/"/>
+
+
+
+
+
+  <title>重构加重写保证版本功能的空中加油 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/rewrite-and-refactoring-policy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">重构加重写保证版本功能的空中加油</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T12:57:47+08:00">
+                2019-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/rewrite-and-refactoring-policy/" class="leancloud_visitors" data-flag-title="重构加重写保证版本功能的空中加油">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/rewrite-and-refactoring-policy/cover.jpg" class="">
+
+<p>在一个产品长期的研发过程中，必须时刻对代码保持警惕，一旦发现代码有腐烂的迹象，就需要考虑及时重构，剔除代码的坏味道，让代码焕然一新。然而，在进度的逼迫下，我们承受了及时交付功能的压力，团队成员对糟糕代码的敏感度又不够高，在这二者的夹击之下，稍有疏忽，整个代码库就有可能变得积重难返。</p>
+<p>多数时候，我们疲于应对各种需求。一方面，我们发布的版本正在支撑着客户的生产应用；另一方面，我们还需要不断地开发新功能，以满足客户不断提出的新需求或者需求变更。同时，我们对产品有着雄心勃勃的计划，希望它能够在不断的演化下变得更加强大。我们清醒地感知到，若任由代码如此发展下去，代码腐烂的结果会进而导致架构的腐烂。就像一架正在执行飞行任务的航空器，明知到缺少足够的燃料，需要返回基地加油，却又不得不继续飞行，否则无法按时到达目的地。这时，我们就需要针对代码库进行“空中加油”。</p>
+<p>理想的方式是对现有的代码库进行小步重构，然而众多阻力让我们没有信心驾驭重构。这些阻力包括：</p>
+<ul>
+<li>随着功能的增加，代码库开始变得庞大</li>
+<li>代码的腐烂情况较为严重，需要在结构上做重大调整</li>
+<li>团队成员欠缺对大型代码库的重构能力</li>
+<li>单元测试与集成测试的测试覆盖率太低</li>
+<li>重构与新功能开发同时进行，破坏原有功能的风险太大</li>
+</ul>
+<p>显然，想要通过重构实现空中加油，谈何容易！但为了避免未来架构的腐化，对现有代码库进行手术又势在必行。因此，基于当前代码库现状、产品需求与团队成员能力，我确定了<strong>“重构+重写”的改造策略</strong>，美其名曰“空中加油”。</p>
+<span id="more"></span>
+
+<h3 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h3><p>要解决的代码问题很多，这里仅以其中一个关键部分作为示例。在我们的产品中，ElasticSearch作为存储主题区数据的数据库，但作为产品，我们还需要应对不同客户的需求，例如针对数据规模相对较小的客户，亦有可能使用关系型数据库，例如Oracle来存储主题区数据。因此在对主题区的数据进行建模时，我们并没有利用ElasticSearch的存储特性，形成主题区业务模型与数据模型的一一对应。主题区业务模型是一个树模型，但在持久化到数据库中时，却是将业务模型拍平，形成关系数据库的表结构。</p>
+<p>在确定持久化架构时，一开始我就确定了两个职责的分离，并以gateway和repository作为承担不同职责的对象。gateway负责访问主题区数据库，完成对数据的CRUD操作，而repository则借鉴了DDD的资源库概念，体现的是业务角度的资源存取。</p>
+<p>我犯下的一个错误是没有及时进行代码走查，在确定了此架构原则后，由于进度压力与开发能力的问题，团队成员在开发时并没有体会到这种职责分离的本质，不断地编写代码，而实现却与当初确定的原则渐行渐远。等到我发现时，问题已经变得较为严重了：</p>
+<ul>
+<li>部分Repository没有守住边界，为了满足自己的业务，越俎代庖做了gateway应该做的事情</li>
+<li>repository没有按照业务去定义，出现了许多从命名上大同小异的repository，每个开发人员似乎只熟悉或相信自己定义的repository</li>
+<li>有时候为了重用，建立了许多不必要的抽象，继承层次变得混乱</li>
+</ul>
+<p>而这一切在引入两层主题区（为了实现多数据源处理等功能，我们引入了前置主题区和细节主题区）之后，就变得更加严重了。两个不同的主题区数据结构几乎一致，但访问的ElasticSearch集群以及index和type却又不同。有的开发人员为了方便，例如他要开发的功能仅需要前置主题区，就定义了一个前置主题区专用的repository，从而引入各种混淆的repository。随着需求的演化，最早定义在<code>ElasticSearchGateway</code>中的基本方法已经不能满足需求，于是又不断增加。但这些方法的操作目标大同小异，就出现了许多混淆不清的方法定义，例如查询单条数据、查询多条数据、按照条件查询、查询时执行聚合与排序以及按照范围进行查询，使得gateway的接口方法变得越来越乱，并被各个repository依赖。</p>
+<h3 id="需求与版本演化"><a href="#需求与版本演化" class="headerlink" title="需求与版本演化"></a>需求与版本演化</h3><p>在2018年12月底，经过不断的测试和bug修复，我们按照客户的进度要求交付了一个相对完整的版本，满足了客户的需求，并已部署到生产环境中投入使用。在投入使用之后，客户的需求又源源不断继续涌来，使得我们发布的版本始终不能保证稳定。按照产品的规划，我们还需要实现一些重要的功能特性，并可能在未来支持更多的客户。不同客户的数据协议、数据源支撑都不相同，这意味着许多相同的功能需要为不同的客户提供各自专有的实现。</p>
+<p>然而，代码的重构又变得刻不容缓。一方面我们要开发新功能，另一方面又需要对原有代码进行重构，而这些变更的发布又需要按照计划部署到生产环境。如前所述，由于众多阻力，重构的风险太大。该怎么办？我们当然可以创建版本分支，例如为当前运行的版本建立一个release分支，然后在master上进行重构和新功能开发。问题在于，重构与新功能发布的频率并不一致，后者甚至可能要求每周发布。如果新功能开发和重构都工作在master上，在发布新功能到生产环境时，我们担心重构会引入未知的bug，破坏已经交付的稳定功能。如果新功能在分支的release版本下开发，又因为重构的影响巨大，导致代码无法及时合并，或者修复代码冲突的代价太大。</p>
+<h3 id="重构加重写的策略"><a href="#重构加重写的策略" class="headerlink" title="重构加重写的策略"></a>重构加重写的策略</h3><p>为了解决这一问题，我们决定仍然将master同时作为开发与重构的版本分支，之前的release版本则作为特殊情况下的后备版本。针对代码的改造，我们则采用重构+重写的策略。</p>
+<p>当我们要重构一个类时，尤其是要重构该类的方法时，往往需要事先确定待重构的方法究竟有多少调用依赖。一旦该方法被多个类调用时，重构接口就成了一件非常棘手的工作。即使保留接口不变，仅仅是重构方法内部的实现，也需要慎之又慎，毕竟不同的调用者可能对这个方法实现会有不同的需求，如果代码编写不够清晰，极有可能在重构时不小心破坏功能，引入Bug。</p>
+<p>这种判断依赖的方式是由内自外的方式，而我们的策略则反其道而行之，先“守”住外部的调用点不变，然后以重写的方式去替换这个调用。在重写的时候，我们会站在调用者的角度，逐步地完成重写，以求小步地完成替换。每替换一小块功能，都编写测试去覆盖所有分支，同时采用手动测试的方式，在类生产环境下运行，以确保这次小范围的替换没有引入问题。</p>
+<p>整个重构加重写的过程如下所示：</p>
+<ol>
+<li>从外部调用者发现它依赖的类</li>
+<li>创建新的类，然后仅将当前外部调用者需要调用的方法原封不动地搬移到新类中</li>
+<li>在调用者内部的调用点，将旧类替换为新类，并保证功能正确</li>
+<li>编写对应的测试覆盖该功能，然后对新类进行重构，运行测试保证重构没有引入错误</li>
+<li>若新类的内部亦依赖了有待重构的旧有实现，则将新类视为当前的外部调用者，重复第1步</li>
+<li>以此类推，直到旧有的类没有别的依赖，则安全删除旧有类</li>
+</ol>
+<h3 id="案例：重构AircraftRepository和ElasticSearchGateway"><a href="#案例：重构AircraftRepository和ElasticSearchGateway" class="headerlink" title="案例：重构AircraftRepository和ElasticSearchGateway"></a>案例：重构AircraftRepository和ElasticSearchGateway</h3><p>以我们现在的项目为例。ElasticSearchGateway本是需要重构的目标，但它的依赖非常多，如下图所示，一共有50处依赖：</p>
+<img src="/rewrite-and-refactoring-policy/01.jpg" class="">
+
+<p>它的其中一个方法<code>queryByCondition()</code>有32处依赖，如下图所示：</p>
+<img src="/rewrite-and-refactoring-policy/02.jpg" class="">
+
+<p>该方法是我们需要修改的目标。现在，我们反其道而行之，在外部定位一个面向某个业务发起调用的类，如针对航空器位置业务的一个类<code>AircraftProcessor</code>，它的调用关系如下所示：</p>
+<img src="/rewrite-and-refactoring-policy/03.png" class="">
+
+<p>图中标记为灰色的类，就是我本希望重构的类，然而根据前面的分析，它们都有多处调用者，要进行重构，就可能牵一发动全身，要做到改变现有代码的结构而不破坏其功能，就好比做一台精密的脑颅手术一般，难度非常大。为此，我们选择的做法是定义一个新的<code>AircraftRepository</code>类，并站在调用者<code>AircraftLocationPreFilter</code>的角度，将它需要的方法原封不动地拷贝到新类中，并在调用者内部以新类替换对旧类的调用。如果已有自动化测试覆盖这一路径，则运行测试，看这一替换是否影响了原有的功能实现。如果没有自动化测试，则需要编写新的测试去覆盖它。可以考虑编写单元测试和集成测试。</p>
+<p>针对新类中的实现，可以在不改变其功能实现的前提下，对其进行重构。这个重构包括调整原有的方法接口，也包括对内部实现进行代码质量改进。由于新类只有这一个依赖点，重构产生的影响就会被限制到一个很小的范围。</p>
+<p>例如调用者<code>AircraftLocationPreFilter</code>调用了<code>queryDistinctOrgStationBy()</code>方法，它的定义为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;FlightPath.Track&gt; queryDistinctOrgStationBy(String craftNo, String scopeField, String gt, String lt, String aggField, String sortField) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>AircraftLocationPreFilter</code>对该方法的调用如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;FlightPath.Track&gt; getPeriodTimeTracks(String craftNo, Date startTime, Date endTime) &#123;</span><br><span class="line">    <span class="keyword">return</span> aircraftRepository.queryDistinctOrgStationBy(</span><br><span class="line">            craftNo, UPDATE_TIME_FIELD,</span><br><span class="line">            DateUtil.transformTime(startTime, DateUtil.YYYY_MM_DD_T_HH_MM_SS),</span><br><span class="line">            DateUtil.transformTime(endTime, DateUtil.YYYY_MM_DD_T_HH_MM_SS),</span><br><span class="line">            ORG_STATION_AGG_FIELD, ORIGINAL_TIMESTAMP_SORT_FIELD);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个方法的定义存在问题。一方面它的方法名未能清晰表达查询航空器路径的意图，另一方面，方法签名暴露了太多不必要的字段，例如方法的第2、5、6三个参数就应该封装到<code>AircraftRepository</code>中，而对第3、4两个参数的转换逻辑也不应该暴露出来。现在可以对新<code>AircraftRepository</code>的方法自由地进行重构，例如通过“修改方法签名”的重构手法，将方法签名修改为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;FlightPath.Track&gt; queryTracksBy(String craftNo, Date startTime, Date endTime) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法签名的修改会直接影响对该方法的调用，调用代码修改为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;FlightPath.Track&gt; getPeriodTimeTracks(String craftNo, Date startTime, Date endTime) &#123;</span><br><span class="line">    <span class="keyword">return</span> aircraftRepository.queryTracksBy(craftNo, startTime, endTime);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，针对<code>AircraftProcessor</code>与<code>AircraftLocationPreFilter</code>进行自动化与手动测试，保证修改的代码分支没有受到任何影响。</p>
+<p>重写、替换、然后重构，这就是主要的三个步骤，如下图所示：</p>
+<img src="/rewrite-and-refactoring-policy/04.png" class="">
+
+<p>黄色的<code>AircraftRepository</code>是新建的类，它的代码仅为调用者<code>AircraftLocationPreFilter</code>提供服务，因此重构它的代码并没有太大压力。<strong>注意</strong>，这里的一个要点是<strong>仅拷贝<code>AircraftLocationPreFilter</code>需要调用的旧AircraftRepository方法，而非原封不动地将整个旧<code>AircraftRepository</code>拷贝到新类中</strong>，因此新类的代码数量以及依赖点都非常的少。我们能够清晰地知道这个改动影响到了哪些代码分支，就通过测试去保护这些分支，使得这一步骤是充满信心的，保证不会引入新的Bug。一旦确认了新类的方法没有任何问题，就可以找到原方法的其他依赖者，采用同样的方式进行替换。在此过程中，旧<code>AircraftRepository</code>不受任何影响，仍然保留着原貌。除非随着替换过程的推进，这个旧类的所有调用者都转向了新类，它才正式退出历史舞台。</p>
+<p>新<code>AircraftRepository</code>类的方法与实现虽然进行了重构，但它对<code>ElasticSearchGateway</code>的依赖仍然未变。现在可以如法炮制，针对<code>AircraftRepository</code>对<code>ElasticSearchGateway</code>的调用，做相似的重构加重写，如下图所示：</p>
+<img src="/rewrite-and-refactoring-policy/05.png" class="">
+
+<p><code>AircraftRepository</code>仅用到了旧<code>ElasticSearchGateway</code>的一个<code>queryByScopeAndTerm()方法</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AircraftRepository</span>...</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">private</span> <span class="title">List</span>&lt;<span class="title">AircraftLocation</span>&gt; <span class="title">queryLocations</span>(<span class="title">String</span> <span class="title">craftNo</span>, <span class="title">String</span> <span class="title">scopeField</span>, <span class="title">String</span> <span class="title">min</span>, <span class="title">String</span> <span class="title">max</span>)...</span></span><br><span class="line"><span class="class">    <span class="title">List</span>&lt;<span class="title">SearchConsequence</span>&gt; <span class="title">consequences</span> </span>= gateway</span><br><span class="line">                .queryByScopeAndTerm(condition, ORG_STATION_AGG_FIELD, ORIGINAL_TIMESTAMP_SORT_FIELD, scopeField, min, max, AIRCRAFT_LOCATION_TABLE);</span><br></pre></td></tr></table></figure>
+
+<p>为之创建的新<code>ElasticSearchGateway</code>也就只包含<code>queryByScopeAndTerm</code>方法。当新<code>ElasticSearchGateway</code>替换了旧类后，重复之前的步骤，再次针对<code>AircraftProcessor</code>与<code>AircraftLocationPreFilter</code>进行自动化与手动测试，保证修改的代码分支没有受到任何影响。同理，新类的代码数量和依赖点都非常少，再对新类进行重构就变得更加简单。我们认为旧类的<code>queryByScopeAndTerm()</code>方法既无法清晰地表达意图，也不利于应对各种查询产生的变化。这时，我们引入了Builder模式，修改原有接口为DSL风格的接口。在新的<code>AircraftRepository</code>类中，保持了原来的调用方式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;AircraftLocation&gt; <span class="title">queryLocations</span><span class="params">(String craftNo, String scopeField, String min, String max)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, Object&gt; condition = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    condition.put(CRAFT_NO_FIELD, craftNo);</span><br><span class="line">    QueryResult queryResult = gateway.queryByScopeAndTerm(condition, ORG_STATION_AGG_FIELD, ORIGINAL_TIMESTAMP_SORT_FIELD, scopeField, min, max, AIRCRAFT_LOCATION_TABLE);</span><br><span class="line">    <span class="keyword">return</span> queryResult.all(AircraftLocation.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重构了新<code>ElasticSearchGateway</code>的<code>queryByScopeAndTerm()</code>方法之后，调用代码变成了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> List&lt;AircraftLocation&gt; <span class="title">queryLocations</span><span class="params">(String craftNo, String scopeField, String min, String max)</span> </span>&#123;</span><br><span class="line">    QueryResult queryResult = gateway.query()</span><br><span class="line">            .from(AIRCRAFT_LOCATION_TABLE)</span><br><span class="line">            .and(CRAFT_NO_FIELD, craftNo)</span><br><span class="line">            .range(scopeField, min, max)</span><br><span class="line">            .aggregateBy(ORG_STATION_AGG_FIELD)</span><br><span class="line">            .orderBy(ORIGINAL_TIMESTAMP_SORT_FIELD)</span><br><span class="line">            .run();</span><br><span class="line">    <span class="keyword">return</span> queryResult.all(AircraftLocation.class);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这样的重构加重写方式，我们新引入的类既在设计上通过重构得到了改进，还能借助这种小步前行的逐步替换方式，确保新实现在业务场景中得到了验证，规避了引入新bug的风险。一旦新接口得到了质量保证，就可以逐渐地替换旧有实现，直到旧有的repository与gateway类不再有任何依赖时，就可以将它们删除，换来更加整洁的代码了。</p>
+<h3 id="抽象分支"><a href="#抽象分支" class="headerlink" title="抽象分支"></a>抽象分支</h3><p>事实上，这种重构加重写方式与“<a target="_blank" rel="noopener" href="https://martinfowler.com/bliki/BranchByAbstraction.html">抽象分支（Branch By Abstraction）</a>”实践不谋而合。在Martin Fowler讨论抽象分支的文章中，他详细地讲述了这个过程。他将我们要替换的类或者模块称之为Flawed Supplier，抽象分支的做法是先为Flawed Supplier建立一层抽象层，并将客户端的调用代码指向该抽象层，同时为其创建单元测试：</p>
+<img src="/rewrite-and-refactoring-policy/06.png" class="">
+
+<p>接下来提供一个新的supplier，它同样实现了这个抽象层。一旦这个新的supplier实现完毕，就可以逐步修改客户端代码，转而使用这个新的supplier。最后，在验证了功能没有问题，也没有任何客户端代码还需要旧有supplier后，就可以去掉它：</p>
+<img src="/rewrite-and-refactoring-policy/07.png" class="">
+
+<p>重构加重写策略中新增的类就是这个新Supplier。但我并没有引入一个额外的抽象层，也未创建一个全新的Supplier，而是采用拷贝的方式直接重用代码，以避免引入不必要的bug。可以认为新增的类其实是要替换类的子集，保留了相同的接口和实现，从而避免多余的实现与依赖，使得重构可以更好地进行。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>重构加重写的策略虽然慢，但每一步前进的步伐都非常稳健，充分利用了代码量与依赖点少的新类来降低重构的难度。每完成一个新类的重构，我们都需要测试去验证。如果之前没有测试保障，则要求为新实现编写测试去覆盖，相当于在这个修改过程中慢慢地偿还了过去欠下的技术债务。由于旧类没有受到任何影响，即使重构或重写失败，我们还能够安全地返航。</p>
+<p>在这个过程中，会有很长一段时间存在<strong>新旧共存</strong>的状态。在执行重构的过程中，如果别的团队成员正在开发的新功能需要调用被重构的接口，由于重构还没有完成或未通过全面的测试，则允许该新功能继续调用旧有的类，保证了新功能的开发不受影响。倘若替换已经完成，旧类不再有存在价值时，则需要及时果断地将其删除，新开发的功能也要立即转为对新类的调用。由于新类的功能已经得到了保证，不必担心调用它会引入错误。</p>
+<p>执行重构加重写的过程需要小步前行，并及时提交新增或重构的代码，同时提高自动化测试的覆盖率。所有工作都在一个版本上进行，并保证重构加重写的功能都是正确可用的，保证该工作版本随时处于可上线的状态。</p>
+<p>在进行重构加重写时，还允许灵活调整人力资源。倘若需求变更或新需求开发的优先级高，交付压力大，就可以只安排少数人员专注于重构加重写，其他人员全力以赴新功能的开发，甚至在压力太大的情况下，停止进行重构加重写。反之，若开发压力较小，又可以匀出更多的人来进行重构加重写，尽快还清技术债。显然，这种策略使得我们进可攻退可守，理想状态下，甚至能够在一直保证不败的前提下，拥有随时发起进攻的选择权。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/rewrite-and-refactoring-policy/" title="重构加重写保证版本功能的空中加油">http://zhangyi.xyz/rewrite-and-refactoring-policy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Refactoring/" rel="tag"># Refactoring</a>
+          
+            <a href="/tags/Clean-Code/" rel="tag"># Clean Code</a>
+          
+            <a href="/tags/Legacy/" rel="tag"># Legacy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/understanding-micro-service-definition/" rel="next" title="重新理解Martin Fowler对微服务的定义">
+                <i class="fa fa-chevron-left"></i> 重新理解Martin Fowler对微服务的定义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/analysis-model-for-promotion/" rel="prev" title="从拼多多事件看电商的促销模型">
+                从拼多多事件看电商的促销模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9D%8F%E5%91%B3%E9%81%93"><span class="nav-number">1.</span> <span class="nav-text">代码的坏味道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E4%B8%8E%E7%89%88%E6%9C%AC%E6%BC%94%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">需求与版本演化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%E5%8A%A0%E9%87%8D%E5%86%99%E7%9A%84%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">重构加重写的策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E9%87%8D%E6%9E%84AircraftRepository%E5%92%8CElasticSearchGateway"><span class="nav-number">4.</span> <span class="nav-text">案例：重构AircraftRepository和ElasticSearchGateway</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E5%88%86%E6%94%AF"><span class="nav-number">5.</span> <span class="nav-text">抽象分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

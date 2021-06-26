@@ -1,23 +1,1348 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Design,OO,Java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Java的类是自定义的引用类型，是对职责相关的行为与数据的一种封装，用以表现一种业务领域或者技术领域的概念。在不同的场景，类包含的成员可能有所不同，大体可以分为如下五类：  数据类：可以视为是持有数据的容器，类的成员只包含了字段，以及与字段有关的get&#x2F;set方法 实体类：既包含了体现状态的字段，又包含了操作这些状态的方法 服务类：只有方法（行为）没有字段（状态），可以理解为提供内聚职责的服务 函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阅读开源框架总结Java类的定义">
+<meta property="og:url" content="http://zhangyi.xyz/class-definition-of-java-class-learning-from-opensource/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="Java的类是自定义的引用类型，是对职责相关的行为与数据的一种封装，用以表现一种业务领域或者技术领域的概念。在不同的场景，类包含的成员可能有所不同，大体可以分为如下五类：  数据类：可以视为是持有数据的容器，类的成员只包含了字段，以及与字段有关的get&#x2F;set方法 实体类：既包含了体现状态的字段，又包含了操作这些状态的方法 服务类：只有方法（行为）没有字段（状态），可以理解为提供内聚职责的服务 函">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-18T10:34:36.000Z">
+<meta property="article:modified_time" content="2018-10-18T10:40:38.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Design">
+<meta property="article:tag" content="OO">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/class-definition-of-java-class-learning-from-opensource/"/>
+
+
+
+
+
+  <title>阅读开源框架总结Java类的定义 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/class-definition-of-java-class-learning-from-opensource/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">阅读开源框架总结Java类的定义</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-18T18:34:36+08:00">
+                2018-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/class-definition-of-java-class-learning-from-opensource/" class="leancloud_visitors" data-flag-title="阅读开源框架总结Java类的定义">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Java的类是自定义的引用类型，是对<strong>职责相关</strong>的行为与数据的一种封装，用以表现一种业务领域或者技术领域的概念。在不同的场景，类包含的成员可能有所不同，大体可以分为如下五类：</p>
+<ul>
+<li>数据类：可以视为是持有数据的容器，类的成员只包含了字段，以及与字段有关的get/set方法</li>
+<li>实体类：既包含了体现状态的字段，又包含了操作这些状态的方法</li>
+<li>服务类：只有方法（行为）没有字段（状态），可以理解为提供内聚职责的服务</li>
+<li>函数类：如果定义的公开方法只有唯一一个，可以理解为它封装的其实是一个函数，通常用匿名类或者Lambda表示</li>
+<li>工具类：只包含一系列静态方法，通常不支持对该类型的实例化</li>
+</ul>
+<span id="more"></span>
+
+<h4 id="数据类"><a href="#数据类" class="headerlink" title="数据类"></a>数据类</h4><p>在Presto框架中定义的<code>ClientSession</code>可以认为是这样一种数据类。除了构造函数外，它只定义了字段与对应的<code>get()</code>方法（实际上，在框架的源代码中，在<code>ClientSession</code>类中还定义了一系列静态工厂方法，但本质上说，<code>ClientSession</code>还是一个数据类），用以持有客户端Session所必须的数据：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientSession</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> URI server;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String user;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String source;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String clientInfo;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String catalog;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String schema;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TimeZoneKey timeZone;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Locale locale;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, String&gt; properties;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, String&gt; preparedStatements;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String transactionId;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">boolean</span> debug;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Duration clientRequestTimeout;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClientSession</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            URI server,</span></span></span><br><span class="line"><span class="params"><span class="function">            String user,</span></span></span><br><span class="line"><span class="params"><span class="function">            String source,</span></span></span><br><span class="line"><span class="params"><span class="function">            String clientInfo,</span></span></span><br><span class="line"><span class="params"><span class="function">            String catalog,</span></span></span><br><span class="line"><span class="params"><span class="function">            String schema,</span></span></span><br><span class="line"><span class="params"><span class="function">            String timeZoneId,</span></span></span><br><span class="line"><span class="params"><span class="function">            Locale locale,</span></span></span><br><span class="line"><span class="params"><span class="function">            Map&lt;String, String&gt; properties,</span></span></span><br><span class="line"><span class="params"><span class="function">            String transactionId,</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">boolean</span> debug,</span></span></span><br><span class="line"><span class="params"><span class="function">            Duration clientRequestTimeout)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(server, user, source, clientInfo, catalog, schema, timeZoneId, locale, properties, emptyMap(), transactionId, debug, clientRequestTimeout);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClientSession</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">            URI server,</span></span></span><br><span class="line"><span class="params"><span class="function">            String user,</span></span></span><br><span class="line"><span class="params"><span class="function">            String source,</span></span></span><br><span class="line"><span class="params"><span class="function">            String clientInfo,</span></span></span><br><span class="line"><span class="params"><span class="function">            String catalog,</span></span></span><br><span class="line"><span class="params"><span class="function">            String schema,</span></span></span><br><span class="line"><span class="params"><span class="function">            String timeZoneId,</span></span></span><br><span class="line"><span class="params"><span class="function">            Locale locale,</span></span></span><br><span class="line"><span class="params"><span class="function">            Map&lt;String, String&gt; properties,</span></span></span><br><span class="line"><span class="params"><span class="function">            Map&lt;String, String&gt; preparedStatements,</span></span></span><br><span class="line"><span class="params"><span class="function">            String transactionId,</span></span></span><br><span class="line"><span class="params"><span class="function">            <span class="keyword">boolean</span> debug,</span></span></span><br><span class="line"><span class="params"><span class="function">            Duration clientRequestTimeout)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.server = requireNonNull(server, <span class="string">&quot;server is null&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">        <span class="keyword">this</span>.source = source;</span><br><span class="line">        <span class="keyword">this</span>.clientInfo = clientInfo;</span><br><span class="line">        <span class="keyword">this</span>.catalog = catalog;</span><br><span class="line">        <span class="keyword">this</span>.schema = schema;</span><br><span class="line">        <span class="keyword">this</span>.locale = locale;</span><br><span class="line">        <span class="keyword">this</span>.timeZone = TimeZoneKey.getTimeZoneKey(timeZoneId);</span><br><span class="line">        <span class="keyword">this</span>.transactionId = transactionId;</span><br><span class="line">        <span class="keyword">this</span>.debug = debug;</span><br><span class="line">        <span class="keyword">this</span>.properties = ImmutableMap.copyOf(requireNonNull(properties, <span class="string">&quot;properties is null&quot;</span>));</span><br><span class="line">        <span class="keyword">this</span>.preparedStatements = ImmutableMap.copyOf(requireNonNull(preparedStatements, <span class="string">&quot;preparedStatements is null&quot;</span>));</span><br><span class="line">        <span class="keyword">this</span>.clientRequestTimeout = clientRequestTimeout;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// verify the properties are valid</span></span><br><span class="line">        CharsetEncoder charsetEncoder = US_ASCII.newEncoder();</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;String, String&gt; entry : properties.entrySet()) &#123;</span><br><span class="line">            checkArgument(!entry.getKey().isEmpty(), <span class="string">&quot;Session property name is empty&quot;</span>);</span><br><span class="line">            checkArgument(entry.getKey().indexOf(<span class="string">&#x27;=&#x27;</span>) &lt; <span class="number">0</span>, <span class="string">&quot;Session property name must not contain &#x27;=&#x27;: %s&quot;</span>, entry.getKey());</span><br><span class="line">            checkArgument(charsetEncoder.canEncode(entry.getKey()), <span class="string">&quot;Session property name is not US_ASCII: %s&quot;</span>, entry.getKey());</span><br><span class="line">            checkArgument(charsetEncoder.canEncode(entry.getValue()), <span class="string">&quot;Session property value is not US_ASCII: %s&quot;</span>, entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> URI <span class="title">getServer</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> server;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUser</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSource</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getClientInfo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> clientInfo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCatalog</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> catalog;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSchema</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> schema;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> TimeZoneKey <span class="title">getTimeZone</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> timeZone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Locale <span class="title">getLocale</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> locale;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">getProperties</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> properties;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">getPreparedStatements</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> preparedStatements;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTransactionId</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> transactionId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDebug</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> debug;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Duration <span class="title">getClientRequestTimeout</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> clientRequestTimeout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> toStringHelper(<span class="keyword">this</span>)</span><br><span class="line">                .add(<span class="string">&quot;server&quot;</span>, server)</span><br><span class="line">                .add(<span class="string">&quot;user&quot;</span>, user)</span><br><span class="line">                .add(<span class="string">&quot;clientInfo&quot;</span>, clientInfo)</span><br><span class="line">                .add(<span class="string">&quot;catalog&quot;</span>, catalog)</span><br><span class="line">                .add(<span class="string">&quot;schema&quot;</span>, schema)</span><br><span class="line">                .add(<span class="string">&quot;timeZone&quot;</span>, timeZone)</span><br><span class="line">                .add(<span class="string">&quot;locale&quot;</span>, locale)</span><br><span class="line">                .add(<span class="string">&quot;properties&quot;</span>, properties)</span><br><span class="line">                .add(<span class="string">&quot;transactionId&quot;</span>, transactionId)</span><br><span class="line">                .add(<span class="string">&quot;debug&quot;</span>, debug)</span><br><span class="line">                .toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样包含数据或状态的对象通常会作为参数在方法调用之间传递，体现了诸如配置、视图模型、服务传输数据、协议数据等概念。除此之外，我们应尽量避免定义这样的对象去体现某种业务概念，因为基于<strong>“信息专家”模式</strong>，好的面向对象设计应该是将数据与操作这些数据的行为封装在一起。</p>
+<h4 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h4><p>这是最为常见的一种类定义，也是符合面向对象设计原则的，前提是定义的类必须是高内聚的，原则上应该满足单一职责原则。例如JDK定义的<code>Vector</code>展现了一种数据结构，因而它持有的字段与方法应该仅仅与队列操作与状态有关：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Vector</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">protected</span> Object[] elementData;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> elementCount;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> capacityIncrement;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">int</span> capacityIncrement)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal Capacity: &quot;</span>+</span><br><span class="line">                                              initialCapacity);</span><br><span class="line">        <span class="keyword">this</span>.elementData = <span class="keyword">new</span> Object[initialCapacity];</span><br><span class="line">        <span class="keyword">this</span>.capacityIncrement = capacityIncrement;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(initialCapacity, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setSize</span><span class="params">(<span class="keyword">int</span> newSize)</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">if</span> (newSize &gt; elementCount) &#123;</span><br><span class="line">            ensureCapacityHelper(newSize);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">                elementData[i] = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        elementCount = newSize;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> elementCount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> elementCount == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> indexOf(o, <span class="number">0</span>) &gt;= <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> E <span class="title">firstElement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (elementCount == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> elementData(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">insertElementAt</span><span class="params">(E obj, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">if</span> (index &gt; elementCount) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArrayIndexOutOfBoundsException(index</span><br><span class="line">                                                    + <span class="string">&quot; &gt; &quot;</span> + elementCount);</span><br><span class="line">        &#125;</span><br><span class="line">        ensureCapacityHelper(elementCount + <span class="number">1</span>);</span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + <span class="number">1</span>, elementCount - index);</span><br><span class="line">        elementData[index] = obj;</span><br><span class="line">        elementCount++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addElement</span><span class="params">(E obj)</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        ensureCapacityHelper(elementCount + <span class="number">1</span>);</span><br><span class="line">        elementData[elementCount++] = obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">removeElement</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="keyword">int</span> i = indexOf(obj);</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            removeElementAt(i);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">removeAllElements</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        modCount++;</span><br><span class="line">        <span class="comment">// Let gc do its work</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; elementCount; i++)</span><br><span class="line">            elementData[i] = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        elementCount = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如下类的定义则体现了一种业务概念，方法<code>changePriceTo()</code>实际上表现的是一种业务规则，而它要操作的数据就是<code>Product</code>类自身持有的字段<code>sellingPrice</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> <span class="keyword">extends</span> <span class="title">Entity</span>&lt;<span class="title">Identity</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;Option&gt; options;</span><br><span class="line">    <span class="keyword">private</span> Price sellingPrice;</span><br><span class="line">    <span class="keyword">private</span> Price retailPrice;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Product</span><span class="params">(Identity id, Price sellingPrice, Price retailPrice)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(id);</span><br><span class="line">        <span class="keyword">this</span>.sellingPrice = sellingPrice;</span><br><span class="line">        <span class="keyword">if</span> (!sellingPriceMatches(retailPrice) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> PricesNotInTheSameCurrencyException(<span class="string">&quot;Selling and retail price must be in the same currency&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.retailPrice = retailPrice;</span><br><span class="line">        options = <span class="keyword">new</span> List&lt;Option&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changePriceTo</span><span class="params">(Price newPrice)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!sellingPriceMatches(newPrice)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> PricesNotInTheSameCurrencyException(<span class="string">&quot;You cannot change the price of this product to a different currency&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        sellingPrice = newPrice;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Price <span class="title">savings</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Price savings = retailPrice.minus(sellingPrice);</span><br><span class="line">        <span class="keyword">if</span> (savings.isGreaterThanZero()) </span><br><span class="line">            <span class="keyword">return</span> savings;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Price(0m, sellingPrice.currency);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> bool <span class="title">sellingPriceMatches</span><span class="params">(Price retailPrice)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sellingPrice.sameCurrency(retailPrice); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Option option)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.contains(option)) </span><br><span class="line">            options.Add(option);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ProductOptionAddedNotUniqueException(string.Format(<span class="string">&quot;This product already has the option &#123;0&#125;&quot;</span>, option.ToString()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> bool <span class="title">contains</span><span class="params">(Option option)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> options.Contains(option); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务类"><a href="#服务类" class="headerlink" title="服务类"></a>服务类</h4><p>只有方法没有状态的类定义是对行为的封装，行为的实现要么是通过操作内部封装的不可变私有数据，要么是通过操作传入的参数对象实现对状态的修改。由于参数传入的状态与服务类自身没有任何关系，因此这样的类通常也被视为无状态的类。以下代码是针对升级激活包的验证服务：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreActivePackageValidator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">validatePreActivePackage</span><span class="params">(ActiveManifest  activeManifest)</span> </span>&#123;</span><br><span class="line">          validateSamePackageType(activeManifest);</span><br><span class="line">          validateNoTempPackage(activeManifest);</span><br><span class="line">          validateNoPackageRunning(activeManifest);</span><br><span class="line">          validateAllPackagesBeenDownloaded(activeManifest);</span><br><span class="line">          validateNoFatherPackageBakStatus(activeManifest);</span><br><span class="line">          validatePackageNum(activeManifest);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validateSamePackageType</span><span class="params">(ActiveManifest  activeManifest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> packakeType = activeManifest.getPackageType();</span><br><span class="line">        <span class="keyword">for</span> (UpagrdePackage pkg : activeManifest.getPackages()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (packageType != pkg.getPackageType()) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> PackagePreActiveException(<span class="string">&quot;pre active exist different type package&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>服务类还可以操作外部资源，例如读取文件、访问数据库、与第三方服务通信等。例如airlift框架定义的<code>ConfigurationLoader</code>类，就提供加载配置文件内容的服务：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigurationLoader</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">loadProperties</span><span class="params">()</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException    </span>&#123;</span><br><span class="line">        Map&lt;String, String&gt; result = <span class="keyword">new</span> TreeMap&lt;&gt;();</span><br><span class="line">        String configFile = System.getProperty(<span class="string">&quot;config&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (configFile != <span class="keyword">null</span>) &#123;</span><br><span class="line">            result.putAll(loadPropertiesFrom(configFile));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        result.putAll(getSystemProperties());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ImmutableSortedMap.copyOf(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">loadPropertiesFrom</span><span class="params">(String path)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> IOException    </span>&#123;</span><br><span class="line">        Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line">        <span class="keyword">try</span> (Reader reader = <span class="keyword">new</span> FileReader(<span class="keyword">new</span> File(path))) &#123;</span><br><span class="line">            properties.load(reader);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fromProperties(properties);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">getSystemProperties</span><span class="params">()</span>    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fromProperties(System.getProperties());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数类"><a href="#函数类" class="headerlink" title="函数类"></a>函数类</h4><p>可以将函数类理解为设计一个类，它仅仅实现了一个接口，且该接口只定义一个方法。使用时，我们会基于<strong>依赖倒置原则（DIP）</strong>从接口的角度使用这个类。为了重用的目的，这个类可以单独被定义，也可能体现为匿名类，或者Java 8中的Lambda表达式。</p>
+<h5 id="单独类形式"><a href="#单独类形式" class="headerlink" title="单独类形式"></a>单独类形式</h5><p>例如，在Presto中定义了<code>PagesIndexComparator</code>接口，提供了比较方法以用于支持对页面索引的排序。接口的定义为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PagesIndexComparator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(PagesIndex pagesIndex, <span class="keyword">int</span> leftPosition, <span class="keyword">int</span> rightPosition)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Presto定义了该接口的实现类<code>SimplePagesIndexComparator</code>，该类就是一个函数类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimplePagesIndexComparator</span></span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">PagesIndexComparator</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;Integer&gt; sortChannels;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;SortOrder&gt; sortOrders;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;Type&gt; sortTypes;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SimplePagesIndexComparator</span><span class="params">(List&lt;Type&gt; sortTypes, List&lt;Integer&gt; sortChannels, List&lt;SortOrder&gt; sortOrders)</span>   </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sortTypes = ImmutableList.copyOf(requireNonNull(sortTypes, <span class="string">&quot;sortTypes is null&quot;</span>));</span><br><span class="line">        <span class="keyword">this</span>.sortChannels = ImmutableList.copyOf(requireNonNull(sortChannels, <span class="string">&quot;sortChannels is null&quot;</span>));</span><br><span class="line">        <span class="keyword">this</span>.sortOrders = ImmutableList.copyOf(requireNonNull(sortOrders, <span class="string">&quot;sortOrders is null&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(PagesIndex pagesIndex, <span class="keyword">int</span> leftPosition, <span class="keyword">int</span> rightPosition)</span>   </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> leftPageAddress = pagesIndex.getValueAddresses().getLong(leftPosition);</span><br><span class="line">        <span class="keyword">int</span> leftBlockIndex = decodeSliceIndex(leftPageAddress);</span><br><span class="line">        <span class="keyword">int</span> leftBlockPosition = decodePosition(leftPageAddress);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> rightPageAddress = pagesIndex.getValueAddresses().getLong(rightPosition);</span><br><span class="line">        <span class="keyword">int</span> rightBlockIndex = decodeSliceIndex(rightPageAddress);</span><br><span class="line">        <span class="keyword">int</span> rightBlockPosition = decodePosition(rightPageAddress);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; sortChannels.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> sortChannel = sortChannels.get(i);</span><br><span class="line">            Block leftBlock = pagesIndex.getChannel(sortChannel).get(leftBlockIndex);</span><br><span class="line">            Block rightBlock = pagesIndex.getChannel(sortChannel).get(rightBlockIndex);</span><br><span class="line"></span><br><span class="line">            SortOrder sortOrder = sortOrders.get(i);</span><br><span class="line">            <span class="keyword">int</span> compare = sortOrder.compareBlockValue(sortTypes.get(i), leftBlock, leftBlockPosition, rightBlock, rightBlockPosition);</span><br><span class="line">            <span class="keyword">if</span> (compare != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> compare;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们看到<code>SimplePagesIndexComparator</code>类的逻辑相对比较复杂，构造函数也需要传入三个参数：<code>List&lt;Type&gt; sortTypes</code>，<code>List&lt;Integer&gt; sortChannels</code>和<code>List&lt;SortOrder&gt; sortOrders</code>。虽然从接口的角度看，其实代表的是compare的语义，但由于逻辑复杂，而且需要传入三个对象帮助对<code>PagesIndex</code>进行比较，因而不可能实现为匿名类或者Lambda表达式。在Presto中，对它的使用为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PagesIndexOrdering</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> PagesIndexComparator comparator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PagesIndexOrdering</span><span class="params">(PagesIndexComparator comparator)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.comparator = requireNonNull(comparator, <span class="string">&quot;comparator is null&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> PagesIndexComparator <span class="title">getComparator</span><span class="params">()</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> comparator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Returns the index of the median of the three positions.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">median3</span><span class="params">(PagesIndex pagesIndex, <span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span>    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ab = comparator.compareTo(pagesIndex, a, b);</span><br><span class="line">        <span class="keyword">int</span> ac = comparator.compareTo(pagesIndex, a, c);</span><br><span class="line">        <span class="keyword">int</span> bc = comparator.compareTo(pagesIndex, b, c);</span><br><span class="line">        <span class="keyword">return</span> (ab &lt; <span class="number">0</span> ?</span><br><span class="line">                (bc &lt; <span class="number">0</span> ? b : ac &lt; <span class="number">0</span> ? c : a) :</span><br><span class="line">                (bc &gt; <span class="number">0</span> ? b : ac &gt; <span class="number">0</span> ? c : a));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="匿名类形式"><a href="#匿名类形式" class="headerlink" title="匿名类形式"></a>匿名类形式</h5><p>同样在该框架下定义的<code>IntComparator</code>接口，它的实现就完全不同了。首先是该接口的定义：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntComparator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** Compares the given primitive types.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@see</span> java.util.Comparator</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> A positive integer, zero, or a negative integer if the first</span></span><br><span class="line"><span class="comment">    * argument is greater than, equal to, or smaller than, respectively, the</span></span><br><span class="line"><span class="comment">    * second one.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> k1, <span class="keyword">int</span> k2)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在针对整型数据提供排序功能时，用到了<code>IntComparator</code>接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">IntBigArray</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, IntComparator comparator)</span>    </span>&#123;</span><br><span class="line">        IntBigArrays.quickSort(array, from, to, comparator);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但由于提供整型数据的比较逻辑相对简单，在Presto中并没有定义显式的函数类，而是使用了Lambda表达式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">groupIds.sort(<span class="number">0</span>, groupByHash.getGroupCount(), (leftGroupId, rightGroupId) -&gt;</span><br><span class="line">                Long.compare(groupByHash.getRawHash(leftGroupId), groupByHash.getRawHash(rightGroupId)));</span><br></pre></td></tr></table></figure>
+
+<p>这里的Lambda表达式其实也可以理解为是一个函数类。</p>
+<h5 id="函数重用形式"><a href="#函数重用形式" class="headerlink" title="函数重用形式"></a>函数重用形式</h5><p>还有一种特殊的函数类，它的定义形式与后面介绍的工具类非常相似，同样是定义了一组静态方法，但它的目的不是提供工具或辅助功能，而是将其视为函数成为被重用的单元。这时，需要用到Java 8提供的方法引用（method reference）语法。例如我们要对<code>List&lt;Apple&gt;</code>集合进行过滤，过滤条件分别为颜色与重量，这时可以在<code>Apple</code>类中定义两个静态方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isGreenApple</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;green&quot;</span>.equals(apple.getColor());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isHeavyApple</span><span class="params">(Apple apple)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> apple.getWeight() &gt; <span class="number">150</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这两个方法实际上满足函数接口<code>Predicate&lt;Apple&gt;</code>的定义，因此可以在<code>filter</code>方法中传入这两个方法的引用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Apple&gt; <span class="title">filter</span><span class="params">(Predicate&lt;Apple&gt; predicate)</span> </span>&#123;</span><br><span class="line">    ArrayList&lt;Apple&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Apple apple : apples) &#123;</span><br><span class="line">        <span class="keyword">if</span> (predicate.test(apple)) &#123;</span><br><span class="line">            result.add(apple);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Apple&gt; <span class="title">filterGreenApples</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> filter(Apple::isGreenApple);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Apple&gt; <span class="title">filterHeavyApples</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> filter(Apple::isHeavyApple);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时<code>Apple</code>类可以认为是一个函数类，但准确地说法是一系列可以被重用的函数的容器。与工具类不同的是，这些函数并不是被直接调用，本质上讲，其实是作为“高阶函数”被传递给其他方法而被重用。虽然说实例方法也可以采用这种方式而被重用，但静态方法的调用会更加简单。</p>
+<h4 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h4><p>在许多项目或开源项目中，随处可见工具类的身影。无需实例化的特性使得我们使用工具类的方式时变得非常的便利，也不需要考虑状态的维护。然而越是方便，我们越是要警惕工具类的陷阱——设计出臃肿庞大无所不能的上帝工具类。工具类仍然要遵循高内聚的原则，只有强相关的职责才能放到同一个工具类中。</p>
+<p>在定义工具类时，通常有三类命名范式：</p>
+<ul>
+<li>名词复数形式：工具类其实就是一系列工具方法的容器，当我们要针对某种类型（或对象）提供工具方法时，可以直接将工具类命名为该类型的复数形式，例如操作<code>Collection</code>的工具类可以命名为<code>Collections</code>，操作<code>Object</code>的工具类可以命名为<code>Objects</code>，而与前置条件有关的工具类则被命名为<code>Preconditions</code>。</li>
+<li>以Util为后缀：这体现了工具（Utility）的语义，当我们在类名中看到<code>Util</code>后缀时，就可以直观地了解到这是一个工具类。例如<code>ArrayUtil</code>类是针对数组的工具类，<code>DatabaseUtil</code>是针对数据库操作的工具类，<code>UuidUtil</code>是针对Uuid的工具类。</li>
+<li>以Helper为后缀：这种命名相对较少，但许多框架也采用这种命名方式来体现“辅助类”的含义。例如在Druid框架中，就定义了<code>JobHelper</code>、<code>GroupByQueryHelper</code>等辅助类。</li>
+</ul>
+<p>工具类是无需实例化的，因此在定义工具类时，尽可能将其声明为final类，并为其定义私有的构造函数。例如Guava框架提供的<code>Preconditions</code>工具类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Preconditions</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Preconditions</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">checkArgument</span><span class="params">(<span class="keyword">boolean</span> expression)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!expression) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//other util methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/class-definition-of-java-class-learning-from-opensource/" title="阅读开源框架总结Java类的定义">http://zhangyi.xyz/class-definition-of-java-class-learning-from-opensource/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Design/" rel="tag"># Design</a>
+          
+            <a href="/tags/OO/" rel="tag"># OO</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/role-of-domain-model-in-communication/" rel="next" title="领域模型在交流中扮演的角色">
+                <i class="fa fa-chevron-left"></i> 领域模型在交流中扮演的角色
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/anlysis-complexity-of-software/" rel="prev" title="深入分析软件复杂度">
+                深入分析软件复杂度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">数据类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">实体类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">服务类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">函数类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E7%8B%AC%E7%B1%BB%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">单独类形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E7%B1%BB%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">匿名类形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E9%87%8D%E7%94%A8%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">函数重用形式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">5.</span> <span class="nav-text">工具类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

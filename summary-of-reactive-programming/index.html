@@ -1,23 +1,1333 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Reactive Programming,RxJava,Akka" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="响应式编程在前端开发以及Android开发中有颇多运用，然而它的非阻塞异步编程模型以及对消息流的处理模式也在后端得到越来越多的应用。除了Netflix的OSS中大量使用了响应式编程之外，最近阿里也提出Dubbo 3.0版本将全面拥抱响应式编程。 我之前针对某些项目需求也给出了响应式编程的方案，较好地解决了并行编程与异步编程的问题。不过在深入了解响应式编程之后，我也给出了自己的一些实践总结。 响应式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="响应式编程的实践">
+<meta property="og:url" content="http://zhangyi.xyz/summary-of-reactive-programming/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="响应式编程在前端开发以及Android开发中有颇多运用，然而它的非阻塞异步编程模型以及对消息流的处理模式也在后端得到越来越多的应用。除了Netflix的OSS中大量使用了响应式编程之外，最近阿里也提出Dubbo 3.0版本将全面拥抱响应式编程。 我之前针对某些项目需求也给出了响应式编程的方案，较好地解决了并行编程与异步编程的问题。不过在深入了解响应式编程之后，我也给出了自己的一些实践总结。 响应式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/summary-of-reactive-programming/flow-graph.jpg">
+<meta property="article:published_time" content="2018-02-03T11:03:46.000Z">
+<meta property="article:modified_time" content="2018-03-16T03:46:40.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Reactive Programming">
+<meta property="article:tag" content="RxJava">
+<meta property="article:tag" content="Akka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/summary-of-reactive-programming/flow-graph.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/summary-of-reactive-programming/"/>
+
+
+
+
+
+  <title>响应式编程的实践 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/summary-of-reactive-programming/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">响应式编程的实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T19:03:46+08:00">
+                2018-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/summary-of-reactive-programming/" class="leancloud_visitors" data-flag-title="响应式编程的实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>响应式编程在前端开发以及Android开发中有颇多运用，然而它的非阻塞异步编程模型以及对消息流的处理模式也在后端得到越来越多的应用。除了Netflix的OSS中大量使用了响应式编程之外，最近阿里也提出Dubbo 3.0版本将全面拥抱响应式编程。</p>
+<p>我之前针对某些项目需求也给出了响应式编程的方案，较好地解决了并行编程与异步编程的问题。不过在深入了解响应式编程之后，我也给出了自己的一些实践总结。</p>
+<h3 id="响应式编程并非银弹"><a href="#响应式编程并非银弹" class="headerlink" title="响应式编程并非银弹"></a>响应式编程并非银弹</h3><p>响应式编程并非银弹。事实上在软件领域，Brooks提出的“没有银弹”一说或许将永远生效。当我们在选择使用响应式编程时，一定要明确它的适用场景，主要包括：</p>
+<ul>
+<li>处理由用户或其他系统发起的事件，如鼠标点击、键盘按键或者物联网设备等无时无刻都在发射信号的情况</li>
+<li>处理磁盘或网络等高延迟的IO数据，且保证这些IO操作是异步的</li>
+<li>业务的处理流程是流式的，且需要高响应的非阻塞操作</li>
+</ul>
+<p>除此之外，我们当然也可以利用一些响应式编程框架如Rx，简化并发编程与数据流操作的实现。诸如RxJava就提供非常完整的工厂方法，可以将非响应式编程的Iterable、Array以及与响应式编程有一定相关性的Future、Callable转换为Observable或Flowable。</p>
+<span id="more"></span>
+
+<h3 id="理解Source的本质"><a href="#理解Source的本质" class="headerlink" title="理解Source的本质"></a>理解Source的本质</h3><p>Akka Stream将流数据源定义为Source，RxJava则定义为Observable或Flowable。这些响应式编程框架都为Source提供了丰富的operator。其中除了组合流的操作之外，最基本的操作即为：filter、map、flatMap、reduce等。</p>
+<p>粗略看来，这些操作皆为函数式的编程接口，从FP的角度看，我们甚至可以将Source视为一个monad。而站在Java编程的角度看，我们则很容易将Source视为等同于集合的数据结构。更何况，响应式编程实则脱胎于Observer模式与Iterator模式，其中Iterator模式就是针对集合的操作，只不过Observable或Flowable是push模型，而Iterator模式则为pull模型罢了。</p>
+<p>然而这就是本质的区别，即<strong>Source是一个不断发射事件（data、error、complete）的源头，具有时间序列的特点</strong>，而Iterable则是一个静态的数据结构，在对它进行操作时，该数据结构中存储的数据就已经存在了。</p>
+<h3 id="合理设计Source的粒度"><a href="#合理设计Source的粒度" class="headerlink" title="合理设计Source的粒度"></a>合理设计Source的粒度</h3><p>在演示Observable或Flowable的API时，我们往往喜欢采用Fluent Interface的方式连续地调用它的operator，形成一个整体的流处理过程。这并非总是合理的。当一个Source被多个operator串联起来的时候，会使得这个Source更加<strong>难以被重用</strong>。</p>
+<p>例如，在加载网页时，默认发起对后端服务的调用并返回需要的用户信息，若建模为<strong>流A</strong>，其转换如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uri ----&gt; user ----&gt; | --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>同时，有一个鼠标点击事件也会通过随机生成URL发起对后端服务的调用并返回需要的用户信息，倘若建模为<strong>流B</strong>，其转换如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">click ----&gt; uri ----&gt; user ----&gt; | --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>显然，这两个流在从uri到user的流处理上出现了重复。如果我们创建的流A与流B并不包含uri到user的转换，就可以通过merge等合并操作将A与B合并，然后再<strong>共同重用从uri到user的转换</strong>。我们也无需担心创建细粒度流的成本，因为这些流的创建是lazy的，流虽然创建了，对流的操作却不会立即执行。</p>
+<h3 id="分离操作的逻辑"><a href="#分离操作的逻辑" class="headerlink" title="分离操作的逻辑"></a>分离操作的逻辑</h3><p>无论是哪个响应式框架，都为流（Source）提供了丰富的operator。这些operator多数都支持lambda表达式。在处理简单的业务逻辑时，这样的实现是没有问题的；然而一旦逻辑变得非常复杂，lambda表达式的表达能力就不够了。从编程实践看，lambda表达式本身就应该保持微小的粒度。这时，就应该将这些逻辑单独分离出来，放到单独的类与方法中。</p>
+<p>例如，我们根据device的配置信息去调用远程服务获取设备信息，然后提取信息获得业务需要的指标，对指标进行转换，最后将转换的数据写入到数据库中。结合函数的转换本质，我们可以将这些操作拆分为多个连续的操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deviceConfig --&gt; deviceInfo --&gt; List&lt;extractedInfo&gt; --&gt; transformedInfo --&gt; write</span><br></pre></td></tr></table></figure>
+
+<p>倘若这些转换的逻辑非常复杂，就可以将这些逻辑分别封装到DeviceFetcher、DeviceExtractor、DeviceTransformer与DeviceWriter这四个类中，于是代码可以写为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Flowable.fromIterable(deviceConfigs)</span><br><span class="line">    .parallel()</span><br><span class="line">    .runOn(Schedulers.computation())</span><br><span class="line">    .map(DeviceFetcher::fetch)</span><br><span class="line">    .flatMap(DeviceExtractor::extract)</span><br><span class="line">    .map(DeviceTransformer::transform)</span><br><span class="line">    .sequential()</span><br><span class="line">    .blockingSubscribe(</span><br><span class="line">        info -&gt; DeviceWriter.write(info), </span><br><span class="line">        err -&gt; log(err), </span><br><span class="line">        () -&gt; log(<span class="string">&quot;done.&quot;</span>)</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<p>这一实践提倡将流的操作与每个操作的业务分离开，既能够保证流操作的简单与纯粹，又能保证操作业务的重用与可扩展。</p>
+<h3 id="API的设计"><a href="#API的设计" class="headerlink" title="API的设计"></a>API的设计</h3><p>如果我们要设计符合响应式编程设计的API，则应该尽可能保证每个方法都是非阻塞的。要做到这一点，就应该保证每个方法返回的类型是Source或Publisher。例如针对要返回多个数据的流，可以返回<code>Observable&lt;T&gt;</code>或者<code>Flowable&lt;T&gt;</code>；如果确定只返回一个数据，则可以返回<code>Single&lt;T&gt;</code>；倘若不确定，则返回<code>Maybe&lt;T&gt;</code>。倘若该API方法仅仅是一个命令，无需返回结果，又需要保证方法是非阻塞的，则可以考虑返回<code>Completable&lt;T&gt;</code>。</p>
+<p>从某种意义上说，返回<code>Future&lt;T&gt;</code>、<code>CompletableFuture&lt;T&gt;</code>或者<code>CompletableStage&lt;T&gt;</code>也可以认为是响应式的。这三个类型由于是JDK自身提供的，因此更纯粹。唯一不便的是这些接口没有提供类似Observable那样丰富的operator，但好在Observable与Flowable都提供了<code>fromFuture()</code>方法对其进行转换，因而这样的设计也是可取的。</p>
+<h3 id="Akka-Stream的流拓扑图"><a href="#Akka-Stream的流拓扑图" class="headerlink" title="Akka Stream的流拓扑图"></a>Akka Stream的流拓扑图</h3><p>Akka Stream对流处理的抽象被建模为图。这一设计思想使得流的处理变得更加直观，流的处理变成了“搭积木”游戏。可惜Java的DSL能力实在太弱，如果对比Scala与Java，你会发现GraphDSL对Graph的构造在表现上简直是天壤之别。</p>
+<p>例如这是官方文档中Java版本对Graph的构造：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">RunnableGraph.fromGraph(GraphDSL.create(builder -&gt; &#123;</span><br><span class="line">    <span class="keyword">final</span> Outlet&lt;Integer&gt; A = builder.add(Source.single(<span class="number">0</span>)).out();</span><br><span class="line">    <span class="keyword">final</span> UniformFanOutShape&lt;Integer, Integer&gt; B = builder.add(Broadcast.create(<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">final</span> UniformFanInShape&lt;Integer, Integer&gt; C = builder.add(Merge.create(<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">final</span> FlowShape&lt;Integer, Integer&gt; D = builder.add(Flow.of(Integer.class).map(i -&gt; i + <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">final</span> UniformFanOutShape&lt;Integer, Integer&gt; E = builder.add(Balance.create(<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">final</span> UniformFanInShape&lt;Integer, Integer&gt; F = builder.add(Merge.create(<span class="number">2</span>));</span><br><span class="line">    <span class="keyword">final</span> Inlet&lt;Integer&gt; G = builder.add(Sink.&lt;Integer&gt;foreach(System.out::println)).in();</span><br><span class="line"></span><br><span class="line">    builder.from(F).toFanIn(C); <span class="comment">//feedback loop</span></span><br><span class="line">    builder.from(A).viaFanOut(B).viaFanIn(C).toFanIn(F);</span><br><span class="line">    builder.from(B).via(D).viaFanOut(E).toFanIn(F);</span><br><span class="line">    builder.from(E).toInlet(G);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ClosedShape.getInstance();</span><br><span class="line">&#125;)).run(mat);</span><br></pre></td></tr></table></figure>
+
+<p>如下是官方文档中Scala版本对同一个Graph的构造：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="type">RunnableGraph</span>.fromGraph(<span class="type">GraphDSL</span>.create() &#123; <span class="keyword">implicit</span> builder =&gt;</span><br><span class="line">  <span class="keyword">val</span> <span class="type">A</span>: <span class="type">Outlet</span>[<span class="type">Int</span>]                  = builder.add(<span class="type">Source</span>.single(<span class="number">0</span>)).out</span><br><span class="line">  <span class="keyword">val</span> <span class="type">B</span>: <span class="type">UniformFanOutShape</span>[<span class="type">Int</span>, <span class="type">Int</span>] = builder.add(<span class="type">Broadcast</span>[<span class="type">Int</span>](<span class="number">2</span>))</span><br><span class="line">  <span class="keyword">val</span> <span class="type">C</span>: <span class="type">UniformFanInShape</span>[<span class="type">Int</span>, <span class="type">Int</span>]  = builder.add(<span class="type">Merge</span>[<span class="type">Int</span>](<span class="number">2</span>))</span><br><span class="line">  <span class="keyword">val</span> <span class="type">D</span>: <span class="type">FlowShape</span>[<span class="type">Int</span>, <span class="type">Int</span>]          = builder.add(<span class="type">Flow</span>[<span class="type">Int</span>].map(_ + <span class="number">1</span>))</span><br><span class="line">  <span class="keyword">val</span> <span class="type">E</span>: <span class="type">UniformFanOutShape</span>[<span class="type">Int</span>, <span class="type">Int</span>] = builder.add(<span class="type">Balance</span>[<span class="type">Int</span>](<span class="number">2</span>))</span><br><span class="line">  <span class="keyword">val</span> <span class="type">F</span>: <span class="type">UniformFanInShape</span>[<span class="type">Int</span>, <span class="type">Int</span>]  = builder.add(<span class="type">Merge</span>[<span class="type">Int</span>](<span class="number">2</span>))</span><br><span class="line">  <span class="keyword">val</span> <span class="type">G</span>: <span class="type">Inlet</span>[<span class="type">Any</span>]</span><br><span class="line">  </span><br><span class="line">                <span class="type">C</span>     &lt;~      <span class="type">F</span></span><br><span class="line">  <span class="type">A</span>  ~&gt;  <span class="type">B</span>  ~&gt;  <span class="type">C</span>     ~&gt;      <span class="type">F</span></span><br><span class="line">         <span class="type">B</span>  ~&gt;  <span class="type">D</span>  ~&gt;  <span class="type">E</span>  ~&gt;  <span class="type">F</span></span><br><span class="line">                       <span class="type">E</span>  ~&gt;  <span class="type">G</span></span><br><span class="line">  <span class="type">ClosedShape</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们也看到，倘若在GraphDSL中我们能够将构成Graph的“材料”对象事先创建好，而将build工作统一放在一起，可以在一定程度改进代码的表现力。</p>
+<p>我们可以将Akka Stream的Graph（完整的Graph，称为ClosedShape，是可以运行的，又称之为RunnableShape）看做是流处理的”模具“，至于那些由Inlet与Outlet端口组成的基础Shape，则是设计这些模具的”基础材料“。</p>
+<p><strong>模具</strong>是静态的，<strong>基础材料</strong>与<strong>组合材料</strong>是可重用的单元，然后再组合可以重用的<strong>业务单元</strong>（以函数、类或者接口形式进行封装），这个模具就具有了业务处理能力。如果这个拓扑图过于复杂，我们还可以利用基础Shape组合形成一个个更粗粒度Partial Shap。这些Partial Shape不是封闭的，可以理解为更粗粒度的Source、Sink和Flow，它使得模具的组装变得更加简单。</p>
+<p>材料、业务单元、模具之间的关系可以形象地用下图来表示：</p>
+<img src="/summary-of-reactive-programming/flow-graph.jpg" class="">
+
+<p>一旦流处理的模具打造完毕，打开数据流的”水龙头“，让数据源源不断地流入Graph中，流处理就可以”自动“运行。只要Source没有发出complete或error信号，它就将一直运行下去。Akka Stream之所以将Graph的运行器称之为materializer，大约也是源于这样的隐喻吧。</p>
+<p>使用Akka Stream进行响应式流处理，我建议参考这样的思维。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/summary-of-reactive-programming/" title="响应式编程的实践">http://zhangyi.xyz/summary-of-reactive-programming/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Reactive-Programming/" rel="tag"># Reactive Programming</a>
+          
+            <a href="/tags/RxJava/" rel="tag"># RxJava</a>
+          
+            <a href="/tags/Akka/" rel="tag"># Akka</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/using-spring-cloud-in-scala-project/" rel="next" title="在Scala项目中使用Spring Cloud">
+                <i class="fa fa-chevron-left"></i> 在Scala项目中使用Spring Cloud
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/boundary-of-bounded-context/" rel="prev" title="限界上下文的边界">
+                限界上下文的边界 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%B9%B6%E9%9D%9E%E9%93%B6%E5%BC%B9"><span class="nav-number">1.</span> <span class="nav-text">响应式编程并非银弹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%A7%A3Source%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">理解Source的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E7%90%86%E8%AE%BE%E8%AE%A1Source%E7%9A%84%E7%B2%92%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">合理设计Source的粒度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E6%93%8D%E4%BD%9C%E7%9A%84%E9%80%BB%E8%BE%91"><span class="nav-number">4.</span> <span class="nav-text">分离操作的逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.</span> <span class="nav-text">API的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Akka-Stream%E7%9A%84%E6%B5%81%E6%8B%93%E6%89%91%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">Akka Stream的流拓扑图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

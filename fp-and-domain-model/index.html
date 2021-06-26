@@ -1,23 +1,1425 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,Design,Scala,FP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="函数范式REA的Ken Scambler认为函数范式的主要特征为：模块化（Modularity），抽象化（Abstraction）和可组合（Composability）。这三个特征可以帮助我们编写简单的程序。 通常，为了降低系统的复杂度，都需要将系统分解为多个功能的组成部分，每个组成部分有着清晰的边界。模块化的编码范式需要支持实现者能够轻易地对模块进行替换，这就要求模块具有隔离性，避免在模块之间出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数范式与领域建模">
+<meta property="og:url" content="http://zhangyi.xyz/fp-and-domain-model/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="函数范式REA的Ken Scambler认为函数范式的主要特征为：模块化（Modularity），抽象化（Abstraction）和可组合（Composability）。这三个特征可以帮助我们编写简单的程序。 通常，为了降低系统的复杂度，都需要将系统分解为多个功能的组成部分，每个组成部分有着清晰的边界。模块化的编码范式需要支持实现者能够轻易地对模块进行替换，这就要求模块具有隔离性，避免在模块之间出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/fp-and-domain-model/01.png">
+<meta property="og:image" content="http://zhangyi.xyz/fp-and-domain-model/02.png">
+<meta property="article:published_time" content="2019-05-26T13:28:41.000Z">
+<meta property="article:modified_time" content="2019-05-26T13:46:43.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Design">
+<meta property="article:tag" content="Scala">
+<meta property="article:tag" content="FP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/fp-and-domain-model/01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/fp-and-domain-model/"/>
+
+
+
+
+
+  <title>函数范式与领域建模 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/fp-and-domain-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">函数范式与领域建模</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-26T21:28:41+08:00">
+                2019-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index">
+                    <span itemprop="name">DDD</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/fp-and-domain-model/" class="leancloud_visitors" data-flag-title="函数范式与领域建模">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="函数范式"><a href="#函数范式" class="headerlink" title="函数范式"></a>函数范式</h2><p>REA的Ken Scambler认为函数范式的主要特征为：模块化（Modularity），抽象化（Abstraction）和可组合（Composability）。这三个特征可以帮助我们编写<strong>简单</strong>的程序。</p>
+<p>通常，为了降低系统的复杂度，都需要将系统分解为多个功能的组成部分，每个组成部分有着清晰的边界。<strong>模块化</strong>的编码范式需要支持实现者能够轻易地对模块进行替换，这就要求模块具有隔离性，避免在模块之间出现太多的纠缠。函数范式以“函数”为核心，作为模块化的重要组成部分。函数范式要求函数均为没有副作用的纯函数（pure function）。在推断每个函数的功能时，由于函数没有产生副作用，就可以不考虑该函数当前所处的上下文，形成清晰的隔离边界。这种相互隔离的纯函数使得模块化成为可能。</p>
+<p>函数的<strong>抽象</strong>能力不言而喻，因为它本质上是一种将输入类型转换为输出类型的转换行为。任何一个函数都可以视为一种转换(transform)，这是对行为的最高抽象，代表了类型（type）之间的某种动作。极端情况下，我们甚至不用考虑函数的名称和类型，只需要关注其数学本质：<code>f(x) = y</code>。其中，x是输入，y是输出，f就是极度抽象的函数。</p>
+<p>函数范式领域模型的核心要素为代数数据类型（Algebraic Data Type, ADT）和纯函数。代数数据类型表达领域概念，纯函数表达领域行为。由于二者皆被定义为不变的、原子的，因此在类型的约束规则下可以对它们进行组合。<strong>可组合</strong>的特征使得函数范式建立的领域模型可以由简单到复杂，利用组合子来表现复杂的领域逻辑。</p>
+<span id="more"></span>
+
+<h3 id="代数数据类型"><a href="#代数数据类型" class="headerlink" title="代数数据类型"></a>代数数据类型</h3><p>代数数据类型借鉴了代数学中的概念，作为一种函数式数据结构，体现了函数范式的数学意义。通常，代数数据类型不包含任何行为。它利用<strong>和类型（Sum Type）</strong>来展示相同抽象概念的不同组合，使用<strong>积类型（Product Type）</strong>来展示同一个概念不同属性的组合。</p>
+<p>和与积是代数中的概念，它们在函数范式中体现了类型的两种组合模式。和就是加，用以表达一种类型是它的所有子类型之和。例如表达时间单位的TimeUnit类型：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">trait</span> <span class="title">TimeUnit</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">Days</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">Hours</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">Minutes</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">Seconds</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">MilliSeconds</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">MicroSeconds</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">NanoSeconds</span> <span class="keyword">extends</span> <span class="title">TimeUnit</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong>由于Java并非真正的函数式语言，较难表达一些函数式特性，因此，本节内容的代码使用Scala语言作为示例。</p>
+<p>在上述模型中，<code>TimeUnit</code>是对时间单位概念的一个抽象。定义为和类型，说明它的实例只能是以下的任意一种：Days、Hours、Minutes、Seconds、MilliSeconds、MicroSeconds或NanoSeconds。这是一种逻辑或的关系，用加号来表示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type TimeUnit = Days + Hours + Minutes + Seconds + MilliSeconds + MicroSeconds + NanoSeconds</span><br></pre></td></tr></table></figure>
+
+<p>积类型体现了一个代数数据类型是其属性组合的笛卡尔积，例如一个员工类型：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span>(<span class="params">number: <span class="type">String</span>, name: <span class="type">String</span>, email: <span class="type">String</span>, onboardingDate: <span class="type">Date</span></span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>它表示Employee类型是<code>(String, String, String, Date)</code>组合的集合，也就是这四种数据类型的笛卡尔积，在类型语言中可以表达为：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> <span class="title">Employee</span> </span>= (<span class="type">String</span>, <span class="type">String</span>, <span class="type">String</span>, <span class="type">Date</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也可以用乘号来表示这个类型的定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type Employee = String * String * String * Date</span><br></pre></td></tr></table></figure>
+
+<p>和类型和积类型的这一特点体现了代数数据类型的组合（combinable）特性。代数数据类型的这两种类型并非互斥的，有的代数数据类型既是和类型，又是积类型，例如银行的账户类型：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">trait</span> <span class="title">Currency</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">RMB</span> <span class="keyword">extends</span> <span class="title">Currency</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">USD</span> <span class="keyword">extends</span> <span class="title">Currency</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">EUR</span> <span class="keyword">extends</span> <span class="title">Currency</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Balance</span>(<span class="params">amount: <span class="type">BigDecimal</span>, currency: <span class="type">Currency</span></span>)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">trait</span> <span class="title">Account</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">number</span></span>: <span class="type">String</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">name</span></span>: <span class="type">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">SavingsAccount</span>(<span class="params">number: <span class="type">String</span>, name: <span class="type">String</span>, dateOfOpening: <span class="type">Date</span></span>) <span class="keyword">extends</span> <span class="title">Account</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">BilledAccount</span>(<span class="params">number: <span class="type">String</span>, name: <span class="type">String</span>, dateOfOpening: <span class="type">Date</span>, balance: <span class="type">Balance</span></span>) <span class="keyword">extends</span> <span class="title">Account</span></span></span><br></pre></td></tr></table></figure>
+
+<p>代码中的<code>Currency</code>被定义为和类型，<code>Balance</code>为积类型。<code>Account</code>首先是和类型，它的值要么是<code>SavingsAccount</code>，要么是<code>BilledAccount</code>；同时，每个类型的Account又是一个积类型。</p>
+<p>代数数据类型与对象范式的抽象数据类型有着本质的区别。前者体现了数学计算的特性，具有<strong>不变性</strong>。使用Scala的<code>case object</code>或<code>case class</code>语法糖会帮助我们创建一个不可变的抽象。当我们创建了如下的账户对象时，它的值就已经确定，不可改变：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> today = <span class="type">Calendar</span>.getInstance.getTime</span><br><span class="line"><span class="keyword">val</span> balance = <span class="type">Balance</span>(<span class="number">10.0</span>, <span class="type">RMB</span>)</span><br><span class="line"><span class="keyword">val</span> account = <span class="type">BilledAccount</span>(<span class="string">&quot;980130111110043&quot;</span>, <span class="string">&quot;Bruce Zhang&quot;</span>, today, balance)</span><br></pre></td></tr></table></figure>
+
+<p>数据的不变性使得代码可以更好地支持并发，可以随意共享值而无需承受对可变状态的担忧。<strong>不可变数据是函数式编程中实践的重要原则之一</strong>，它可以与纯函数更好地结合。</p>
+<p>代数数据类型既体现了领域概念的知识，同时还通过和类型和积类型定义了约束规则，从而建立了严格的抽象。例如类型组合<code>(String, String, Date)</code>是一种高度的抽象，但它却丢失了领域知识，因为它缺乏类型标签，如果采用积类型方式进行定义，则在抽象的同时，还约束了各自的类型。和类型在约束上更进了一步，它将变化建模在一个特定数据类型内部，并限制了类型的取值范围。和类型与积类型结合起来，与操作代数数据类型的函数放在一起，然后利用模式匹配来实现表达业务规则的领域行为。</p>
+<p>我们以Robert Martin在《敏捷软件开发》一书中给出的薪资管理系统需求为例，利用函数范式的建模方式来说明代数数据类型的优势。需求描述如下：</p>
+<blockquote>
+<p>公司雇员有三种类型。一种雇员是钟点工，系统会按照雇员记录中每小时报酬字段的值对他们进行支付。他们每天会提交工作时间卡，其中记录了日期以及工作小时数。如果他们每天工作超过8小时，超过部分会按照正常报酬的1.5倍进行支付。支付日期为每周五。月薪制的雇员以月薪进行支付。每个月的最后一个工作日对他们进行支付。在雇员记录中有月薪字段。销售人员会根据他们的销售情况支付一定数量的酬金（Commssion）。他们会提交销售凭条，其中记录了销售的日期和数量。在他们的雇员记录中有一个酬金报酬字段。每隔一周的周五对他们进行支付。 </p>
+</blockquote>
+<p>我们现在要计算公司雇员的薪资。从需求看，我们需要建立的领域模型是雇员，它是一个<strong>积类型</strong>。注意，需求虽然清晰地勾勒出三种类型的雇员，但实则它们的差异体现在<strong>收入</strong>的类型上，这种差异体现为<strong>和类型</strong>不同的值。于是，可以得到由如下代数数据类型呈现的领域模型：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ADT定义，体现了领域概念</span></span><br><span class="line"><span class="comment">// Amount是一个积类型，Currency则为前面定义的和类型</span></span><br><span class="line">calse <span class="class"><span class="keyword">class</span> <span class="title">Amount</span>(<span class="params">value: <span class="type">BigDecimal</span>, currency: <span class="type">Currency</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 实现了运算符重载，支持Amount的组合运算</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">+</span></span>(that: <span class="type">Amount</span>): <span class="type">Amount</span> = &#123;</span><br><span class="line">        require(that.currency == currency)</span><br><span class="line">        <span class="type">Amount</span>(value + that.value, currency)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">*</span></span>(times: <span class="type">BigDecimal</span>): <span class="type">Amount</span> = &#123;</span><br><span class="line">        <span class="type">Amount</span>(value * times, currency)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下类型皆为积类型，分别体现了工作时间卡与销售凭条领域概念</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">TimeCard</span>(<span class="params">startTime: <span class="type">Date</span>, endTimeDate</span>)</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">SalesReceipt</span>(<span class="params">date: <span class="type">Date</span>, amount: <span class="type">Amount</span></span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 支付周期是一个隐藏概念，不同类型的雇员支付周期不同</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">PayrollPeriod</span>(<span class="params">startDate: <span class="type">Date</span>, endDate: <span class="type">Date</span></span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Income的抽象表示成和类型与乘积类型的组合</span></span><br><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">trait</span> <span class="title">Income</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">WeeklySalary</span>(<span class="params">feeOfHour: <span class="type">Amount</span>, timeCards: <span class="type">List</span>[<span class="type">TimeCard</span>], payrollPeriod: <span class="type">PayrollPeriod</span></span>) <span class="keyword">extends</span> <span class="title">Income</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">MonthlySalary</span>(<span class="params">salary: <span class="type">Amount</span>, payrollPeriod: <span class="type">PayrollPeriod</span></span>) <span class="keyword">extends</span> <span class="title">Income</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Commission</span>(<span class="params">salary: <span class="type">Amount</span>, saleReceipts: <span class="type">List</span>[<span class="type">SalesReceipt</span>], payrollPeriod: <span class="type">PayrollPeriod</span></span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Employee被定义为积类型，它组合的Income具有不同的抽象</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span>(<span class="params">number: <span class="type">String</span>, name: <span class="type">String</span>, onboardingDate: <span class="type">Date</span>, income: <span class="type">Income</span></span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>在定义了以上由代数数据类型组成的领域模型之后，即可将其与领域行为结合起来，例如计算每个雇员的收入。由于<code>Income</code>被定义为和类型，它表达的是一种逻辑或的关系，因此它的每个子类型（称为ADT变体）都将成为模式匹配的分支。和类型的组合有着确定的值（类型理论的术语将其称之为inhabitant），例如<code>Income</code>和类型的值为3，则模式匹配的分支就应该是3个，这就使得Scala编译器可以检查模式匹配的穷尽性。如果模式匹配缺少了对和类型的值表示，编译器都会给出警告。倘若和类型增加了一个新的值，编译器也会指出所有需要新增ADT变体来更新模式匹配的地方。针对<code>Income</code>积类型，可以利用模式匹配结合业务规则对它进行解构，代码如下所示：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculateIncome</span></span>(employee: <span class="type">Employee</span>): <span class="type">Amount</span> = employee.income <span class="keyword">match</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">WeeklySalary</span>(fee, timeCards, _) =&gt; weeklyIncomeOf(fee, timeCards)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">MonthlySalary</span>(salary, _) =&gt; salary</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Commision</span>(salary, saleReceipts, _) =&gt; salary + commistionOf(saleReceipts)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>calculateIncome()</code>是一个纯函数，它利用模式匹配，针对<code>Employee</code>的特定<code>Income</code>类型计算雇员的不同收入。</p>
+<h3 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h3><p>在函数范式中，往往使用纯函数（pure function）来表现领域行为。所谓“纯函数”，就是指没有副作用（side effects）的函数。《Scala函数式编程》认为常见的副作用包括：</p>
+<ul>
+<li>修改一个变量</li>
+<li>直接修改数据结构</li>
+<li>设置一个对象的成员</li>
+<li>抛出一个异常或以一个错误终止</li>
+<li>打印到终端或读取用户的输入</li>
+<li>读取或写入一个文件</li>
+<li>在屏幕上绘画</li>
+</ul>
+<p>例如，读取花名册文件对内容进行解析获得收件人电子邮件列表的函数为：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span></span>(rosterPath: <span class="type">String</span>): <span class="type">List</span>[<span class="type">Email</span>] = &#123;</span><br><span class="line">    <span class="keyword">val</span> lines = readLines(rosterPath)</span><br><span class="line">    lines.filter(containsValidEmail(_)).map(toEmail(_))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码中的<code>readLines()</code>函数需要读取一个外部的花名册文件，这是引起副作用的一个原因。该副作用为单元测试带来了影响。要测试<code>parse()</code>函数，就需要为它事先准备好一个花名册文件，增加了测试的复杂度。同时，该副作用使得我们无法根据输入参数推断函数的返回结果，因为读取文件可能出现一些未知的错误，如读取文件错误，又或者有其他人同时在修改该文件，就可能抛出异常或者返回一个不符合预期的邮件列表。</p>
+<p>要将<code>parse()</code>定义为纯函数，就需要分离这种副作用，函数的计算结果就不会受到任何内部或外部过程状态改变的影响。一旦去掉副作用，调用函数返回的结果就与直接使用返回结果具有相同效果，二者可以互相替换，这称之为“引用透明（referential transparency）”。引用透明的替换性可以用于验证一个函数是否是纯函数。假设客户端要根据解析获得的电子邮件列表发送邮件，解析的花名册文件路径为<code>roster.txt</code>。假定解析该花名册得到的电子邮件列表为：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="type">List</span>(<span class="type">Email</span>(<span class="string">&quot;liubei@dddcompany.com&quot;</span>), <span class="type">Email</span>(<span class="string">&quot;guanyu@dddcompany.com&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>parse()</code>是一个纯函数，就需要遵循引用透明的原则，则如下函数调用的行为应该完全相同：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 调用解析方法</span></span><br><span class="line">send(parse(<span class="string">&quot;roster.txt&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接调用解析结果</span></span><br><span class="line">send(<span class="type">List</span>(<span class="type">Email</span>(<span class="string">&quot;liubei@dddcompany.com&quot;</span>), <span class="type">Email</span>(<span class="string">&quot;guanyu@dddcompany.com&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>显然并非如此。后者传入的参数是一个电子邮件列表，而前者除了提供了电子邮件列表之外，还读取了花名册文件。函数获得的电子邮件列表不是由花名册文件路径决定的，而是由读取文件的内容决定。读取外部文件的这种副作用使得我们无法根据确定的输入参数推断出确定的计算结果。要将<code>parse()</code>改造为支持引用透明的纯函数，就需要分离副作用，即将产生副作用的读取外部文件功能推向<code>parse()</code>函数外部：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span></span>(content: <span class="type">List</span>[<span class="type">String</span>]): <span class="type">List</span>[<span class="type">Emial</span>] = </span><br><span class="line">    content.filter(containsValidEmail(_)).map(toEmail(_))</span><br></pre></td></tr></table></figure>
+
+<p>现在，以下代码的行为就是完全相同的：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">send(parse(<span class="type">List</span>(<span class="string">&quot;liubei, liubei@dddcompany.com&quot;</span>, <span class="string">&quot;noname&quot;</span>, <span class="string">&quot;guanyu, guanyu@dddcompany.com&quot;</span>)))</span><br><span class="line"></span><br><span class="line">send(<span class="type">List</span>(<span class="type">Email</span>(<span class="string">&quot;liubei@dddcompany.com&quot;</span>), <span class="type">Email</span>(<span class="string">&quot;guanyu@dddcompany.com&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>这意味着改进后的<code>parse()</code>可以根据输入结果推断出函数的计算结果，这正是引用透明的价值。<strong>保持函数的引用透明，不产生任何副作用，是函数式编程的基本原则。</strong>如果说面向对象设计需要将依赖尽可能向外推，最终采用依赖注入的方式来降低耦合；那么，函数式编程思想就是要利用纯函数来隔离变化与不变，内部由无副作用的纯函数组成，纯函数将副作用向外推，形成由不变的业务内核与可变的副作用外围组成的结构：</p>
+<img src="/fp-and-domain-model/01.png" class="">
+
+<p>具有引用透明特征的纯函数更加贴近数学中的函数概念：没有计算，只有转换。转换操作不会修改输入参数的值，只是基于某种规则把输入参数值转换为输出。输入值和输出值都是不变的（immutable），只要给定的输入值相同，总会给出相同的输出结果。例如我们定义<code>add1()</code>函数：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add1</span></span>(x: <span class="type">Int</span>):<span class="type">Int</span> =&gt; x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>基于数学函数的转换（transformation）特征，完全可以翻译为如下代码：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add1</span></span>(x: <span class="type">Int</span>): <span class="type">Int</span> =&gt; x <span class="keyword">match</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">0</span> =&gt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span> =&gt; <span class="number">2</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span> =&gt; <span class="number">3</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span> =&gt; <span class="number">4</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们看到的不是对变量x增加1，而是根据x的值进行模式匹配，然后基于业务规则返回确定的值。这就是纯函数的数学意义。</p>
+<p>引用透明、无副作用以及数学函数的转换本质，为纯函数提供了模块化的能力，再结合高阶函数的特性，使纯函数具备了强大的组合（combinable）特性，而这正是函数式编程的核心原则。这种组合性如下图所示：</p>
+<img src="/fp-and-domain-model/02.png" class="">
+
+<p>图中的<code>andThen</code>是Scala语言提供的组合子，它可以组合两个函数形成一个新的函数。Scala还提供了<code>compose</code>组合子，二者的区别在于组合函数的顺序不同。上图可以表现为如下Scala代码：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">trait</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">weight</span></span>: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span>(<span class="params">weight: <span class="type">Int</span></span>) <span class="keyword">extends</span> <span class="title">Fruit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Pear</span>(<span class="params">weight: <span class="type">Int</span></span>) <span class="keyword">extends</span> <span class="title">Fruit</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Banana</span>(<span class="params">weight: <span class="type">Int</span></span>) <span class="keyword">extends</span> <span class="title">Fruit</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> appleToPear: <span class="type">Apple</span> =&gt; <span class="type">Pear</span> = apple =&gt; <span class="type">Pear</span>(apple.weight)</span><br><span class="line"><span class="keyword">val</span> pearToBanana: <span class="type">Pear</span> =&gt; <span class="type">Banana</span> = pear =&gt; <span class="type">Banana</span>(pear.weight)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用组合</span></span><br><span class="line"><span class="keyword">val</span> appleToBanana = appleToPear andThen pearToBanana</span><br></pre></td></tr></table></figure>
+
+<p>组合后得到的函数类型，以及对该函数的调用如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scala&gt; val appleToBanana = appleToPear andThen pearToBanana</span><br><span class="line">appleToBanana: Apple =&gt; Banana = &lt;function1&gt;</span><br><span class="line"></span><br><span class="line">scala&gt; appleToBanana(Apple(15))</span><br><span class="line">res0: Banana = Banana(15)</span><br></pre></td></tr></table></figure>
+
+<p>除了纯函数的组合性之外，函数式编程中的Monad模式也支持组合。我们可以简单地将一个Monad理解为提供bind功能的容器。在Scala语言中，bind功能就是<code>flatMap</code>函数。可以简单地将<code>flatMap</code>函数理解为是<code>map</code>与<code>flattern</code>的组合。例如，针对如下的编程语言列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scala&gt; val l = List(&quot;scala&quot;, &quot;java&quot;, &quot;python&quot;, &quot;go&quot;)</span><br><span class="line">l: List[String] = List(scala, java, python, go)</span><br></pre></td></tr></table></figure>
+
+<p>对该列表执行map操作，对列表中的每个元素执行<code>toCharArray()</code>函数，就可以把一个字符串转换为同样是Monad的字符数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scala&gt; l.map(lang =&gt; lang.toCharArray)</span><br><span class="line">res7: List[Array[Char]] = List(Array(s, c, a, l, a), Array(j, a, v, a), Array(p, y, t, h, o, n), Array(g, o))</span><br></pre></td></tr></table></figure>
+
+<p><code>map</code>函数完成了从<code>List[String]</code>到<code>List[Array[Char]]</code>的转换。对同一个列表执行相同的转换函数，但调用<code>flatMap</code>函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">scala&gt; l.flatMap(lang =&gt; lang.toCharArray)</span><br><span class="line">res6: List[Char] = List(s, c, a, l, a, j, a, v, a, p, y, t, h, o, n, g, o)</span><br></pre></td></tr></table></figure>
+
+<p><code>flatMap</code>函数将字符串转换为字符数组后，还执行了一次拍平操作，完成了<code>List[String]</code>到<code>List[Char]</code>的转换。</p>
+<p>然而在Monad的真正实现中，<code>flatMap</code>并非<code>map</code>与<code>flattern</code>的组合，相反，<code>map</code>函数是<code>flatMap</code>基于unit演绎出来的。因此，Monad的核心其实是<code>flatMap</code>函数：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">M</span>[<span class="type">A</span>](<span class="params">value: <span class="type">A</span></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">unit</span></span>[<span class="type">B</span>] (value : <span class="type">B</span>) = <span class="keyword">new</span> <span class="type">M</span>(value) </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">map</span></span>[<span class="type">B</span>](f: <span class="type">A</span> =&gt; <span class="type">B</span>) : <span class="type">M</span>[<span class="type">B</span>] = flatMap &#123;x =&gt; unit(f(x))&#125; </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">flatMap</span></span>[<span class="type">B</span>](f: <span class="type">A</span> =&gt; <span class="type">M</span>[<span class="type">B</span>]) : <span class="type">M</span>[<span class="type">B</span>] = ... </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><code>flatMap</code>和<code>map</code>以及<code>filter</code>往往可以组合起来，实现更加复杂的针对Monad的操作。一旦操作变得复杂，这种组合操作的可读性就会降低。例如，我们将两个同等大小列表中的元素项相乘，使用<code>flatMap</code>与<code>map</code>的代码为：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> ns = <span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="keyword">val</span> os = <span class="type">List</span>(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="keyword">val</span> qs = ns.flatMap(n =&gt; os.map(o =&gt; n * o))</span><br></pre></td></tr></table></figure>
+
+<p>这样的代码并不好理解。为了提高代码的可读性，Scala提供了for-comprehaension。它本质上是Monad的语法糖，组合了flatMap、map与filter等函数；但从语法上看，却类似一个for循环，这就使得我们多了一种可读性更强的调用Monad的形式。同样的功能，使用for-comprehaension语法糖就变成了：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> qs = <span class="keyword">for</span> &#123;</span><br><span class="line">    n &lt;- ns</span><br><span class="line">    o &lt;- os</span><br><span class="line">&#125; <span class="keyword">yield</span> n * o</span><br></pre></td></tr></table></figure>
+
+<p>这里演示的for语法糖看起来像是一个嵌套循环，分别从ns和os中取值，然后利用yield生成器将计算得到的积返回为一个列表；实质上，这段代码与使用<code>flatMap</code>和<code>map</code>的代码完全相同。</p>
+<p>在使用纯函数表现领域行为时，我们可以让纯函数返回一个Monad容器，再通过for-comprehaension进行组合。这种方式既保证了代码对领域行为知识的体现，又能因为不变性避免状态变更带来的缺陷。同时，结合纯函数的组合子特性，使得代码的表现力更加强大，非常自然地传递了领域知识。例如，针对下订单场景，需要验证订单，并对验证后的订单进行计算。验证订单时，需要验证订单自身的合法性、客户状态以及库存；对订单的计算则包括计算订单的总金额、促销折扣与运费。</p>
+<p>在对这样的需求进行领域建模时，我们需要先寻找到表达领域知识的各个原子元素，包括具体的代数数据类型和实现原子功能的纯函数：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 积类型</span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Order</span>(<span class="params">id: <span class="type">OrderId</span>, customerId: <span class="type">CustomerId</span>, desc: <span class="type">String</span>, totalPrice: <span class="type">Amount</span>, discount: <span class="type">Amount</span>, shippingFee: <span class="type">Amount</span>, orderItems: <span class="type">List</span>[<span class="type">OrderItem</span>]</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下是验证订单的行为，皆为原子的纯函数，并返回scalaz定义的Validation Monad</span></span><br><span class="line"><span class="keyword">val</span> validateOrder : <span class="type">Order</span> =&gt; <span class="type">Validation</span>[<span class="type">Order</span>, <span class="type">Boolean</span>] = order =&gt;</span><br><span class="line">    <span class="keyword">if</span> (order.orderItems isEmpty) <span class="type">Failure</span>(<span class="string">s&quot;Validation failed for order <span class="subst">$order</span>.id&quot;</span>) </span><br><span class="line">    <span class="keyword">else</span> <span class="type">Success</span>(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> checkCustomerStatus: <span class="type">Order</span> =&gt; <span class="type">Validation</span>[<span class="type">Order</span>, <span class="type">Boolean</span>] = order =&gt; </span><br><span class="line">    <span class="type">Success</span>(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> checkInventory: <span class="type">Order</span> =&gt; <span class="type">Validation</span>[<span class="type">Order</span>, <span class="type">Boolean</span>] = order =&gt; </span><br><span class="line">    <span class="type">Success</span>(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下定义了计算订单的行为，皆为原子的纯函数</span></span><br><span class="line"><span class="keyword">val</span> calculateTotalPrice: <span class="type">Order</span> =&gt; <span class="type">Order</span> = order =&gt; </span><br><span class="line">    <span class="keyword">val</span> total = totalPriceOf(order)</span><br><span class="line">    order.copy(totalPrice = total)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> calculateDiscount: <span class="type">Order</span> =&gt; <span class="type">Order</span> = order =&gt; </span><br><span class="line">    order.copy(discount = discountOf(order))</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> calculateShippingFee: <span class="type">Order</span> =&gt; <span class="type">Order</span> = order =&gt;</span><br><span class="line">    order.copy(shippingFee = shippingFeeOf(order))</span><br></pre></td></tr></table></figure>
+
+<p>这些纯函数是原子的、分散的、可组合的，接下来就可以利用纯函数与Monad的组合能力，编写满足业务场景需求的实现代码：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> order = ...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组合验证逻辑</span></span><br><span class="line"><span class="comment">// 注意返回的orderValidated也是一个Validation Monad</span></span><br><span class="line"><span class="keyword">val</span> orderValidated = <span class="keyword">for</span> &#123;</span><br><span class="line">    _ &lt;- validateOrder(order)</span><br><span class="line">    _ &lt;- checkCustomerStatus(order)</span><br><span class="line">    c &lt;- checkInventory(order)</span><br><span class="line">&#125; <span class="keyword">yield</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (orderValidated.isSuccess) &#123;</span><br><span class="line">    <span class="comment">// 组合计算逻辑，返回了一个组合后的函数</span></span><br><span class="line">    <span class="keyword">val</span> calculate = calculateTotalPrice andThen calculateDiscount andThen calculateShippingFee</span><br><span class="line">    <span class="comment">// 返回具有订单总价、折扣与运费的订单对象</span></span><br><span class="line">    <span class="comment">// 在计算订单的过程中，订单对象是不变的</span></span><br><span class="line">    <span class="keyword">val</span> calculatedOrder = calculate(order)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数范式与领域模型"><a href="#函数范式与领域模型" class="headerlink" title="函数范式与领域模型"></a>函数范式与领域模型</h3><p>遵循函数范式建立领域模型时，代数数据类型与纯函数是主要的建模元素。代数数据类型中的和类型与积类型可以表达领域概念，纯函数则用于表达领域行为。它们都被定义为不变的原子类型，然后再将这些原子的类型与操作组合起来，满足复杂业务逻辑的需要。这是函数式编程中面向组合子（combinator）的建模方法，它与面向对象的建模方法存在思想上的不同。</p>
+<p>面向对象的建模方法是一种<strong>归纳法</strong>，通过分析和归纳需求，找到问题域并逐级分解问题，然后通过对象来表达领域逻辑，并以职责的角度分析这些领域逻辑，按照角色把职责分配给各自的对象，通过对象之间的协作实现复杂的领域行为。面向组合子的建模方法则是一种<strong>演绎法</strong>，通过在领域需求中寻找和定义最基本的原子操作，然后根据基本的组合规则将这些原子类型与原子函数组合起来。</p>
+<p>因此，函数范式对领域建模的影响是全方位的，它与对象范式看待世界的角度迥然不同。对象范式是在定义一个完整的世界，然后以上帝的身份去规划各自行使职责的对象；函数范式是在组合一个完整的世界，它就像古代哲学家一般，看透了物质的本原而识别出不可再分的原子微粒，然后再按照期望的方式组合这些微粒来创造世界。故而，采用函数范式进行领域建模，关键是组合子包括组合规则的设计，既要简单，又要完整，还需要保证每个组合子的正交性，如此才能对其进行组合，互不冗余，互不干涉。这些组合子，就是前面介绍的代数数据类型和纯函数。</p>
+<p>通过前面给出的案例，我们发现函数范式的领域模型颠覆了面向对象思想中“贫血模型是坏的”这一观点。事实上，函数范式的贫血模型不同于结构范式和对象范式的贫血模型。结构范式是将过程与数据分离，这些过程实现的是一个完整的业务场景，由于缺乏完整的封装性，因而无法控制对过程与数据的修改对其他调用者带来的影响。对象范式要求将数据与行为封装在一起，就是为了解决这一问题。函数范式虽然建立的是贫血模型，但它的模块化、抽象化与可组合特征降低了变化带来的影响。在组合这些组合子时，通过引入高内聚松耦合的模块对这些功能进行分组，就能避免细粒度的组合子过于散乱，形成更加清晰的代码层次。</p>
+<p>Debasish Ghosh总结了函数范式的基本原则，用以建立更好的领域模型：    </p>
+<ul>
+<li>利用函数组合的力量，用小函数组装成一个大函数，获得更好的组合性。</li>
+<li>纯粹，领域模型的很多部分都由引用透明的表达式组成。</li>
+<li>通过方程式推导，可以很容易地推导和验证领域行为。</li>
+</ul>
+<p>不止如此，根据代数数据类型的不变性以及对模式匹配的支持，它还天生适合表达领域事件。例如地址变更事件，就可以用一个积类型来表示：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">AddressChanged</span>(<span class="params">eventId: <span class="type">EventId</span>, customerId: <span class="type">CustomerId</span>, oldAddress: <span class="type">Address</span>, newAddress: <span class="type">Address</span>, occurred: <span class="type">Time</span></span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>我们还可以用和类型对事件进行抽象，这样就可以在处理事件时运用模式匹配：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="class"><span class="keyword">trait</span> <span class="title">Event</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eventId</span></span>: <span class="type">EventId</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">occurred</span></span>: <span class="type">Time</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">AddressChanged</span>(<span class="params">eventId: <span class="type">EventId</span>, customerId: <span class="type">CustomerId</span>, oldAddress: <span class="type">Address</span>, newAddress: <span class="type">Address</span>, occurred: <span class="type">Time</span></span>) <span class="keyword">extends</span> <span class="title">Event</span></span></span><br><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountOpened</span>(<span class="params">eventId: <span class="type">EventId</span>, <span class="type">Account</span>: <span class="type">Account</span>, occurred: <span class="type">Time</span></span>) <span class="keyword">extends</span> <span class="title">Event</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle</span></span>(event: <span class="type">Event</span>) = event <span class="keyword">match</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> ac: <span class="type">AddressChanged</span> =&gt; ...</span><br><span class="line">    <span class="keyword">case</span> ao: <span class="type">AccountOpened</span> =&gt; ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数范式中的代数数据类型仍然可以用来表示实体和值对象，但它们都是不变的，二者的区别主要在于是否需要定义唯一标识符。聚合的概念仍然存在，如果使用Scala语言，往往会为聚合定义满足角色特征的trait，这样就可以使得聚合的实现通过混入多个trait来完成代数数据类型的组合。由于资源库（Repository）会与外部资源进行协作，意味着它会产生副作用，因此遵循函数式编程思想，往往会将其推向纯函数的外部。在函数式语言中，可以利用柯里化（Currying，又译作咖喱化）或者Reader Monad来推迟对资源库具体实现的注入。</p>
+<p>主流的领域驱动设计往往以对象范式作为建模范式，利用函数范式建立的领域模型多多少少显得有点“另类”，因此我将其称之为非主流的领域驱动设计。这里所谓的“非主流”，仅仅是从建模范式的普及性角度来考虑的，并不能说明二者的优劣与高下之分。事实上，函数范式可以很好地与事件驱动架构结合在一起，这是一种<strong>以领域事件作为模型驱动设计的驱动力</strong>思想。针对事件进行建模，则任何业务流程皆可用状态机来表达。状态的迁移，就是命令（command）或者决策（decision）对事件的触发。我们还可以利用事件风暴（Event Storming）帮助我们识别这些事件，而事件的不变性特征又可以很好地与函数式编程结合起来。</p>
+<p>如果采用命令查询职责分离（CQRS）模式，那么在命令端，将由命令与事件组成一系列异步的非阻塞消息流。这种对消息的认识，恰好可以与响应式编程（Reactive Programming）结合起来。诸如ReactiveX这样的响应式编程框架在参考了迭代器模式与观察者模式的基础上，结合了函数式编程思想，以事件处理的形式实现了异步非阻塞处理，在满足系统架构灵活性与伸缩性的同时，提高了事件处理的响应能力。</p>
+<p>显然，围绕着不变的事件为中心，包括响应式编程、事件风暴、事件溯源与命令查询职责分离模式都可以与函数范式有效地结合起来，形成一种事件模型驱动设计(Event Model Driven Design, EDDD)方法。与事件驱动架构不同，事件模型驱动设计可以算是领域驱动设计的一种分支。作为一种设计方法学，它的实践与模式同样涵盖了战略设计与战术设计等多个层次，且可以与领域驱动设计的模式如限界上下文、领域事件、领域服务等结合起来。在金融、通信等少数领域，已经开始了对这种建立在函数范式基础之上的领域驱动设计的尝试，与它们相关的知识可以写成厚厚的一本大书，在这里就不再赘述了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/fp-and-domain-model/" title="函数范式与领域建模">http://zhangyi.xyz/fp-and-domain-model/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"># DDD</a>
+          
+            <a href="/tags/Design/" rel="tag"># Design</a>
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+            <a href="/tags/FP/" rel="tag"># FP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/talking-with-gitchat-about-ddd/" rel="next" title="GitChat独家采访：聊聊领域驱动设计">
+                <i class="fa fa-chevron-left"></i> GitChat独家采访：聊聊领域驱动设计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/model-of-software-system/" rel="prev" title="软件系统中的模型">
+                软件系统中的模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%8C%83%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">函数范式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E6%95%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">代数数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">纯函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%8C%83%E5%BC%8F%E4%B8%8E%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">函数范式与领域模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,23 +1,1469 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Architecture,Micro Service,Spring Cloud," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="微服务架构模式的核心在于如何识别服务的边界，设计出合理的微服务。但如果要将微服务架构运用到生产项目上，并且能够发挥该架构模式的重要作用，则需要微服务框架的支持。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Spring Cloud的微服务落地">
+<meta property="og:url" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="微服务架构模式的核心在于如何识别服务的边界，设计出合理的微服务。但如果要将微服务架构运用到生产项目上，并且能够发挥该架构模式的重要作用，则需要微服务框架的支持。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/logo.jpeg">
+<meta property="og:image" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/ms-01.png">
+<meta property="og:image" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/ms-02.png">
+<meta property="og:image" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/ms-03.png">
+<meta property="og:image" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/ms-04.jpg">
+<meta property="article:published_time" content="2018-04-06T15:42:04.000Z">
+<meta property="article:modified_time" content="2018-04-07T08:17:19.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Micro Service">
+<meta property="article:tag" content="Spring Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/micro-service-based-on-spring-cloud/logo.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/micro-service-based-on-spring-cloud/"/>
+
+
+
+
+
+  <title>基于Spring Cloud的微服务落地 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/micro-service-based-on-spring-cloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于Spring Cloud的微服务落地</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T23:42:04+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index">
+                    <span itemprop="name">Architecture</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/micro-service-based-on-spring-cloud/" class="leancloud_visitors" data-flag-title="基于Spring Cloud的微服务落地">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/micro-service-based-on-spring-cloud/logo.jpeg" class="">
+<p>微服务架构模式的核心在于如何识别服务的边界，设计出合理的微服务。但如果要将微服务架构运用到生产项目上，并且能够发挥该架构模式的重要作用，则需要微服务框架的支持。</p>
+<span id="more"></span>
+
+<p>在Java生态圈，目前使用较多的微服务框架就是集成了包括Netfilix OSS以及Spring的Spring Cloud。它包括：</p>
+<ul>
+<li>Spring Cloud Config：配置管理工具，支持使用Git存储配置内容，可以实现应用配置的外部化存储，支持客户端配置信息刷新、加密/解密配置内容等。</li>
+<li>Spring Cloud Netflix：对Netflix OSS进行了整合。其中又包括：<ul>
+<li>Eureka：服务治理组件，包含服务注册中心、服务注册与发现。</li>
+<li>Hystrix：容器管理组件，实现断路器模式，倘若依赖的服务出现延迟或故障，则提供强大的容错功能。</li>
+<li>Ribbon：客户端负载均衡的服务调用组件。</li>
+<li>Feign：基于Ribbon和Hystrix的声明式服务调用组件。</li>
+<li>Zuul：网关组件，提供智能路由、访问过滤等功能。</li>
+<li>Archaius：外部化配置组件。</li>
+</ul>
+</li>
+<li>Spring Cloud Bus：事件、消息总线。</li>
+<li>Spring Cloud Cluster：针对ZooKeeper、Redis、Hazelcast、Consul的选举算法和通用状态模式的实现。</li>
+<li>Spring Cloud Cloudfoundry：与Pivotal Cloudfoundry的整合支持。</li>
+<li>Spring Cloud Consul：服务发现与配置管理工具。</li>
+<li>Spring Cloud Stream：通过Redis、Rabbit或者Kafka实现的消息驱动的微服务。</li>
+<li>Spirng Cloud AWS：简化和整合Amazon Web Service。</li>
+<li>Spring Cloud Security：安全工具包，提供Zuul代理中对OAuth2客户端请求的中继器。</li>
+<li>Spring Cloud Sleuth：Spring Cloud应用的分布式跟踪实现，可以整合Zipkin。</li>
+<li>Spring Cloud ZooKeeper：基于ZooKeeper的服务发现与配置管理组件。</li>
+<li>Spring Cloud Starters：Spring Cloud的基础组件，是基于Spring Boot风格项目的基础依赖模块。</li>
+<li>Spring Cloud CLI：用于在Groovy中快速创建Spring Cloud应用的Spring Boot CLI插件。</li>
+</ul>
+<h3 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h3><p>当一个系统的微服务数量越来越多的时候，我们就需要对服务进行治理，提供统一的服务注册中心，然后在其框架下提供发现服务的功能。这样就避免了对多个微服务的配置，以及微服务之间以及与客户端之间的耦合。</p>
+<p>Spring Cloud Eureka是对Netflix Eureka的包装，用以实现服务注册与发现。Eureka服务端即服务注册中心，支持高可用配置。它依托于强一致性提供良好的服务实例可用性，并支持集群模式部署。Eureka客户端则负责处理服务的注册与发现。客户端服务通过annotation与参数配置的方式，嵌入在客户端应用程序代码中。在运行应用程序时，Eureka客户端向注册中心注册自身提供的服务，并周期性地发送心跳更新它的服务租约。</p>
+<h4 id="搭建服务注册中心"><a href="#搭建服务注册中心" class="headerlink" title="搭建服务注册中心"></a>搭建服务注册中心</h4><p>服务注册中心是一个独立部署的服务（你可以认为它也是一个微服务），所以需要单独为它创建一个项目，并在pom.xml中添加Eureka的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建Spring Boot Application：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> SpringApplicationBuilder(Application.class).web(<span class="keyword">true</span>).run(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="注册服务提供者"><a href="#注册服务提供者" class="headerlink" title="注册服务提供者"></a>注册服务提供者</h4><p>要让自己编写的微服务能够注册到Eureka服务器中，需要在服务的Spring Boot Application中添加<code>@EnableDiscoveryClient</code>注解，如此才能让Eureka服务器发现该服务。当然，pom.xml文件中也需要添加相关依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-eureka<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同时，我们还需要为服务命名，并指定地址。这些信息都可以在application.properties配置文件中配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring.application.name=demo-service</span><br><span class="line"></span><br><span class="line">eureka.client.serviceUrl.defaultZone=http://localhost:1111/eureka/</span><br></pre></td></tr></table></figure>
+
+<p><strong>说明：</strong>Spring更推荐使用yml文件来维护系统的配置，yml文件可以体现出配置节的层次关系，表现力比单纯的key-value形式更好。如果结合使用后面讲到的Spring Cloud Config，则客户端的配置文件必须命名为bootstrap.properties或者bootstrap.yml。与上述配置相同的yml文件配置为：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">demo-service</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">serviceUrl:</span> </span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://localhost:1111/eureka/</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="服务发现与消费"><a href="#服务发现与消费" class="headerlink" title="服务发现与消费"></a>服务发现与消费</h4><p>在微服务架构下，许多微服务可能会扮演双重身份。一方面它是服务的提供者，另一方面它又可能是服务的消费者。注册在Eureka Server中的微服务可能会被别的服务消费。此时，就相当于在服务中创建另一个服务的客户端，并通过RestTemplate发起对服务的调用。为了更好地提高性能，可以在服务的客户端引入Ribbon，作为客户端负载均衡。</p>
+<p>现在假定我们要为demo-service创建一个服务消费者demo-consumer。该消费者自身也是一个Spring Boot微服务，同时也能够被Eureka服务器注册。这时，就需要在该服务的pom.xml中添加eureka与ribbon的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-eureka<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-ribbon<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在主应用类<code>ConosumerApplication</code>中注入<code>RestTemplate</code>，并引入<code>@LoadBalanced</code>注解开启客户端负载均衡：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerApplication</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ConsumerApplication.class, args)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设消费demo-service的客户端代码写在demo-consumer服务的其中一个Controller中：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/demo-consumer&quot;, method = RequestMethod.Get)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloConsumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForEntity(<span class="string">&quot;http://demo-service/demo&quot;</span>, String.class).getBody(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>RestTemplate</code>就可以发起对demo-service的消费调用。</p>
+<h4 id="声明式服务调用"><a href="#声明式服务调用" class="headerlink" title="声明式服务调用"></a>声明式服务调用</h4><p>通过Ribbon和Hystrix可以实现对微服务的调用以及容错保护，但Spring Cloud还提供了另一种更简单的声明式服务调用方式，即Spring Cloud Feign。Feign实际上就是对Ribbon与Hystrix的进一步封装。通过Feign，我们只需创建一个接口并用annotation的方式配置，就可以完成对服务供应方的接口（REST API）绑定。</p>
+<p>假设我们有三个服务：</p>
+<ul>
+<li>Notification Service</li>
+<li>Account Service</li>
+<li>Statistics Service</li>
+</ul>
+<p>服务之间的依赖关系如下图所示：</p>
+<img src="/micro-service-based-on-spring-cloud/ms-01.png" class="">
+
+<p>要使用Feign来完成声明式的服务调用，需要在作为调用者的服务中创建Client。Client通过Eureka Server调用注册的对应服务，这样可以解除服务之间的耦合。结构如下图所示：</p>
+<img src="/micro-service-based-on-spring-cloud/ms-02.png" class="">
+
+<p>为了使用Feign，需要对应微服务的pom.xml文件中添加如下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-feign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>同时，还需要在被消费的微服务Application中添加<code>@EnableFeignClients</code>注解。例如在Statistics服务的应用程序类中：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StatisticsApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(StatisticsApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于Account服务需要调用Statistics服务，因此需要在Account服务项目中增加对应的client接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FeignClient(name = &quot;statistics-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">StatisticsServiceClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(method = RequestMethod.PUT, value = &quot;/statistics/&#123;accountName&#125;&quot;, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateStatistics</span><span class="params">(<span class="meta">@PathVariable(&quot;accountName&quot;)</span> String accountName, Account account)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StatisticsServiceClient接口的<code>updateStatistics()</code>方法会调用URI为<code>/statistics/&#123;accountName&#125;</code>的REST服务，且HTTP动词为put。这个服务其实对应就是Statistics Service中StatisticsController类中的<code>saveStatistics()</code>方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StatisticsController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StatisticsService statisticsService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/&#123;accountName&#125;&quot;, method = RequestMethod.PUT)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveStatistics</span><span class="params">(<span class="meta">@PathVariable</span> String accountName, <span class="meta">@Valid</span> <span class="meta">@RequestBody</span> Account account)</span> </span>&#123;</span><br><span class="line">        statisticsService.save(accountName, account);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Account服务中，如果要调用Statistics服务，都应该通过StatisticsServiceClient接口进行调用。例如，Account服务中的AccountServiceImpl要调用<code>updateStatistics()</code>方法，就可以在该类的实现中通过<code>@autowired</code>注入StatisticsServiceClient接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StatisticsServiceClient statisticsClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountRepository repository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveChanges</span><span class="params">(String name, Account update)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        statisticsClient.updateStatistics(name, account);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Notification服务对Account服务的调用如法炮制。</p>
+<h3 id="服务容错保护"><a href="#服务容错保护" class="headerlink" title="服务容错保护"></a>服务容错保护</h3><p>在微服务架构中，微服务之间可能存在依赖关系，例如Notification Service会调用Account Service，Account Service调用Statistics Service。真实产品中，微服务之间的调用会更加寻常。倘若上游服务出现了故障，就可能会因为依赖关系而导致故障的蔓延，最终导致整个系统的瘫痪。</p>
+<p>Spring Cloud Hystrix通过实现断路器（Circuit Breaker）模式以及线程隔离等功能，实现服务的容错保护。</p>
+<p>仍然参考前面的例子。现在系统的微服务包括：</p>
+<ul>
+<li>上游服务：demo-service</li>
+<li>下游服务：demo-consumer</li>
+<li>Eureka服务器：eureka-server</li>
+</ul>
+<p>假设上游服务可能会出现故障，为保证系统的健壮性，需要在下游服务中加入容错包含功能。首先需要在demo-consumer服务中添加对hystrix的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在demo-consumer的应用程序类中加入<code>@EnableCircuitBreaker</code>开启断路器功能：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableCircuitBreaker</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerApplication</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ConsumerApplication.class, args)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>Spring Cloud提供了<code>@SpringCloudApplication</code>注解简化如上代码。该注解事实上已经包含了前面所述的三个注解。<code>@SpringCloudApplication</code>注解的定义如下所示：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@EnableCircuitBreaker</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> SpringCloudApplication &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，需要引入一个新的服务类来封装hystrix提供的断路器保护功能，主要是定义当故障发生时需要执行的回调逻辑，即代码中指定的fallbackMethod：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@HystrixCommand(fallbackMethod = &quot;consumerFallback&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">consume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForEntity(<span class="string">&quot;http://demo-service/demo&quot;</span>, String.class).getBody(); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">consumerFallback</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    ConsumerService consumerService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = &quot;/demo-consumer&quot;, method = RequestMethod.Get)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloConsumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> consumerService.consume(); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务监控"><a href="#服务监控" class="headerlink" title="服务监控"></a>服务监控</h3><p>微服务架构将服务的粒度分解的足够细，这使得它在保证服务足够灵活、足够独立的优势下，也带来了管理和监控上的挑战，服务与服务之间的依赖也变得越来越复杂。因此，对服务健康度和运行指标的监控就变得非常重要。</p>
+<p>Hystrix提供了Dashboard用以监控Hystrix的各项指标信息。为了监控整个系统的微服务，我们需要为Hystrix Dashboard建立一个Spring Boot微服务。在该服务项目的pom文件中，添加如下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-hystrix-dashboard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>服务的Application类需要添加<code>@EnableHystrixDashboard</code>，以启用Hystrix Dashboard功能。同时，可能需要根据实际情况修改application.properties配置文件，例如选择可用的端口号等。</p>
+<p>如果要实现对集群的监控，则需要加入Turbine。</p>
+<h3 id="API网关"><a href="#API网关" class="headerlink" title="API网关"></a>API网关</h3><p>理论上，客户端可以直接向每个微服务直接发送请求。但是这种方式是存在挑战和限制的，调用者需要知道所有端点的地址，分别对每一段信息执行http请求，然后将结果合并到客户端。</p>
+<p>一般而言，针对微服务架构模式的系统，采用的都是<strong>前后端分离</strong>的架构。为了明显地隔离开前端与后端的边界，我们通常可以专门为前端的消费者定义更加粗粒度的Open Service。这些Open Service是对外的RESTful API服务，可以通过F5、Nginx等网络设备或工具软件实现对各个微服务的路由与负载均衡，并公开给外部的客户端调用（注意，内部微服务之间的调用并不需要通过Open Service）。这种对外公开的Open Service通常又被称为边缘服务（edge service）。</p>
+<p>如果这些Open Service需要我们自己去开发实现并进行服务的运维，在系统规模不断增大的情况下，会变得越来越困难。例如，当增加了新的微服务又或者IP地址发生变动时，都需要运维人员手工维护这些路由规则与服务实例列表。又例如针对所有垂直分隔的微服务，不可避免存在重用的横切关注点，例如用户身份认证、授权或签名校验等机制。我们不能在所有微服务中都去添加这些相同的功能，因为这会造成横切关注点的冗余。</p>
+<p>解决的办法是引入API网关（API Gateway）。它是系统的单个入口点，用于通过将请求路由到适当的后端服务或者通过调用多个后端服务并聚合结果来处理请求。此外，它还可以用于认证、insights、压力测试、金丝雀测试（canary testing）、服务迁移、静态响应处理和主动变换管理。Spring Cloud为API网关提供的解决方案就是Spring Cloud Zuul，它是对Netflix Zuul的包装。</p>
+<h4 id="路由规则与服务实例维护"><a href="#路由规则与服务实例维护" class="headerlink" title="路由规则与服务实例维护"></a>路由规则与服务实例维护</h4><p>Zuul解决路由规则与服务实例维护的方法是通过Spring Cloud Eureka。API Gateway自身就是一个Spring Boot服务，该服务自身被注册为Eureka服务治理下的应用，同时它会从Eureka中获得所有其他微服务的实例信息。这样的设计符合DRY原则，因为Eureka已经维护了一套服务实例信息，Zuul直接重用了这些信息，无需人工介入。</p>
+<p>对于路由规则，Zuul默认会将服务名作为ContextPath创建路由映射，基本上这种路由映射机制就可以满足微服务架构的路由需求。倘若需要一些特殊的配置，Zuul也允许我们自定义路由规则，可以通过在API网关的Application类中创建PatternServiceRouteMapper来定义自己的规则。</p>
+<h4 id="横切关注点"><a href="#横切关注点" class="headerlink" title="横切关注点"></a>横切关注点</h4><p>诸如授权认证、签名校验等业务逻辑本身与微服务应用所要处理的业务逻辑没有直接关系，我们将这些可能横跨多个微服务的功能称为“横切关注点”。这些横切关注点往往会作为“装饰”功能在服务方法的前后被调用。Spring Cloud Zuul提供了一套<strong>过滤器机制</strong>，允许开发者创建各种过滤器，并指定哪些规则的请求需要执行哪个过滤器。</p>
+<p>自定义的过滤器继承自ZuulFilter类。例如我们要求客户端发过来的请求在路由之前需要先验证请求中是否包含accessToken参数，如果有就进行路由，否则就拒绝，并返回401 Unauthorized错误，则可以定义AccessFilter类：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccessFilter</span> <span class="keyword">extends</span> <span class="title">ZuulFilter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Logger log = LoggerFactory.getLogger(AccessFilter.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">filterType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;pre&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">filterOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">shouldFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        RequestContext ctx = RequestContext.getCurrentContext();</span><br><span class="line">        HttpServletRequest request = ctx.getRequest();</span><br><span class="line">        </span><br><span class="line">        log.info(<span class="string">&quot;send &#123;&#125; request to &#123;&#125;&quot;</span>, request.getMethod(), request.getRequestURL().toString());</span><br><span class="line"></span><br><span class="line">        Object accessToken = request.getParameter(<span class="string">&quot;accessToken&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (accessToken == <span class="keyword">null</span>) &#123;</span><br><span class="line">            log.warn(<span class="string">&quot;access token is empty&quot;</span>);</span><br><span class="line">            ctx.setSendZuulResponse(<span class="keyword">false</span>);</span><br><span class="line">            ctx.setResponseStatusCode(<span class="number">401</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        log.info(<span class="string">&quot;access token ok&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要让该自定义过滤器生效，还需要在Zuul服务的Application中创建具体的Bean：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableZuulProxy</span></span><br><span class="line"><span class="meta">@SpringCloudApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZuulApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> SpringApplicatonBuilder(ZuulApplication.class).web(<span class="keyword">true</span>).run(args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AccessFilter <span class="title">accessFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AccessFilter();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Zuul一共提供了四种过滤器：</p>
+<ul>
+<li>pre filter</li>
+<li>routing filter</li>
+<li>post filter</li>
+<li>error filter</li>
+</ul>
+<p>下图来自官网，它展现了客户端请求到达Zuul API网关的生命周期与过滤过程：</p>
+<img src="/micro-service-based-on-spring-cloud/ms-03.png" class="">
+
+<p>通过starter添加Zuul的依赖时，自身包含了spring-cloud-starter-hystrix与spring-cloud-starter-ribbon模块的依赖，因此Zuul自身就拥有线程隔离与断路器的服务容错功能，以及客户端负载均衡。但是，倘若我们使用path与url的映射关系来配置路由规则，则路由转发的请求并不会采用HystrixCommand来包装，因而这类路由是没有服务容错与客户端负载均衡作用的。所以在使用Zuul时，应尽量使用path和serviceId的组合对路由进行配置。</p>
+<h3 id="分布式配置中心"><a href="#分布式配置中心" class="headerlink" title="分布式配置中心"></a>分布式配置中心</h3><p>为什么要引入一个分布式配置中心？一个微服务就需要至少一个配置文件，怎么管理分散在各个微服务中的配置文件呢？如果微服务采用的是不同的技术栈，如何来统一微服务的配置呢？微服务是部署在不同的节点中，显然我们无法在单机中实现对分布式节点的配置管理。这就是引入Spring Cloud Config的目的。</p>
+<p>Spring Cloud Config提供了服务端和客户端支持。服务端是一个独立的微服务，同样可以注册到Eureka服务器中。每个需要使用分布式配置中心的微服务都是Spring Cloud Config的客户端。Spring Cloud Config默认实现基于Git仓库，既可以进行版本管理，还可以通过本地Git库起到缓存作用。Spring Cloud Config不限于基于Spring Cloud开发的系统，而是可以用于任何语言开发的程序，并支持自定义实现。</p>
+<h4 id="配置中心服务端"><a href="#配置中心服务端" class="headerlink" title="配置中心服务端"></a>配置中心服务端</h4><p>Spring Cloud Config Server作为配置中心服务端，提供如下功能：</p>
+<ul>
+<li>拉取配置时更新git仓库副本，保证是最新结果</li>
+<li>支持数据结构丰富，yml, json, properties等</li>
+<li>配合Eureke可实现服务发现，配合cloud bus可实现配置推送更新</li>
+<li>配置存储基于git仓库，可进行版本管理</li>
+<li>简单可靠，有丰富的配套方案</li>
+</ul>
+<p>建立一个Config服务，需要添加如下依赖：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-config-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>服务的Application类需要添加<code>@EnableConfigServer</code>注解：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableConfigServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ConfigApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置服务的基本信息和Git仓库的信息放在application.yml文件中：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="attr">server:</span></span><br><span class="line">        <span class="attr">git:</span></span><br><span class="line">            <span class="attr">uri:</span> <span class="string">http://localhost/workspace/springcloud-demo</span></span><br><span class="line">            <span class="attr">username:</span> <span class="string">user</span></span><br><span class="line">            <span class="attr">password:</span> <span class="string">password</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8888</span></span><br><span class="line"></span><br><span class="line"><span class="attr">security:</span></span><br><span class="line">  <span class="attr">user:</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">$&#123;CONFIG_SERVICE_PASSWORD&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Git库与配置服务"><a href="#Git库与配置服务" class="headerlink" title="Git库与配置服务"></a>Git库与配置服务</h4><p>在Config服务中配置了Git服务器以及Git库的信息后，我们就可以在git库中提交配置文件。存储在git库中配置文件的名字以及分支名（默认为master分支）会组成访问Config服务的URI。假设有一个服务为Notification服务，则它在配置中心服务端的配置文件为notification-dev.yml，内容如下：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">devMode:</span>  <span class="literal">true</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">application:</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">notification</span></span><br><span class="line">    <span class="attr">jdbc:</span></span><br><span class="line">        <span class="attr">host:</span> <span class="string">localhost</span></span><br><span class="line">        <span class="attr">port:</span> <span class="number">3306</span></span><br><span class="line">        <span class="attr">user:</span> <span class="string">root</span></span><br><span class="line">        <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line"><span class="attr">logging:</span></span><br><span class="line">    <span class="attr">file:</span> <span class="string">demo</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="配置中心客户端"><a href="#配置中心客户端" class="headerlink" title="配置中心客户端"></a>配置中心客户端</h4><p>需要读取配置中心服务端信息的微服务都是配置中心的客户端，为了能够读取配置服务端的信息，这些微服务需要：</p>
+<ul>
+<li>在pom中添加对spring-cloud-starter-config的依赖</li>
+<li>在bootstrap.properties或者bootstrap.yml中配置获取配置的config-server位置</li>
+</ul>
+<p>例如，Account服务的配置是由Spring Cloud Config进行管理的。在它的资源目录下，提供了bootstrap.yml配置文件，内容如下所示：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">account-service</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="attr">uri:</span> <span class="string">http://config:8888</span></span><br><span class="line">      <span class="attr">fail-fast:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">$&#123;CONFIG_SERVICE_PASSWORD&#125;</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">user</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，该配置文件除了配置了该Account服务应用的name之外，主要是支持该应用获得配置服务端的信息。微服务自身的配置信息则统一放到配置中心服务端的文件中，并由Git库进行管理。例如，Account服务的详细配置在配置中心服务端的account-dev.yml文件中：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">security:</span></span><br><span class="line">  <span class="attr">oauth2:</span></span><br><span class="line">    <span class="attr">client:</span></span><br><span class="line">      <span class="attr">clientId:</span> <span class="string">account-service</span></span><br><span class="line">      <span class="attr">clientSecret:</span> <span class="string">$&#123;ACCOUNT_SERVICE_PASSWORD&#125;</span></span><br><span class="line">      <span class="attr">accessTokenUri:</span> <span class="string">http://auth-service:5000/uaa/oauth/token</span></span><br><span class="line">      <span class="attr">grant-type:</span> <span class="string">client_credentials</span></span><br><span class="line">      <span class="attr">scope:</span> <span class="string">server</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">data:</span></span><br><span class="line">    <span class="attr">mongodb:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">account-mongodb</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">user</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">$&#123;MONGODB_PASSWORD&#125;</span></span><br><span class="line">      <span class="attr">database:</span> <span class="string">piggymetrics</span></span><br><span class="line">      <span class="attr">port:</span> <span class="number">27017</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">context-path:</span> <span class="string">/accounts</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">6000</span></span><br></pre></td></tr></table></figure>
+
+<p>Spring Cloud Config通过Git实现分布式的配置管理。当配置中心服务端的配置信息发生变更时，各个作为配置客户端的微服务会向Git库提交pull更新，获得最新的配置信息。</p>
+<p>当然，Spring Cloud Config还可以使用SVN库进行配置管理，也支持简单的本地文件系统的存储方式。此时需要将<code>spring.profiles.active</code>设置为native，并设置搜索配置文件的路径。如果不配置路径，默认在<code>src/main/resources</code>目录下搜索。如下配置文件：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">config:</span></span><br><span class="line">      <span class="attr">server:</span></span><br><span class="line">        <span class="attr">native:</span></span><br><span class="line">          <span class="attr">search-locations:</span> <span class="string">classpath:/shared</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">native</span></span><br></pre></td></tr></table></figure>
+
+<p>搜索路径放在classpath下的shared目录下，那么在代码中，目录就是<code>resources/shared</code>。如果使用本地文件系统管理配置文件，则无法支持分布式配置管理以及版本管理，因此在生产系统下，还是推荐使用Git库的方式。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在实施微服务时，我们可以将微服务视为两个不同的边界。一个是与前端UI的通信，称为Open Service（Edge Service），通过引入API Gateway来实现与前端UI的通信。另一个是在边界内业务微服务之间的通信，通过Feign实现微服务之间的协作。所有的微服务都会通过Eureka来完成微服务的注册与发现。一个典型的基于Spring Cloud的微服务架构如下所示：</p>
+<img src="/micro-service-based-on-spring-cloud/ms-04.jpg" class="">
+
+<p>微服务的集成可以通过Feign+Ribbon以RESTful方式实现通信，也可以基于RPC方式（可以结合Protocol Buffer）完成服务之间的通信，甚至可以通过发布事件与订阅事件的机制。事件机制可以使微服务之间更加松散耦合。这时，我们可以引入RabbitMQ或Kafka来做到服务与服务之间的解耦。事件机制是异步和非阻塞的，在某些业务场景下，它的性能会更加的好。Spring Cloud也提供了相关的组件Spring Cloud Stream来支持这种事件机制。</p>
+<p>对于微服务之间的协作，到底选择Feign这种REST方式、事件机制或者RPC方式，取决于业务场景是否需要同步方式，还是异步方式；是高性能高并发，还是普通方式；是要求彻底解耦，还是做到一般的松散耦合。我们需要针对实际情况作出实际的判断，作出正确的选择。没有谁坏谁好之分，而是看谁更加的适合。</p>
+<p><strong>备注：</strong>本文部分内容来自<a target="_blank" rel="noopener" href="https://github.com/sqshq/PiggyMetrics">PiggyMetrics</a>，并参考了微服务与Spring Cloud相关文档。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/micro-service-based-on-spring-cloud/" title="基于Spring Cloud的微服务落地">http://zhangyi.xyz/micro-service-based-on-spring-cloud/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          
+            <a href="/tags/Micro-Service/" rel="tag"># Micro Service</a>
+          
+            <a href="/tags/Spring-Cloud/" rel="tag"># Spring Cloud</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/handout-tdd-code-kata/" rel="next" title="TDD编码实战讲义">
+                <i class="fa fa-chevron-left"></i> TDD编码实战讲义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/thinking-pattern-after-reading-borges/" rel="prev" title="富内斯的思维模式">
+                富内斯的思维模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">服务治理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.1.</span> <span class="nav-text">搭建服务注册中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85"><span class="nav-number">1.2.</span> <span class="nav-text">注册服务提供者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%B6%88%E8%B4%B9"><span class="nav-number">1.3.</span> <span class="nav-text">服务发现与消费</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">声明式服务调用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%AE%B9%E9%94%99%E4%BF%9D%E6%8A%A4"><span class="nav-number">2.</span> <span class="nav-text">服务容错保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7"><span class="nav-number">3.</span> <span class="nav-text">服务监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API%E7%BD%91%E5%85%B3"><span class="nav-number">4.</span> <span class="nav-text">API网关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%AE%9E%E4%BE%8B%E7%BB%B4%E6%8A%A4"><span class="nav-number">4.1.</span> <span class="nav-text">路由规则与服务实例维护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%AA%E5%88%87%E5%85%B3%E6%B3%A8%E7%82%B9"><span class="nav-number">4.2.</span> <span class="nav-text">横切关注点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">5.</span> <span class="nav-text">分布式配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">5.1.</span> <span class="nav-text">配置中心服务端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git%E5%BA%93%E4%B8%8E%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.2.</span> <span class="nav-text">Git库与配置服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">5.3.</span> <span class="nav-text">配置中心客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

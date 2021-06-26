@@ -1,23 +1,1393 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,Architecture,Design,OO," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="广而告知：我在GitChat的领域驱动战略设计实践达人课已经发布，目前正在进入预售期。打开链接即可查看与订阅。同时，我还将在我的个人公众号上做抽奖活动，对于积极评论者会有本次课程的免费码赠送，敬请期待！ 在领域驱动设计过程中，正确地进行领域建模是至为关键的环节。如果我们没有能够从业务需求中发现正确的领域概念，就可能导致职责的分配不合理，业务流程不清晰，出现没有任何领域行为的贫血对象，甚至做出错">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么我们需要正确地领域建模">
+<meta property="og:url" content="http://zhangyi.xyz/why-do-we-need-domain-modeling/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="广而告知：我在GitChat的领域驱动战略设计实践达人课已经发布，目前正在进入预售期。打开链接即可查看与订阅。同时，我还将在我的个人公众号上做抽奖活动，对于积极评论者会有本次课程的免费码赠送，敬请期待！ 在领域驱动设计过程中，正确地进行领域建模是至为关键的环节。如果我们没有能够从业务需求中发现正确的领域概念，就可能导致职责的分配不合理，业务流程不清晰，出现没有任何领域行为的贫血对象，甚至做出错">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/why-do-we-need-domain-modeling/ddd-course.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/why-do-we-need-domain-modeling/ad.jpeg">
+<meta property="article:published_time" content="2018-07-17T03:48:58.000Z">
+<meta property="article:modified_time" content="2018-07-17T04:43:15.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Design">
+<meta property="article:tag" content="OO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/why-do-we-need-domain-modeling/ddd-course.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/why-do-we-need-domain-modeling/"/>
+
+
+
+
+
+  <title>为什么我们需要正确地领域建模 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/why-do-we-need-domain-modeling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">为什么我们需要正确地领域建模</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T11:48:58+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index">
+                    <span itemprop="name">DDD</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/why-do-we-need-domain-modeling/" class="leancloud_visitors" data-flag-title="为什么我们需要正确地领域建模">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/why-do-we-need-domain-modeling/ddd-course.jpg" class="">
+
+<p><strong>广而告知：</strong>我在<a target="_blank" rel="noopener" href="https://gitbook.cn/gitchat/column/5b3235082ab5224deb750e02">GitChat的领域驱动战略设计实践达人课</a>已经发布，目前正在进入预售期。打开链接即可查看与订阅。同时，我还将在我的个人公众号上做抽奖活动，对于积极评论者会有本次课程的免费码赠送，敬请期待！</p>
+<p>在领域驱动设计过程中，<strong>正确地进行领域建模</strong>是至为关键的环节。如果我们没有能够从业务需求中发现正确的领域概念，就可能导致职责的分配不合理，业务流程不清晰，出现没有任何领域行为的贫血对象，甚至做出错误的设计决策。</p>
+<span id="more"></span>
+
+<h3 id="最初的实现"><a href="#最初的实现" class="headerlink" title="最初的实现"></a>最初的实现</h3><p>在一个结算系统中，业务需求要求导入一个结算账单模板的Excel文档，然后通过账单号查询该模板需要填充的变量值，生成并导出最终需要的结算账单。结算账单有多种，例如内部结算账单等。不同账单的模板并不相同，需要填充的变量值也不相同。</p>
+<p>团队确实进行了领域建模，发现了如下的几个领域概念以及对应的服务和资源库对象：</p>
+<ul>
+<li>InternalSettlementBill</li>
+<li>InternalSettlementBillRepository</li>
+<li>TemplateReplacement</li>
+<li>BaseBillReviewExportTemplate</li>
+<li>InternalSettlementBillService</li>
+<li>BillReviewService</li>
+</ul>
+<p>为了方便大家对这个设计有直观认识，我先贴出这些关键类型的实现代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalSettlementBill</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String billNumber;</span><br><span class="line">    <span class="keyword">private</span> String newAndOldBillNumber;</span><br><span class="line">    <span class="keyword">private</span> String flightIdentity;</span><br><span class="line">    <span class="keyword">private</span> String flightNumber;</span><br><span class="line">    <span class="keyword">private</span> String flightRoute;</span><br><span class="line">    <span class="keyword">private</span> String scheduledDate;</span><br><span class="line">    <span class="keyword">private</span> String passengerClass;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Passenger&gt; passengers;</span><br><span class="line">    <span class="keyword">private</span> String serviceReason;</span><br><span class="line">    <span class="keyword">private</span> List&lt;CostDetail&gt; costDetails;</span><br><span class="line">    <span class="keyword">private</span> BigDecimal totalCost;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InternalSettlementBillRepository</span> </span>&#123;</span><br><span class="line">    <span class="function">InternalSettlementBill <span class="title">queryByBillNumber</span><span class="params">(String billNumber)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.infrastructure.file;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.data;</span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TemplateReplacement</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> rowIndex;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cellNum;</span><br><span class="line">    <span class="keyword">private</span> String replaceValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pakcage settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> settlement.infrastructure.file.TemplateReplacement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseBillReviewExportTemplate</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> List&lt;TemplateReplacement&gt; <span class="title">queryAndComposeTemplateReplacementsBy</span><span class="params">(String billNumber)</span> </span>&#123;</span><br><span class="line">        T t = queryFilledDataBy(billNumber);</span><br><span class="line">        <span class="keyword">return</span> composeTemplateReplacements(t);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> T <span class="title">queryFilledDataBy</span><span class="params">(String billNumber)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> List&lt;TemplateReplacement&gt; <span class="title">composeTemplateReplacements</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pakcage settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> settlement.infrastructure.file.TemplateReplacement;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalSettlementBillService</span> <span class="keyword">extends</span> <span class="title">BaseBillReviewExportTemplate</span>&lt;<span class="title">InternalSettlementBill</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> InternalSettlementBillRepository internalSettlementBillRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> InternalSettlementBill <span class="title">queryFilledDataBy</span><span class="params">(String billNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> internalSettlementBillRepository.queryByBillNumber(billNumber);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> List&lt;TemplateReplacement&gt; <span class="title">composeTemplateReplacements</span><span class="params">(InternalSettlementBill t)</span> </span>&#123;</span><br><span class="line">        List&lt;TemplateReplacement&gt; templateReplacements = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        templateReplacements.add(<span class="keyword">new</span> TemplateReplacement(<span class="number">0</span>, <span class="number">0</span>, t.getNewAndOldBillNumber()));</span><br><span class="line">        templateReplacements.add(<span class="keyword">new</span> TemplateReplacement(<span class="number">1</span>, <span class="number">0</span>, t.getFlightIdentity()));</span><br><span class="line">        templateReplacements.add(<span class="keyword">new</span> TemplateReplacement(<span class="number">1</span>, <span class="number">2</span>, t.getFlightRoute()));</span><br><span class="line">        <span class="keyword">return</span> templateReplacements;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> settlement.infrastructure.file.FileDownloader;</span><br><span class="line"><span class="keyword">import</span> settlement.infrastructure.file.PoiUtils;</span><br><span class="line"><span class="keyword">import</span> settlement.infrastructure.file.TemplateReplacement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BillReviewService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_REPLACE_PATTERN = <span class="string">&quot;@replace&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_SHEET_INDEX = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;file-path.bill-templates-dir&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String billTemplatesDirPath;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PoiUtils poiUtils;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> FileDownloader fileDownloader;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> InternalSettlementBillService internalSettlementBillService;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> ExportBillReviewConfiguration configuration;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exportBillReviewByTemplate</span><span class="params">(HttpServletResponse response, String billNumber, String templateName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String className = fetchClassNameFromConfigBy(templateName);</span><br><span class="line">            List&lt;TemplateReplacement&gt; replacements = templateReplacementsBy(billNumber, className);</span><br><span class="line"></span><br><span class="line">            HSSFWorkbook workbook = poiUtils.getHssfWorkbook(billTemplatesDirPath + templateName);</span><br><span class="line">            poiUtils.fillCells(workbook, DEFAULT_SHEET_INDEX, DEFAULT_REPLACE_PATTERN, replacements);</span><br><span class="line"></span><br><span class="line">            fileDownloader.downloadHSSFFile(response, workbook, templateName);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">&quot;Export bill review by template failed, templateName: &#123;&#125;&quot;</span>, templateName);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;TemplateReplacement&gt; <span class="title">templateReplacementsBy</span><span class="params">(String billNumber, String className)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (className) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;InternalSettlementBill&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> internalSettlementBillService.queryAndComposeTemplateReplacementsBy(billNumber);</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">fetchClassNameFromConfigBy</span><span class="params">(String templateName)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (ExportBillReviewConfiguration.Item item : configuration.getItems()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (item.getTemplateName().equals(templateName)) &#123;</span><br><span class="line">                <span class="keyword">return</span> item.getClassName();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;can not found className by templateName in configuration file&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.web.controllers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> settlement.domain.*;</span><br><span class="line"><span class="keyword">import</span> settlement.web.model.ExportBillReviewRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/bill-review&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BillReviewController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> BillReviewService billReviewService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/export-template&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exportBillReviewByTemplate</span><span class="params">(HttpServletResponse response, <span class="meta">@RequestBody</span> ExportBillReviewRequest request)</span> </span>&#123;</span><br><span class="line">        billReviewService.exportBillReviewByTemplate(response, request.getBillNumber(), request.getTemplateName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这些类中，领域层的<code>InternalSettlementBill</code>表达的是“内部结算账单”领域概念，显然，如代码所示，这个对象是一个典型的贫血对象。<code>BaseBillReviewExportTemplate</code>类是一个抽象类，<code>InternalSettlementBillService</code>是继承它的子类。团队开发人员运用了模板方法模式，<code>BaseBillReviewExportTemplate</code>是获取各种结算账单的<code>TemplateReplacement</code>的一个抽象，因为开发人员发现这个过程是通用的：</p>
+<ul>
+<li>通过billNumber查询结算账单</li>
+<li>根据结算账单的值组装导出账单需要的模板替换对象</li>
+</ul>
+<h3 id="提炼领域知识"><a href="#提炼领域知识" class="headerlink" title="提炼领域知识"></a>提炼领域知识</h3><p><code>BaseBillReviewExportTemplate</code>是一个领域服务，但它其实有一个很糟糕的命名，让人无法看懂它到底承担了什么职责？从命名看，它蕴含了多个概念：bill、review、export、template。究竟要做什么？是账单评阅的导出模板？还是导出账单评阅的模板？它代表了模板的名词概念，还是代表导出的领域行为？真是让人丈二和尚摸不着头脑。其实，阅读其代码实现，发现这个类要做的不过就是获得结算账单的所谓“模板替换（TemplateReplacement）”对象罢了？</p>
+<p><code>TemplateReplacement</code>表达的是什么概念呢？通过和团队成员沟通需求，结合代码我梳理出要实现的业务逻辑：</p>
+<ul>
+<li>用户首先导入一个结算账单模板的Excel工作薄；</li>
+<li>Excel工作薄模板中对应的单元格中定义了一些变量值；系统需要从数据库中读取结算账单的信息，然后基于结算账单信息中的值去替换定义在模板中的这些变量；</li>
+<li>导出替换了变量值的Excel工作薄。</li>
+</ul>
+<p>显然，替换模板中的变量值是我们期望完成的行为，其本质其实应该是一个模板变量：<code>TemplateVariable</code>。这个对象属于领域层的领域概念，不应该被定义在基础设施层。</p>
+<p>如此，<code>BaseBillReviewExportTemplate</code>这个服务的命名就真可以说是名实不副了，不如更名为<code>BaseBillTemplateVariablesComposer</code>。但仔细看它的实现，我发现它不过就是通过一个Repository获得结算账单，再用结算账单中的对应值去组装模板变量。这个组装模板变量的行为放在这个服务中合适吗？遵循“信息专家模式”，<code>InternalSettlementBill</code>自身就具备了组装模板变量的信息，它才是承担组装职责的最佳专家啊！于是，我们可以转移职责：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalSettlementBill</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String billNumber;</span><br><span class="line">    <span class="keyword">private</span> String newAndOldBillNumber;</span><br><span class="line">    <span class="keyword">private</span> String flightIdentity;</span><br><span class="line">    <span class="keyword">private</span> String flightNumber;</span><br><span class="line">    <span class="keyword">private</span> String flightRoute;</span><br><span class="line">    <span class="keyword">private</span> String scheduledDate;</span><br><span class="line">    <span class="keyword">private</span> String passengerClass;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Passenger&gt; passengers;</span><br><span class="line">    <span class="keyword">private</span> String serviceReason;</span><br><span class="line">    <span class="keyword">private</span> List&lt;CostDetail&gt; costDetails;</span><br><span class="line">    <span class="keyword">private</span> BigDecimal totalCost;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;TemplateVariable&gt; <span class="title">composeVariables</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Lists.newArrayList(</span><br><span class="line">            <span class="keyword">new</span> TemplateVariable(<span class="number">0</span>, <span class="number">0</span>, <span class="keyword">this</span>.newAndOldBillNumber()),</span><br><span class="line">            <span class="keyword">new</span> TemplateVariable(<span class="number">1</span>, <span class="number">0</span>, <span class="keyword">this</span>.flightIdentity()),</span><br><span class="line">            <span class="keyword">new</span> TemplateVariable(<span class="number">1</span>, <span class="number">2</span>, <span class="keyword">this</span>.flightRoute())</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于不同的结算模板都提供了不同的模板变量，我们就可以为其定义一个抽象的结算模板类型：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SettlementBill</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;TemplateVariable&gt; <span class="title">composeVariables</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InternalSettlementBill</span> <span class="keyword">implements</span> <span class="title">SettlementBill</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在转移了组装模板变量的职责后，我已经看不出<code>BaseBillTemplateVariablesComposer</code>这个服务还有什么存在必要了！是的，它还承担了调用Repository去获得结算账单的职责，但在转移了组装模板变量的职责后，这个服务已经被弱化为只剩下查询职责了。这个查询结算账单的职责不是Repository提供的么？再对这个查询功能做一次封装有何意义？所以，在<code>InternalSettlementBill</code>摆脱“贫血对象”的身份后，看起来很酷的模板方法模式就变得没有任何价值了！</p>
+<h3 id="保持清晰的领域服务"><a href="#保持清晰的领域服务" class="headerlink" title="保持清晰的领域服务"></a>保持清晰的领域服务</h3><p>再来看服务<code>BillReviewService</code>服务。从实现内容看，它才是真正负责导出结算账单的服务。这个服务的类名既含糊，实现代码又混乱，看起来它根本就不是一个纯粹的业务服务，因为它将业务逻辑与技术实现搅在了一起：既有Excel工作薄的获取，又有通过poi框架实现对单元格数据的填充，还有文件的下载，同时还通过结算账单获得了需要填充的模板变量值。</p>
+<p>之所以会出现如此混乱的局面，除了没有有效地将技术实现与业务逻辑通过抽象去隔离之外，<strong>最关键的还是没有正确地建立领域模型</strong>。实际上，这里的<strong>结算账单模板</strong>不正是我们要操作的领域对象吗？实际上，我们要完成的业务功能是<strong>填充以及导出结算账单模板，而不是填充工作薄的单元格，自然也不是下载工作薄文件</strong>。所谓的“工作薄”概念，其实是实现层面的细节。</p>
+<p>为保障设计的纯粹性，我们理当将<strong>结算账单模板</strong>定义为一个POJO类型的领域实体对象。即使需要将其导出为Excel工作薄，我们也可以令其持有数据，然后再将数据写入到工作薄。但是，由于结算账单模板的部分内容是通过模板文件直接导入的，除了需要替换的模板变量值之外，其余内容无需重新写入。如果硬要将其定义为纯粹的领域对象，就需要记录账单所有值在工作薄中的坐标，以便于在生成模板文件时正确地填充值；然而，这个模板的部分值在工作薄文件中已经存在了，再做一次无谓的填充就显得多余了。故而，<strong>我们需要做一个设计妥协</strong>，直接将poi框架的<code>HSSFWorkbook</code>作为结算账单模板对象内部持有的属性。让领域层依赖poi框架使得我们的领域模型不再纯粹，但为了技术实现的便利性，偶尔退让一步，也未为不可，只要我们能守住底线：<strong>保持系统架构的清晰层次</strong>。</p>
+<p>一旦将工作薄对象赋予结算账单模板对象，则模板自身就不再有多种结算账单类别，因为它们的区别在于workbook。因此，我们没有必要为各种结算账单定义对应的模板对象，只需一个<code>SettlementBillTemplate</code>即可：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hsf.usermodel.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillTemplate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> HSSFWorkbook workbook;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sheetIndex;</span><br><span class="line">    <span class="keyword">private</span> String replacePattern;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SettlementBillTemplate</span><span class="params">(HSSFWorkbook workbook)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(workbook, <span class="number">0</span>, <span class="string">&quot;@replace&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SettlementBillTemplate</span><span class="params">(HSSFWorkbook workbook, <span class="keyword">int</span> sheetIndex, String replacePattern)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.workbook = workbook;</span><br><span class="line">        <span class="keyword">this</span>.sheetIndex = sheetIndex;</span><br><span class="line">        <span class="keyword">this</span>.replacePattern = replacePattern;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>既然<code>SettlementBillTemplate</code>已经拥有了工作薄对象，为何不将填充模板变量值的功能赋予它呢？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillTemplate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fillWith</span><span class="params">(SettlementBill bill)</span> </span>&#123;</span><br><span class="line">        HSSFSheet sheet = hssfWorkbook.getSheetAt(sheetIndex);</span><br><span class="line">        bill.composeVariables().foreach( v -&gt; &#123;</span><br><span class="line">            HSSFCell cell = sheet.getRow(v.getRowIndex()).getCell(v.getCellNum());</span><br><span class="line">            String cellValue = cell.getStringCellValue();</span><br><span class="line">            String replaceValue = v.getReplaceValue();</span><br><span class="line">            <span class="keyword">if</span> (replaceValue == <span class="keyword">null</span>) &#123;</span><br><span class="line">                logger.warn(<span class="string">&quot;&#123;&#125; -&gt; &#123;&#125; 替换值为空，未从数据库中查出相应字段值&quot;</span>, cellValue, replaceValue);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            logger.info(<span class="string">&quot;&#123;&#125; -&gt; &#123;&#125;&quot;</span>, cellValue, replaceValue);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (cellValue.toLowerCase().contains(replacePattern)) &#123;</span><br><span class="line">                cell.setCellValue(cellValue.replace(replacePattern, replaceValue));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cell.setCellValue(replaceValue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，组装模板以及模板变量的工作已经完成，剩下的就是导出模板了。那么，谁该拥有导出模板的能力呢？虽然要导出的数据是<code>SettlementBillTemplate</code>拥有的，但<strong>它并不具备读取与下载工作薄文件的能力</strong>，既然如此，就只能将其放到领域服务。<strong>你看，我在分配表达领域逻辑的职责时，是将领域服务排在最后的顺序。</strong></p>
+<p>在此之前，我们还需要分离业务逻辑与技术实现。什么是业务逻辑？组装模板变量，组装模板以及导出模板都是业务逻辑，而读/写工作薄文件则是技术实现。既然如此，工作薄文件的读写职责就应该分配给基础设施层，然后在interfaces模块中定义它们的抽象接口。<strong>注：</strong>改进后的代码采用的代码结构皆以我的推荐为准。例如下面的接口定义是放在interfaces/file包中，实现放在gateways/file包中：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.interfaces.file;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">WorkbookReader</span> </span>&#123;</span><br><span class="line">    <span class="function">HSSFWorkbook <span class="title">readFrom</span><span class="params">(String templateName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">WorkbookWriter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">writeTo</span><span class="params">(HSSFWorkbook workbook, String targetPath)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.gateways.file;</span><br><span class="line"><span class="keyword">import</span> settlement.interfaces.file.WorkbookReader;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelWorkbookReader</span> <span class="keyword">implements</span> <span class="title">WorkbookReader</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.gateways.file;</span><br><span class="line"><span class="keyword">import</span> settlement.interfaces.file.WorkbookWriter;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelWorkbookWriter</span> <span class="keyword">implements</span> <span class="title">WorkbookWriter</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解决资源库多态的问题"><a href="#解决资源库多态的问题" class="headerlink" title="解决资源库多态的问题"></a>解决资源库多态的问题</h3><p>还有一个问题没有解决，就是不同的结算账单是通过不同的Repository获得的。虽然模板已经没有类型的区别了，但用组装模板的模板变量值确实是不相同的。我们需要根据传入的<code>templateName</code>决定获得什么样的结算账单对象。但是，我们之前已经为<code>InternalSettlementBill</code>定义了对应的Repository，且它被定义为一个接口。是否可以将这个接口作为服务的属性，交给依赖注入去注入实现呢？例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillTemplateExporter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> InternalSettlementBillRepository repository;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是不对的。因为采用这样的定义，就意味着<code>SettlementBillTemplateExporter</code>服务只能查询<code>InternalSettlementBill</code>。要解决这个问题，似乎可以为资源库查询所有结算账单的行为定义一个统一接口，如<code>SettlementBillFinder</code>接口。然而，这一改进还是不能解决问题，因为决定实例化哪个Repository，是由调用者传递的<code>templateName</code>决定的。</p>
+<p>在进行领域驱动设计时，为了隔离业务逻辑与技术实现，一般建议对技术实现尽可能做抽象，例如定义抽象的Repository接口，然后再利用依赖注入（Dependency Injection）完成对具体实现的注入。当我们使用框架来完成依赖注入时，就要求领域层的领域对象包括Repository、Service等对象都将由IoC框架来管理生命周期。这些IoC框架在带来依赖管理的便利时，也给我们的设计施加了一些约束。</p>
+<p>一种解决办法是为资源库引入静态工厂：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.repositories;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SettlementBillFinder</span> </span>&#123;</span><br><span class="line">    <span class="function">SettlementBill <span class="title">settlementBillBy</span><span class="params">(String billNumber)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.repositories;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InternalSettlementBillRepository</span> <span class="keyword">extends</span> <span class="title">SettlementBillFinder</span> </span>&#123;</span><br><span class="line">    <span class="comment">// other methods;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"><span class="keyword">import</span> settlement.repositories.SettlementBillFinder;</span><br><span class="line"><span class="keyword">import</span> settlement.gateways.persistence.InternalSettlementBillMapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillFinderFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SettlementBillFinder <span class="title">create</span><span class="params">(String templateName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (templateName.toLowerCase()) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;internal&quot;</span>: </span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> InternalSettlementBillMapper();</span><br><span class="line">            <span class="comment">// 其余分支略</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，这样的设计是有问题的，因为它破坏了各层的职责。如上所示的<code>SettlementBillFinderFactory</code>是一个静态工厂，它需要创建具体的资源库对象，就意味着它依赖了基础设施层的类，即放在gateways/persistence中的InternalSettlementBillMapper类，而工厂自身却属于领域层。倘若采用这种做法的话，前面运用的依赖注入方法就变得没有意义了。<strong>在领域驱动设计的实现时，我们确实需要时时刻刻保持谨慎，防守住因为某种实现原因导致对整洁架构的破坏。</strong></p>
+<p>要做到这一点，可以考虑使用工厂方法模式，为工厂再定义一个抽象，转而将实现放到基础设施层。例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SettlementBillFinderFactory</span> </span>&#123;</span><br><span class="line">    <span class="function">SettlementBillFinder <span class="title">create</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可惜，这样一个多态的工厂让我们又走回了老路，因为需要调用者根据<code>templateName</code>决定使用哪一个具体工厂！这与通过<code>templateName</code>确定选择使用哪一个Repository又有何区别呢？反而引入了不必要的间接。</p>
+<p>如果使用Spring来管理依赖注入，有一种做法是在服务中定义一个<code>HashMap&lt;String, String&gt;</code>，其中key值对应模板名，value值对应<code>SettlementBillFinder</code>实现子类的类名，然后在配置文件中配置这些映射信息。当服务传入一个<code>templateName</code>时，在这个hashmap中搜索获得的子类类型，然后利用反射来创建这些类。这一方法看起来保证了可扩展性，但实在太繁琐，太复杂，且反射的使用也在一定程度影响了性能。</p>
+<p>有两种更简单的办法：</p>
+<ul>
+<li>让Repository的实现子类自行判断：如果我们将结算账单视为一个领域概念，就应该为其只抽象一个<code>SettlementBillRepository</code>。即无需为每种结算账单提供专有的资源库抽象。在定义Repository的查询方法时，将<code>templateName</code>与<code>billNumber</code>都视为查询的条件，然后在实现类中根据<code>templateName</code>去查询不同的表，获得不同的结算账单领域对象。这个方法胜在简单，但较为死板不易扩展。</li>
+<li>采用惯例优于配置（CoC）：依然将<code>templateName</code>作为服务方法的参数，也依旧提供一个<code>SettlementBillRepository</code>抽象，但在基础设施层为每个结算账单提供一个实现，且实现类遵循命名规则，即以<code>&#123;templateName&#125;</code>名字（单词首字母大写）为前缀，后缀统一为<code>SettlementBillRepository</code>，这样就可以基于规则组装类的类型名，再通过反射创建资源库对象。这一方法胜在能扩展，但依旧引入了反射。</li>
+</ul>
+<p>这里我选择使用最简单的第一种方案，于是导出服务就变为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"><span class="keyword">import</span> settlement.repositories.SettlementBillRepository;</span><br><span class="line"><span class="keyword">import</span> settlement.interfaces.file.WorkbookReader;</span><br><span class="line"><span class="keyword">import</span> settlement.interfaces.file.WorkbookWriter;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillTemplateExporter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Service</span></span><br><span class="line">    <span class="keyword">private</span> WorkbookReader reader;    </span><br><span class="line">    <span class="meta">@Service</span></span><br><span class="line">    <span class="keyword">private</span> WorkbookWriter writer;</span><br><span class="line">    <span class="meta">@Repository</span></span><br><span class="line">    <span class="keyword">private</span> SettlementBillRepository repository;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">export</span><span class="params">(HttpServletResponse response, String templateName, String billNumber)</span> </span>&#123;</span><br><span class="line">        SettlementBill bill = repository.settlementBillBy(templateName, billNumber);</span><br><span class="line">        SettlementBillTemplate template = <span class="keyword">new</span> SettlementBillTemplate(reader.readFrom(templateName));</span><br><span class="line">        template.fillWith(bill);</span><br><span class="line">        writer.writeTo(response, template, templateName);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="尽可能保证领域层的整洁"><a href="#尽可能保证领域层的整洁" class="headerlink" title="尽可能保证领域层的整洁"></a>尽可能保证领域层的整洁</h3><p>事情还未结束，因为在领域服务的方法中出现了“恼人”的<code>HttpServletReponse</code>，它属于servlet包的核心对象。在干净的领域层中，怎么能容忍它的出现呢？（当然poi框架的依赖算是例外，前面已经分析过。）仔细分析，我发现在导出逻辑的实现中，其实仅仅用到了<code>HttpServletResponse</code>对象的<code>getOutputStream()</code>方法，返回的<code>OutputStream</code>对象则是JDK中<code>java.io</code>库中的一个类。既然如此，我们可以在领域层为这一需求提供一个抽象，例如定义接口<code>OutputStreamProvider</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OutputStreamProvider</span> </span>&#123;</span><br><span class="line">    <span class="function">OutputStream <span class="title">getOutputStream</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在的领域服务就可以使用在领域层中自定义的<code>OutputStreamProvider</code>抽象。此外，还得加上一些异常处理：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.domain;</span><br><span class="line"><span class="keyword">import</span> settlement.domain.exceptions.*;</span><br><span class="line"><span class="keyword">import</span> settlement.repositories.SettlementBillRepository;</span><br><span class="line"><span class="keyword">import</span> settlement.interfaces.file.WorkbookReader;</span><br><span class="line"><span class="keyword">import</span> settlement.interfaces.file.WorkbookWriter;</span><br><span class="line"><span class="keyword">import</span> org.apache.poi.hssf.usermodel.HSSFWorkbook;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillTemplateExporter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Service</span></span><br><span class="line">    <span class="keyword">private</span> WorkbookReader reader;    </span><br><span class="line">    <span class="meta">@Service</span></span><br><span class="line">    <span class="keyword">private</span> WorkbookWriter writer;</span><br><span class="line">    <span class="meta">@Repository</span></span><br><span class="line">    <span class="keyword">private</span> SettlementBillRepository repository;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">export</span><span class="params">(OutputStreamProvider streamProvider, String templateName, String billNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            SettlementBill bill = repository.settlementBillBy(templateName, billNumber);</span><br><span class="line">            SettlementBillTemplate template = <span class="keyword">new</span> SettlementBillTemplate(reader.readFrom(templateName));</span><br><span class="line">            template.fillWith(bill);</span><br><span class="line">            writer.writeTo(streamProvider, template, templateName);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (DownloadTemplateFileException | OpenTemplateFileException ex) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> TemplateFileFailedException(ex.getMessage(), ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应用服务的定义就变得简单了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.application;</span><br><span class="line"><span class="keyword">import</span> settlement.domain.SettlementBillTemplateExporter;</span><br><span class="line"><span class="keyword">import</span> settlement.domain.OutputStreamProvider;</span><br><span class="line"><span class="keyword">import</span> settlement.domain.exceptions.TemplateFileFailedException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SettlementBillAppService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Service</span></span><br><span class="line">    <span class="keyword">private</span> SettlementBillTemplateExporter exporter;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exportByTemplate</span><span class="params">(OutputStreamProvider streamProvider, String templateName, String billNumber)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            exporter.export(streamProvider, templateName, billNumber);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TemplateFileFailedException ex) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ApplicationException(<span class="string">&quot;Failed to export settlement bill file.&quot;</span>, ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对应的，控制器的实现修改为：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> settlement.gateways.controllers;</span><br><span class="line"><span class="keyword">import</span> settlement.application.SettlementBillAppService;</span><br><span class="line"><span class="keyword">import</span> settlement.gateways.controllers.model.ExportBillReviewRequest;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/bill-review&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BillTemplateController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> SettlementBillAppService settlementBillService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/export-template&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exportBillReviewByTemplate</span><span class="params">(HttpServletResponse response, <span class="meta">@RequestBody</span> ExportBillReviewRequest request)</span> </span>&#123;</span><br><span class="line">        exportService.exportByTemplate(response::getOutputStream, request.getTemplateName(), request.getBillNumber());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码的层次结构"><a href="#代码的层次结构" class="headerlink" title="代码的层次结构"></a>代码的层次结构</h3><p>如上代码的层次结构为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">settlement</span><br><span class="line">    - application</span><br><span class="line">        - SettlementBillAppService</span><br><span class="line">    - domain</span><br><span class="line">        - SettlementBill</span><br><span class="line">        - TemplateVariable</span><br><span class="line">        - InternalSettlementBill</span><br><span class="line">        - SettlementBillTemplate</span><br><span class="line">        - SettlementBillTemplateExporter</span><br><span class="line">        - OutputStreamProvider</span><br><span class="line">        - exceptions</span><br><span class="line">            - TemplateFileFailedException </span><br><span class="line">            - DownloadTemplateFileException</span><br><span class="line">            - OpenTemplateFileException</span><br><span class="line">    - repositories（persistence技术实现的抽象）</span><br><span class="line">        - SettlementBillRepository</span><br><span class="line">    - interfaces（技术实现层面的抽象）</span><br><span class="line">        - file</span><br><span class="line">            - WorkbookReader</span><br><span class="line">            - WorkbookWriter</span><br><span class="line">    - gateways（包含技术实现层面）</span><br><span class="line">        - persistence</span><br><span class="line">            - SettlementBillMapper</span><br><span class="line">        - file</span><br><span class="line">            - ExcelWorkbookReader</span><br><span class="line">            - ExcelWorkbookWriter</span><br><span class="line">        - controllers</span><br><span class="line">            - BillTemplateController </span><br><span class="line">            - model</span><br><span class="line">                - ExportBillReviewRequest </span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上对代码的逐步演化，我们就此可以发现原来代码的诸多问题。这些问题往往是许多领域驱动设计新手容易犯的错误，包括：</p>
+<ul>
+<li>未能正确地表达领域知识</li>
+<li>贫血的领域模型</li>
+<li>层次不清，对DDD的分层架构理解混乱</li>
+<li>领域服务与应用服务概念混乱</li>
+<li>业务逻辑与技术实现纠缠在一起</li>
+</ul>
+<p>回归这些问题的原点，其实还是在于<strong>团队没有正确地进行领域建模</strong>。如果还要继续深究，则在于<strong>团队没有为领域建立统一语言</strong>。我们看前面对模板导出业务的分析，每一个步骤都没有正确表达业务逻辑，因而获得的领域对象也是不正确的。又由于没有建立统一语言，导致对类和方法的命名都不能很好地体现领域概念，甚至导致某些表达领域概念的类被错误地放在了基础设施层。当我们在运用面向对象编程范式来实现领域驱动设计时，对OO思想的理解偏差与知识缺乏也反映到了代码的实现上，尤其是对“贫血模型”的理解，对职责分配的认知，都会直接反映到代码层面上。</p>
+<p>最后，如果团队成员没有清晰地理解分层架构各层的含义，以及为何要引入分层架构，就无法守住分层架构各层的边界，最后就会导致业务复杂度与技术复杂度的混搭。若系统简单还好说，一旦系统的业务复杂度增加带来系统规模的扩大，不紧守架构层次的边界，就可能导致我们事先建立的分层架构名存实亡，代码变成大泥球，重新回归到太初的混沌世界。</p>
+<h3 id="达人课专属海报"><a href="#达人课专属海报" class="headerlink" title="达人课专属海报"></a>达人课专属海报</h3><p>下图为《领域驱动战略设计实践》达人课的专属海报，可微信扫描购买：</p>
+<img src="/why-do-we-need-domain-modeling/ad.jpeg" class="">
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/why-do-we-need-domain-modeling/" title="为什么我们需要正确地领域建模">http://zhangyi.xyz/why-do-we-need-domain-modeling/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"># DDD</a>
+          
+            <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          
+            <a href="/tags/Design/" rel="tag"># Design</a>
+          
+            <a href="/tags/OO/" rel="tag"># OO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/preface-of-beautiful-architecture/" rel="next" title="《架构之美》评注版序">
+                <i class="fa fa-chevron-left"></i> 《架构之美》评注版序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/preface-of-practice-ddd/" rel="prev" title="领域驱动设计，重焕青春的设计经典">
+                领域驱动设计，重焕青春的设计经典 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%88%9D%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.</span> <span class="nav-text">最初的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E7%82%BC%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">提炼领域知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E6%8C%81%E6%B8%85%E6%99%B0%E7%9A%84%E9%A2%86%E5%9F%9F%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">保持清晰的领域服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%B5%84%E6%BA%90%E5%BA%93%E5%A4%9A%E6%80%81%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">解决资源库多态的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%BD%E5%8F%AF%E8%83%BD%E4%BF%9D%E8%AF%81%E9%A2%86%E5%9F%9F%E5%B1%82%E7%9A%84%E6%95%B4%E6%B4%81"><span class="nav-number">5.</span> <span class="nav-text">尽可能保证领域层的整洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">6.</span> <span class="nav-text">代码的层次结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%BE%E4%BA%BA%E8%AF%BE%E4%B8%93%E5%B1%9E%E6%B5%B7%E6%8A%A5"><span class="nav-number">8.</span> <span class="nav-text">达人课专属海报</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

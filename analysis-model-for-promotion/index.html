@@ -1,23 +1,1395 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,Design," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="最近一段时间，电商圈出了一件大事情，拼多多再次吸引了大家的眼球。2019年1月20日，拼多多出现了数额巨大的羊毛Bug，起因在于一张无门槛的优惠券，券面价值100元，可以全场通用（特殊商品除外），有效期一年。如果仅仅从业务角度分析，定义这样的优惠券自身并没有任何问题。当然，也有人说像这样的无门槛券本身就不该用于花费充值、Q币充值等几乎等于现金业务的商品，这是从促销层面去考虑的问题。还有人提到风">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从拼多多事件看电商的促销模型">
+<meta property="og:url" content="http://zhangyi.xyz/analysis-model-for-promotion/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="最近一段时间，电商圈出了一件大事情，拼多多再次吸引了大家的眼球。2019年1月20日，拼多多出现了数额巨大的羊毛Bug，起因在于一张无门槛的优惠券，券面价值100元，可以全场通用（特殊商品除外），有效期一年。如果仅仅从业务角度分析，定义这样的优惠券自身并没有任何问题。当然，也有人说像这样的无门槛券本身就不该用于花费充值、Q币充值等几乎等于现金业务的商品，这是从促销层面去考虑的问题。还有人提到风">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/cover.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/01.png">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/02.png">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/03.png">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/04.png">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/05.png">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/06.png">
+<meta property="og:image" content="http://zhangyi.xyz/analysis-model-for-promotion/07.png">
+<meta property="article:published_time" content="2019-01-24T12:07:11.000Z">
+<meta property="article:modified_time" content="2019-01-24T21:14:24.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Design">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/analysis-model-for-promotion/cover.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/analysis-model-for-promotion/"/>
+
+
+
+
+
+  <title>从拼多多事件看电商的促销模型 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/analysis-model-for-promotion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从拼多多事件看电商的促销模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-24T20:07:11+08:00">
+                2019-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index">
+                    <span itemprop="name">DDD</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/analysis-model-for-promotion/" class="leancloud_visitors" data-flag-title="从拼多多事件看电商的促销模型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/analysis-model-for-promotion/cover.jpg" class="">
+
+<p>最近一段时间，电商圈出了一件大事情，拼多多再次吸引了大家的眼球。2019年1月20日，拼多多出现了数额巨大的羊毛Bug，起因在于一张无门槛的优惠券，券面价值100元，可以全场通用（特殊商品除外），有效期一年。如果仅仅从业务角度分析，定义这样的优惠券自身并没有任何问题。当然，也有人说像这样的无门槛券本身就不该用于花费充值、Q币充值等几乎等于现金业务的商品，这是从促销层面去考虑的问题。还有人提到风控问题，为何等到损失达200亿（事后拼多多说明这些优惠券涉及到千万）才发现问题？更有人质疑这是一次别出心裁的炒作。</p>
+<p>从薅羊毛的角度看这个Bug，似乎是因为该无门槛券可以被无限次使用导致的。本质上，这确实是一个Bug，我不明白这样的Bug是如何产生的，是测试不到位，还是说该优惠券本身是一个内部测试数据，被不小心放到生产环境？正好，最近正在考虑如何利用分析模式建立电商系统中的促销模型，算是应景之作吧。</p>
+<span id="more"></span>
+
+<h2 id="分析模式对模型的精炼"><a href="#分析模式对模型的精炼" class="headerlink" title="分析模式对模型的精炼"></a>分析模式对模型的精炼</h2><p>在领域驱动设计中，通过统一语言与“名词动词法”的结合，可以快速获得初步的分析模型。但是这种方法获得的模型品质，受限于语言描述的写作技巧，统一语言的描述更多体现在是对现实世界的模型描述，缺乏深入精准的分析与统一的抽象，使得我们很难发现一些隐含在统一语言背后的重要概念。一言以蔽之，由此获得分析模型还需要进一步精炼。</p>
+<p>对相同或相近的领域进行建模分析时，一定有章法和规律可循。例如同样都是电商系统，它们的领域模型定有相似之处；如果都为财务系统，自然也得遵循普适性的会计准则。这并非运用行业术语这么简单，而是结合领域专家的知识，将这些相同或相似的模型抽象出来，形成可以参考和重用的概念模型，这就是Martin Fowler提出的分析模式。Fowler认为：“分析模式是一组概念，这些概念反映了业务建模中的通用结构。它可以只与某个特定的领域相关，也可以跨越多个领域。”由于分析模式是独立于软件技术的，就使得领域专家可以理解这些模式，这是分析建模过程中关键的一点。</p>
+<p>每个行业都可以定义自己的分析模式，当然我们也可以参考一些已经被别人总结好的分析模式。例如在Martin Fowler的著作《分析模式》中，模式所覆盖的领域就包括组织结构、单位数量、财务模型、库存与账务、计划以及合同（期权、期货、产品以及交易）等领域。Eric Evans认为利用这些分析模式，“可以避免一些代价高昂的尝试和失败过程，而直接从一个已经具有良好表达力和易实现的模型开始工作，并解决了一些可能难于学习的微妙的问题。我们可以从这样一个起点来重构和实验。”</p>
+<p>要获得这样的分析模式，需要专精的领域专家与软件设计师共同来完成。只可惜沟通与知识的壁垒让这样一个重要的分析工作变得举步维艰。Martin Fowler撰写《分析模式》正是希望通过引入更多的模式来降低建模的难度，至少可以做到一定程度的模型复用。然而，分析模式与领域知识息息相关，这就限制了分析模式的通用性；但这并不能说明分析模式不重要。领域驱动设计尤其强调为领域建模，对于那些具有较长生命周期的产品而言，<strong>针对产品的核心领域建立一套分析模式绝对值得，因为它是分析阶段的重要资产，它的稳定与扩展能力可能会直接影响到领域模型中的设计模型与实现模型</strong>。</p>
+<h3 id="案例：促销策略的分析模式"><a href="#案例：促销策略的分析模式" class="headerlink" title="案例：促销策略的分析模式"></a>案例：促销策略的分析模式</h3><p>促销（Promotion）是一种运营手段，目的是通过这种手段去刺激消费的各种信息，把信息传递到一个或更多的目标对象，以影响其态度和行为，提高转化率。为了拉动消费，无论是线上还是线下，商家总是会绞尽脑汁提供各种促销手段，这就带来了促销策略的复杂性；然而从消费心理角度考虑，要刺激消费，简单有效的方式就是让消费者认为花了更少的钱却买了更多的商品，这就带来了促销策略的相似性。从某种意义上讲，拼多多的这次促销极大地“刺激”了消费者的热情！</p>
+<h4 id="促销策略的业务背景"><a href="#促销策略的业务背景" class="headerlink" title="促销策略的业务背景"></a>促销策略的业务背景</h4><p>在电商系统中，对促销的管理主要牵涉到对促销活动与促销规则的管理。同时，促销还会影响到订单、库存、物流以及支付。如果我们将促销视为核心领域，那么在为它建立分析模型时，应以促销领域为主。</p>
+<p><strong>促销活动</strong></p>
+<p>促销活动实际上是针对促销进行基本属性管理，负责提供活动方式和商品内容，主要包括：</p>
+<ul>
+<li>商品选择：参加促销的商品，分为活动商品和赠品两种；也可以选定商品的品种参与促销，例如针对图书类开展促销。</li>
+<li>投放时间选择：即该促销的有效时段</li>
+<li>投放区域选择：针对全平台还是部分平台（自营或指定店铺），或者仅针对APP平台</li>
+<li>用户类型：针对新注册用户，VIP用户等</li>
+</ul>
+<p><strong>促销规则</strong></p>
+<p>促销规则是促销管理的核心。一个促销系统的好坏取决于促销规则设计是否合理，设计时既要考虑到商品的促销，又要考虑到店铺的盈利，还要考虑滞销品和畅销品的差别，因此促销规则的制订是非常灵活的，范围和促销力度也各有不同。大体来看，我们可以从平台、商品种数、促销方式这三个维度来分别理解促销规则的制订：</p>
+<ul>
+<li>平台维度：促销规则可以分为自营促销和POP平台促销。</li>
+<li>商品总数维度：站在商品角度看促销，则促销可以分为单品促销、集合促销和店铺促销：<ul>
+<li>单品促销：以单个商品为维度进行的促销叫单品促销，例如限时抢。</li>
+<li>集合促销：通过商品集合来满足促销规则进行的促销叫集合促销，例如满额减。</li>
+<li>店铺级促销：以商家店铺为维度进行的促销叫店铺级促销，例如店铺级满额折。</li>
+</ul>
+</li>
+<li>促销方式维度：<ul>
+<li>直减类：限时抢、直减、多买多折、VIP专享价、手机专享价等</li>
+<li>赠品：满赠</li>
+<li>换购类：加价购，凑单</li>
+<li>满额类：满额减、满额折等</li>
+<li>返券类：满额返券</li>
+<li>组合优惠类：套餐</li>
+<li>预订类：团购</li>
+</ul>
+</li>
+</ul>
+<p>在配置促销规则时，还需要考虑规则的优先级，它会直接影响促销活动的<strong>共享与互斥</strong>。例如我们可以按照一定的优先级完成用户的优惠享用，如享用了单品促销，就不能参加集合促销，满减优先级大于代金券；这是互斥的情况。促销活动也可以共享，例如满额累促销可以与满额包邮共同使用。</p>
+<h4 id="对促销领域的分析建模"><a href="#对促销领域的分析建模" class="headerlink" title="对促销领域的分析建模"></a>对促销领域的分析建模</h4><p>我们在为促销领域进行分析建模时，首先需要甄别出该领域的核心概念，然后分析这些概念在该领域中蕴含的业务意义。基于前面介绍的业务背景，我们知道促销领域的核心概念包括促销活动与促销规则。在管理促销活动时，需要指定促销规则，这就产生了二者之间的关联关系。表面看，是通过促销活动去配置促销规则，前者为主，后者为辅；但对于促销而言，其实是活动与规则合二为一组合形成一种<strong>促销产品（Promotion Product）</strong>。这种促销产品可以是“券（Coupon）”形式，也可以是“礼品卡（Gift Card）”形式，又或者是提供“打折（Discount）”或者“包邮（Free Shipping）”。</p>
+<p>模型概念“促销产品”的获得实际上是分析建模过程中<strong>对关系建模</strong>的一种体现。在现实世界中，各种概念之间总是会存在各种错综复杂的关系，例如在学校中，有教师与学生之间的师生关系，有院长与教师之间的上下级关系，有教授与研究生之间的科研关系。一旦关系变得越来越多，越来越复杂，仅仅靠体现对象之间的委派关系来体现这种组合就会显得缺乏表现力，这个时候就可以将“关系”提炼为模型中一个显式的概念。</p>
+<p><strong>建模原则：如果某个类型拥有多种相似的关联，可以为这些关联对象定义一个新的类型，并建立一个知识级类型来区分它们。</strong></p>
+<p>前面所述的促销活动与促销规则在业务上存在一定的重复。例如平台维度的促销规则，其实对应的是促销活动中对投放平台或区域的选择。商品总数维度的促销规则，又与促销活动中适用商品（品种）选择的配置重叠了。这是因为我们扩大了所谓“规则”的外延。规则（Rule）不是计划，更不是策略，而应该是一条条具体的可判断是否满足条件的约束规则，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">购指定图书满100元减20元，满200元减40元，在2018年12月12日当天有效。</span><br></pre></td></tr></table></figure>
+
+<p>以上描述并非<strong>促销规则</strong>，而是一次完整的<strong>促销</strong>，该促销的促销产品为“券（Coupon）”，券的类型为现金券（若描述中为满额折扣，就是折扣券）。描述“指定图书”属于促销活动中对适用商品（品种）的配置，描述“2018年12月12日当天有效”则是该促销的有效时段属性。唯有描述“满100元减20元，满200元减40元”，才是所谓的<strong>规则</strong>。该规则又包含了两条金额阈值的条件（Creteria）。面对这种场景，我们就可以在分析模型中引入“<a target="_blank" rel="noopener" href="https://www.martinfowler.com/apsupp/spec.pdf">规格模式（Specification Pattern）</a>”。</p>
+<p>规格模式由Martin Fowler与Eric Evans提出，他们对规格模式的描述如下所示：</p>
+<p><strong>问题</strong>：<br>选择（Selection）：需要基于某些条件（Creteria）选择对象的一个子集，且需要多次刷新其选择<br>验证（Validation）：需要根据确定的目标获得满足条件的合适对象<br>按需构造（Construction-to-order）：需要描述对象应该做什么而无需解释对象执行的细节，这样就可以构造一个候选对象来满足需求</p>
+<p><strong>解决方案：</strong><br>创建一个规格（Specification）对象，它能够辨别候选对象是否满足某些条件。规格对象定义了方法<code>isSatisfiedBy(anObject)</code>，如果anObject的所有条件均满足，则返回值true。</p>
+<p><strong>结果：</strong></p>
+<ul>
+<li>解除需求设计、实现与验证之间的耦合</li>
+<li>提供清晰的声明式的系统定义</li>
+</ul>
+<p>规格对象可以是单一的，也可以是合成的。</p>
+<p>一个促销规则可以包含多个规格，而对于规格而言，在促销场景又可以分为：</p>
+<ul>
+<li>金额（Amount）阈值的规格：例如满200元减40元，或满200元9折</li>
+<li>数量（Count）阈值的规格：例如满2件9折，又或者限量购</li>
+</ul>
+<p>结合业务分析与模型分析，我们可以得出如下的分析模型：</p>
+<img src="/analysis-model-for-promotion/01.png" class="">
+
+<p>分析促销产品时，我们发现模型中的概念并未处于同一个抽象层次，且相互间存在混合关联的关系。例如打折（Discount）或现金抵用（Reward）可以单独针对一次促销提供，也可以和券（Coupon）进行捆绑；礼品卡（Gift Card）和券均可以提供赠品或者包邮。显然，诸如打折、现金抵用、赠品和包邮等概念并非一种促销产品，而是一种促销产品类型，是促销产品的一种属性，例如券的促销产品类型若为打折，就是折扣券，若为现金抵用，就是现金券。这时，促销产品其实是这些产品类型的一种载体。</p>
+<p>在电商系统的促销策略中，诸如打折、现金抵用之类的促销手段未必需要通过券或者礼品卡的形式呈现，它们其实是可以作为促销产品被单独使用的。但在建模过程中，我们却不允许概念层次的混乱，因为我们必须要避免领域概念的二义性。例如对于打折（Discount），到底是促销产品，还是促销类型，必须分辨清楚。既然概念层次不在同一个抽象层次上，我们就需要针对这些概念建立一层抽象，这个抽象概念是与券、礼品卡处于同一个抽象层次。这个抽象的促销产品概念就是“优惠（Special Offer）”。因此，前面建立的模型就可以改进为：</p>
+<img src="/analysis-model-for-promotion/02.png" class="">
+
+<p><strong>建模原则：保证分析模型中的概念遵循单一抽象层次原则。</strong></p>
+<h4 id="知识级和操作级"><a href="#知识级和操作级" class="headerlink" title="知识级和操作级"></a>知识级和操作级</h4><p>当模型变得渐趋复杂时，《分析模式》引入了操作级（operational level）和知识级（knowledge level）两个层次来组织模型中的概念。操作级模型记录该领域每天发生的事件；知识级模型则定义了操作级对象的合法配置，记录控制着结构的各种通用规则。知识级和操作级二者之间并没有明确的差异，但Martin Fowler认为“将两者（知识级和操作级）分开有助于理清建模思路”。为此，我们需要明确这二者之间的差别。</p>
+<p>在《分析模式》一书中，Martin Fowler引入了英国国民医疗服务制度的Cosmos项目作为分析模式的案例，这个模型的推导过程清晰地展现了引入这两个层级是怎么让模型变得更加清晰的。</p>
+<p>Cosmos作为一个医疗保健系统，需要对医药行业的测量和观察需求建立模型。简单说来，每个患者的测量结果可以建模为“测量（Meassurement）”。然而针对整家医院，即使是一个患者也可能存在成千上万种可能的测量。如果为每种测量定义一个相应的属性，就意味着一个患者存在着成千上万种可能的测量操作——测量的接口就会变得格外复杂。分析模型的解决方案是将所有可以被测量的不同事物（身高、体重、血糖水平……）都作为测量对象，并将其抽象为“现象类型（Phenomenon Type）”。这里，测量属于操作级，现象类型属于知识级：</p>
+<img src="/analysis-model-for-promotion/03.png" class="">
+
+<p>在为测量引入现象类型后，患者可以有许多测量，但是针对某一种现象类型而言，患者就只有一个测量。例如John Smith身高1米75，在上述模型中，该描述信息整个代表一个测量，其中，患者是John Smith，现象类型是身高，数量是1米75。</p>
+<p>那么为什么现象类型属于知识级，测量属于操作级呢？《分析模式》给出了一条建模原则：“操作级中的对象会经常发生变化，它们的配置由很少发生变化的知识级来约束。”这是<strong>从变化的角度</strong>来区分的。操作级中的“测量”可以被定义成多种多样的测量，但知识级的“现象类型”却是可以穷举的。因此这里提到的“变化”表达的并非类型的变化，而是对象值的变化。</p>
+<p>领域概念中存在一些定性的描述，例如医疗观察模型中的血型A现象、汽车分类观察模型中的汽车油量不足现象，它们都是在系统中确确实实存在的客观事实，不会因为观察是否建立而消亡，像这样的定性描述放到知识级中，可以按照规则来使用它们。这是<strong>从领域概念的性质</strong>来区分的。</p>
+<p>回到电商系统的促销策略模型，促销可以被定义为多种多样，但促销产品与促销类型在促销领域中却是可以穷举的，因此促销应该被定义在操作级，而促销产品与促销类型则属于知识级。当然，各自级别内部的属性自然也会归入到各自的级别中，正如数量之于测量，在促销策略模型中，有效时段就属于促销的属性，因此有效时段也属于操作级的概念。</p>
+<p>促销活动属于操作级，因为它类似案例中的测量概念，针对某一种促销活动类型而言，一次促销只有一个促销活动。为了应对操作级对象（促销活动）的变化，驱动我们引入了知识级的促销活动类型（Activity Type）概念。</p>
+<p>从领域概念的性质看，促销类型为折扣（Discount）是一种定性描述，券类型为现金券也是一种定性描述，因此促销类型和券类型属于知识级。那么，促销规格为“满200元减40元”是一种定性描述吗？——不是。虽然一旦定义了这样的规格，它确实是一种不变的事实，但它却是附着在促销规则上，一旦促销规则失效或者被删除，这样的规格就没有存在的意义了。因此促销规则与规格应属于操作级的概念。</p>
+<p>每个促销都有属于自己的类别（Label），这个类别是促销的一种定性描述，属于操作级对象。在计算促销优惠时，不同类别的商品会分别计算，同一类别则可以兼容，这相当于分类汇总。对于促销而言，如果我们将一个具体的促销实例视为一个实体，在计算促销优惠时，同一实体的促销是互斥的，不同实体的促销可以叠加组合，也可以按照优先级（Priority）。这个优先级属于促销的属性。优先级可以在配置促销策略时事先配置，也可以由买家指定，例如买家在购买商品时，出现了多种促销叠加的情况，买家就可以根据具体的购买情况选择最适合自己的促销，这时用户指定的优先级要高于事先配置的优先级。</p>
+<p>与优先级属性相同，我们还需要为“促销”概念引入“状态”属性，例如标记该促销对象的状态为“未使用”、“已使用”和“过期”。同一个促销不能被用户无限使用，又或者需要给定一个有效期。其中，“已使用”和“过期”都表达了促销实例的无效状态。显然，这个“状态”属性应该属于知识级。再以拼多多为例，刚才提到的优惠券Bug就是促销的“状态”属性未能在使用后设置为“已使用”状态；又或者说在用户使用该促销优惠时，不曾检查促销的“状态”属性，仅允许在“未使用”状态下才是有效可用的。</p>
+<p>因此，我们引入分析模式中的建模原则与模式，可以获得如下的分析模型：</p>
+<img src="/analysis-model-for-promotion/04.png" class="">
+
+<h4 id="对分析模型的验证"><a href="#对分析模型的验证" class="headerlink" title="对分析模型的验证"></a>对分析模型的验证</h4><p>我们可以结合实际的业务场景验证获得的促销分析模型。以京东商城为例，如下图所示：</p>
+<img src="/analysis-model-for-promotion/05.png" class="">
+
+<p>上图给出了两种促销类别（Label）：联合促销活动与玩具元旦特惠。以玩具元旦优惠类别为例，<strong>促销（Promotion）</strong>为“跨店铺满减”。该促销的<strong>活动类型（Activity Type）</strong>包括适用店铺（值为“跨店铺”）、适用品种（值为“玩具”）。<strong>促销产品（Promotion Product）</strong>为优惠（Special Offer），<strong>促销产品类型（Product Type）</strong>为满减（Reward），<strong>规则（Rule）</strong>为金额阈值规则，<strong>规格（Specification）</strong>为满99.00元减。图中的两种玩具都属于同一个促销类别，因此在计算满减时，这两个商品是可以叠加的。对应的分析模型为：</p>
+<img src="/analysis-model-for-promotion/06.png" class="">
+
+<p>我们再来看另外一个促销场景：</p>
+<img src="/analysis-model-for-promotion/07.png" class="">
+
+<p>上图展现的促销场景包含了多种促销，它们的促销类别（Lebel）皆为京东自营，因此在进行优惠计算时，这些商品是可以叠加的。这里包含的促销实体包括：</p>
+<ul>
+<li>活动类型（Activity Type）之适用店铺为京东自营，促销产品为券（Coupon），促销产品类型为满减（Reward），优惠规则为金额阈值，规格分别为满49减6、满158减20、满258减30、满388减50等。</li>
+<li>活动类型（Activity Type）之适用店铺为京东自营，适用商品为自营晨光指定商品，促销产品为券（Coupon），促销产品类型为满减（Reward），优惠规则为金额阈值，规格为满98减10。</li>
+<li>活动类型（Activity Type）之适用店铺为京东自营，促销产品为优惠（Special Offer），促销产品类型为包邮（Free Shipping），优惠规则为金额阈值，规格为满99。</li>
+<li>活动类型（Activity Type）之适用店铺为京东自营，促销产品为优惠（Special Offer），促销产品类型为换购（Trade-in），优惠规则为金额阈值，规格为满30。</li>
+</ul>
+<p>在促销模型中，这些促销实体就是一个个促销，在实现时，体现为多个促销实例，这些促销实例可以通过促销活动的“适用商品”活动类型，作用到同一件商品，形成这种促销优惠的叠加。</p>
+<p>目前给出的促销模型考虑还不全面。一方面这取决于它适用的哪种电商应用场景，例如淘宝与京东的促销策略就不相同，有的电商仅仅支持虚拟商品，相关的促销领域逻辑就有所不同了。另一方面，该模型本身还未考虑如何与计算订单金额、支付以及退换货这些业务相结合。总之业务约复杂，模型也就变得相应的复杂，但同时也要学会利用抽象将模型化繁为简，又或者在模型表达中用不同的视图表达不同的概念，尽量让模型变得精简而直观，同时又不会缺少关键的领域概念。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/analysis-model-for-promotion/" title="从拼多多事件看电商的促销模型">http://zhangyi.xyz/analysis-model-for-promotion/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"># DDD</a>
+          
+            <a href="/tags/Design/" rel="tag"># Design</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/rewrite-and-refactoring-policy/" rel="next" title="重构加重写保证版本功能的空中加油">
+                <i class="fa fa-chevron-left"></i> 重构加重写保证版本功能的空中加油
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/event-storming-distill/" rel="prev" title="事件风暴的设计要素与驱动力">
+                事件风暴的设计要素与驱动力 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E6%A8%A1%E5%BC%8F%E5%AF%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%B2%BE%E7%82%BC"><span class="nav-number">1.</span> <span class="nav-text">分析模式对模型的精炼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%BF%83%E9%94%80%E7%AD%96%E7%95%A5%E7%9A%84%E5%88%86%E6%9E%90%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">案例：促销策略的分析模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%83%E9%94%80%E7%AD%96%E7%95%A5%E7%9A%84%E4%B8%9A%E5%8A%A1%E8%83%8C%E6%99%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">促销策略的业务背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E4%BF%83%E9%94%80%E9%A2%86%E5%9F%9F%E7%9A%84%E5%88%86%E6%9E%90%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.1.2.</span> <span class="nav-text">对促销领域的分析建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%BA%A7%E5%92%8C%E6%93%8D%E4%BD%9C%E7%BA%A7"><span class="nav-number">1.1.3.</span> <span class="nav-text">知识级和操作级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E5%88%86%E6%9E%90%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-number">1.1.4.</span> <span class="nav-text">对分析模型的验证</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,23 +1,1336 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Design, OO," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="公司的茶水间装修得如家一般温馨，咖啡机时刻飘出咖啡的浓香。员工们常常在此休息聊天，既可以选择坐在高脚凳上依着吧台闲谈阔论，也可以舒服的躺坐在旁边的沙发上闭目养神。晨会之后的半小时，以及午餐前后是这里最喧嚣的时候，此时的茶水间却颇为安宁，大家都在工位上专心工作。 两人来到茶水间，蔡了问道：“老规矩，还是拿铁，对吧？”马丁花点点头，蔡了殷勤地给他接了一杯浓浓的拿铁，然后又给自己接了一杯卡布奇诺，两人坐">
+<meta property="og:type" content="article">
+<meta property="og:title" content="茶水间的技术问答">
+<meta property="og:url" content="http://zhangyi.xyz/technical-discussion-in-tea-room/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="公司的茶水间装修得如家一般温馨，咖啡机时刻飘出咖啡的浓香。员工们常常在此休息聊天，既可以选择坐在高脚凳上依着吧台闲谈阔论，也可以舒服的躺坐在旁边的沙发上闭目养神。晨会之后的半小时，以及午餐前后是这里最喧嚣的时候，此时的茶水间却颇为安宁，大家都在工位上专心工作。 两人来到茶水间，蔡了问道：“老规矩，还是拿铁，对吧？”马丁花点点头，蔡了殷勤地给他接了一杯浓浓的拿铁，然后又给自己接了一杯卡布奇诺，两人坐">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/technical-discussion-in-tea-room/01.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/technical-discussion-in-tea-room/02.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/technical-discussion-in-tea-room/coffee.png">
+<meta property="og:image" content="http://zhangyi.xyz/technical-discussion-in-tea-room/factory-method.png">
+<meta property="og:image" content="http://zhangyi.xyz/technical-discussion-in-tea-room/abstract-factory.png">
+<meta property="article:published_time" content="2021-01-06T07:09:03.000Z">
+<meta property="article:modified_time" content="2021-01-08T11:56:28.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Design, OO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/technical-discussion-in-tea-room/01.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/technical-discussion-in-tea-room/"/>
+
+
+
+
+
+  <title>茶水间的技术问答 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/technical-discussion-in-tea-room/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">茶水间的技术问答</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-06T15:09:03+08:00">
+                2021-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">蔡了成长记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/technical-discussion-in-tea-room/" class="leancloud_visitors" data-flag-title="茶水间的技术问答">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>公司的茶水间装修得如家一般温馨，咖啡机时刻飘出咖啡的浓香。员工们常常在此休息聊天，既可以选择坐在高脚凳上依着吧台闲谈阔论，也可以舒服的躺坐在旁边的沙发上闭目养神。晨会之后的半小时，以及午餐前后是这里最喧嚣的时候，此时的茶水间却颇为安宁，大家都在工位上专心工作。</p>
+<p>两人来到茶水间，蔡了问道：“老规矩，还是拿铁，对吧？”马丁花点点头，蔡了殷勤地给他接了一杯浓浓的拿铁，然后又给自己接了一杯卡布奇诺，两人坐在沙发上继续讨论之前的话题。</p>
+<span id="more"></span>
+
+<p>“蔡了，你见过摆放在餐厅里的饮料机吗？就是能够提供可乐、汽水、橙汁等各种饮料的机器。”</p>
+<img src="/technical-discussion-in-tea-room/01.jpg" class="">
+
+<p>“当然见过啊。小时候和爸爸妈妈去餐厅，最喜欢的就是这样的饮料机了，各种饮料尽情畅饮，关键还不收钱。”</p>
+<p>“难怪你这么抠门，原来小时候就是个小财迷啊！”马丁花取笑道，看到蔡了有要暴走的迹象，赶紧把话题绕回来：“结合简单工厂模式来看，你觉得饮料机和我们公司的咖啡机有什么区别呢？”</p>
+<img src="/technical-discussion-in-tea-room/02.jpg" class="">
+
+<p>说回正题，蔡了马上收回无关的情绪，开始认真地思索起来。“如果我们将饮料和咖啡当做我们要创建的产品，饮料机的每个出口只能创建一种特定的饮料，咖啡机则不同，无论你选择什么类型的咖啡，都从一个出口流出来。所以——”蔡了似乎想到了什么，陷入了沉思。</p>
+<p>马丁花坐在沙发上，翘着二郎腿，悠闲地品着咖啡，耐心地等着。</p>
+<p>“啊，我想到了！是抽象和多态，对吧，大叔？”说罢，兴奋地拍了拍马丁花的肩膀，差点没让他手中的拿铁泼洒出来。蔡了连连道歉，一边说着对不起，一边拉过放在茶水间的白板，眉飞色舞地讲着：“咖啡机利用了抽象和多态，例如我们定义一个<code>Coffee</code>抽象类，对于喝咖啡的人来说，无论是什么类型的咖啡，其实都是喝咖啡，也就是这样的行为——”蔡了在白板上写下代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">coffee.drink();</span><br></pre></td></tr></table></figure>
+
+<p>“显然，coffee的类型是可变的，具体是什么类型在于你选择了什么咖啡！饮料机就不同了，选择了什么饮料，就只能到对应的出口接取饮料。从简单工厂的创建方式来看，饮料机返回的是具体的饮料类型，而咖啡机返回的是抽象的咖啡类型，例如——”</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Coffee coffee = CaffeeMachine.make(CoffeeType.Latte);</span><br><span class="line"></span><br><span class="line">Cola cola = SodaFountain.makeCola();</span><br><span class="line">OrangeJuice juice = SodaFountain.makeOrangeJuice();</span><br></pre></td></tr></table></figure>
+
+<p>看到蔡了这么快时间就get到了重点，马丁花不由轻声鼓鼓掌，表示认可和赞赏，接过蔡了的话说道：“从调用代码来看，<code>CoffeeMachine</code>通过多态应对咖啡类型的变化，而<code>SodaFountain</code>则通过多个方法定义满足饮料类型的变化。从调用的简便性和可读性来看，<code>SodaFountain</code>的接口设计其实更合理，但它主要的问题是在返回饮料对象时，没有创建抽象的饮料类，使得返回的产品被绑定死了。这也是饮料机设计上的最大问题。”</p>
+<p>“不对啊！大叔，”蔡了打断马丁花，说道：“你不是说多态有利于接口的扩展吗？怎么现在又说是<code>SodaFountain</code>的接口设计更合理呢？”</p>
+<p>“你没听清楚我说的前提吗？从简便性和可读性的角度看，<code>SodaFountain</code>的接口设计当然更合理！调用者根据方法名称就知道它究竟生成了什么样的饮料，你也不需要传递方法参数。要知道，<strong>任何设计决策必有其设计前提，你必须在收益和成本中做出取舍和权衡！</strong>”马丁花郑重其事地说道，那神情，仿佛是在传授什么不传之秘！“所以，你说的也没错，从可扩展性角度看，<code>CoffeeMachine</code>的接口显然更稳定，不会因为增加咖啡类型而修改接口的定义。这实际上就是开放封闭原则（Open-Closed Principle）的体现，通过封装隐藏实现细节，即使修改了内部实现，也不会影响到接口的调用者，这也就是开放封闭原则所讲的——<strong>对修改是封闭的</strong>。”</p>
+<p>“<a href="http://zhangyi.xyz/simple-factory-is-not-simple/">之前我们讲到<code>Collections</code>类定义的<code>unmodifiableCollection()</code>方法</a>也遵循这一原则，它返回的是抽象的<code>Collection&lt;T&gt;</code>类型！”马丁花补充道。</p>
+<p>“可是——”蔡了的思维转动起来，发现自己越想越糊涂，不由问道：“虽说<code>CoffeeMachine</code>的接口方法返回的是一个抽象的<code>Coffee</code>类，但在它的方法实现里，实际上还是躲不掉需要写<code>if-else</code>分支语句，一旦增加了新的咖啡类型，还是要修改<code>make(COffeeType)</code>方法啊！？”</p>
+<p>“不错！”马丁花同意蔡了的判断，说道：“Uncle Bob说过，在一个软件系统中针对一种业务逻辑，如果只有一处分支语句是可以接受的。简单方法的这一设计至少保证了接口的稳定性，避免调用者受到变化的影响。当然，如果你想要追求极致，希望不用改任何一行代码就能很好地支持咖啡类型的增加，就可以像<a href="http://zhangyi.xyz/simple-factory-is-not-simple/">之前我们提到的<code>Composer</code>的设计</a>，通过反射结合惯例优于配置的原则，根据传入的咖啡类型组装不同的咖啡类，创建<code>Coffee</code>对象。”马丁花继续补充道：“采用这一方式，只要新增加的咖啡类型遵循规定的类名定义原则（即所谓的惯例），只需新定义一个类，不需要修改任何已有代码，符合开放封闭原则所讲的——<strong>对扩展是开放的</strong>，也就是——”马丁花在白板上写到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开放封闭原则：对扩展是开放的，对修改是封闭的</span><br><span class="line"></span><br><span class="line">通过惯例优于配置与反射创建对象 --&gt; 对扩展是开放的  --&gt; 抽象</span><br><span class="line">返回抽象类型，保证接口稳定 --&gt; 对修改是封闭的  --&gt; 封装</span><br></pre></td></tr></table></figure>
+
+<p>“嗯，明白了。这也算是开放封闭原则的活学活用吧！没想到一个简单工厂模式都蕴含了这么多设计道理！”蔡了饱餐了一顿精神食粮，但似乎还有些意犹未尽，“大叔啊，讲了半天，咖啡都快喝完了，怎么还没讲到其他工厂模式呢？”</p>
+<p>“原来你还惦记着这个的啊！我还以为你忘了。”马丁花扬了扬手里空空如也的咖啡杯，颐指气使地指挥着蔡了：“去，再给我来杯拿铁，让我细细给你道来！”</p>
+<p>“好咧！”蔡了接过杯子，求学的愿望盖过了对老马高高在上态度的不满，像个使唤丫头似的赶紧给他斟上一杯满满的咖啡。</p>
+<p>马丁花接过咖啡，神清气闲地坐在沙发上，一幅得道高人开始布道的样子，开启了循循善诱的讲学模式：“通过之前的讨论，我们确定了咖啡机的简单工厂模式，也分析了它的优劣，对吧？”蔡了点点头，态度像小学生一般恭敬而乖巧。马丁花继续讲道：“假定咖啡机的每个按钮都调用了这个工厂方法，选项不同，传入的参数也不同。由于咖啡类型众多，每次都要选咖啡类型就显得比较麻烦，一不小心，还会选错。现在假设，我们开了一家咖啡店，买了一排这种款式的咖啡机来应对源源不断涌来的点单需求。考虑到顾客点黑咖啡、拿铁与摩卡的频率是最高的，为了提高效率，我希望这款咖啡机能够允许我事先设定一种固定的咖啡类型，如此就不用每次费神选择咖啡类型，也不担心选错咖啡类型了。你想想看，该怎么修改设计呢？”</p>
+<p>蔡了想了想，小心地问道：“你的意思是——设定好这种固定的咖啡类型后，就不用选择咖啡类型，每次都按相同的按钮来冲咖啡，对吗？”</p>
+<p>“不错！”</p>
+<p>蔡了捧着手里的咖啡，开始思考解决方案。平素总是鬼灵精怪的她在陷入沉思时，蓦然展现出她安静娴雅的一面来。一绺秀发滑落下来，在她如月一般皎洁的脸庞前飘过，不知为什么，马丁花突然想到了“你若安好便是晴天”的民国才女林徽因。</p>
+<p>“哇，我想到了！大叔！”蔡了欢欣雀跃地叫起来，完全忘记了这里是办公室的茶水间。看她一幅冒失的样子，之前沉思的静女图就好似被撕成碎片丢到了波光粼粼的湖面，马丁花苦笑着摇摇头，心里不由自嘲自己真是老眼昏花了。</p>
+<p>蔡了压根儿没有察觉到马大叔的失态，兴奋地讲到：“我想到冲咖啡的按钮对应的是工厂方法<code>make()</code>，既然不需要选择咖啡类型，这个工厂方法就不需要传入<code>CoffeeType</code>参数。可是，没有参数又无法决定冲泡的咖啡类型，所以就需要转移到设定固定咖啡类型的按钮处，它决定了咖啡机到底该冲泡哪种咖啡。一旦确定了，<code>make()</code>方法冲泡出来的咖啡就不会发生变化了。如果将咖啡当做产品，那么决定咖啡机该冲泡哪种咖啡，就应该交给工厂。”蔡了擦去之前白板上的内容，在上面写道：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">产品：咖啡，抽象类型是Coffee</span><br><span class="line">工厂：咖啡机，抽象类型是CoffeeMachine</span><br><span class="line"></span><br><span class="line">冲泡拿铁：</span><br><span class="line">CoffeeMachine lateeMachine = new LateeCoffeeMachine();</span><br><span class="line">Coffee coffee = lateeMachine.make();</span><br></pre></td></tr></table></figure>
+
+
+<p>看了蔡了写的内容，马丁花忍不住提醒她：“要注意，我买的咖啡机可只有一种款式哦，如果<code>CaffeeMachine</code>是一个抽象类型，就意味着我可能要买各种各样的咖啡机。”</p>
+<p>“对哦！”蔡了恍然大悟，自言自语道：“看来咖啡机不能作为工厂，那该怎么办呢？”</p>
+<p>“笨蛋！咖啡机不能作为工厂，难道你不能为咖啡机引入一个工厂吗？”马丁花喝道！</p>
+<p>真是醍醐灌顶，赶紧擦去错误的内容，重新写到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">产品：咖啡，抽象类型是Coffee</span><br><span class="line">工厂：咖啡制造者，抽象类型是CoffeeMaker</span><br><span class="line"></span><br><span class="line">冲泡拿铁：</span><br><span class="line">CoffeeMaker coffeeMaker = new LateeCoffeeMaker();</span><br><span class="line">Coffee coffee = coffeeMaker.make();</span><br></pre></td></tr></table></figure>
+
+<p>“你再想想，此时的咖啡机该做什么呢？”马丁花提醒道。</p>
+<p>“咖啡机是用户操作的对象，按照<strong>最小知识法则</strong>，操作咖啡机的人其实并不知道制造咖啡的工厂对象，但它需要支持用户能够设定一种固定的咖啡类型。所以……”任督二脉被打通了，蔡了的思路也变得清晰无比，立马在白板上写下了如下代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CoffeeMachine</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> CoffeeMaker coffeeMaker;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">switchTo</span><span class="params">(CoffeeType coffeeType)</span> </span>&#123;</span><br><span class="line">        coffeeMaker = createMaker(coffeeType);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Coffee <span class="title">make</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        coffeeMaker.make();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> CoffeeMaker <span class="title">createMaker</span><span class="params">(CoffeeType coffeeType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (coffeeType.isLatte()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> LatteCoffeeMaker();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (coffeeType.isMocha()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> MochaCoffeeMaker();</span><br><span class="line">        &#125;</span><br><span class="line">        ......</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BlackCoffeeMaker();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> Class CoffeeMaker &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Coffee <span class="title">make</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LatteCoffeeMaker</span> <span class="keyword">extends</span> <span class="title">CoffeeMaker</span> ...</span></span><br></pre></td></tr></table></figure>
+
+<p>“是这样吗？”写完后，蔡了得意地问向马丁花！</p>
+<p>“不错不错，你还真是冰雪聪明啊！”即使严苛的马丁花也不得不发出赞叹。</p>
+<p>“那当然！你不看看我是谁！！！”</p>
+<p>“既然你这么厉害，那有没有注意到，在你写的<code>createMaker()</code>方法中仍然出现了烦人的<code>if-else</code>语句，那它的设计和简单工厂方法到底有什么区别呢？”马丁花不放过任何打压她的机会，免得她得志便“猖狂”。</p>
+<p>“确实呢……除非用反射，不然都逃不掉分支语句的干扰啊！”蔡了懊恼地说道，然后又认真地对比二者，得出结论道：“虽然它们都是分支语句，但创建的对象却不相同，一个是创建产品，即<code>Coffee</code>，另一个是创建工厂，即<code>CoffeeMaker</code>。除此之外，似乎并无不同！当然，二者运用的模式不同，前者为简单工厂模式，后者就是工厂方法模式，对吧，马大叔？”</p>
+<p>“说得都对，不过你没有get到关键的点。它们最大的区别，<strong>在于产品类型变化频率的不同，而频率的不同，使得变化带来的影响亦不相同。</strong>如果待创建产品的类型总在变化，就适合运用简单工厂模式；如果产品类型在确定后几乎不会变化，同时产品对象又会被频繁创建，就适合运用工厂方法模式。你比较咖啡机的不同业务场景，是不是这样的差异？”</p>
+<p>“好像是这么回事呢。之前的咖啡机，虽然只有一个冲泡咖啡的出口，但随时可以根据需要选择不同的咖啡类型；而咖啡店的一排咖啡机，在设定了固定的咖啡类型后，通常不会轻易改变，也就不需要临时选择咖啡类型了。”蔡了似乎明白了之间的差异。</p>
+<p>“是的。当然，我们要注意，引入工厂模式的<code>CaffeeMachine</code>并非不允许变更咖啡类型，反而它提供了变化的扩展点，通过引入工厂的继承体系来封装<code>Coffee</code>创建的变化。你看——”马丁花一边讲着，一边在白板上写着：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A调用者</span></span><br><span class="line">Coffee coffee = <span class="keyword">new</span> LatteCoffee();     <span class="comment">// 构造函数</span></span><br><span class="line">Coffee coffee = CoffeeMachine.make(CoffeeType.Latte);     <span class="comment">// 工厂方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// B调用者</span></span><br><span class="line">Coffee coffee = <span class="keyword">new</span> LatteCoffee();     <span class="comment">// 构造函数</span></span><br><span class="line">Coffee coffee = CoffeeMachine.make(CoffeeType.Latte);     <span class="comment">// 工厂方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// C调用者</span></span><br><span class="line">Coffee coffee = <span class="keyword">new</span> LatteCoffee();     <span class="comment">// 构造函数</span></span><br><span class="line">Coffee coffee = CoffeeMachine.make(CoffeeType.Latte);     <span class="comment">// 工厂方法</span></span><br></pre></td></tr></table></figure>
+
+<p>“假设有A、B、C三个调用者，他们都需要冲泡拿铁咖啡，不管是使用构造函数，还是调用工厂方法，都存在创建逻辑蔓延的问题，一旦这三个调用者都想要换成摩卡咖啡时，就需要修改三个地方。而引入工厂方法模式呢？情况就完全不同了——”马丁花继续在白板的另一侧写道：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 全局调用</span></span><br><span class="line"><span class="comment">// 要修改咖啡类型，只需要改这一个地方</span></span><br><span class="line">coffeeMachine.switchTo(<span class="keyword">new</span> LatteCoffeeMaker());  </span><br><span class="line"></span><br><span class="line"><span class="comment">// A调用者</span></span><br><span class="line">Coffee coffee = coffeeMachine.make();</span><br><span class="line"></span><br><span class="line"><span class="comment">// B调用者</span></span><br><span class="line">Coffee coffee = coffeeMachine.make();</span><br><span class="line"></span><br><span class="line"><span class="comment">// C调用者</span></span><br><span class="line">Coffee coffee = coffeeMachine.make();</span><br></pre></td></tr></table></figure>
+
+
+<p>“这样对比一看，真的就秒懂了！太感谢大叔了！”因为又增加了一个技能点，收获满满，蔡了不停地给马丁花握拳作揖，再一看大叔手中的咖啡又要喝完了，赶忙殷勤地跑去给大叔冲咖啡，大叔赶紧说道：“都喝了两杯拿铁了，给我换一杯摩卡吧！哎……今天喝了这么多咖啡，晚上估计又睡不着了，还好是小杯啊！“忽然，马丁花想起了什么，一拍脑袋，赶紧说道：”说起来还忘记给你讲什么是抽象工厂模式了”。</p>
+<p>马丁花一边接过蔡了冲泡好的咖啡，继续讲道：“其实很简单。如果说工厂方法模式的工厂方法只有一个，抽象工厂模式就是有多个工厂方法，它们各自创建的产品组合起来就形成了一个产品族（Product Family）。我们还是以咖啡机为例，假设我们要冲泡的咖啡除了类别的不同，还要根据咖啡杯大小分为超大杯（Venti）、大杯（Grande）和中杯（Tall），如果我们要求：咖啡杯尺寸不能作为工厂方法的参数，也就调整了咖啡的继承体系——例如：”马丁花在白板上画出调整后的<code>Coffee</code>类继承图：</p>
+<img src="/technical-discussion-in-tea-room/coffee.png" class="">
+
+
+<p>“现在，要创建这样的<code>Coffee</code>，就需要用到抽象工厂模式了。蔡了，你可以在白板上根据咖啡机的例子画一个类图作为对比。”</p>
+<p>“好的。”蔡了答应道，很快就在白板上画出了两个类图：</p>
+<img src="/technical-discussion-in-tea-room/factory-method.png" class="">
+<img src="/technical-discussion-in-tea-room/abstract-factory.png" class="">
+
+<p>“不错，看来你已经彻底理解这几个工厂模式罗！注意，这些工厂模式都有各自的适用场景，并不能直接说哪一个模式好，哪一个模式差，用得恰当，就是最好！”这几句话说得蔡了连连点头，毕竟这才是真正的经验之谈啊！</p>
+<p>正说话间，两人听到后面有人嚷道：“蔡了，又在骚扰马大叔了！”回头一看，说话人原来是团队的成大思。</p>
+<p>“什么骚扰啊？”蔡了的俏脸微微泛红，也不知是气的还是羞的，义正言辞地说道：“我这叫不耻下问！懂吗？你没看我正在虚心请教大叔吗？”</p>
+<p>“呃……”马丁花听了此言，忍不住手一抖，杯里的摩卡都溅了出来，无语地看着愤怒的蔡了。成大思也满头黑线，笑着说道：“蔡了，你的语文是体育老师教的吗？”</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/technical-discussion-in-tea-room/" title="茶水间的技术问答">http://zhangyi.xyz/technical-discussion-in-tea-room/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Design-OO/" rel="tag"># Design, OO</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/understand-simple-design/" rel="next" title="深入理解简单设计">
+                <i class="fa fa-chevron-left"></i> 深入理解简单设计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/discuss-with-factory-pattern-in-real-project/" rel="prev" title="讨论实际项目的工厂模式">
+                讨论实际项目的工厂模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

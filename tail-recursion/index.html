@@ -1,23 +1,1320 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Scala,FP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="这是一幅奇妙的图，如你所见，画中的两只手各自画着对方，当我们明晓这样一种怪异的循环时，一瞬间，仿佛这张静止的画突然流动起来，而且是一种永恒的运动，作画的两只手似乎永远无法停止。正如《哥德尔艾舍尔巴赫》一书的作者侯世达在评价艾舍尔的这幅《画手》时提到的：  《画手》给我们提供了一个更紧凑的圈，这幅画中的每一只手都在画另一只手：这是个只包含两个阶段的怪圈。  侯世达在巴赫的音乐、艾舍尔的绘画以及哥">
+<meta property="og:type" content="article">
+<meta property="og:title" content="艾舍尔的《画手》与尾递归">
+<meta property="og:url" content="http://zhangyi.xyz/tail-recursion/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="这是一幅奇妙的图，如你所见，画中的两只手各自画着对方，当我们明晓这样一种怪异的循环时，一瞬间，仿佛这张静止的画突然流动起来，而且是一种永恒的运动，作画的两只手似乎永远无法停止。正如《哥德尔艾舍尔巴赫》一书的作者侯世达在评价艾舍尔的这幅《画手》时提到的：  《画手》给我们提供了一个更紧凑的圈，这幅画中的每一只手都在画另一只手：这是个只包含两个阶段的怪圈。  侯世达在巴赫的音乐、艾舍尔的绘画以及哥">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/tail-recursion/hand.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/tail-recursion/factorial-01.png">
+<meta property="og:image" content="http://zhangyi.xyz/tail-recursion/draw-hand.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/tail-recursion/factorial-02.png">
+<meta property="article:published_time" content="2018-12-03T15:27:46.000Z">
+<meta property="article:modified_time" content="2018-12-03T15:35:44.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Scala">
+<meta property="article:tag" content="FP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/tail-recursion/hand.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/tail-recursion/"/>
+
+
+
+
+
+  <title>艾舍尔的《画手》与尾递归 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/tail-recursion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">艾舍尔的《画手》与尾递归</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-03T23:27:46+08:00">
+                2018-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Coding/" itemprop="url" rel="index">
+                    <span itemprop="name">Coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/tail-recursion/" class="leancloud_visitors" data-flag-title="艾舍尔的《画手》与尾递归">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/tail-recursion/hand.jpg" class="">
+
+<p>这是一幅奇妙的图，如你所见，画中的两只手各自画着对方，当我们明晓这样一种怪异的循环时，一瞬间，仿佛这张静止的画突然流动起来，而且是一种永恒的运动，作画的两只手似乎永远无法停止。正如<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1291204/">《哥德尔艾舍尔巴赫》</a>一书的作者侯世达在评价艾舍尔的这幅《画手》时提到的：</p>
+<blockquote>
+<p>《画手》给我们提供了一个更紧凑的圈，这幅画中的每一只手都在画另一只手：这是个只包含两个阶段的怪圈。</p>
+</blockquote>
+<p>侯世达在巴赫的音乐、艾舍尔的绘画以及哥德尔不完全定理中发现了“<strong>怪圈</strong>”这个概念。</p>
+<blockquote>
+<p>所谓“怪圈”现象，就是当我们向上（或向下）穿过某种层次系统中的（这里，系统是音乐的调子）一些层次时，会意外地发现我们正好回到了我们开始的地方。有时我用“缠结的层次结构”这个词来形容出现怪圈的系统。</p>
+</blockquote>
+<p>我在阅读<a target="_blank" rel="noopener" href="https://book.douban.com/subject/1291204/">《哥德尔艾舍尔巴赫》</a>这本书时，改不了作为程序员的积习，尤其当我看到这幅令人震撼的《画手》时，我即刻从“怪圈”想到了“递归（Recursion）”。因为“递归”正是这样自身调用自身的编程技巧。当然，一段正确的递归程序，必须要有一个必定能够到达或满足的终止条件，否则就会像《画手》那样永恒地循环下去。程序术语称之为“死循环”。</p>
+<span id="more"></span>
+
+<p>递归可以让代码变得极为简洁，这种逐步递减而又自我调用的方式确有一种神秘意味，然而，它却并非是一种高效的算法实现。仔细琢磨递归的运算轨迹，会发现它最终形成了“先逐步展开而后收缩的形状”，如下图所示：</p>
+<img src="/tail-recursion/factorial-01.png" class="">
+
+<p>将这种运算过程转换为scala代码，则如下所示：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span></span>(n: <span class="type">Int</span>): <span class="type">Long</span> = </span><br><span class="line">  <span class="keyword">if</span> (n == <span class="number">1</span>) <span class="number">1</span> <span class="keyword">else</span> n * factorial(n - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://book.douban.com/subject/1451622/">《Structure and Interpretation of Computer Programs，计算机程序的构造和解释》（简称SICP）</a>对递归进行了深刻的阐释：</p>
+<blockquote>
+<p>这一过程构造了一条推迟执行的操作链条，收缩阶段则表现为这些操作的实际执行。这种过程被称之为“递归过程（recursive process）”。要执行这一过程，需要解释器记录后面要执行的操作。在计算阶乘n!时，推迟执行的乘法链条的长度也就是为保存其轨迹需要保存的信息量，这个长度随着n值而线性增长，故而称为“线性递归过程（linear recursive process）”。</p>
+</blockquote>
+<p>正因为此，递归固然让代码变得简洁，但由于它要保存推迟执行的操作，链条越长，需要保存的信息越多，因而执行的效率取决于这条“链条”的长度。</p>
+<p>让我们再回过头来看艾舍尔的《画手》。在这个左手画右手，右手画左手无限纠缠的怪圈之外，实际上“隐藏着一直未画出但正在画的手，它属于艾舍尔，左手和右手二者的创作者。”</p>
+<p>“艾舍尔处于这两只手所在的空间之外”，因此能够做到旁观者清。侯世达将其视为两个不同的层次，如下图所示：</p>
+<img src="/tail-recursion/draw-hand.jpg" class="">
+
+<p>以阶乘运算为例。阶乘本身其实不应该陷入到自我调用的递归圈中，正如绘画的艾舍尔应该置身怪圈之外。<strong>递归仅应该出现在递进的运算中，每次递进的结果则作为参数传入到递归的函数中。</strong>正如SICP对阶乘运算的分析。线性递归的算法体现的是阶乘运算的朴素数学知识，即：对于一个正整数n，n!就等于n乘以(n-1)!。</p>
+<p>除此之外，SICP给出了另外一种观察的视角：</p>
+<blockquote>
+<p>我们可以将计算阶乘n!的规则描述为：先乘1和2，而后将<strong>得到的结果</strong>乘以3，而后再乘以4，这样下去直到达到n。更形式地说，我们要维持着一个<strong>变动中的乘积product</strong>，以及一个从1到n的计数器counter。</p>
+</blockquote>
+<p>我们需要将计数器counter与变动的乘积product抽离出来，放到如侯世达所说的“可见的层次结构”中，即单独定义一个函数factIter：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span></span>(n: <span class="type">Int</span>): <span class="type">Long</span> = &#123;</span><br><span class="line">  <span class="meta">@tailrec</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">factIter</span></span>(product: <span class="type">Long</span>, counter: <span class="type">Int</span>, maxCount:<span class="type">Int</span>): <span class="type">Long</span> =</span><br><span class="line">    <span class="keyword">if</span> (counter &gt; maxCount) product</span><br><span class="line">    <span class="keyword">else</span> factIter(product * counter, counter+<span class="number">1</span>, maxCount)</span><br><span class="line">  factIter(<span class="number">1</span>, <span class="number">1</span>, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在factorial函数内部定义的函数factIter实现了递归，它有一个特征是方法的尾部是且只能是对函数自身的调用。</p>
+<p>product变量就是前面我所谓的“每次递进的结果”，也就是SICP中提到的“变动中的乘积”。准确来讲，应该将product看作是一个<strong>accumulator</strong>。它每次存储的都是每一步计算的结果，然后通过其汇集，最后收获最终的运算结果。至于counter与maxCount变量的引入，不过是为了完成递进的运算，以及给出终止运算的满足条件而已。</p>
+<p>SICP认为：</p>
+<blockquote>
+<p>（这种运算过程）并没有任何增长或者收缩。对于任何一个n，在计算过程中的每一步，在我们需要保存的轨迹里，所有的东西就是变量product、counter和maxCount的当前值。我们称这种过程为一个<strong>迭代过程（iterative process）</strong>……在计算n!时，所需的计算步骤随着n线性增长，因而被称为线性迭代过程（linear iterative process）。</p>
+</blockquote>
+<p>由于其特性是内部的函数总是在函数尾部被递归调用，故而这种调用方式又被称之为<strong>尾递归（tail recursive）</strong>。它的执行过程如下图所示：</p>
+<img src="/tail-recursion/factorial-02.png" class="">
+
+<p>我们可以比较前面线性递归过程的执行结果，很显然，线性迭代过程的执行步骤要远远少于前者。本质上，虽然尾递归名为“递归”，其实执行的是一个迭代过程。在Scala或者其他很多语言中，尾递归就是一种编译技巧。例如当Scala发现某个递归调用其实是一个尾递归时，会自动将该递归编译为循环迭代，从而避免了每次进行栈的操作（因为递归需要记录延迟运算）。Scala还提供了@tailrec标记来标识尾递归。若你编写的递归函数不是尾递归，只要标记了@tailrec，编译时会提示错误。</p>
+<p>要将一个递归过程编写为迭代过程，而又要避免显示地循环调用方式，关键之处就在于我们要转换视角（跳出互相绘制的两只手）。个人认为，“四两拨千斤”的着眼点就是<strong>寻找accumulator</strong>。</p>
+<p>我在项目中希望对一个类似树结构的样例类做一次“拍平”的操作。定义如下：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">BindingElement</span>(<span class="params">itemType: <span class="type">BindingItemType</span>, fieldId: <span class="type">ID</span>, children: <span class="type">Option</span>[<span class="type">List</span>[<span class="type">BindingElement</span>]]</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>BindingElement的内部“可能”嵌套了子的BindingElement列表。而子列表中的BindingElement也可能继续嵌套。如此的嵌套自然就形成了一棵树，且非最简单的二叉树。</p>
+<p>需求要求将根节点BindingElement嵌套的所有子节点（包括间接嵌套）全部拍平，最后形成一个没有任何子节点的BindingElement列表。</p>
+<p>我在实现时，直觉告诉我这个“拍平”的动作其实就是对一棵树的遍历，完全可以用尾递归来完成。可是写了许久，都未能将这个尾递归函数实现。问题的症结就是我没有去寻找关键的accumulator。实质上，针对这个场景，我们要返回的结果是<code>List[BindingElement]</code>，在迭代过程中，就是每次叠加的值。初始值则为Nil。这里没有阶乘运算中的counter与maxCount，而是一个作为children的<code>List[BindingElement]</code>。因为参与递归的结构是列表中每个BindingElement中的children，对于List而言，我们可以判断其值是否为Nil来作为终止条件。</p>
+<p>找到了accumulator，尾递归的迭代算法自然就水到渠成了。代码如下所示：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">BindingElement</span>(<span class="params">itemType: <span class="type">BindingItemType</span>, fieldId: <span class="type">ID</span>, children: <span class="type">Option</span>[<span class="type">List</span>[<span class="type">BindingElement</span>]]</span>) </span>&#123; </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">flatten</span></span>:<span class="type">List</span>[<span class="type">BindingElement</span>] = &#123; </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cloneToLeaf</span></span>(item: <span class="type">BindingElement</span>) = <span class="type">BindingElement</span>(item.itemType, item.fieldId, <span class="type">None</span>) </span><br><span class="line"></span><br><span class="line">    <span class="meta">@tailrec</span> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">traverse</span></span>(items: <span class="type">List</span>[<span class="type">BindingElement</span>], acc: <span class="type">List</span>[<span class="type">BindingElement</span>]): <span class="type">List</span>[<span class="type">BindingElement</span>] = </span><br><span class="line">      items <span class="keyword">match</span> &#123; </span><br><span class="line">        <span class="keyword">case</span> <span class="type">Nil</span> =&gt; acc </span><br><span class="line">        <span class="keyword">case</span> head :: tail =&gt; traverse(head.children.getOrElse(<span class="type">Nil</span>) ::: tail, acc :+ cloneToLeaf(head)) </span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    traverse(children.getOrElse(<span class="type">Nil</span>), <span class="type">List</span>[<span class="type">BindingElement</span>](cloneToLeaf(<span class="keyword">this</span>))) </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，这里的acc（即accumulator）在Scala中其实是一个不变的变量；所以通过运算符<code>:+</code>添加元素项后得到的是另外一个List。然而，作为accumulator，其实它是以参数形式传递给下一个迭代，故而下一次迭代中的acc已经变成了累加了元素后的结果，这是traverse函数之所以能够奏效的原因。</p>
+<p>因为尾递归函数tranverse遍历的是<code>List[BindingElement]</code>，这会导致返回的结果会缺失根元素自身，所以在初始化acc时，将根元素（即this）赋值给了acc。</p>
+<p>递归充满了艺术的神秘美感，而尾递归则在艺术美与工程高效之间取得了平衡。《画手》的两个层次（可见的和不可见的）给了我们一个启发，就是在观察事物时，需要尝试不同的视角，要学会跳出具体的实现细节，找到职责上的抽象分解。对于程序员而言，我们还可以尝试跳出计算机科学的范畴，从绘画、数学、建筑或者音乐中寻找到灵感，利用跨界思想来体悟软件设计与编程。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/tail-recursion/" title="艾舍尔的《画手》与尾递归">http://zhangyi.xyz/tail-recursion/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+            <a href="/tags/FP/" rel="tag"># FP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/anlysis-complexity-of-software/" rel="next" title="深入分析软件复杂度">
+                <i class="fa fa-chevron-left"></i> 深入分析软件复杂度
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/ddd-strategic-design-workshop/" rel="prev" title="领域驱动战略设计工作坊">
+                领域驱动战略设计工作坊 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

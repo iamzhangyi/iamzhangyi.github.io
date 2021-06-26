@@ -1,23 +1,1362 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
-{% block title %}{{ page.title }} | {{ title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
 
-{% block content %}
+  
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+<meta name="baidu-site-verification" content="5yZwajXcNi" />
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DDD,Design," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="张逸说" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="当我们在讨论领域驱动设计时，不止要谈到领域驱动设计固有的设计概念，结合开发语言和开发平台的设计实践，又会有其他设计概念穿插其中，它们之间的关系并非正交的，解决的问题和思考的角度都不太一致，许多设计概念更有其历史渊源，却又在提出之后或者被滥用，后者被错用，到了最后已经失去了它本来的面目。因此，我们首先需要揭开这些设计术语的历史迷雾，理解其本真的概念，然后再确定它的统一语言。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计概念的统一语言">
+<meta property="og:url" content="http://zhangyi.xyz/ubiquitous-language-of-design-concept/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="当我们在讨论领域驱动设计时，不止要谈到领域驱动设计固有的设计概念，结合开发语言和开发平台的设计实践，又会有其他设计概念穿插其中，它们之间的关系并非正交的，解决的问题和思考的角度都不太一致，许多设计概念更有其历史渊源，却又在提出之后或者被滥用，后者被错用，到了最后已经失去了它本来的面目。因此，我们首先需要揭开这些设计术语的历史迷雾，理解其本真的概念，然后再确定它的统一语言。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/ubiquitous-language-of-design-concept/cover.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/ubiquitous-language-of-design-concept/wechat.png">
+<meta property="og:image" content="http://zhangyi.xyz/ubiquitous-language-of-design-concept/02.png">
+<meta property="article:published_time" content="2020-02-16T04:29:24.000Z">
+<meta property="article:modified_time" content="2020-03-14T10:17:55.000Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Design">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/ubiquitous-language-of-design-concept/cover.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhangyi.xyz/ubiquitous-language-of-design-concept/"/>
+
+
+
+
+
+  <title>设计概念的统一语言 | 张逸说</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">张逸说</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">出口成张，逸派胡言</p>
+      
   </div>
 
-{% endblock %}
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<nav class="site-nav">
+  
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/ubiquitous-language-of-design-concept/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/zhangyi.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设计概念的统一语言</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-16T12:29:24+08:00">
+                2020-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index">
+                    <span itemprop="name">DDD</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/ubiquitous-language-of-design-concept/" class="leancloud_visitors" data-flag-title="设计概念的统一语言">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/ubiquitous-language-of-design-concept/cover.jpg" class="">
+
+
+
+<p>当我们在讨论领域驱动设计时，不止要谈到领域驱动设计固有的设计概念，结合开发语言和开发平台的设计实践，又会有其他设计概念穿插其中，它们之间的关系并非正交的，解决的问题和思考的角度都不太一致，许多设计概念更有其历史渊源，却又在提出之后或者被滥用，后者被错用，到了最后已经失去了它本来的面目。因此，我们首先需要揭开这些设计术语的历史迷雾，理解其本真的概念，然后再确定它的统一语言。</p>
+<span id="more"></span>
+
+
+
+<h3 id="POJO对象"><a href="#POJO对象" class="headerlink" title="POJO对象"></a>POJO对象</h3><p>POJO（Plain Old Java Object）的概念来自Martin Fowler、Rebecca Parsons和Josh MacKenzie在2000年一次大会的讨论。它的本质含义是指一个常规的Java对象，不受任何框架、平台的约束和限制。除了遵守Java语法之外，它不应该继承预先设定的类、实现预先设定的接口或者包含预先指定的注解。如果一个模块定义的对象皆为POJO，那么除了依赖JDK之外，它不会依赖任何框架或平台。在.NET框架中，借助这个概念，也提出了POCO（Plain Old CLR Object）的概念。</p>
+<p>Martin Fowler等人之所以提出POJO，是因为他们看到了使用POJO封装业务逻辑的益处，而在2000年那个时代，恰恰是EJB开始流行的时代，受到EJB规范的限制，Java开发人员更愿意使用Entity Bean，而Entity Bean却是与EJB强耦合的。</p>
+<p>一些人错误地将Entity Bean理解为仅仅支持持久化的持久化对象（Persistence Object），实际并非如此。即使是EJB规范也认为Entity Bean可以包含复杂的业务逻辑，例如Oracle的官方网站对Entity Bean的定义就包括：</p>
+<ul>
+<li><p>管理持久化数据</p>
+</li>
+<li><p>通过主键形成唯一标识</p>
+</li>
+<li><p>引入依赖对象执行复杂逻辑</p>
+</li>
+</ul>
+<p>当Entity Bean还封装了复杂的业务逻辑时，带来的危害更多。由于定义一个Entity Bean类需要继承自javax.ejb.EntityBean，这就使得业务逻辑与EJB框架紧耦合，不利于对业务逻辑的测试、部署与运行。这也正是Rod Johnson要提出抛开EJB进行J2EE开发的原因。当然，Entity Bean与EJB框架紧耦合的为人诟病，主要是针对EJB 3.0之前的版本，随着Spring与Hibernate等轻量级框架出来之后，EJB也开始向轻量级方向发展，通过大量使用标注来降低EJB对Java类的侵入性。</p>
+<p>总之，POJO对象并非只有get/set方法的贫血对象，它的主要特征不在于它究竟定义了什么样的成员，而在于它作为一个常规的Java对象，并不依赖于除语言之外的任何框架。当然，它的目的不在于数据传输，也不在于数据持久化，它其实是一种设计模式。</p>
+<h3 id="Java-Bean"><a href="#Java-Bean" class="headerlink" title="Java Bean"></a>Java Bean</h3><p>严格讲来，Java Bean其实是一种Java开发规范。一个Java Bean类必须同时满足以下三个条件：</p>
+<ul>
+<li><p>类必须是具体的、公共的</p>
+</li>
+<li><p>具有无参构造函数</p>
+</li>
+<li><p>提供一致性设计模式的公共方法将内部字段暴露为成员属性，即为内部字段提供规范的get和set方法</p>
+</li>
+</ul>
+<p>认真解读这三个条件，你会发现它们都是为框架通过反射访问类成员而准备的前置条件，包括创建Java Bean实例和操作内部字段。只要遵循Java Bean规范，就可以采用完全统一的一套代码实现对Java Bean的访问。这一规范并没有提及业务方法的定义，这是因为规范无法对公开的方法做出任何一致性的限制。这意味着框架使用Java Bean，看重的其实是该对象携带的数据，且能够减少不必要的访问代码。例如，JSP对Java Bean的使用：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp:useBean</span> <span class="attr">id</span>=<span class="string">&quot;student&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.sample.javabeans.Student&quot;</span>&gt;</span> </span><br><span class="line">   <span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">&quot;student&quot;</span> <span class="attr">property</span>=<span class="string">&quot;firstName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Bill&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">&quot;student&quot;</span> <span class="attr">property</span>=<span class="string">&quot;lastName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Gates&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">&quot;student&quot;</span> <span class="attr">property</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">jsp:useBean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>JSP标签中使用的Student类就是一个Java Bean。如果没有遵循Java Bean规范定义类，JSP就可能无法实例化Student对象，无法设置firstName等字段值。</p>
+<p>至于Session Bean、Entity Bean和Message Driven Bean则是Enterprise Java Bean的三种分类，它们都是Java Bean，但EJB对它们又有框架的约束，例如Session Bean需要继承自javax.ejb.SessionBean，Entity Bean需要继承自javax.ejb.EntityBean。</p>
+<p>通过追本溯源，就可以发现POJO与Java Bean并没有任何关系。一个POJO如果遵循了Java Bean的设计规范，可以成为一个Java Bean，但并不意味着POJO必须是Java Bean。反过来，一个Java Bean如果仅仅遵循了设计规范，并没有依赖任何框架，也可以认为是一个POJO。但是，Enterprise Java Bean一定不是一个POJO。</p>
+<h3 id="贫血模型"><a href="#贫血模型" class="headerlink" title="贫血模型"></a>贫血模型</h3><p>贫血模型准确地说，应该被称之为“贫血领域模型（Anemic Domain Model）”，因为这个术语其实是在领域模型这个语境中使用的。这个术语来自Martin Fowler的创造，从贫血这个词可知，这样的一种领域模型必然是不健康的，它违背了面向对象设计的关键原则，即“数据与行为应该封装在一起”。在领域驱动设计中，会导致贫血模型的对象是实体与值对象。如果一个实体或值对象除了内部字段之外，就只有一系列的getter/setter方法，它就成为了贫血对象。</p>
+<p>关于贫血领域模型的坏处，我在本书已经阐述了很多，例如它会影响对象之间的协作方式，它违背了“迪米特法则”与“信息专家模式”，它会导致“特性依恋”坏味道的产生，最后，它其实破坏了封装，导致领域服务形成一种事务脚本的实现。</p>
+<p>与贫血领域模型相对的是富领域模型（Rich Domain Model），也就是封装了领域逻辑的领域模型。这才是符合面向对象设计思想的领域设计建模。在领域模型设计建模过程中，我们定义的实体与值对象都应该建立为富领域模型。这才是真正的领域模型，也就是Martin Fowler在《企业应用架构模式》中定义的领域模型模式，作为一种领域逻辑模式（Domain Logic Pattern），它与事务脚本（Transaction Script）、表模块（Table Module）属于不同的表达领域逻辑的模式。倘若遵循这一模式的定义，即默认为领域模型就应该是富领域模型，而贫血领域模型会导致事务脚本，不应该将这样的模型称为领域模型。</p>
+<p>当我们在讨论领域模型时，发现更有好事者在贫血模型的基础上衍生出各种与“血”有关的各种模型，统计下来，除了Martin Fowler提出的贫血模型之外，还包括失血模型、充血模型与胀血模型。我将这些模型戏称为“X血模型”。我个人其实并不赞成制造出这么多的模型。实际上，贫血模型的核心关键在于面向对象设计思想的职责分配。如果我们能够按照合理的职责分配原则来设计领域模型，就无所谓这些X血模型了。只要职责分配合理，有可能领域模型中的一个类确乎没有定义具有领域逻辑的行为，那也只能说明该领域概念确实不具有领域逻辑，那么这样的类也不应当称之为是贫血对象。</p>
+<p>我还看到有的人错误的理解或者误用了“贫血模型”的定义，将只有字段和字段的getter/setter方法的类称之为“失血模型”，而将Martin Fowler提出的富领域模型称之为“贫血模型”。这一说法绝对是“谬种流传”。顾名思义，贫血（Anemic）这个词代表着不健康，贫血模型当然就意指不健康的模型。如果采用这篇文章的定义，Martin Fowler所推崇的富领域模型反倒成了不健康的贫血模型（虽然该文作者未必认为贫血模型不健康），该何其无辜啊！因此，在这些“X血模型”中，我们必须坚定果断地去掉失血模型，并让贫血模型回到本初的含义上。</p>
+<p>在去掉了错误的失血模型后，一般认为充血模型其实就是Martin Fowler提出的富领域模型。我总觉得“充血”这个词仍然带有不健康的隐含意义，故而不愿意使用这一模式名称，更不用说更加惊悚的“胀血模型”了。这种胀血模型违背了单一职责原则，将与该领域概念相关的所有逻辑都放到了领域模型对象中，包括对持久化类（如传统的DAO，DDD中的Repository）的依赖以及事务、授权等横切关注点的调用。这实际上就是让一个领域模型对象承担了聚合、领域服务以及应用服务的职责，这样的模型显然有悖于面向对象的设计原则。</p>
+<p>有的观点认为混入了持久化能力的领域模型属于充血模型，这更进一步混淆X血模型的边界。实际上，Martin Fowler将这种对象称之为“活动记录（Active Record）”，它属于数据源架构模式（Data Source Architectural Patterns）中的一种。这种设计方式是领域驱动设计努力避免的，如果让每个实体都混入了持久化能力，就会丢失聚合的边界保护作用，资源库也就失去了存在的价值。</p>
+<p>还有人混淆了领域模型与POJO的概念，认为贫血模型对象就是一个POJO，殊不知这二者根本就是两个迥然不同的维度。POJO关注类的定义是否纯粹，领域模型关注的是对领域逻辑的表达与封装。即使是一个只有getter/setter方法的贫血模型对象，只要它依赖了任何外部框架，例如标记了javax.persistence.Entity标注，它也不属于一个POJO。严格说来，Dubbo服务化最佳实践给出的建议——“服务参数及返回值建议使用POJO对象，即通过setter, getter方法表示属性的对象”，对POJO的描述也是不正确的，因为Dubbo服务的参与与返回值需要支持序列化，这不符合POJO的定义。</p>
+<p>由此可以看出，定义种类繁多的模式会让人“乱花渐欲迷人眼”，随着信息的多次传递，就会迷失它们本来的面目。我们需要做减法，在领域驱动战术设计中，只要遵循领域驱动设计的原则定义了实体、值对象、领域服务和应用服务，就不用考虑这些模式，只需要把握一条：避免设计出贫血领域模型！</p>
+<h3 id="诸多XO"><a href="#诸多XO" class="headerlink" title="诸多XO"></a>诸多XO</h3><p>在分层架构的约束下，在职责分离的指引下，一个软件系统需要定义各种各样的对象，在分层架构中承担了不同的职责，又彼此协作，共同响应系统外部的各种请求，执行业务逻辑，并让整个软件系统能够真正地跑起来。然而，若没有真正理解这些对象在架构中扮演的角色，承担的职责，导致误用和滥用，就有可能适得其反。因此，有必要在领域驱动设计的方法体系下，将各式各样的对象进行一次梳理，形成一套统一语言，就不至于出现理解上的分歧，使用上的不当。由于这些对象皆以O结尾，故而戏称为XO对象。</p>
+<p>这些XO对象包括：</p>
+<h4 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h4><p>DTO（Data Transfer Object，数据传输对象）用于在进程间传递数据，远程服务接口的输入参数与返回值都可以认为是一个DTO。我个人又根据调用者的不同，将其分为视图模型对象与消息契约对象。DTO必须支持序列化，同时它通常应该设计为一个Java Bean，即定义为公开的类，具有默认构造函数和getter/setter方法。这样就有利于一些框架通过反射来创建与组装DTO对象。DTO还应该是一个贫血对象，因为它的目的是为了传输数据，没有必要定义封装逻辑的方法。</p>
+<h4 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h4><p>VO（View Object，视图对象）其实是DTO的一种，即我提到的视图模型对象。本质上，它应该遵循MVC模式，为前端的视图提供数据，即MVC中的模型对象。视图对象可能仅传输视图需要呈现的数据，但也可能为了满足前端UI的可配置，由后端传递与视图元素相关的属性值，如视图元素的位置、大小乃至颜色等样式信息。在领域驱动设计中，有些人会将值对象（Value Object）简称为VO，要注意不要混淆这两个缩写。</p>
+<h4 id="BO"><a href="#BO" class="headerlink" title="BO"></a>BO</h4><p>BO（Business Object，业务对象）这是一个非常宽泛的定义，在软件系统中，它的定义来自于分层架构的定义，即数据访问层、业务逻辑层与UI呈现层。故而BO就是定义在业务逻辑层中封装了业务逻辑的对象。在领域驱动设计中，可以认为就是领域对象。为避免混淆，我建议不要在领域驱动设计中使用该概念。</p>
+<h4 id="DO"><a href="#DO" class="headerlink" title="DO"></a>DO</h4><p>由于领域驱动设计将业务逻辑层分解为应用层和领域层，业务对象在领域层中就变成了DO（Domain Object，领域对象）。不过，在领域驱动设计中，更准确的说法是领域模型对象。通常，领域模型对象包括实体、值对象、领域服务与领域事件。有时候，领域模型对象单指组成聚合的实体与值对象。宽泛地讲，只要表达了现实世界的领域概念，或者封装了领域行为逻辑，都可以认为是领域模型对象。</p>
+<h4 id="PO"><a href="#PO" class="headerlink" title="PO"></a>PO</h4><p>对象字段持有的数据需要被持久化到数据表中，但不要由此认为PO（Persistence Object，持久化对象）就只能定义字段以及对应的getter/setter方法，变成一个贫血对象。前面讨论的富领域模型对象也可以成为PO，只是在持久化时，不会用到封装在领域模型对象中的方法罢了。由于需要告知持久化框架对象与关系表之间的映射，往往需要以某种形式在PO中展现这种关系，这就导致PO变得不够纯粹，不是一个POJO。</p>
+<h4 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h4><p>DAO（Data Access Object，数据访问对象）作用在映射了关系表的PO之上对其进行持久化，实现对数据的访问。由于领域驱动设计引入了聚合边界，并力求领域模型与数据模型之间的分离，且引入了资源库（Repository）来实现对聚合的生命周期管理，因此在领域驱动设计中，不再使用DAO这个概念。</p>
+<p>经过对以上概念的历史追寻与本质分析，我们基本上理清了这些概念的含义与用途。在归纳到领域驱动设计这个方法体系中，我们可以得出如下统一语言：</p>
+<ul>
+<li><p>领域模型对象包含实体、值对象、领域服务与领域事件，有时候也可以单指组成聚合的实体与值对象。</p>
+</li>
+<li><p>领域模型必须是富领域模型</p>
+</li>
+<li><p>远程服务与应用服务接口的输入参数和返回值定义为DTO，根据客户端的不同，可以分为视图模型对象与消息契约对象。</p>
+</li>
+<li><p>领域模型对象中的实体与值对象同时也可以作为PO</p>
+</li>
+<li><p>只有资源库对象，没有DAO对象</p>
+</li>
+</ul>
+<h3 id="发布声明"><a href="#发布声明" class="headerlink" title="发布声明"></a>发布声明</h3><p>本文首先发表于我的微信公众号「逸言」，欢迎关注：</p>
+<img src="/ubiquitous-language-of-design-concept/wechat.png" class="">
+
+
+
+<h3 id="干货推荐"><a href="#干货推荐" class="headerlink" title="干货推荐"></a>干货推荐</h3><p>张逸老师携手Gitchat为大家带来《领域驱动设计实践》精讲课，限时特价只需¥128即可学习更多关于领域驱动设计的干货哟，扫描下方二维码即可报名啦。</p>
+
+
+<img src="/ubiquitous-language-of-design-concept/02.png" class="">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/ubiquitous-language-of-design-concept/" title="设计概念的统一语言">http://zhangyi.xyz/ubiquitous-language-of-design-concept/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DDD/" rel="tag"># DDD</a>
+          
+            <a href="/tags/Design/" rel="tag"># Design</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/scenario-driven-design/" rel="next" title="场景驱动设计新鲜出炉了">
+                <i class="fa fa-chevron-left"></i> 场景驱动设计新鲜出炉了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/qa-for-ddd-group-of-wechat/" rel="prev" title="GitChatDDD课程微信群问答">
+                GitChatDDD课程微信群问答 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/zhangyi.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/agiledon" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:15023157626@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#POJO%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">POJO对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Bean"><span class="nav-number">2.</span> <span class="nav-text">Java Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">贫血模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B8%E5%A4%9AXO"><span class="nav-number">4.</span> <span class="nav-text">诸多XO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DTO"><span class="nav-number">4.1.</span> <span class="nav-text">DTO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VO"><span class="nav-number">4.2.</span> <span class="nav-text">VO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BO"><span class="nav-number">4.3.</span> <span class="nav-text">BO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DO"><span class="nav-number">4.4.</span> <span class="nav-text">DO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PO"><span class="nav-number">4.5.</span> <span class="nav-text">PO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DAO"><span class="nav-number">4.6.</span> <span class="nav-text">DAO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E5%A3%B0%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">发布声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B2%E8%B4%A7%E6%8E%A8%E8%8D%90"><span class="nav-number">6.</span> <span class="nav-text">干货推荐</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66166881";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("czTvFtq156OqFjxIzIMnctgE-gzGzoHsz", "j2Ic7pKBWAld84G4W7zXLtN8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
