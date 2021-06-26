@@ -922,6 +922,60 @@
       </tags>
   </entry>
   <entry>
+    <title>何时定义领域服务</title>
+    <url>/example-of-define-domain-service/</url>
+    <content><![CDATA[<p>若遵循基于面向对象设计范式的领域驱动设计，并用以应对纷繁复杂的业务逻辑，则强调领域模型的充血设计模型已成为社区不争事实。我将Eric提及的战术设计要素如Entity、Value Object、Domain Service、Aggregate、Repository与Factory视为<strong>设计模型</strong>。这其中，只有Entity、Value Object和Domain Service才能表达领域逻辑。</p>
+<span id="more"></span>
+
+<p>为避免贫血模型，在封装领域逻辑时，考虑设计要素的顺序为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Value Object -&gt; Entity -&gt; Domain Service</span><br></pre></td></tr></table></figure>
+
+<p>切记，我们必须将Domain Service作为承担业务逻辑的最后的救命稻草。之所以把Domain Service放在最后，是因为我太清楚领域服务的强大“魔力”了。开发人员总会有一种惰性，很多时候不愿意仔细思考所谓“职责（封装领域逻辑的行为）”的正确履行者，而领域服务恰恰是最便捷的选择。</p>
+<p>就我个人的理解，<strong>只有满足如下三个特征的领域行为才应该放到领域服务中</strong>：</p>
+<ul>
+<li>领域行为需要多个领域实体参与协作</li>
+<li>领域行为与状态无关</li>
+<li>领域行为需要与外部资源（尤其是DB）协作</li>
+</ul>
+<p>假设某系统的合同管理功能允许客户输入自编码，该自编码需要遵循一定的编码格式。在创建新合同时，客户输入自编码，系统需要检测该自编码是否在已有合同中已经存在。针对该需求，可以提炼出两个领域行为：</p>
+<ul>
+<li>验证输入的自编码是否符合业务规则</li>
+<li>检查自编码是否重复</li>
+</ul>
+<p>在寻找职责的履行者时，我们应首先遵循“<strong>信息专家模式</strong>”，即“拥有信息的对象就是操作该信息的专家”，因此可以提出一个问题：领域行为要操作的数据由谁拥有？针对第一个领域行为，就是要确认谁拥有自编码格式的验证规则？有两个候选：</p>
+<ul>
+<li>拥有自编码信息的“合同(Contract)”对象</li>
+<li>体现自编码知识概念自身的“自编码（CustomizedNumber）”对象</li>
+</ul>
+<p>我倾向于定义CustomizedNumber值对象，将该检测规则封装其内，并在构造函数中对其进行验证。在领域驱动设计中，值对象往往用于封装这些基础概念。由于自定义的类型可以封装领域行为，就可以有效地实现职责的“分治”，实现对象的协作。</p>
+<p>若要检查自编码是否重复，则需要从数据库中查找，这就需要通过Repository与DB协作。基于前面总结的三个特征，则该职责应该分配给一个领域服务，例如DuplicatedNumberChecker。</p>
+<p>从职责分配的角度看，实体Contract又或者值对象CustomizedNumber才应该是承担该职责的合理选择。为何我却定义了这么一条例外原则呢？究其原因，就是在领域驱动设计中，我们应尽量保证实体与值对象的纯粹性，尤其不应该依赖于Repository（资源库）。继续深挖根本原因，是因为<strong>实体与值对象的生命周期是由Repository管理的</strong>。倘若被管理的实体对象还依赖了Repository，就要求该实体对应的Repository在管理实体对象的生命周期的同时，还需要管理它与Repository的依赖，这并不合理。值对象在一个聚合（Aggregate)边界之内，道理相同。</p>
+<p>举例来说，假设Contract是聚合根，如果将检查重复编码的职责分配给该实体对象（或值对象CustomizedNumber），内部就需要依赖ContractRepository。然而，Contract的获取也是通过Repository得到，在基础设施层对ContractRepository的实现时，其实<strong>并不知道该如何管理二者之间的依赖</strong>。如果Contract实体还要依赖其他Repository，就更不可能了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContractRepositoryImpl</span> <span class="keyword">implements</span> <span class="title">ContractRepository</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Contract <span class="title">contractById</span><span class="params">(Identity contractId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这里并不知道Contract对象需要注入ContractRepository对象自身</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若真要解决此依赖管理问题，较简单的做法是为Contract提供一个<code>setContractRepository()</code>的依赖注入方法。不过，当Contract是通过Repository来获得时，如Spring、Guice之类的DI框架都无法注入这一依赖，因而需要显式调用，这就会引入对Repository具体实现的耦合。这样的耦合放在领域层，会导致本来单纯的领域层内核依赖了外部资源。倘若将这种具体耦合往外推，例如推到应用层，又会加重调用者的负担。</p>
+<p>领域服务则不存在此问题，因为它的生命周期不是由Repository管理。如下的领域服务定义是合情合理的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DuplicatedNumberChecker</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Repository</span></span><br><span class="line">    <span class="keyword">private</span> ContractRepository repository;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDuplicate</span><span class="params">(CustomizedNumber number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> repository.existsNumber(number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在分配领域逻辑时，领域服务是最轻易也是最便宜的首选。这会导致领域服务的泛滥，长此以往，对领域层的开发又会走向“贫血模型”的老路。所谓“服务”本身就是一个抽象概念。越抽象就越显得包容并蓄。例如定义一个OrderService，那么所有和订单有关的逻辑都可以往这个服务里面塞，而诸如Order之类的实体对象终归有不少限制，分配职责时需得思虑再三。因此，倘若在设计与开发时对职责的分配不加约束，所谓的“职责分治”就不过是一句空话罢了。</p>
+<p>归根结底，主流的领域驱动设计在战术层面考察的其实是面向对象的设计能力。我认为，所谓面向对象设计，核心就是<strong>角色</strong>、<strong>职责</strong>与<strong>协作</strong>。在分配职责时，应考虑将<strong>数据与行为封装在一起</strong>，这是面向对象设计的首要原则。</p>
+<p>为了避免程序员把领域服务当做一个“筐”，什么逻辑都往里面装，除了需要提高团队成员面向对象的设计能力，并加强代码评审之外，还有一个方法，就是对领域服务加以约束。</p>
+<p>没有任何语言可以在DDD设计要素上施加约束。Mat Wall与Nik Silver在对Guardian.co.uk网站推行DDD时的实践值得我们借鉴。他们在文章《<a href="http://www.infoq.com/cn/articles/ddd-evolving-architecture">演进架构中的领域驱动设计</a>》中建议：</p>
+<blockquote>
+<p>为了对付这一行为，我们对应用中的所有服务进行了代码评审，并进行重构，将逻辑移到适当的领域对象中。我们还制定了一个新的规则：任何服务对象在其名称中必须包含一个动词。这一简单的规则阻止了开发人员去创建类似于ArticleService的类。取而代之，我们创建 ArticlePublishingService和ArticleDeletionService这样的类。推动这一简单的命名规范的确帮助我们将领域逻辑移到了正确的地方，但我们仍要求对服务进行定期的代码评审，以确保我们在正轨上，以及对领域的建模接近于实际的业务观点。</p>
+</blockquote>
+<p>其实，这一别具一格的约束形式其实与服务的本质是一脉相承的，即服务应代表无状态的领域行为，甚至可以说领域服务是领域层面用例的体现。</p>
+<p>这一实践可能会导致更多细粒度的领域服务产生，但更有可能的结果是，当我们在创建一个新的领域服务时，可能会考虑暂时停下来，想一想，要分配给这个新服务的领域逻辑是否有更好的去处呢？即使因为该逻辑可能牵涉到多个领域实体，又或者需要与Repository协作而不得不放入到领域服务中，似乎也可以考虑将领域逻辑中与实体（或值对象）数据强相关的内容”摘“出来，分配到合适的地方，保证职责分配的合理均衡。<strong>和谐的协作机制</strong>是好的面向对象设计。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Design</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>运用事件风暴进行领域分析建模</title>
     <url>/event-storming-with-domain-model/</url>
     <content><![CDATA[<img src="/event-storming-with-domain-model/10.png" class="">
@@ -999,60 +1053,6 @@
         <tag>DDD</tag>
         <tag>Design</tag>
         <tag>Event Storming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>何时定义领域服务</title>
-    <url>/example-of-define-domain-service/</url>
-    <content><![CDATA[<p>若遵循基于面向对象设计范式的领域驱动设计，并用以应对纷繁复杂的业务逻辑，则强调领域模型的充血设计模型已成为社区不争事实。我将Eric提及的战术设计要素如Entity、Value Object、Domain Service、Aggregate、Repository与Factory视为<strong>设计模型</strong>。这其中，只有Entity、Value Object和Domain Service才能表达领域逻辑。</p>
-<span id="more"></span>
-
-<p>为避免贫血模型，在封装领域逻辑时，考虑设计要素的顺序为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Value Object -&gt; Entity -&gt; Domain Service</span><br></pre></td></tr></table></figure>
-
-<p>切记，我们必须将Domain Service作为承担业务逻辑的最后的救命稻草。之所以把Domain Service放在最后，是因为我太清楚领域服务的强大“魔力”了。开发人员总会有一种惰性，很多时候不愿意仔细思考所谓“职责（封装领域逻辑的行为）”的正确履行者，而领域服务恰恰是最便捷的选择。</p>
-<p>就我个人的理解，<strong>只有满足如下三个特征的领域行为才应该放到领域服务中</strong>：</p>
-<ul>
-<li>领域行为需要多个领域实体参与协作</li>
-<li>领域行为与状态无关</li>
-<li>领域行为需要与外部资源（尤其是DB）协作</li>
-</ul>
-<p>假设某系统的合同管理功能允许客户输入自编码，该自编码需要遵循一定的编码格式。在创建新合同时，客户输入自编码，系统需要检测该自编码是否在已有合同中已经存在。针对该需求，可以提炼出两个领域行为：</p>
-<ul>
-<li>验证输入的自编码是否符合业务规则</li>
-<li>检查自编码是否重复</li>
-</ul>
-<p>在寻找职责的履行者时，我们应首先遵循“<strong>信息专家模式</strong>”，即“拥有信息的对象就是操作该信息的专家”，因此可以提出一个问题：领域行为要操作的数据由谁拥有？针对第一个领域行为，就是要确认谁拥有自编码格式的验证规则？有两个候选：</p>
-<ul>
-<li>拥有自编码信息的“合同(Contract)”对象</li>
-<li>体现自编码知识概念自身的“自编码（CustomizedNumber）”对象</li>
-</ul>
-<p>我倾向于定义CustomizedNumber值对象，将该检测规则封装其内，并在构造函数中对其进行验证。在领域驱动设计中，值对象往往用于封装这些基础概念。由于自定义的类型可以封装领域行为，就可以有效地实现职责的“分治”，实现对象的协作。</p>
-<p>若要检查自编码是否重复，则需要从数据库中查找，这就需要通过Repository与DB协作。基于前面总结的三个特征，则该职责应该分配给一个领域服务，例如DuplicatedNumberChecker。</p>
-<p>从职责分配的角度看，实体Contract又或者值对象CustomizedNumber才应该是承担该职责的合理选择。为何我却定义了这么一条例外原则呢？究其原因，就是在领域驱动设计中，我们应尽量保证实体与值对象的纯粹性，尤其不应该依赖于Repository（资源库）。继续深挖根本原因，是因为<strong>实体与值对象的生命周期是由Repository管理的</strong>。倘若被管理的实体对象还依赖了Repository，就要求该实体对应的Repository在管理实体对象的生命周期的同时，还需要管理它与Repository的依赖，这并不合理。值对象在一个聚合（Aggregate)边界之内，道理相同。</p>
-<p>举例来说，假设Contract是聚合根，如果将检查重复编码的职责分配给该实体对象（或值对象CustomizedNumber），内部就需要依赖ContractRepository。然而，Contract的获取也是通过Repository得到，在基础设施层对ContractRepository的实现时，其实<strong>并不知道该如何管理二者之间的依赖</strong>。如果Contract实体还要依赖其他Repository，就更不可能了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContractRepositoryImpl</span> <span class="keyword">implements</span> <span class="title">ContractRepository</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Contract <span class="title">contractById</span><span class="params">(Identity contractId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这里并不知道Contract对象需要注入ContractRepository对象自身</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>若真要解决此依赖管理问题，较简单的做法是为Contract提供一个<code>setContractRepository()</code>的依赖注入方法。不过，当Contract是通过Repository来获得时，如Spring、Guice之类的DI框架都无法注入这一依赖，因而需要显式调用，这就会引入对Repository具体实现的耦合。这样的耦合放在领域层，会导致本来单纯的领域层内核依赖了外部资源。倘若将这种具体耦合往外推，例如推到应用层，又会加重调用者的负担。</p>
-<p>领域服务则不存在此问题，因为它的生命周期不是由Repository管理。如下的领域服务定义是合情合理的：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DuplicatedNumberChecker</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Repository</span></span><br><span class="line">    <span class="keyword">private</span> ContractRepository repository;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDuplicate</span><span class="params">(CustomizedNumber number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> repository.existsNumber(number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们在分配领域逻辑时，领域服务是最轻易也是最便宜的首选。这会导致领域服务的泛滥，长此以往，对领域层的开发又会走向“贫血模型”的老路。所谓“服务”本身就是一个抽象概念。越抽象就越显得包容并蓄。例如定义一个OrderService，那么所有和订单有关的逻辑都可以往这个服务里面塞，而诸如Order之类的实体对象终归有不少限制，分配职责时需得思虑再三。因此，倘若在设计与开发时对职责的分配不加约束，所谓的“职责分治”就不过是一句空话罢了。</p>
-<p>归根结底，主流的领域驱动设计在战术层面考察的其实是面向对象的设计能力。我认为，所谓面向对象设计，核心就是<strong>角色</strong>、<strong>职责</strong>与<strong>协作</strong>。在分配职责时，应考虑将<strong>数据与行为封装在一起</strong>，这是面向对象设计的首要原则。</p>
-<p>为了避免程序员把领域服务当做一个“筐”，什么逻辑都往里面装，除了需要提高团队成员面向对象的设计能力，并加强代码评审之外，还有一个方法，就是对领域服务加以约束。</p>
-<p>没有任何语言可以在DDD设计要素上施加约束。Mat Wall与Nik Silver在对Guardian.co.uk网站推行DDD时的实践值得我们借鉴。他们在文章《<a href="http://www.infoq.com/cn/articles/ddd-evolving-architecture">演进架构中的领域驱动设计</a>》中建议：</p>
-<blockquote>
-<p>为了对付这一行为，我们对应用中的所有服务进行了代码评审，并进行重构，将逻辑移到适当的领域对象中。我们还制定了一个新的规则：任何服务对象在其名称中必须包含一个动词。这一简单的规则阻止了开发人员去创建类似于ArticleService的类。取而代之，我们创建 ArticlePublishingService和ArticleDeletionService这样的类。推动这一简单的命名规范的确帮助我们将领域逻辑移到了正确的地方，但我们仍要求对服务进行定期的代码评审，以确保我们在正轨上，以及对领域的建模接近于实际的业务观点。</p>
-</blockquote>
-<p>其实，这一别具一格的约束形式其实与服务的本质是一脉相承的，即服务应代表无状态的领域行为，甚至可以说领域服务是领域层面用例的体现。</p>
-<p>这一实践可能会导致更多细粒度的领域服务产生，但更有可能的结果是，当我们在创建一个新的领域服务时，可能会考虑暂时停下来，想一想，要分配给这个新服务的领域逻辑是否有更好的去处呢？即使因为该逻辑可能牵涉到多个领域实体，又或者需要与Repository协作而不得不放入到领域服务中，似乎也可以考虑将领域逻辑中与实体（或值对象）数据强相关的内容”摘“出来，分配到合适的地方，保证职责分配的合理均衡。<strong>和谐的协作机制</strong>是好的面向对象设计。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Design</tag>
       </tags>
   </entry>
   <entry>
@@ -1489,6 +1489,48 @@
       </tags>
   </entry>
   <entry>
+    <title>利用聚合概念指导MongoDB的Schema设计</title>
+    <url>/mongodb-schema-design-using-aggregate/</url>
+    <content><![CDATA[<img src="/mongodb-schema-design-using-aggregate/logo.jpg" class="">
+<p>习惯的力量强大却往往无法察觉。往往不经意之间，陷入习惯的陷阱中却不自知。</p>
+<p>在我们的项目中，为了能够保存分析报表以及用户设置的报表查询条件，我们将这些信息视为报表元数据存储在MongoDB中。要存储的元数据包括：</p>
+<ul>
+<li>报表分类（ReportCategory）</li>
+<li>报表（Report）</li>
+<li>报表查询条件（QeuryCondition）</li>
+</ul>
+<p>一个报表分类会包含多个报表，同一个报表只能属于一个分类。每个报表提供了多个标准查询条件和多个用户自定义查询条件。</p>
+<span id="more"></span>
+
+<p>我需要为这些元数据设计MongoDB的DB Schema。最初考虑将这三个概念合起来定义为元数据表的一条记录。之后想到对于一个报表而言，需要频繁对报表的查询条件进行增删操作，似乎又应该将查询条件单独分离出来。那么报表分类与报表呢？是否将报表也独立出来才合适？对于MongoDB这样的Document数据库而言，将Report作为ReportCategory的embedded属性也是可行的，至少不会像关系型数据库那样会产生数据冗余。倘若要分开，当需要查询某个分类下的所有报表时，还得多余地做一次Link。</p>
+<p>好纠结啊！似乎怎么设计都是可行的，又仿佛总有不如意处。</p>
+<p>正在思索中，突然想起对于这样面向文档的NoSQL数据库而言，使用聚合（Aggregate）来观察表记录会更加恰当。这个想法恍若闪电般迅捷而锐利，猛地撞向脑中的思绪，一下子点燃了我的设计思维。</p>
+<p>这里所谓“<strong>聚合</strong>”，非面向对象中表达对象关系的概念，而是领域驱动设计（DDD）对对象边界的思考。关于聚合（Aggregate）的设计，我根据过往的经验，整理出五条设计原则：</p>
+<ul>
+<li>聚合作为一种边界，主要用于维护业务完整性，此时应遵循业务规则中定义的不变量（Invariant）</li>
+<li>作为聚合边界内的非聚合根实体对象，若可能被别的调用者单独调用，则应该作为单独的聚合分离出来</li>
+<li>在聚合边界内的非聚合根对象，与聚合根之间应该存在直接或间接的引用关系，且可以通过对象的引用方式；若必须采用Id来引用，则说明被引用的对象不属于该聚合</li>
+<li>若一个对象缺少另一个对象作为其主对象就不可能存在，则该对象一定属于该主对象的聚合边界内</li>
+<li>若一个实体对象，可能被多个聚合引用，则该实体对象应首先考虑作为单独的聚合</li>
+</ul>
+<p>这些设计原则都是我在探索聚合设计时的一些思考，多次实践下来，窃以为颇有指导价值。这里不再铺开，留待以后的文章详述。单说本例，我们该如何运用这些原则来思考ReportCategory、Report与QueryCondition之间的关系？</p>
+<p>显然，套用这些原则，我认为前面纠缠不清的混乱思路已可迎刃而解。从业务完整性看，Report虽属于ReportCategory，但二者未尝有强的约束关系，即不存在业务上的不变量（Invariant）。例如ReportCategory可以没有Report，成为一个空的分类，我们也可以撇开ReportCategory，单独查询所有的Report。倘若我们将Report放到ReportCategory聚合中，由于Report可能会被单独调用，聚合的边界保护反而成为了障碍，不合理。</p>
+<p>于是，我们可以得出第一个结论：<strong>ReportCategory和Report应该属于两个不同的聚合</strong>。</p>
+<p>基于第四条原则，我们可以提出问题：当QueryCondition缺少Report对象后，还有存在意义吗？答案一目了然，没有Report，就没有QueryCondition。皮之不存毛将焉附！第二个结论自然得来：<strong>Report与QueryCondition应属于同一个聚合</strong>。于是，模型呼之欲出：</p>
+<img src="/mongodb-schema-design-using-aggregate/aggregate.png" class="">
+
+<p>上图是领域模型而非数据模型。站在领域驱动设计的角度，这才是正确的打开姿势。那么，使用该领域模型去指导MongoDB的Schema设计，是否有将领域混入技术实现之嫌呢？从设计方向看，先考虑领域模型才是正解，DB的技术实现应为了满足该领域模型而设计。只有当领域模型可能阻碍技术实现，又或者依据领域模型得到的Schema设计不满足性能或其他质量属性需求时，才应该反过来调整领域模型。对于MongoDB这种面向Document的数据库，以聚合概念指导Schema设计，可谓水到渠成，不仅没有违和之感，反而让Repository的实现变得更加简单、自然。</p>
+<p>在项目开发过程中，我先入为主地做了技术选型，从而习惯性地开始针对MongoDB进行Schema设计，反而忘了领域驱动设计的指导原则。技术人员对技术实现往往见猎心喜，因而忽略了领域设计的驱动力，慎之慎之！</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多维度规划业务架构</title>
     <url>/multi-views-of-business-architecture/</url>
     <content><![CDATA[<img src="/multi-views-of-business-architecture/cover.jpg" class="">
@@ -1552,48 +1594,6 @@
         <tag>DDD</tag>
         <tag>Architecture</tag>
         <tag>EA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用聚合概念指导MongoDB的Schema设计</title>
-    <url>/mongodb-schema-design-using-aggregate/</url>
-    <content><![CDATA[<img src="/mongodb-schema-design-using-aggregate/logo.jpg" class="">
-<p>习惯的力量强大却往往无法察觉。往往不经意之间，陷入习惯的陷阱中却不自知。</p>
-<p>在我们的项目中，为了能够保存分析报表以及用户设置的报表查询条件，我们将这些信息视为报表元数据存储在MongoDB中。要存储的元数据包括：</p>
-<ul>
-<li>报表分类（ReportCategory）</li>
-<li>报表（Report）</li>
-<li>报表查询条件（QeuryCondition）</li>
-</ul>
-<p>一个报表分类会包含多个报表，同一个报表只能属于一个分类。每个报表提供了多个标准查询条件和多个用户自定义查询条件。</p>
-<span id="more"></span>
-
-<p>我需要为这些元数据设计MongoDB的DB Schema。最初考虑将这三个概念合起来定义为元数据表的一条记录。之后想到对于一个报表而言，需要频繁对报表的查询条件进行增删操作，似乎又应该将查询条件单独分离出来。那么报表分类与报表呢？是否将报表也独立出来才合适？对于MongoDB这样的Document数据库而言，将Report作为ReportCategory的embedded属性也是可行的，至少不会像关系型数据库那样会产生数据冗余。倘若要分开，当需要查询某个分类下的所有报表时，还得多余地做一次Link。</p>
-<p>好纠结啊！似乎怎么设计都是可行的，又仿佛总有不如意处。</p>
-<p>正在思索中，突然想起对于这样面向文档的NoSQL数据库而言，使用聚合（Aggregate）来观察表记录会更加恰当。这个想法恍若闪电般迅捷而锐利，猛地撞向脑中的思绪，一下子点燃了我的设计思维。</p>
-<p>这里所谓“<strong>聚合</strong>”，非面向对象中表达对象关系的概念，而是领域驱动设计（DDD）对对象边界的思考。关于聚合（Aggregate）的设计，我根据过往的经验，整理出五条设计原则：</p>
-<ul>
-<li>聚合作为一种边界，主要用于维护业务完整性，此时应遵循业务规则中定义的不变量（Invariant）</li>
-<li>作为聚合边界内的非聚合根实体对象，若可能被别的调用者单独调用，则应该作为单独的聚合分离出来</li>
-<li>在聚合边界内的非聚合根对象，与聚合根之间应该存在直接或间接的引用关系，且可以通过对象的引用方式；若必须采用Id来引用，则说明被引用的对象不属于该聚合</li>
-<li>若一个对象缺少另一个对象作为其主对象就不可能存在，则该对象一定属于该主对象的聚合边界内</li>
-<li>若一个实体对象，可能被多个聚合引用，则该实体对象应首先考虑作为单独的聚合</li>
-</ul>
-<p>这些设计原则都是我在探索聚合设计时的一些思考，多次实践下来，窃以为颇有指导价值。这里不再铺开，留待以后的文章详述。单说本例，我们该如何运用这些原则来思考ReportCategory、Report与QueryCondition之间的关系？</p>
-<p>显然，套用这些原则，我认为前面纠缠不清的混乱思路已可迎刃而解。从业务完整性看，Report虽属于ReportCategory，但二者未尝有强的约束关系，即不存在业务上的不变量（Invariant）。例如ReportCategory可以没有Report，成为一个空的分类，我们也可以撇开ReportCategory，单独查询所有的Report。倘若我们将Report放到ReportCategory聚合中，由于Report可能会被单独调用，聚合的边界保护反而成为了障碍，不合理。</p>
-<p>于是，我们可以得出第一个结论：<strong>ReportCategory和Report应该属于两个不同的聚合</strong>。</p>
-<p>基于第四条原则，我们可以提出问题：当QueryCondition缺少Report对象后，还有存在意义吗？答案一目了然，没有Report，就没有QueryCondition。皮之不存毛将焉附！第二个结论自然得来：<strong>Report与QueryCondition应属于同一个聚合</strong>。于是，模型呼之欲出：</p>
-<img src="/mongodb-schema-design-using-aggregate/aggregate.png" class="">
-
-<p>上图是领域模型而非数据模型。站在领域驱动设计的角度，这才是正确的打开姿势。那么，使用该领域模型去指导MongoDB的Schema设计，是否有将领域混入技术实现之嫌呢？从设计方向看，先考虑领域模型才是正解，DB的技术实现应为了满足该领域模型而设计。只有当领域模型可能阻碍技术实现，又或者依据领域模型得到的Schema设计不满足性能或其他质量属性需求时，才应该反过来调整领域模型。对于MongoDB这种面向Document的数据库，以聚合概念指导Schema设计，可谓水到渠成，不仅没有违和之感，反而让Repository的实现变得更加简单、自然。</p>
-<p>在项目开发过程中，我先入为主地做了技术选型，从而习惯性地开始针对MongoDB进行Schema设计，反而忘了领域驱动设计的指导原则。技术人员对技术实现往往见猎心喜，因而忽略了领域设计的驱动力，慎之慎之！</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>MongoDB</tag>
       </tags>
   </entry>
   <entry>
@@ -2068,30 +2068,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2018，重新开始</title>
-    <url>/restart-from-2018/</url>
-    <content><![CDATA[<p>我从2004年开始写技术博客。最初一直是在博客园，笔耕不辍，几年积累下来也有不少文章。最初我的关注点主要在于软件设计，尤其是与面向对象设计和设计模式有关的，在园子里也颇受关注。2006年，我将这些文章整理成册，名为“设计之道”，开源出来放在网上，似乎引起不少人的关注和追捧，其中就有电子工业出版社的博文视点编辑。2007年，在博客园dudu的帮助下，我在博文视点出版了我的第一本书《软件设计精要与模式》，这也是至今我出版的唯一一本自己的著作。本书在2009年出版了第二版，之后，就没有之后了。</p>
-<p>因为我做的项目慢慢开始脱离.NET圈子，兴趣点也放在Java社区，我逐渐与微软的.NET阵营渐行渐远。不再继续申请连续五年的微软MVP，很少关注.NET技术，于是自己觉得应该与当时专注于.NET技术的博客园告别了。</p>
-<p>其间自己效仿技术网红的做法，申请了域名，开起了个人网站。有了小小富贵，就想独立成家立业，典型的小市民。因为少了整个博客园这个圈子，个人网站的访问几乎称得上是“门前冷落鞍马稀”了。那时候没有GitHub，没有许多特别自由的博客软件，没有markdown，自己小本经营着个人网站，慢慢心也淡了。博客仍然继续写，因为后来需要域名备注的缘故，个人网站终于惨淡收场。待到Github page出现，就赶紧惊喜地将博客搬迁到github上。</p>
-<p>当时我使用了jekyll制作了博客，自己修改了样式，二次开发了一些小程序，例如通过ruby程序自动将发布的博客同步到新浪微博上。我寻找到了geek的感觉，因而乐此不疲。然而我这人总有些喜新厌旧，慢慢的，博客虽然照常这样不温不火地写着，却寻找不回最初的乐趣了。直到我发现farbox。</p>
-<span id="more"></span>
-
-<p>farbox这种博客写作方式完全颠覆了传统，然而本质其实与github没有太大区别。但是操作更简单。farbox提供了非常棒的markdown编辑器，且一旦编辑即可发布博客，颇有几分当初windows Live Writer的感觉。且编辑器针对markdown提供了很棒的所见即所得功能，使得博客写作变得如此easy。</p>
-<p>我打算长期驻扎在farbox上了，即使每天的访问量依旧单薄，但我深信只要自己深耕下去，总会有收获。然而，farbox通过dropbox同步文件的技术选型其实从一开始就埋下了地雷。当翻墙变得越来越不容易时，dropbox就变成了我难以逾越的天堑，每次同步博客还得不停地连接各种VPN。烦恼啊！</p>
-<p>其时，我也创建了我个人的微信公众号<strong>「逸言」</strong>。其实我很讨厌微信公众号这种形式，它除了可以非常方便地提供订阅之外，增加了更好的分享渠道更多受众之外，一无是处。排版麻烦，对代码显示极不友好，也不利于文章的收藏。因此从最初的0个用户到目前近3000用户，我始终惫懒的更新着，不死不活。</p>
-<p>终于，我再也无法忍受farbox的翻墙之苦了，而时间也走向了2018年。我认为我应该有一个新的开始，我需要向过去做一个告别。选择良久，我还是决定回归到github，而建站的软件则选择基于NodeJS的hexo。我还计划申请一个个人域名。github支持域名绑定，而hexo提供的建博客功能也异常地简单。</p>
-<p>我新开一个博客，挥挥手与过去告别。</p>
-<p>这个告别是彻底的告别。以前每当我新开一个博客，总是舍不得把过去丢弃，因而总是不厌其烦地把过去的文章一篇一篇迁移到新博客上。而在这个博客上，我打算以全新的姿态亮相。对于博客，我打算以一种更轻松更写意的态度来面对。因此，三两句话的闲谈、碎片般的思想、过去的心得体会、走过的足迹、文法严谨的大块文章，可能都会呈现在这个博客上，形成一种斑斓的姿态。是为博客的站名——<strong>「斑斓」</strong>。</p>
-<p>至于过去，我正在利用WizNote整理那些还值得一读的旧文章，分门别类，最后分享到GitBook上。从2007年的第一次整理，至今刚好十年，也许这本开源的小册子可以命名为《我的十年》。Btw，WizNote即为知笔记真的是个好东西，我热情地给他打电话呢。</p>
-]]></content>
-      <categories>
-        <category>Thinking</category>
-      </categories>
-      <tags>
-        <tag>Thinking</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Spark读取并分析二进制文件</title>
     <url>/read-binary-file-using-spark/</url>
     <content><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>客户希望通过spark来分析二进制文件中0和1的数量以及占比。如果要分析的是目录，则针对目录下的每个文件单独进行分析。分析后的结果保存与被分析文件同名的日志文件中，内容包括0和1字符的数量与占比。</p>
@@ -2179,6 +2155,30 @@
         <tag>Spark</tag>
         <tag>Scala</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2018，重新开始</title>
+    <url>/restart-from-2018/</url>
+    <content><![CDATA[<p>我从2004年开始写技术博客。最初一直是在博客园，笔耕不辍，几年积累下来也有不少文章。最初我的关注点主要在于软件设计，尤其是与面向对象设计和设计模式有关的，在园子里也颇受关注。2006年，我将这些文章整理成册，名为“设计之道”，开源出来放在网上，似乎引起不少人的关注和追捧，其中就有电子工业出版社的博文视点编辑。2007年，在博客园dudu的帮助下，我在博文视点出版了我的第一本书《软件设计精要与模式》，这也是至今我出版的唯一一本自己的著作。本书在2009年出版了第二版，之后，就没有之后了。</p>
+<p>因为我做的项目慢慢开始脱离.NET圈子，兴趣点也放在Java社区，我逐渐与微软的.NET阵营渐行渐远。不再继续申请连续五年的微软MVP，很少关注.NET技术，于是自己觉得应该与当时专注于.NET技术的博客园告别了。</p>
+<p>其间自己效仿技术网红的做法，申请了域名，开起了个人网站。有了小小富贵，就想独立成家立业，典型的小市民。因为少了整个博客园这个圈子，个人网站的访问几乎称得上是“门前冷落鞍马稀”了。那时候没有GitHub，没有许多特别自由的博客软件，没有markdown，自己小本经营着个人网站，慢慢心也淡了。博客仍然继续写，因为后来需要域名备注的缘故，个人网站终于惨淡收场。待到Github page出现，就赶紧惊喜地将博客搬迁到github上。</p>
+<p>当时我使用了jekyll制作了博客，自己修改了样式，二次开发了一些小程序，例如通过ruby程序自动将发布的博客同步到新浪微博上。我寻找到了geek的感觉，因而乐此不疲。然而我这人总有些喜新厌旧，慢慢的，博客虽然照常这样不温不火地写着，却寻找不回最初的乐趣了。直到我发现farbox。</p>
+<span id="more"></span>
+
+<p>farbox这种博客写作方式完全颠覆了传统，然而本质其实与github没有太大区别。但是操作更简单。farbox提供了非常棒的markdown编辑器，且一旦编辑即可发布博客，颇有几分当初windows Live Writer的感觉。且编辑器针对markdown提供了很棒的所见即所得功能，使得博客写作变得如此easy。</p>
+<p>我打算长期驻扎在farbox上了，即使每天的访问量依旧单薄，但我深信只要自己深耕下去，总会有收获。然而，farbox通过dropbox同步文件的技术选型其实从一开始就埋下了地雷。当翻墙变得越来越不容易时，dropbox就变成了我难以逾越的天堑，每次同步博客还得不停地连接各种VPN。烦恼啊！</p>
+<p>其时，我也创建了我个人的微信公众号<strong>「逸言」</strong>。其实我很讨厌微信公众号这种形式，它除了可以非常方便地提供订阅之外，增加了更好的分享渠道更多受众之外，一无是处。排版麻烦，对代码显示极不友好，也不利于文章的收藏。因此从最初的0个用户到目前近3000用户，我始终惫懒的更新着，不死不活。</p>
+<p>终于，我再也无法忍受farbox的翻墙之苦了，而时间也走向了2018年。我认为我应该有一个新的开始，我需要向过去做一个告别。选择良久，我还是决定回归到github，而建站的软件则选择基于NodeJS的hexo。我还计划申请一个个人域名。github支持域名绑定，而hexo提供的建博客功能也异常地简单。</p>
+<p>我新开一个博客，挥挥手与过去告别。</p>
+<p>这个告别是彻底的告别。以前每当我新开一个博客，总是舍不得把过去丢弃，因而总是不厌其烦地把过去的文章一篇一篇迁移到新博客上。而在这个博客上，我打算以全新的姿态亮相。对于博客，我打算以一种更轻松更写意的态度来面对。因此，三两句话的闲谈、碎片般的思想、过去的心得体会、走过的足迹、文法严谨的大块文章，可能都会呈现在这个博客上，形成一种斑斓的姿态。是为博客的站名——<strong>「斑斓」</strong>。</p>
+<p>至于过去，我正在利用WizNote整理那些还值得一读的旧文章，分门别类，最后分享到GitBook上。从2007年的第一次整理，至今刚好十年，也许这本开源的小册子可以命名为《我的十年》。Btw，WizNote即为知笔记真的是个好东西，我热情地给他打电话呢。</p>
+]]></content>
+      <categories>
+        <category>Thinking</category>
+      </categories>
+      <tags>
+        <tag>Thinking</tag>
       </tags>
   </entry>
   <entry>
