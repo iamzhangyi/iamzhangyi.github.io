@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-06-16T07:58:11.802Z</updated>
+  <updated>2021-06-26T23:51:52.476Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《解构领域驱动设计》最新进展</title>
+    <link href="http://zhangyi.xyz/Report-the-progress-of-DDDE/"/>
+    <id>http://zhangyi.xyz/Report-the-progress-of-DDDE/</id>
+    <published>2021-06-26T23:22:57.000Z</published>
+    <updated>2021-06-26T23:51:52.476Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/Report-the-progress-of-DDDE/cover.jpg&quot; class=&quot;&quot;&gt;
+
+
+
+&lt;p&gt;不出意外，《解构领域驱动设计》再次延期，完全符合一般软件开发的惯例。 &lt;/p&gt;
+&lt;p&gt;我来汇报一下本书临近出版的一条时间线。&lt;/p&gt;
+&lt;p&gt;5月31日，出版社编辑刘雅思同学告知我本书正式申领到书号，标志着本书正式发稿完毕。这个流程是必走的，否则就别想通过正规出版社出版了。之后的流程就是排版。 因为书的内容非常多，排版花费了不少时间。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/categories/Writing/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
+    
+  </entry>
   
   <entry>
     <title>多维度规划业务架构</title>
@@ -515,35 +543,6 @@
       <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
     
       <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>函数范式与领域建模</title>
-    <link href="http://zhangyi.xyz/fp-and-domain-model/"/>
-    <id>http://zhangyi.xyz/fp-and-domain-model/</id>
-    <published>2019-05-26T13:28:41.000Z</published>
-    <updated>2019-05-26T13:46:43.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;函数范式&quot;&gt;&lt;a href=&quot;#函数范式&quot; class=&quot;headerlink&quot; title=&quot;函数范式&quot;&gt;&lt;/a&gt;函数范式&lt;/h2&gt;&lt;p&gt;REA的Ken Scambler认为函数范式的主要特征为：模块化（Modularity），抽象化（Abstraction）和可组合（Composability）。这三个特征可以帮助我们编写&lt;strong&gt;简单&lt;/strong&gt;的程序。&lt;/p&gt;
-&lt;p&gt;通常，为了降低系统的复杂度，都需要将系统分解为多个功能的组成部分，每个组成部分有着清晰的边界。&lt;strong&gt;模块化&lt;/strong&gt;的编码范式需要支持实现者能够轻易地对模块进行替换，这就要求模块具有隔离性，避免在模块之间出现太多的纠缠。函数范式以“函数”为核心，作为模块化的重要组成部分。函数范式要求函数均为没有副作用的纯函数（pure function）。在推断每个函数的功能时，由于函数没有产生副作用，就可以不考虑该函数当前所处的上下文，形成清晰的隔离边界。这种相互隔离的纯函数使得模块化成为可能。&lt;/p&gt;
-&lt;p&gt;函数的&lt;strong&gt;抽象&lt;/strong&gt;能力不言而喻，因为它本质上是一种将输入类型转换为输出类型的转换行为。任何一个函数都可以视为一种转换(transform)，这是对行为的最高抽象，代表了类型（type）之间的某种动作。极端情况下，我们甚至不用考虑函数的名称和类型，只需要关注其数学本质：&lt;code&gt;f(x) = y&lt;/code&gt;。其中，x是输入，y是输出，f就是极度抽象的函数。&lt;/p&gt;
-&lt;p&gt;函数范式领域模型的核心要素为代数数据类型（Algebraic Data Type, ADT）和纯函数。代数数据类型表达领域概念，纯函数表达领域行为。由于二者皆被定义为不变的、原子的，因此在类型的约束规则下可以对它们进行组合。&lt;strong&gt;可组合&lt;/strong&gt;的特征使得函数范式建立的领域模型可以由简单到复杂，利用组合子来表现复杂的领域逻辑。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-      <category term="Scala" scheme="http://zhangyi.xyz/tags/Scala/"/>
-    
-      <category term="FP" scheme="http://zhangyi.xyz/tags/FP/"/>
     
   </entry>
   
