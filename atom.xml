@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>张逸说</title>
+  
+  <subtitle>出口成张，逸派胡言</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://zhangyi.xyz/"/>
+  <updated>2021-06-16T07:58:11.802Z</updated>
+  <id>http://zhangyi.xyz/</id>
+  
+  <author>
+    <name>张逸</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>多维度规划业务架构</title>
+    <link href="http://zhangyi.xyz/multi-views-of-business-architecture/"/>
+    <id>http://zhangyi.xyz/multi-views-of-business-architecture/</id>
+    <published>2021-06-15T05:59:00.000Z</published>
+    <updated>2021-06-16T07:58:11.802Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/multi-views-of-business-architecture/cover.jpg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;领域驱动设计的社区主流声音是划分问题空间（Problem Space）与解空间（Solution Space）。整个问题空间实际上就是团队开发的目标系统对应的领域，这实际上也是业务架构要描述的目标。领域驱动设计解决大规模问题空间的方法或模式是引入子领域（Subdomain）。&lt;/p&gt;
+&lt;p&gt;根据价值高低的不同，子领域分为核心子领域、支撑子领域和通用子领域。若将其引入到业务架构，似乎可以根据价值高低建立不同的服务层，例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;核心子领域：产品服务层，体现为子领域专用的产品服务&lt;/li&gt;
+&lt;li&gt;支撑子领域：能力服务层，体现为跨子领域复用的能力服务&lt;/li&gt;
+&lt;li&gt;通用子领域：基础服务层，体现为与领域无关的基础服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不同的层次代表了复用的粒度和水平。基础服务层因为与领域无关，它复用的范围更广泛，对应为业务架构中的支撑业务（支撑部门提供的职能），如财务体系、人力资源体系、行政体系、采购体系等。原则上，任何企业都需要这些支撑业务，而与企业从事的领域方向无关。引入领域驱动设计的概念，我将其纳入到通用子领域的范畴。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/categories/Architecture/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+      <category term="EA" scheme="http://zhangyi.xyz/tags/EA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>企业架构与领域驱动设计的融合</title>
+    <link href="http://zhangyi.xyz/enterprise-architecture-and-ddd/"/>
+    <id>http://zhangyi.xyz/enterprise-architecture-and-ddd/</id>
+    <published>2021-06-06T08:35:42.000Z</published>
+    <updated>2021-06-16T07:52:30.132Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/enterprise-architecture-and-ddd/2021-06-07.jpg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;DDD的作用范围主要还是针对系统级的分析、架构与设计，在更高的层面上，即将问题空间扩大到超过系统范围，变成企业或组织范围之后，DDD的模式就显得捉襟见肘了。此时，可以考虑引入企业架构的思想，尤其是业务架构的内容，给了DDD很好的补充，又或者说，将企业架构与DDD融合起来，就能真正串联起战略和战术设计了。&lt;/p&gt;
+&lt;p&gt;为什么在传统企业中，DDD开始得到了许多企业的追捧？不仅仅是微服务的原因，就我个人不成熟的判断，应该是数字化转型开始倒逼着传统企业的IT部门开始接纳了DDD这一方法体系。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/categories/Architecture/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="EA" scheme="http://zhangyi.xyz/tags/EA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>架构设计的三个原则</title>
+    <link href="http://zhangyi.xyz/three-principles-of-architecture/"/>
+    <id>http://zhangyi.xyz/three-principles-of-architecture/</id>
+    <published>2021-05-06T11:38:23.000Z</published>
+    <updated>2021-06-06T08:37:57.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/three-principles-of-architecture/2021-05-07.jpeg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;在进行架构设计时，我认为需要遵循如下原则：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一致原则&lt;/li&gt;
+&lt;li&gt;简单原则&lt;/li&gt;
+&lt;li&gt;演进原则&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/categories/Architecture/"/>
+    
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>讨论实际项目的工厂模式</title>
+    <link href="http://zhangyi.xyz/discuss-with-factory-pattern-in-real-project/"/>
+    <id>http://zhangyi.xyz/discuss-with-factory-pattern-in-real-project/</id>
+    <published>2021-01-20T12:12:42.000Z</published>
+    <updated>2021-02-01T07:02:42.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/discuss-with-factory-pattern-in-real-project/2021-02-01.jpeg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;大思接了满满一杯热咖啡，正欲离去，转身时，偶然瞥见茶水间的白板画满了类图，定睛一看，感慨地说道：“蔡了，你还真是幸福啊！马大叔亲自给你讲解工厂模式。”&lt;/p&gt;
+&lt;p&gt;蔡了刚刚意识到自己说错了话，还在尴尬中，赶紧说道：“是啊，是啊！”一边说着，一边还使劲地点着头，希望通过过分的礼貌来化解刚才的口不择言。&lt;/p&gt;
+&lt;p&gt;成大思想到了自己过去学习设计模式的经历，悠悠地说道：“说起来，当初我学设计模式时，可没有你这么好的待遇了。”&lt;/p&gt;
+&lt;p&gt;这一番话倒是勾起了蔡了的好奇心，赶紧问道：“大思，那你当时是怎么学的呢？”&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="蔡了成长记" scheme="http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/"/>
+    
+    
+      <category term="Design, OO" scheme="http://zhangyi.xyz/tags/Design-OO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>茶水间的技术问答</title>
+    <link href="http://zhangyi.xyz/technical-discussion-in-tea-room/"/>
+    <id>http://zhangyi.xyz/technical-discussion-in-tea-room/</id>
+    <published>2021-01-06T07:09:03.000Z</published>
+    <updated>2021-01-08T11:56:28.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;公司的茶水间装修得如家一般温馨，咖啡机时刻飘出咖啡的浓香。员工们常常在此休息聊天，既可以选择坐在高脚凳上依着吧台闲谈阔论，也可以舒服的躺坐在旁边的沙发上闭目养神。晨会之后的半小时，以及午餐前后是这里最喧嚣的时候，此时的茶水间却颇为安宁，大家都在工位上专心工作。&lt;/p&gt;
+&lt;p&gt;两人来到茶水间，蔡了问道：“老规矩，还是拿铁，对吧？”马丁花点点头，蔡了殷勤地给他接了一杯浓浓的拿铁，然后又给自己接了一杯卡布奇诺，两人坐在沙发上继续讨论之前的话题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="蔡了成长记" scheme="http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/"/>
+    
+    
+      <category term="Design, OO" scheme="http://zhangyi.xyz/tags/Design-OO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入理解简单设计</title>
+    <link href="http://zhangyi.xyz/understand-simple-design/"/>
+    <id>http://zhangyi.xyz/understand-simple-design/</id>
+    <published>2020-12-12T14:10:22.000Z</published>
+    <updated>2020-12-12T14:43:37.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/understand-simple-design/12-13.jpeg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;Kent Beck提出的简单设计原则，内容为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通过所有测试（Passes its tests）&lt;/li&gt;
+&lt;li&gt;尽可能消除重复 (Minimizes duplication)&lt;/li&gt;
+&lt;li&gt;尽可能清晰表达 (Maximizes clarity)&lt;/li&gt;
+&lt;li&gt;更少代码元素 (Has fewer elements)&lt;/li&gt;
+&lt;li&gt;以上四个原则的重要程度依次降低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过所有测试原则意味着我们开发的功能满足客户的需求，这是简单设计的底线原则。该原则同时隐含地告知与客户或领域专家（需求分析师）充分沟通的重要性。&lt;/p&gt;
+&lt;p&gt;尽可能消除重复原则是对代码质量提出的要求，并通过测试驱动开发的重构环节来完成。注意此原则提到的是Minimizes（尽可能消除），而非No duplication（无重复），因为追求极致的重用存在设计与编码的代价。&lt;/p&gt;
+&lt;p&gt;尽可能清晰表达原则要求代码要简洁而清晰地传递领域知识，在领域驱动设计的语境下，就是要遵循统一语言，提高代码的可读性，满足业务人员与开发人员的交流目的。针对核心领域，甚至可以考虑引入领域特定语言（Domain Specific Language，DSL）来表现领域逻辑。&lt;/p&gt;
+&lt;p&gt;在满足这三个原则的基础上，更少代码元素原则告诫我们遏制过度设计的贪心，做到设计的恰如其分，即在满足客户需求的基础上，只要代码已经做到了最少重复与清晰表达，就不要再进一步拆分或提取类、方法和变量。&lt;/p&gt;
+&lt;p&gt;这四个原则是依次递进的，功能正确，减少重复，代码可读是简单设计的根本要求。一旦满足这些要求，就不能创建更多的代码元素去迎合未来可能并不存在的变化，避免过度设计。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/categories/Design/"/>
+    
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+      <category term="TDD" scheme="http://zhangyi.xyz/tags/TDD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>简单工厂不简单</title>
+    <link href="http://zhangyi.xyz/simple-factory-is-not-simple/"/>
+    <id>http://zhangyi.xyz/simple-factory-is-not-simple/</id>
+    <published>2020-12-08T12:14:51.000Z</published>
+    <updated>2020-12-08T14:52:27.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/simple-factory-is-not-simple/cover.jpeg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;马丁花背着灰色的双肩背包走进了公司写字楼，浮现在眼前的是排成长蛇状的一群上班族，正按照单双层各自分成两队等候着电梯。低楼层的童鞋等不及了，甩开双腿开始爬楼梯，就当是减肥锻炼身体了，不着急的依旧排在队伍里，低头看着手机，玩着游戏或者刷着朋友圈。手机扫去了等待的急躁与不安，一个个安静如花，只待电梯像殷勤的主人把他们一批一批接走。&lt;/p&gt;
+&lt;p&gt;终于踏进了电梯，马丁花被挤到了角落里，电梯里的人互不相识，肃穆像开追悼会，只听得电梯不断发出“叮”的一声响，电子合成声开始汇报多少层到了，门打开，随着不断有人走出，空间变得逐渐开阔起来。&lt;/p&gt;
+&lt;p&gt;“十八层到了！”自从新搬到这栋写字楼后，马丁花每次听到呆板而不带感情的电子合成声汇报所在楼层到达时，都忍不住翻一下白眼，心里不由脑补出“地狱”两个字眼儿。摇摇头，缓缓走出电梯。&lt;/p&gt;
+&lt;p&gt;刷卡。自动门刚一打开，就瞥见一道身影正要到正前方拐角处的茶水间倒水，看见自己来了，又赶紧退了回去，似乎故意躲着马丁花。这道身影再熟悉不过，自然躲不过马丁花敏锐的法眼，赶紧叫到：“蔡了！”&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="蔡了成长记" scheme="http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/"/>
+    
+    
+      <category term="Design, OO, Design Pattern" scheme="http://zhangyi.xyz/tags/Design-OO-Design-Pattern/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《解构领域驱动设计》篇首语</title>
+    <link href="http://zhangyi.xyz/prologue-of-every-volumn-of-ddd-explained/"/>
+    <id>http://zhangyi.xyz/prologue-of-every-volumn-of-ddd-explained/</id>
+    <published>2020-12-03T15:41:38.000Z</published>
+    <updated>2020-12-03T15:47:51.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《解构领域驱动设计》在领域驱动设计统一过程的指导下，将该过程的全部三个阶段作为本书的三个核心篇章：全局分析、架构映射与领域建模，再辅以开篇和融合，共分为五篇二十五章，全面而完整地表达了我对领域驱动设计的全部认知与最佳实践。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD, Writing" scheme="http://zhangyi.xyz/tags/DDD-Writing/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计一个小接口展开的讨论</title>
+    <link href="http://zhangyi.xyz/discuss-about-interface-design/"/>
+    <id>http://zhangyi.xyz/discuss-about-interface-design/</id>
+    <published>2020-12-03T08:44:59.000Z</published>
+    <updated>2020-12-03T08:56:24.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;蔡了戴着耳机一边哼着歌一边晃着头沉浸在自己的音乐世界里。8点45分，距离早会还有半个多小时，放松一下，抽空自娱自乐！&lt;/p&gt;
+&lt;p&gt;“蔡了！”办公室传来中气十足的呼唤声，似乎整个写字楼都回荡着蔡了的名字。&lt;/p&gt;
+&lt;p&gt;“哎，明明就只隔几个工位，还要吼得整栋楼都听得到，不明真相的，还以为我又犯什么错了呢！”蔡了一边腹诽着，一边回应着“来了来了”，丢下耳机就向马大叔的工位跑去——没办法，头儿的呼唤，怎敢不从？&lt;/p&gt;
+&lt;p&gt;“马大叔！什么事啊？不会我的代码又没写好吧？”蔡了看着电脑屏幕的光线投射在马丁花那张老脸上，阴晴不明，心里一紧，说话也变得小心翼翼起来。&lt;/p&gt;
+&lt;p&gt;“没事就不能叫你？”马丁花脸一板，像指挥军队的将军一般将手一挥，说到：“过来，过来！我今早一来就pull了代码，正好看到你提交的代码。”&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="蔡了成长记" scheme="http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/"/>
+    
+    
+      <category term="Design, OO" scheme="http://zhangyi.xyz/tags/Design-OO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《解构领域驱动设计》前言</title>
+    <link href="http://zhangyi.xyz/Preface-of-DDD-Explained/"/>
+    <id>http://zhangyi.xyz/Preface-of-DDD-Explained/</id>
+    <published>2020-12-02T23:03:29.000Z</published>
+    <updated>2020-12-03T08:43:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;写下本书内容第一个字的具体时间已不可考，从文档创建的时间看，本书的写作至少可以追溯到2017年11月，屈指算来，距今已是三载光阴流逝而过，为了本书，我已算得上呕心沥血。回想这悠悠三年，无论在万米高空的飞行途中，还是在蔚蓝海边的栖息之旅，抑或工作之余正襟危坐书桌之前，我的心弦一刻不敢放松，沉思于体系的构建，纠结于案例的选择，锱铢必较于每个文字的运用，我力求输出最好的文本，希望打造领域驱动设计技术书籍的经典！&lt;/p&gt;
+&lt;p&gt;我在ThoughtWorks的前同事滕云开我的玩笑，说：“老人家，你写完这本书，也就功德圆满了！”老人家是我在ThoughtWorks的诨名，虽然我对此称呼一直敬谢不敏，不过写作此书至今，我已心力交瘁，老人家的称谓也算名实相副了，至于是否“功德圆满”，就要交给读者诸君来品评了。本书内容主要来自我在GitChat发布的课程《领域驱动设计实践》。该课程历经两年，完成于2020年1月21日。当时的我，颇有感慨地写下如此后记：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;课程写作结束了。战略篇一共 34 章，15 万 5 千字；战术篇一共 71 章，35 万 1 千字；合计 105 章，共 50 万 6 千余字，加上两篇开篇词与这篇可以称为写后感的后记，共108 章，算是凑齐了一百单八将。如此成果也足可慰藉我为之付出的两年多艰辛时光！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我对《领域驱动设计实践》课程的内容还算满意，然而，随着我对领域驱动设计理解的蜕变与升华，我的“野心”也在不断膨胀，不仅希望讲清楚该如何实践领域驱动设计，还企图对这套方法体系进行深层次的解构。这也是本书书名《解构领域驱动设计》得名的由来。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《解构领域驱动设计》目录</title>
+    <link href="http://zhangyi.xyz/toc-of-ddd-explained/"/>
+    <id>http://zhangyi.xyz/toc-of-ddd-explained/</id>
+    <published>2020-09-03T11:56:26.000Z</published>
+    <updated>2020-09-03T13:31:02.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;《解构领域驱动设计》目录&quot;&gt;&lt;a href=&quot;#《解构领域驱动设计》目录&quot; class=&quot;headerlink&quot; title=&quot;《解构领域驱动设计》目录&quot;&gt;&lt;/a&gt;《解构领域驱动设计》目录&lt;/h2&gt;&lt;p&gt;本书经过近4年的准备和写作，基于GitChat《领域驱动设计实践》战略篇和战术篇的内容，我又历经一年的时间来打磨本书，相信本书呈现给读者的内容已经达到我目前的极限了。书名暂定为《解构领域驱动设计（Domain-Driven Design Explained）》，说明了我的“野心”也罢，“宏图”也罢，就是要全方位的解构领域驱动设计这一套方法体系。&lt;/p&gt;
+&lt;p&gt;一些订阅了我的GitChat课程的同学可能会问，这本即将出版的纸质书与GitChat课程有什么差别呢？实际上，基于线上更新的写作方式，进度压力颇大，很多内容缺乏系统的梳理，在写作时，难免会有前后矛盾、重复之处，有的内容待写在后面会有更深刻的理解，因为时间关系，也就没有来得及调整。当然，这些内容差别都是细节差异，最主要的差别还是因为我重新梳理了DDD的体系，提出了所谓的“领域驱动设计统一过程（Domain-Driven Design Unified Process）”。&lt;/p&gt;
+&lt;p&gt;总结出的这个过程对我而言意义重大，正是因为有此过程，我整本书的结构才明晰起来，有了一个前后呼应且成体系的目录结构，这个过程还弥补了我一直认为非常重要的“需求分析”的知识，因为我一直认为要做到好的领域驱动设计，必须要有好的需求分析为基础。于是，针对这套统一过程，我对GitChat课程的内容做了全方位的手术，如果仅仅是对比文字，你会发现纸质版的内容很少与GitChat课程内容重复，并非我对内容做了彻底改写，而是对内容做了修改、修饰和调整，改变了原来内容相对粗糙的一面，这也是为何从GitChat课程到纸质书的完成，居然花了我一年时间的缘故。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Book" scheme="http://zhangyi.xyz/categories/Book/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Book" scheme="http://zhangyi.xyz/tags/Book/"/>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>菱形对称架构</title>
+    <link href="http://zhangyi.xyz/rhombic-symmetric-architecture/"/>
+    <id>http://zhangyi.xyz/rhombic-symmetric-architecture/</id>
+    <published>2020-03-17T12:12:21.000Z</published>
+    <updated>2020-03-17T12:37:46.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/rhombic-symmetric-architecture/cover.jpeg&quot; class=&quot;&quot;&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在实施领域驱动设计的过程中，限界上下文（Bounded Context）扮演了关键角色：它既是维护领域模型完整性与一致性的重要边界，又是系统架构的重要组成部分。随着社区对限界上下文的重视，越来越多的人开始尝试将更多的架构实践与限界上下文融合在一起，创造出符合领域驱动设计的架构模式。&lt;/p&gt;
+&lt;p&gt;Eric Evans 在领域驱动设计中引入了分层架构（Layered Architecture），目的是希望能够分离领域，这意味着该模式本身是作用在整个系统层次。Vaughn Vernon 在《实现领域驱动设计》一书中，将 Alistair Cockburn 提出的六边形架构（Haxagonal Architecture）引入到领域驱动设计中，并将其与限界上下文结合在一起，清晰地体现了它内部的视图。这一模式的引入，实际上代表着限界上下文在架构中的核心地位。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>限界上下文的菱形对称架构</title>
+    <link href="http://zhangyi.xyz/diamond-symmetry-architecture-of-bounded-context/"/>
+    <id>http://zhangyi.xyz/diamond-symmetry-architecture-of-bounded-context/</id>
+    <published>2020-02-25T12:47:53.000Z</published>
+    <updated>2020-03-14T10:23:08.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;img src=&quot;/diamond-symmetry-architecture-of-bounded-context/chat.jpg&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GitChatDDD课程微信群问答</title>
+    <link href="http://zhangyi.xyz/qa-for-ddd-group-of-wechat/"/>
+    <id>http://zhangyi.xyz/qa-for-ddd-group-of-wechat/</id>
+    <published>2020-02-17T13:57:23.000Z</published>
+    <updated>2020-03-14T10:20:29.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/qa-for-ddd-group-of-wechat/cover.png&quot; class=&quot;&quot;&gt;
+
+
+
+&lt;p&gt;我在GitChat发布了《&lt;a href=&quot;https://gitbook.cn/gitchat/column/5cdab7fb34b6ed1398fd8de7&quot;&gt;领域驱动设计实践&lt;/a&gt;》&lt;a href=&quot;https://gitbook.cn/gitchat/column/5b3235082ab5224deb750e02&quot;&gt;战略篇&lt;/a&gt;+&lt;a href=&quot;https://gitbook.cn/gitchat/column/5cbed2f6f00736695f3a8699&quot;&gt;战术篇&lt;/a&gt;课程，购买该课程的学员还可以免费加入由我创建，GitChat维护的DDD微信群。目前，已创建三个微信群，人数达到1200人左右。在这三个群里，每天都有DDD的爱好者参与激烈的讨论，讨论的质量也格外的高。我几乎可以自豪地说，天下DDD英雄已尽在群中矣。&lt;/p&gt;
+&lt;p&gt;感谢志愿者@子鱼每天不辞辛劳对群里问题的收集。本文遴选了部分问题给以回答。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="GitChat" scheme="http://zhangyi.xyz/tags/GitChat/"/>
+    
+      <category term="QA" scheme="http://zhangyi.xyz/tags/QA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计概念的统一语言</title>
+    <link href="http://zhangyi.xyz/ubiquitous-language-of-design-concept/"/>
+    <id>http://zhangyi.xyz/ubiquitous-language-of-design-concept/</id>
+    <published>2020-02-16T04:29:24.000Z</published>
+    <updated>2020-03-14T10:17:55.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/ubiquitous-language-of-design-concept/cover.jpg&quot; class=&quot;&quot;&gt;
+
+
+
+&lt;p&gt;当我们在讨论领域驱动设计时，不止要谈到领域驱动设计固有的设计概念，结合开发语言和开发平台的设计实践，又会有其他设计概念穿插其中，它们之间的关系并非正交的，解决的问题和思考的角度都不太一致，许多设计概念更有其历史渊源，却又在提出之后或者被滥用，后者被错用，到了最后已经失去了它本来的面目。因此，我们首先需要揭开这些设计术语的历史迷雾，理解其本真的概念，然后再确定它的统一语言。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>场景驱动设计新鲜出炉了</title>
+    <link href="http://zhangyi.xyz/scenario-driven-design/"/>
+    <id>http://zhangyi.xyz/scenario-driven-design/</id>
+    <published>2019-08-23T10:34:09.000Z</published>
+    <updated>2019-08-23T11:18:51.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我并非要刻意创造一个方法体系，仅仅是在领域驱动设计的大旗下，发现以“场景”为起点，会有更为系统的设计过程。设计本身会有许多驱动力，场景驱动的方式并没有超出领域驱动的范畴，只是以场景来描述会更准确。&lt;/p&gt;
+&lt;p&gt;我对场景的定义为：&lt;strong&gt;具有业务价值的，由参与者触发的，按照时序排列的一系列连续执行的任务过程。&lt;/strong&gt;场景的层次与Alistair Corkburn设定的用例层次一致，可以简单分为三个层次：概要目标、用户目标和子功能。&lt;/p&gt;
+&lt;p&gt;用户目标被Corkburn形象地比喻为“海平面”，它是最重要的目标，可以认为是业务需求与系统需求的分界线。只有满足用户目标的场景才体现了业务价值，因此，位于这一层的场景才可以认为是“领域场景”。准确地说，场景驱动设计其实是领域场景驱动设计，如此才能体现通过业务来驱动设计的事实。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/categories/Design/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+      <category term="SDD" scheme="http://zhangyi.xyz/tags/SDD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>运用事件风暴进行领域分析建模</title>
+    <link href="http://zhangyi.xyz/event-storming-with-domain-model/"/>
+    <id>http://zhangyi.xyz/event-storming-with-domain-model/</id>
+    <published>2019-08-08T15:25:56.000Z</published>
+    <updated>2019-08-08T16:02:16.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/event-storming-with-domain-model/10.png&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;在确定了全景事件流之后，可以在战略设计层面继续精进，鉴别出领域与限界上下文的边界。这里略过不提，且进入战术设计阶段的领域分析建模。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+      <category term="Event Storming" scheme="http://zhangyi.xyz/tags/Event-Storming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用事件风暴探索业务全景</title>
+    <link href="http://zhangyi.xyz/explore-big-picture-by-event-storming/"/>
+    <id>http://zhangyi.xyz/explore-big-picture-by-event-storming/</id>
+    <published>2019-08-02T11:24:50.000Z</published>
+    <updated>2019-08-02T11:54:54.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/explore-big-picture-by-event-storming/06.jpg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;事件风暴是一种高度强调交流与协作的可视化工作坊，是大白纸与各色即时贴的重度使用者。面对着糊满整面墙的大白纸，工作坊的参与人员通过充分地交流与沟通，然后用马克笔在各色即时贴上写下各个领域模型概念，贴在墙上呈现生动的模型。由于这些模型都是可视化的，就可以给团队直观印象。大家站在墙面前，观察这些模型，及时开展讨论。若发现有误，就可以通过移动即时贴来调整与更新，也可以随时贴上新的即时贴完善建模结果。&lt;/p&gt;
+&lt;p&gt;Alberto Brandolini设计的事件风暴通常分为两个层次。如果在工作坊过程中将主要的精力用于寻找业务流程中产生的领域事件，则这个过程可以认为是宏观级别的事件风暴，其目的是&lt;strong&gt;探索业务全景（Big Picture Exploration）&lt;/strong&gt;。在识别出全景事件流之后，就可以标记时间轴的关键时间点作为划分领域边界和限界上下文边界的依据；同时也可以基于事件表达的业务概念对领域进行划分，最终确定候选的子领域和限界上下文。另一个层次则属于设计级别（Design-level）的领域分析建模方法，通过探索业务全景获得的事件流，&lt;strong&gt;围绕着事件获得领域分析模型&lt;/strong&gt;。这些领域分析建模要素除了领域事件之外，还包括决策命令、读模型和聚合。事件风暴的领域分析建模方法通常会以业务全景探索的结果作为领域分析建模的基础。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+      <category term="Event Storming" scheme="http://zhangyi.xyz/tags/Event-Storming/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>软件系统中的模型</title>
+    <link href="http://zhangyi.xyz/model-of-software-system/"/>
+    <id>http://zhangyi.xyz/model-of-software-system/</id>
+    <published>2019-07-16T14:00:58.000Z</published>
+    <updated>2019-07-16T14:10:01.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/model-of-software-system/header.jpeg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;从领域驱动的战略设计进入战术设计，简单说来，就是跨过系统视角的限界上下文边界进入它的内部，从分层架构的逻辑分层进入到每一层的内部。在思考内部的设计细节时，首先需要思考的问题就是：什么是模型（Model）？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>函数范式与领域建模</title>
+    <link href="http://zhangyi.xyz/fp-and-domain-model/"/>
+    <id>http://zhangyi.xyz/fp-and-domain-model/</id>
+    <published>2019-05-26T13:28:41.000Z</published>
+    <updated>2019-05-26T13:46:43.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;函数范式&quot;&gt;&lt;a href=&quot;#函数范式&quot; class=&quot;headerlink&quot; title=&quot;函数范式&quot;&gt;&lt;/a&gt;函数范式&lt;/h2&gt;&lt;p&gt;REA的Ken Scambler认为函数范式的主要特征为：模块化（Modularity），抽象化（Abstraction）和可组合（Composability）。这三个特征可以帮助我们编写&lt;strong&gt;简单&lt;/strong&gt;的程序。&lt;/p&gt;
+&lt;p&gt;通常，为了降低系统的复杂度，都需要将系统分解为多个功能的组成部分，每个组成部分有着清晰的边界。&lt;strong&gt;模块化&lt;/strong&gt;的编码范式需要支持实现者能够轻易地对模块进行替换，这就要求模块具有隔离性，避免在模块之间出现太多的纠缠。函数范式以“函数”为核心，作为模块化的重要组成部分。函数范式要求函数均为没有副作用的纯函数（pure function）。在推断每个函数的功能时，由于函数没有产生副作用，就可以不考虑该函数当前所处的上下文，形成清晰的隔离边界。这种相互隔离的纯函数使得模块化成为可能。&lt;/p&gt;
+&lt;p&gt;函数的&lt;strong&gt;抽象&lt;/strong&gt;能力不言而喻，因为它本质上是一种将输入类型转换为输出类型的转换行为。任何一个函数都可以视为一种转换(transform)，这是对行为的最高抽象，代表了类型（type）之间的某种动作。极端情况下，我们甚至不用考虑函数的名称和类型，只需要关注其数学本质：&lt;code&gt;f(x) = y&lt;/code&gt;。其中，x是输入，y是输出，f就是极度抽象的函数。&lt;/p&gt;
+&lt;p&gt;函数范式领域模型的核心要素为代数数据类型（Algebraic Data Type, ADT）和纯函数。代数数据类型表达领域概念，纯函数表达领域行为。由于二者皆被定义为不变的、原子的，因此在类型的约束规则下可以对它们进行组合。&lt;strong&gt;可组合&lt;/strong&gt;的特征使得函数范式建立的领域模型可以由简单到复杂，利用组合子来表现复杂的领域逻辑。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+      <category term="Scala" scheme="http://zhangyi.xyz/tags/Scala/"/>
+    
+      <category term="FP" scheme="http://zhangyi.xyz/tags/FP/"/>
+    
+  </entry>
+  
+</feed>

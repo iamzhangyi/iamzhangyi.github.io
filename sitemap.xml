@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://zhangyi.xyz/multi-views-of-business-architecture/</loc>
+    
+    <lastmod>2021-06-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/enterprise-architecture-and-ddd/</loc>
+    
+    <lastmod>2021-06-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/three-principles-of-architecture/</loc>
+    
+    <lastmod>2021-06-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/discuss-with-factory-pattern-in-real-project/</loc>
+    
+    <lastmod>2021-02-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/technical-discussion-in-tea-room/</loc>
+    
+    <lastmod>2021-01-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/understand-simple-design/</loc>
+    
+    <lastmod>2020-12-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/simple-factory-is-not-simple/</loc>
+    
+    <lastmod>2020-12-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/prologue-of-every-volumn-of-ddd-explained/</loc>
+    
+    <lastmod>2020-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/discuss-about-interface-design/</loc>
+    
+    <lastmod>2020-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/Preface-of-DDD-Explained/</loc>
+    
+    <lastmod>2020-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/toc-of-ddd-explained/</loc>
+    
+    <lastmod>2020-09-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/rhombic-symmetric-architecture/</loc>
+    
+    <lastmod>2020-03-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/diamond-symmetry-architecture-of-bounded-context/</loc>
+    
+    <lastmod>2020-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/qa-for-ddd-group-of-wechat/</loc>
+    
+    <lastmod>2020-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/ubiquitous-language-of-design-concept/</loc>
+    
+    <lastmod>2020-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/scenario-driven-design/</loc>
+    
+    <lastmod>2019-08-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/event-storming-with-domain-model/</loc>
+    
+    <lastmod>2019-08-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/explore-big-picture-by-event-storming/</loc>
+    
+    <lastmod>2019-08-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/model-of-software-system/</loc>
+    
+    <lastmod>2019-07-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/fp-and-domain-model/</loc>
+    
+    <lastmod>2019-05-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/talking-with-gitchat-about-ddd/</loc>
+    
+    <lastmod>2019-05-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/self-governance-of-oo/</loc>
+    
+    <lastmod>2019-05-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/process-of-domain-driven-tactic-design/</loc>
+    
+    <lastmod>2019-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/basic-concepts-of-ddd/</loc>
+    
+    <lastmod>2019-02-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/how-to-break-monolith-into-microservices/</loc>
+    
+    <lastmod>2019-02-26</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/abstract-streaming-model-on-flink/</loc>
+    
+    <lastmod>2019-02-11</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/event-storming-distill/</loc>
+    
+    <lastmod>2019-02-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/analysis-model-for-promotion/</loc>
+    
+    <lastmod>2019-01-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/rewrite-and-refactoring-policy/</loc>
+    
+    <lastmod>2019-01-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/understanding-micro-service-definition/</loc>
+    
+    <lastmod>2019-01-13</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/handling-complex-by-ddd/</loc>
+    
+    <lastmod>2018-12-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/state-pattern-and-rdd/</loc>
+    
+    <lastmod>2018-12-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/ddd-strategic-design-workshop/</loc>
+    
+    <lastmod>2018-12-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tail-recursion/</loc>
+    
+    <lastmod>2018-12-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/anlysis-complexity-of-software/</loc>
+    
+    <lastmod>2018-11-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/class-definition-of-java-class-learning-from-opensource/</loc>
+    
+    <lastmod>2018-10-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/role-of-domain-model-in-communication/</loc>
+    
+    <lastmod>2018-10-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/overview-of-ddd/</loc>
+    
+    <lastmod>2018-09-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/architectural-elements-of-ddd/</loc>
+    
+    <lastmod>2018-09-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/boundary-of-bounded-context/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/table-of-contect-practice-ddd/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/6w-model-based-on-scenario/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/solve-puzzle-of-ddd/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/how-to-identify-application-service/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/mongodb-schema-design-using-aggregate/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/example-of-define-domain-service/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/preface-of-practice-ddd/</loc>
+    
+    <lastmod>2018-09-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/why-do-we-need-domain-modeling/</loc>
+    
+    <lastmod>2018-07-17</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/preface-of-beautiful-architecture/</loc>
+    
+    <lastmod>2018-07-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/framework-example-of-scala-dsl/</loc>
+    
+    <lastmod>2018-06-10</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/interface-oriented-design-and-role-interface/</loc>
+    
+    <lastmod>2018-06-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/demeter-law-and-refactoring/</loc>
+    
+    <lastmod>2018-06-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/the-design-of-topic-data/</loc>
+    
+    <lastmod>2018-06-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/thinking-pattern-after-reading-borges/</loc>
+    
+    <lastmod>2018-04-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/micro-service-based-on-spring-cloud/</loc>
+    
+    <lastmod>2018-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/handout-tdd-code-kata/</loc>
+    
+    <lastmod>2018-04-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/brief-introduce-bdd/</loc>
+    
+    <lastmod>2018-03-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/about-just-enough-soft-arch/</loc>
+    
+    <lastmod>2018-03-23</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/usage-of-java-nested-class/</loc>
+    
+    <lastmod>2018-03-19</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/summary-of-reactive-programming/</loc>
+    
+    <lastmod>2018-03-16</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/read-binary-file-using-spark/</loc>
+    
+    <lastmod>2018-03-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/foreachrdd-of-spark-streaming/</loc>
+    
+    <lastmod>2018-03-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/when-use-static-method/</loc>
+    
+    <lastmod>2018-03-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/thinking-rule-of-rp/</loc>
+    
+    <lastmod>2018-03-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/log-storage-and-analysis-based-on-big-data/</loc>
+    
+    <lastmod>2018-03-04</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/using-spring-cloud-in-scala-project/</loc>
+    
+    <lastmod>2018-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/technical-choice-of-streaming-platform/</loc>
+    
+    <lastmod>2018-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/operators-of-apache-apex/</loc>
+    
+    <lastmod>2018-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/oo-and-fp-of-scala/</loc>
+    
+    <lastmod>2018-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/build-your-tech-tag/</loc>
+    
+    <lastmod>2018-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/apache-streaming-projects/</loc>
+    
+    <lastmod>2018-03-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/about/index.html</loc>
+    
+    <lastmod>2018-02-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/restart-from-2018/</loc>
+    
+    <lastmod>2018-02-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/index.html</loc>
+    
+    <lastmod>2018-02-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/index.html</loc>
+    
+    <lastmod>2018-02-01</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>http://zhangyi.xyz/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/DDD/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Requirement/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Architecture/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Book/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Streaming/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Big-Data/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Flink/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Design/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Micro-Service/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/BDD/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Agile/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Thinking/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Career/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Refactoring/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Clean-Code/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Design-OO/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/EA/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Event-Storming/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Spark/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Scala/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/FP/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Design-Pattern/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/OO/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Kafka/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/HBase/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Spring-Boot/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/MongoDB/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Apex/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Writing/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/DDD-Writing/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/GitChat/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/QA/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Python/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/SDD/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Design-OO-Design-Pattern/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/RDD/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Reactive-Programming/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/RxJava/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Akka/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Reading/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Data-Warehouse/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Spring-Cloud/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Java/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Legacy/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/TDD/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Open-Source/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/DDD/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/Writing/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/BigData/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/Architecture/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/Design/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/Thinking/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/Coding/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/categories/Book/</loc>
+    <lastmod>2021-06-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>
