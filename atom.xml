@@ -325,9 +325,9 @@
     
       <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
     
-      <category term="Book" scheme="http://zhangyi.xyz/tags/Book/"/>
-    
       <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
+    
+      <category term="Book" scheme="http://zhangyi.xyz/tags/Book/"/>
     
   </entry>
   

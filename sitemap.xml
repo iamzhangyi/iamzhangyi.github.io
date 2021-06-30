@@ -557,6 +557,13 @@
   </url>
   
   <url>
+    <loc>http://zhangyi.xyz/tags/Writing/</loc>
+    <lastmod>2021-06-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://zhangyi.xyz/tags/Architecture/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
@@ -613,20 +620,6 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/BDD/</loc>
-    <lastmod>2021-06-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhangyi.xyz/tags/Agile/</loc>
-    <lastmod>2021-06-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zhangyi.xyz/tags/Thinking/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
@@ -635,6 +628,20 @@
   
   <url>
     <loc>http://zhangyi.xyz/tags/Career/</loc>
+    <lastmod>2021-06-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/BDD/</loc>
+    <lastmod>2021-06-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Agile/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -746,13 +753,6 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/Writing/</loc>
-    <lastmod>2021-06-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zhangyi.xyz/tags/DDD-Writing/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
@@ -823,14 +823,14 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/Data-Warehouse/</loc>
+    <loc>http://zhangyi.xyz/tags/Reading/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/Reading/</loc>
+    <loc>http://zhangyi.xyz/tags/Data-Warehouse/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -902,14 +902,14 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/categories/Design/</loc>
+    <loc>http://zhangyi.xyz/categories/Thinking/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/categories/Thinking/</loc>
+    <loc>http://zhangyi.xyz/categories/Design/</loc>
     <lastmod>2021-06-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
