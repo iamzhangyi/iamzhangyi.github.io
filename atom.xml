@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-06-26T23:51:52.476Z</updated>
+  <updated>2021-07-03T12:32:11.107Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flink分布式程序的异常处理</title>
+    <link href="http://zhangyi.xyz/exception-handling-in-flink/"/>
+    <id>http://zhangyi.xyz/exception-handling-in-flink/</id>
+    <published>2021-07-03T04:57:17.000Z</published>
+    <updated>2021-07-03T12:32:11.107Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/exception-handling-in-flink/cover.jpg&quot; class=&quot;&quot;&gt;
+
+
+
+&lt;p&gt;在我们的数据平台产品中，为了简化开发，对Flink做了一层封装，定义了&lt;code&gt;Job&lt;/code&gt;和&lt;code&gt;Flow&lt;/code&gt;的抽象。一个Job其实就是Flink的一个作业，每个Job可以定义多个Flow，一个Flow可以理解为是Flink的一个&lt;code&gt;DataStream&lt;/code&gt;，利用Job传递的&lt;code&gt;StreamExecutionEnvironment&lt;/code&gt;可以在Flow中添加包括&lt;code&gt;Source&lt;/code&gt;与&lt;code&gt;Sink&lt;/code&gt;的多个算子。&lt;/p&gt;
+&lt;p&gt;Job与Flow之间的关系可以利用自定义的&lt;code&gt;@JobFlow&lt;/code&gt;注解进行配置，如此就可以在执行抽象的&lt;code&gt;AbstractJob&lt;/code&gt;的&lt;code&gt;run()&lt;/code&gt;方法时，利用反射获得该Job下的所有Flow，遍历执行每个Flow的&lt;code&gt;run()&lt;/code&gt;方法。在Flow的&lt;code&gt;run()&lt;/code&gt;方法中，才会真正根据&lt;code&gt;StreamExecutionEnvironment&lt;/code&gt;执行多个算子。&lt;/p&gt;
+&lt;p&gt;Flink为了保证计算的稳定性，提供了不同的重启策略。例如，当我们将重启策略设置为失败率（failure-rate）时，如果执行的任务出错次数达到了失败率配置的要求，Flink的Worker节点的TaskManager就会重启。如果超过重启次数，Task Manager就会停止运行。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Coding" scheme="http://zhangyi.xyz/categories/Coding/"/>
+    
+    
+      <category term="Big Data" scheme="http://zhangyi.xyz/tags/Big-Data/"/>
+    
+      <category term="Flink" scheme="http://zhangyi.xyz/tags/Flink/"/>
+    
+      <category term="Coding" scheme="http://zhangyi.xyz/tags/Coding/"/>
+    
+  </entry>
   
   <entry>
     <title>《解构领域驱动设计》最新进展</title>
@@ -519,30 +549,6 @@
       <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
     
       <category term="Event Storming" scheme="http://zhangyi.xyz/tags/Event-Storming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>软件系统中的模型</title>
-    <link href="http://zhangyi.xyz/model-of-software-system/"/>
-    <id>http://zhangyi.xyz/model-of-software-system/</id>
-    <published>2019-07-16T14:00:58.000Z</published>
-    <updated>2019-07-16T14:10:01.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;img src=&quot;/model-of-software-system/header.jpeg&quot; class=&quot;&quot;&gt;
-
-&lt;p&gt;从领域驱动的战略设计进入战术设计，简单说来，就是跨过系统视角的限界上下文边界进入它的内部，从分层架构的逻辑分层进入到每一层的内部。在思考内部的设计细节时，首先需要思考的问题就是：什么是模型（Model）？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
     
   </entry>
   

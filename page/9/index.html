@@ -164,6 +164,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/architectural-elements-of-ddd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/architectural-elements-of-ddd/" class="post-title-link" itemprop="url">领域驱动设计中的架构要素</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2018-09-06 09:01:25 / 修改时间：10:04:51" itemprop="dateCreated datePublished" datetime="2018-09-06T09:01:25+08:00">2018-09-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>多数时候，领域驱动设计的分层架构并不能清晰表达各模块之间的依赖关系，以及这些模块在分层架构中所处的位置。因为我倾向于将Uncle Bob的Clean Architecture与DDD的分层架构整合起来，如下图所示：</p>
+<img src="/architectural-elements-of-ddd/01.jpg" class="">
+
+<p>在这个架构图中，基础设施层处于最外部，然后是应用层，最核心的是领域层。<strong>基础设施中的模块，我都称之为gateway。</strong>根据依赖方向，如果是被调用的方向，即由外至内的调用方向，就是北向，称之为北向网关。如果当前限界上下文是通过该网关调用外部资源或者别的限界上下文，即由内至外的调用方向，则是南向网关。例如图中的<code>OrderController</code>，会被别人调用，因而属于北向网关。注意，倘若<code>OrderController</code>通过RESTful方式暴露API，即为REST服务，也就是基于资源的服务。我们不能将它与DDD的应用服务混为一谈。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/architectural-elements-of-ddd/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/preface-of-practice-ddd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -467,83 +545,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/interface-oriented-design-and-role-interface/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="张逸">
-      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="张逸说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/interface-oriented-design-and-role-interface/" class="post-title-link" itemprop="url">面向接口设计与角色接口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2018-06-08 19:04:57 / 修改时间：19:12:37" itemprop="dateCreated datePublished" datetime="2018-06-08T19:04:57+08:00">2018-06-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index"><span itemprop="name">Design</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>问题：</strong>在做项目的时候，是不是所有包含非静态方法的类，都要写一个接口？是因为这样的目的是为了解耦，然后通过DI注入实现吗？</p>
-<p><strong>回答：</strong></p>
-<p>这不是提取接口的根本原因。因为要做到解耦和DI，直接用类也是可以的，尤其Java的普通方法都是允许子类override的。此外，如果你的接口永远都只有一个实现类，并没有任何可能的需求变化，那么还有必要解耦吗？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/interface-oriented-design-and-role-interface/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -613,7 +614,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -626,7 +627,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-count">48</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
