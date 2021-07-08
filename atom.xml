@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-07-03T12:32:11.107Z</updated>
+  <updated>2021-07-08T11:47:39.509Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>业务架构映射为应用架构</title>
+    <link href="http://zhangyi.xyz/mapping-to-application-architecture-from-business-architecture/"/>
+    <id>http://zhangyi.xyz/mapping-to-application-architecture-from-business-architecture/</id>
+    <published>2021-07-08T05:09:01.000Z</published>
+    <updated>2021-07-08T11:47:39.509Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/mapping-to-application-architecture-from-business-architecture/cover.jpg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;通过《&lt;a href=&quot;http://zhangyi.xyz/multi-views-of-business-architecture/&quot;&gt;多维度规划业务架构&lt;/a&gt;》，我们获得了由业务领域-业务组件-业务服务三个层次组成的业务架构。虽然是架构，但其本质仍然属于问题空间，其目的在于真实地探索问题空间，了解我们要解决什么样的问题。我们用到“分解”的方法，并非在解决问题，而是希望通过横向分层与纵向切分让问题空间变得更小，降低业务复杂度罢了。&lt;/p&gt;
+&lt;p&gt;这种分解层次体现为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;业务领域是对目标系统之系统范围进行划分，划分依据为价值高低&lt;/li&gt;
+&lt;li&gt;业务组件是对业务领域的划分，划分依据在于业务相关性&lt;/li&gt;
+&lt;li&gt;业务服务是对业务组件的划分，划分依据在于领域模型的知识语境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;领域驱动进行的业务分解，既是对问题空间的探索，又自然地暗合确定解决方案的思路。由于有清晰的边界存在，这一做法并未混淆问题空间与解空间，却天然地搭建了一种映射方法，使得我们能够以较小成本将业务架构&lt;strong&gt;映射&lt;/strong&gt;为IT架构中的应用架构。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/categories/Architecture/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+      <category term="EA" scheme="http://zhangyi.xyz/tags/EA/"/>
+    
+  </entry>
   
   <entry>
     <title>Flink分布式程序的异常处理</title>
@@ -520,33 +553,6 @@
       <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
     
       <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-      <category term="Event Storming" scheme="http://zhangyi.xyz/tags/Event-Storming/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用事件风暴探索业务全景</title>
-    <link href="http://zhangyi.xyz/explore-big-picture-by-event-storming/"/>
-    <id>http://zhangyi.xyz/explore-big-picture-by-event-storming/</id>
-    <published>2019-08-02T11:24:50.000Z</published>
-    <updated>2019-08-02T11:54:54.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;img src=&quot;/explore-big-picture-by-event-storming/06.jpg&quot; class=&quot;&quot;&gt;
-
-&lt;p&gt;事件风暴是一种高度强调交流与协作的可视化工作坊，是大白纸与各色即时贴的重度使用者。面对着糊满整面墙的大白纸，工作坊的参与人员通过充分地交流与沟通，然后用马克笔在各色即时贴上写下各个领域模型概念，贴在墙上呈现生动的模型。由于这些模型都是可视化的，就可以给团队直观印象。大家站在墙面前，观察这些模型，及时开展讨论。若发现有误，就可以通过移动即时贴来调整与更新，也可以随时贴上新的即时贴完善建模结果。&lt;/p&gt;
-&lt;p&gt;Alberto Brandolini设计的事件风暴通常分为两个层次。如果在工作坊过程中将主要的精力用于寻找业务流程中产生的领域事件，则这个过程可以认为是宏观级别的事件风暴，其目的是&lt;strong&gt;探索业务全景（Big Picture Exploration）&lt;/strong&gt;。在识别出全景事件流之后，就可以标记时间轴的关键时间点作为划分领域边界和限界上下文边界的依据；同时也可以基于事件表达的业务概念对领域进行划分，最终确定候选的子领域和限界上下文。另一个层次则属于设计级别（Design-level）的领域分析建模方法，通过探索业务全景获得的事件流，&lt;strong&gt;围绕着事件获得领域分析模型&lt;/strong&gt;。这些领域分析建模要素除了领域事件之外，还包括决策命令、读模型和聚合。事件风暴的领域分析建模方法通常会以业务全景探索的结果作为领域分析建模的基础。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
     
       <category term="Event Storming" scheme="http://zhangyi.xyz/tags/Event-Storming/"/>
     
