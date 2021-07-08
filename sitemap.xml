@@ -634,20 +634,6 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/Thinking/</loc>
-    <lastmod>2021-07-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zhangyi.xyz/tags/Career/</loc>
-    <lastmod>2021-07-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://zhangyi.xyz/tags/BDD/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
@@ -656,6 +642,20 @@
   
   <url>
     <loc>http://zhangyi.xyz/tags/Agile/</loc>
+    <lastmod>2021-07-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Thinking/</loc>
+    <lastmod>2021-07-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Career/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -691,6 +691,13 @@
   
   <url>
     <loc>http://zhangyi.xyz/tags/Event-Storming/</loc>
+    <lastmod>2021-07-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://zhangyi.xyz/tags/Coding/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -837,14 +844,14 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/Reading/</loc>
+    <loc>http://zhangyi.xyz/tags/Data-Warehouse/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/tags/Data-Warehouse/</loc>
+    <loc>http://zhangyi.xyz/tags/Reading/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -885,13 +892,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>http://zhangyi.xyz/tags/Coding/</loc>
-    <lastmod>2021-07-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
@@ -923,14 +923,14 @@
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/categories/Thinking/</loc>
+    <loc>http://zhangyi.xyz/categories/Design/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zhangyi.xyz/categories/Design/</loc>
+    <loc>http://zhangyi.xyz/categories/Thinking/</loc>
     <lastmod>2021-07-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
