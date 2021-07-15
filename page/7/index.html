@@ -164,6 +164,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/event-storming-distill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/event-storming-distill/" class="post-title-link" itemprop="url">事件风暴的设计要素与驱动力</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-02-01 19:48:19 / 修改时间：21:25:32" itemprop="dateCreated datePublished" datetime="2019-02-01T19:48:19+08:00">2019-02-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/event-storming-distill/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/event-storming-distill/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="/event-storming-distill/cover.jpg" class="">
+
+<p>个人认为，相比较传统领域分析方法，<a target="_blank" rel="noopener" href="https://www.eventstorming.com/">事件风暴</a>的革命意义在于它建立了以“领域事件”为核心的建模思路，这相当于改变了我们观察业务领域的世界观。当我们在理解业务需求时，我们看到的常常是功能、流程，并通过从需求描述中梳理领域概念，进而借助这些概念去识别那些参与到业务场景中互为协作的领域对象，这往往让我们忽略了一个在任何领域中都必须存在的概念，即“<strong>事件</strong>”。这些事件是每次用户操作、业务活动留下来的不可磨灭的足迹，它牵涉到状态的迁移，业务事实的发生，忠实地记录了每次执行命令后可能产生的结果。倘若这些事件还直接影响到该领域的运营和管理时，则可以将它们认为是“关键事件”。</p>
+<p>正如Martin Fowler对领域事件的定义：“重要的事件肯定会在系统其它地方引起反应，因此理解为什么会有这些反应同样也很重要。”在识别和理解事件时，正是要从这样的因果关系着手，考虑为什么要产生这一事件，以及为什么要响应这一事件，进而思考如何响应这个事件，驱动着设计者的“心流”不断思考下去，就像搅动了一场激荡湍急的风暴一般。我想着或许是Alberto Brandolini将其命名为事件风暴的缘由吧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/event-storming-distill/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/analysis-model-for-promotion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -611,141 +717,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/state-pattern-and-rdd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="张逸">
-      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="张逸说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/state-pattern-and-rdd/" class="post-title-link" itemprop="url">职责驱动设计以及状态模式的变化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2018-12-24 20:34:35 / 修改时间：20:44:49" itemprop="dateCreated datePublished" datetime="2018-12-24T20:34:35+08:00">2018-12-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design/" itemprop="url" rel="index"><span itemprop="name">Design</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/state-pattern-and-rdd/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/state-pattern-and-rdd/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>针对某通信产品，我们需要开发一个版本升级管理系统。该系统需要通过由Java开发的管理后台，由Telnet发起向前端基站设备的命令，以获取基站设备的版本信息，并在后台比较与当前最新版本的差异，以确定执行什么样的命令对基站设备的软件文件进行操作。基站设备分为两种：</p>
-<ul>
-<li>主控板（Master Board）</li>
-<li>受控板（Slave Board）</li>
-</ul>
-<p>基站设备允许执行的命令包括transfer、active、inactive等。这些命令不仅受到设备类型的限制，还要受制于该设备究竟运行在什么样的终端。类型分为：</p>
-<ul>
-<li>Shell</li>
-<li>UShell</li>
-</ul>
-<p>对命令的约束条件大体如下表所示（不代表真实需求）：</p>
-<img src="/state-pattern-and-rdd/01.jpg" class="">
-
-
-<p>通过登录可以连接到主控板的Shell终端，此时，若执行enterUshell命令则进入UShell终端，执行enterSlaveBoard则进入受控板的Shell终端。在受控板同样可以执行enterUshell进入它的UShell终端。系统还提供了对应的退出操作。整个操作引起的变迁如下图所示：</p>
-<img src="/state-pattern-and-rdd/02.png" class="">
-
-
-<p>执行升级的流程是在让基站设备处于失效状态下，获取基站设备的软件版本信息，然后在后端基于最新版本进行比较。得到版本之间的差异后，通过transfer命令传输新文件，put命令更新文件，deleteFiles命令删除多余的文件。成功更新后，再激活基站设备。因此，一个典型的升级流程如下所示：<br>0. login (Master Board Shell)</p>
-<ol>
-<li>inactive (Master Board UShell)</li>
-<li>get  (Slave Board Shell)</li>
-<li>transfer(Master Board Shell)</li>
-<li>put(Slave Board Shell)</li>
-<li>deleteFiles(Slave Board Ushell)</li>
-<li>active(Master Board UShell)</li>
-<li>logout</li>
-</ol>
-<p>整个版本升级系统要求：无论当前基站设备属于哪种分类，处于哪种终端，只要Telnet连接没有中断，在要求升级执行的命令必须执行成功。如果当前所处的设备与终端不满足要求，系统就需要迁移到正确的状态，以确保命令的执行成功。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/state-pattern-and-rdd/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -811,7 +786,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -871,12 +846,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">348k</span>
+    <span title="站点总字数">351k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:17</span>
+    <span title="站点阅读时长">5:19</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

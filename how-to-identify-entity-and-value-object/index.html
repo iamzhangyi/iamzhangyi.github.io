@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhangyi.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="甄别实体与值对象非常重要，正确与否会直接影响聚合的设计。 聚合是边界在DDD中，聚合是实体与值对象的边界。一个聚合对外代表了一个完整的领域概念，遵循面向对象设计的基本原则，聚合内部往往由多个细小的高内聚领域概念组成。聚合内部的领域模型形成了一棵树，树的根必须是实体，可以称之为是聚合根（Aggregate Root），当然，也可以称之为根实体（Root Entity），它是聚合的唯一入口或出口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="识别实体与值对象的特征">
+<meta property="og:url" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="甄别实体与值对象非常重要，正确与否会直接影响聚合的设计。 聚合是边界在DDD中，聚合是实体与值对象的边界。一个聚合对外代表了一个完整的领域概念，遵循面向对象设计的基本原则，聚合内部往往由多个细小的高内聚领域概念组成。聚合内部的领域模型形成了一棵树，树的根必须是实体，可以称之为是聚合根（Aggregate Root），当然，也可以称之为根实体（Root Entity），它是聚合的唯一入口或出口。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/cover.jpg">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/entity-vo.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/money.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/money-plus.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/order.png">
+<meta property="og:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/holiday.png">
+<meta property="article:published_time" content="2021-07-14T07:57:26.000Z">
+<meta property="article:modified_time" content="2021-07-15T03:14:24.373Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Design">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/how-to-identify-entity-and-value-object/cover.jpg">
+
+<link rel="canonical" href="http://zhangyi.xyz/how-to-identify-entity-and-value-object/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>识别实体与值对象的特征 | 张逸说</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">张逸说</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">出口成张，逸派胡言</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/how-to-identify-entity-and-value-object/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          识别实体与值对象的特征
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-14 15:57:26" itemprop="dateCreated datePublished" datetime="2021-07-14T15:57:26+08:00">2021-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-15 11:14:24" itemprop="dateModified" datetime="2021-07-15T11:14:24+08:00">2021-07-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/how-to-identify-entity-and-value-object/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/how-to-identify-entity-and-value-object/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/how-to-identify-entity-and-value-object/cover.jpg" class="">
+
+<p>甄别实体与值对象非常重要，正确与否会直接影响聚合的设计。</p>
+<h3 id="聚合是边界"><a href="#聚合是边界" class="headerlink" title="聚合是边界"></a>聚合是边界</h3><p>在DDD中，聚合是实体与值对象的边界。一个聚合对外代表了一个完整的领域概念，遵循面向对象设计的基本原则，聚合内部往往由多个细小的高内聚领域概念组成。聚合内部的领域模型形成了一棵树，树的根必须是实体，可以称之为是<strong>聚合根（Aggregate Root）</strong>，当然，也可以称之为<strong>根实体（Root Entity）</strong>，它是聚合的唯一入口或出口。例如订单聚合定义了<code>Order</code>根实体，它就是订单聚合的唯一代言人。</p>
+<p>在一个限界上下文的所有领域模型（实体和值对象）中，按照关系的强弱与概念的完整性，将其划分为多个聚合，就好像草原部落由一个个蒙古包构成了松散的聚居社群一般。</p>
+<span id="more"></span>
+
+<p>考虑到值对象与实体的差异，倘若需要管理它们的生命周期，则值对象不可能脱离聚合的边界单独存在。这就意味着，当我们要识别领域模型的聚合时，<strong>实体与值对象之间的强弱关系并不会影响到对聚合边界的界定</strong>。只要实体与值对象之间存在关系，无论关系强弱，该值对象都必须与存在关系的实体放在同一个聚合。如果一个值对象与多个实体之间存在关系，要么说明多个实体都属于一个聚合；要么意味着该值对象需要复制为多份，放到不同的聚合中，如下图所示：</p>
+<img src="/how-to-identify-entity-and-value-object/entity-vo.png" class="">
+
+
+
+<p>如此一来，对于聚合边界的识别，就变成了<strong>对实体关系强弱的判断</strong>。只要我们正确地甄别了实体与值对象，在识别聚合时，就可以不再考虑值对象，如此就能降低识别的难度。</p>
+<h3 id="上下文的影响"><a href="#上下文的影响" class="headerlink" title="上下文的影响"></a>上下文的影响</h3><p>虽然我们知道实体与值对象之间的本质差异在于是否具备唯一的身份标识（identity），然而许多时候，这一差异仍然显得似是而非。更何况，实体与值对象的定义并非绝对，在不同的上下文，同一个领域概念也可能定义为不同的设计类型。例如下图所示的钞票一枚：</p>
+<img src="/how-to-identify-entity-and-value-object/money.png" class="">
+
+
+
+<p>在购买上下文，买卖双方只关注钞票的面值与货币类型，只要值相等，即可认为是同一个对象，因而需定义为值对象；在印钞上下文，每张钞票都具有一个唯一的标识，即使同为100元的人民币，只要ID不同，也会认为是不同的对象，故而定义为实体。因此，要正确地甄别实体与值对象，需要结合具体的上下文。</p>
+<h3 id="识别的特征"><a href="#识别的特征" class="headerlink" title="识别的特征"></a>识别的特征</h3><p>即便如此，仍然缺乏相对客观的判断标准。为此，我总结了如下几个特征。</p>
+<h4 id="相等性"><a href="#相等性" class="headerlink" title="相等性"></a>相等性</h4><p>甄别实体与值对象，可以首先从<strong>相等性</strong>进行判断。只要一个领域模型对象的属性值相等，就认为是同一个对象，应优先考虑建模为值对象；否则，需要为领域模型对象定义唯一标识，并建模为实体。</p>
+<p><strong>注意：</strong>在进行相等性判断时，不能将作为唯一标识的ID视为领域模型的属性。</p>
+<p>例如地址领域概念，只要其属性值国家、省份、城市、街道与邮政编码相等，就可以认为是同一个地址，应将<code>Address</code>类定义为值对象。对于大家耳熟能详的订单领域概念，显然需要为其分配一个唯一的订单编号，因为理论上可能存在除订单编号外其他属性都相同的两个不同订单，应将<code>Order</code>定义为实体。</p>
+<p>然而，在对相等性进行判断时，可能出现ID与属性存在一种隐含的对应关系。例如，出版行业中作为正规出版物的图书，具有唯一的ISBN号，它相当于是图书领域概念的ID，所以<code>Book</code>应定义为实体。可在对<code>Book</code>相等性进行判断时，也可以不通过ISBN进行相等性判断，基本上，只要书名、作者（译者）、出版社、价格、出版日期、版次、页数、字数等属性值相同，也可以认为是同一本书，那是否意味着可以将<code>Book</code>定义为值对象呢？</p>
+<p>显然，在进行相等性判断时，考虑的属性越多，就会出现多个组合的属性形成一种“隐藏”的唯一标识特征，有一些体现业务规则的ID，自身就是根据属性值来定义的。例如，航班的唯一标识就可以根据承运公司二字码、航班号、起降机场三字码与执飞日期来决定。通过唯一标识固然可以决定是否同一个航班，根据映射的多个属性值，也可以判断相等性。这会让人在甄别实体与值对象时，显得摇摆不定。例如，腾讯会议的会议号是<code>Meeting</code>的身份标识，在比较会议的相等性时，倘若我们考虑了除会议号之外的其他属性，如会议名称、会议类型、开始时间、结束时间、创建人、创建时间等属性，不一样可以确定会议的相等性吗？</p>
+<p>因此，除了判断相等性，还需考虑<strong>不变性</strong>。</p>
+<h4 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h4><p>Eric Evans建议将值对象定义为不变的类，实则是因为根据值判等的值对象就应该具有不变性。仍以购买上下文的钞票为例，<code>50元+50元=100元</code>，这100元与原来的50元是另一张不同的钞票：</p>
+<img src="/how-to-identify-entity-and-value-object/money-plus.png" class="">
+
+
+
+<p>反之，一个对象除了ID，其余属性值都可以修改，不需要创建一个新的对象，就可以认为该领域对象是可变的，应考虑定义为实体。如前所述的<code>Meeting</code>对象，只要<code>meetingId</code>值不变，如会议名称、会议类型、开始时间、结束时间这样的属性值即使发生了天翻地覆的变化，我们也认为它是同一个会议。显然，应将<code>Meeting</code>定义为实体。</p>
+<p>再考虑一个典型的订单聚合：</p>
+<img src="/how-to-identify-entity-and-value-object/order.png" class="">
+
+
+
+<p>为什么我们要将订单聚合中的<code>OrderItem</code>定义为实体？如果不考虑ID属性，只要<code>orderId</code>、<code>product</code>与<code>quantity</code>值相同，完全可以认为是同一个订单项。然则，订单项的<code>quantity</code>值是可以更改的，更改了数量的订单项也不会认为是不同的订单项。订单项的可变性决定了它应该定义为实体。</p>
+<p>为何要将<code>OrderItem</code>的<code>Product</code>属性定义为值对象呢？要知道，该<code>Product</code>类型还定义了<code>productId</code>属性，既然具有身份标识，不应该定义为实体吗？因为在订单上下文中，商品的<code>productId</code>来自于商品上下文的商品ID，在订单聚合中，可以将<code>productId</code>视为<code>Product</code>类的属性值。只要<code>productId</code>、<code>name</code>和<code>price</code>值相同，就可以认为是同一个商品，且它们的值是不变的。这正是将<code>Product</code>定义为值对象的原因所在。</p>
+<h4 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h4><p>即使考虑了相等性和不变性，仍有一种例外情形，那就是考虑<strong>独立性</strong>特征。值对象作为实体的属性必定附属于实体，不能单独存在；如果一个领域对象既满足了相等性，又满足了不变性，可定义为值对象；可是，如果它单独存在，且需要管理其生命周期，就需要将这样的类“升级”为实体。</p>
+<p>考虑考勤上下文的假期领域概念。由于中国农历假期的缘故，每年都需要配置新的假期。假期概念对应的<code>Holiday</code>类定义为：</p>
+<img src="/how-to-identify-entity-and-value-object/holiday.png" class="">
+
+
+
+<p>显然，该类的所有属性值相等，即可认为是同一个假期，一旦修改了假期的值，也可以认为是不同的假期，即<code>Holiday</code>类同时满足相等性和不变性，应定义为值对象。可是，在考勤上下文的领域模型中，<code>Holiday</code>类是完全独立的，不依附于其他任何实体，而它也需要管理生命周期。这时，就应遵循独立性特征，将其“升级”为实体。</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p> 以上三个特征并无重要性排列，需综合考虑。如果仍然无法判断，就遵循<strong>优先级</strong>原则：优先将领域概念建模为值对象。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/how-to-identify-entity-and-value-object/" title="识别实体与值对象的特征">http://zhangyi.xyz/how-to-identify-entity-and-value-object/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DDD/" rel="tag"># DDD</a>
+              <a href="/tags/Design/" rel="tag"># Design</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/mapping-to-application-architecture-from-business-architecture/" rel="prev" title="业务架构映射为应用架构">
+      <i class="fa fa-chevron-left"></i> 业务架构映射为应用架构
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E6%98%AF%E8%BE%B9%E7%95%8C"><span class="nav-number">1.</span> <span class="nav-text">聚合是边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">2.</span> <span class="nav-text">上下文的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-number">3.</span> <span class="nav-text">识别的特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E7%AD%89%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">相等性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">不变性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">独立性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">3.4.</span> <span class="nav-text">优先级</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">张逸</p>
+  <div class="site-description" itemprop="description">张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">76</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agiledon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agiledon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:brucezhang@tom.com" title="E-Mail → mailto:brucezhang@tom.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">351k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:19</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'wPVDNiDMLe1I6wcQzysBwx1G-gzGzoHsz',
+      appKey     : 'xSeNJmSjwgSFbu704F1RNHze',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

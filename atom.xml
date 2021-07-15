@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-07-08T11:47:39.509Z</updated>
+  <updated>2021-07-15T03:14:24.373Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>识别实体与值对象的特征</title>
+    <link href="http://zhangyi.xyz/how-to-identify-entity-and-value-object/"/>
+    <id>http://zhangyi.xyz/how-to-identify-entity-and-value-object/</id>
+    <published>2021-07-14T07:57:26.000Z</published>
+    <updated>2021-07-15T03:14:24.373Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/how-to-identify-entity-and-value-object/cover.jpg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;甄别实体与值对象非常重要，正确与否会直接影响聚合的设计。&lt;/p&gt;
+&lt;h3 id=&quot;聚合是边界&quot;&gt;&lt;a href=&quot;#聚合是边界&quot; class=&quot;headerlink&quot; title=&quot;聚合是边界&quot;&gt;&lt;/a&gt;聚合是边界&lt;/h3&gt;&lt;p&gt;在DDD中，聚合是实体与值对象的边界。一个聚合对外代表了一个完整的领域概念，遵循面向对象设计的基本原则，聚合内部往往由多个细小的高内聚领域概念组成。聚合内部的领域模型形成了一棵树，树的根必须是实体，可以称之为是&lt;strong&gt;聚合根（Aggregate Root）&lt;/strong&gt;，当然，也可以称之为&lt;strong&gt;根实体（Root Entity）&lt;/strong&gt;，它是聚合的唯一入口或出口。例如订单聚合定义了&lt;code&gt;Order&lt;/code&gt;根实体，它就是订单聚合的唯一代言人。&lt;/p&gt;
+&lt;p&gt;在一个限界上下文的所有领域模型（实体和值对象）中，按照关系的强弱与概念的完整性，将其划分为多个聚合，就好像草原部落由一个个蒙古包构成了松散的聚居社群一般。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
   
   <entry>
     <title>业务架构映射为应用架构</title>
@@ -529,32 +555,6 @@
       <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
     
       <category term="SDD" scheme="http://zhangyi.xyz/tags/SDD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>运用事件风暴进行领域分析建模</title>
-    <link href="http://zhangyi.xyz/event-storming-with-domain-model/"/>
-    <id>http://zhangyi.xyz/event-storming-with-domain-model/</id>
-    <published>2019-08-08T15:25:56.000Z</published>
-    <updated>2019-08-08T16:02:16.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;img src=&quot;/event-storming-with-domain-model/10.png&quot; class=&quot;&quot;&gt;
-
-&lt;p&gt;在确定了全景事件流之后，可以在战略设计层面继续精进，鉴别出领域与限界上下文的边界。这里略过不提，且进入战术设计阶段的领域分析建模。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-      <category term="Event Storming" scheme="http://zhangyi.xyz/tags/Event-Storming/"/>
     
   </entry>
   
