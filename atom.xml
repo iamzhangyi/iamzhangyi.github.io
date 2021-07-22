@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-07-15T03:14:24.373Z</updated>
+  <updated>2021-07-22T04:50:27.251Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>领域驱动建模与面向对象建模的差异</title>
+    <link href="http://zhangyi.xyz/the-difference-between-ddd-and-oo/"/>
+    <id>http://zhangyi.xyz/the-difference-between-ddd-and-oo/</id>
+    <published>2021-07-20T10:54:25.000Z</published>
+    <updated>2021-07-22T04:50:27.251Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;即便采用面向对象建模范式，领域驱动设计的建模仍与面向对象建模存在较大差异，原因在于领域驱动设计引入了&lt;strong&gt;限界上下文（Bounded Context）&lt;/strong&gt;与&lt;strong&gt;聚合（Aggregate）&lt;/strong&gt;，使得建模的风景变得迥然不同。二者为领域模型引入了边界的约束，使得建模者不能随心所欲地建模，亦改变了模型的面貌。&lt;/p&gt;
+&lt;p&gt;在我的《解构领域驱动设计》一书中，提炼了领域驱动设计之精髓，在于对边界的控制。其中，限界上下文与聚合是解空间边界控制中最为重要的两个要素。我们构建的领域模型必然位于限界上下文中，构成领域模型中的主力军——实体和值对象——又必然位于聚合的边界内：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+      <category term="OO" scheme="http://zhangyi.xyz/tags/OO/"/>
+    
+  </entry>
   
   <entry>
     <title>识别实体与值对象的特征</title>
@@ -529,32 +554,6 @@
       <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
     
       <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>场景驱动设计新鲜出炉了</title>
-    <link href="http://zhangyi.xyz/scenario-driven-design/"/>
-    <id>http://zhangyi.xyz/scenario-driven-design/</id>
-    <published>2019-08-23T10:34:09.000Z</published>
-    <updated>2019-08-23T11:18:51.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我并非要刻意创造一个方法体系，仅仅是在领域驱动设计的大旗下，发现以“场景”为起点，会有更为系统的设计过程。设计本身会有许多驱动力，场景驱动的方式并没有超出领域驱动的范畴，只是以场景来描述会更准确。&lt;/p&gt;
-&lt;p&gt;我对场景的定义为：&lt;strong&gt;具有业务价值的，由参与者触发的，按照时序排列的一系列连续执行的任务过程。&lt;/strong&gt;场景的层次与Alistair Corkburn设定的用例层次一致，可以简单分为三个层次：概要目标、用户目标和子功能。&lt;/p&gt;
-&lt;p&gt;用户目标被Corkburn形象地比喻为“海平面”，它是最重要的目标，可以认为是业务需求与系统需求的分界线。只有满足用户目标的场景才体现了业务价值，因此，位于这一层的场景才可以认为是“领域场景”。准确地说，场景驱动设计其实是领域场景驱动设计，如此才能体现通过业务来驱动设计的事实。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/categories/Design/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-      <category term="SDD" scheme="http://zhangyi.xyz/tags/SDD/"/>
     
   </entry>
   

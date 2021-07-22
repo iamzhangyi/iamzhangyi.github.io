@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://zhangyi.xyz/the-difference-between-ddd-and-oo/</loc>
+    <lastmod>2021-07-22</lastmod>
+  </url>
+  <url>
     <loc>http://zhangyi.xyz/how-to-identify-entity-and-value-object/</loc>
     <lastmod>2021-07-15</lastmod>
   </url>
