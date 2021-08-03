@@ -164,6 +164,123 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/apache-streaming-projects/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/apache-streaming-projects/" class="post-title-link" itemprop="url">Apache下流处理项目巡览</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-06 12:01:56" itemprop="dateCreated datePublished" datetime="2018-02-06T12:01:56+08:00">2018-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-03-02 16:15:15" itemprop="dateModified" datetime="2018-03-02T16:15:15+08:00">2018-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/apache-streaming-projects/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/apache-streaming-projects/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="/apache-streaming-projects/stream.jpg" class="">
+
+<blockquote>
+<p>我们的产品需要对来自不同数据源的大数据进行采集，从数据源的多样化以及处理数据的低延迟与可伸缩角度考虑，需要选择适合项目的大数据流处理平台。我最初列出的候选平台包括Flume、Flink、Kafka Streaming以及Spark Streaming。然而对产品架构而言，这个技术选型的决策可谓举足轻重，倘若选择不当，可能会导致较大的修改成本，须得慎之又慎。</p>
+</blockquote>
+<blockquote>
+<p>我除了在项目中曾经使用过Flume、Kafka以及Spark Streaming之外，对其余平台并不甚了解。即便是用过的这几个平台，也了解得比较肤浅。因此我查阅了这些平台的官方文档以及相关文章，偶然发现有Janakiram在2016年7月8日发表在<a target="_blank" rel="noopener" href="https://thenewstack.io/">The New Stack</a>网站上的这篇文章<a target="_blank" rel="noopener" href="https://thenewstack.io/apache-streaming-projects-exploratory-guide">All the Apache Streaming Projects: An Exploratory Guid</a>，全(jian)面(dan)介绍了目前在Apache下主流的流处理项目，具有一定参考价值。因此摘译过来，以飧读者。</p>
+</blockquote>
+<p>最近几年，数据的生成、消费、处理以及分析的速度惊人地增长，社交媒体、物联网、游戏等领域产生的数据都需要以接近实时的速度处理和分析数据。这直接催生了<strong>流数据</strong>的处理范式。从Kafka到Beam，即使是在Apache基金下，已有多个流处理项目运用于不同的业务场景。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/apache-streaming-projects/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/boundary-of-bounded-context/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -616,126 +733,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/thinking-rule-of-rp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="张逸">
-      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="张逸说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/thinking-rule-of-rp/" class="post-title-link" itemprop="url">面向流的设计思想</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-01 13:17:40" itemprop="dateCreated datePublished" datetime="2018-02-01T13:17:40+08:00">2018-02-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2018-03-07 23:13:10" itemprop="dateModified" datetime="2018-03-07T23:13:10+08:00">2018-03-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Coding/" itemprop="url" rel="index"><span itemprop="name">Coding</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/thinking-rule-of-rp/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/thinking-rule-of-rp/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>响应式编程（Reactive Programming）的本质是异步非阻塞的高响应式处理，最核心思想则为<strong>Everything is stream</strong>，即针对流进行处理，这是其根本。从这个角度讲，我们可以将响应式编程的设计思想视为Stream-Oriented Design，即面向流的设计。</p>
-<p>正如面向对象设计以对象为基本设计要素，函数式编程思想以函数为基本设计要素，响应式编程则应该以流为基本设计要素。这带来设计思想上根本的变化，包括：</p>
-<ul>
-<li>以流作为建模的元素</li>
-<li>流存在松耦合的上下游关系</li>
-<li>以流为重用的单位</li>
-<li>对流进行转换、运算、合并与拆分</li>
-</ul>
-<p>在Rx框架中，一个流就是一个Observable或者Flowable。例如我们要统计网页的字数，则流的源头就是对网页内容的获取，而流就是<code>Observable&lt;String&gt;</code>类型的网页内容。至于统计操作，则需要经历分词、字数统计两个阶段，则可以视为是对流的转换与运算操作：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Flowable.fromFuture(pageContent)</span><br><span class="line">    .flatMap(content -&gt; Flowable.fromArray(s.split(<span class="string">&quot; &quot;</span>)))</span><br><span class="line">    .map(w -&gt; <span class="keyword">new</span> Pair&lt;&gt;(w, <span class="number">1</span>))</span><br><span class="line">    .groupBy(Pair::getKey);</span><br></pre></td></tr></table></figure>
-
-<p>由于Rx框架提供了诸如merge、combineLatest、zip等操作符来完成多个流之间的组合，我们就可以分别建立各自的流，然后再利用这些操作符对其进行合并，或者反其道而行之。这样就能尽可能地分解出诸多原子的可重用的流。例如，针对UI的click操作以及response响应，我们就可以分别建立两个流，然后利用combineLatest进行组合。无论哪个流发射了数据，它都会将这两个流最近发射的数据组合起来，并按照指定的函数进行运算。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/thinking-rule-of-rp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -805,7 +802,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-count">78</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -865,12 +862,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">353k</span>
+    <span title="站点总字数">355k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:21</span>
+    <span title="站点阅读时长">5:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

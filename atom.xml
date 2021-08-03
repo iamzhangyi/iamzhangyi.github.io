@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-07-22T04:50:27.251Z</updated>
+  <updated>2021-08-03T12:53:35.789Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《解构领域驱动设计》终于可以预购了</title>
+    <link href="http://zhangyi.xyz/presale-of-DDDE/"/>
+    <id>http://zhangyi.xyz/presale-of-DDDE/</id>
+    <published>2021-08-03T09:58:24.000Z</published>
+    <updated>2021-08-03T12:53:35.789Z</updated>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;/presale-of-DDDE/cover-small.jpg&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;四年了，《解构领域驱动设计》&lt;strong&gt;终于&lt;/strong&gt;可以在异步社区的&lt;a href=&quot;https://www.epubit.com/bookDetails?id=UB77d68d84212a6&amp;typeName=%E6%90%9C%E7%B4%A2&quot;&gt;官方网站上预购&lt;/a&gt;了！这意味着，我的著作&lt;strong&gt;终于&lt;/strong&gt;出版了！有没有普天同庆的赶脚？总之，当我收到这一消息后，长长地吁了一口气……终于，终于，四年了，真不容易啊！&lt;/p&gt;
+&lt;p&gt;许多次，我在给别人介绍这本著作时，总有人问我哪里可以买到，而我则尴尬地回答：嗯，这个，这个，还没有出版呢。许多次，读者圈的朋友在问这本书多久出版时，我从2020年承诺年底出版，然后推迟到4月，然后推迟到6月，最后推迟到7月，进度的delay已经让人产生抱怨了！而在许多年前，我总是说我的第一本书《&lt;a href=&quot;https://book.douban.com/subject/2058073/&quot;&gt;软件设计精要与模式&lt;/a&gt;》，言外之意，我还有第二本书，可是自从2007年出版我的第一本书，到2009年出版&lt;a href=&quot;http://product.china-pub.com/196623&quot;&gt;该书的第二版&lt;/a&gt;之后，我的第二本书终于在14年后诞生了。&lt;/p&gt;
+&lt;p&gt;一些信息可以侧面证明本书写作的不容易。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/categories/Writing/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
+    
+  </entry>
   
   <entry>
     <title>领域驱动建模与面向对象建模的差异</title>
@@ -528,32 +554,6 @@
       <category term="GitChat" scheme="http://zhangyi.xyz/tags/GitChat/"/>
     
       <category term="QA" scheme="http://zhangyi.xyz/tags/QA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计概念的统一语言</title>
-    <link href="http://zhangyi.xyz/ubiquitous-language-of-design-concept/"/>
-    <id>http://zhangyi.xyz/ubiquitous-language-of-design-concept/</id>
-    <published>2020-02-16T04:29:24.000Z</published>
-    <updated>2020-03-14T10:17:55.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;img src=&quot;/ubiquitous-language-of-design-concept/cover.jpg&quot; class=&quot;&quot;&gt;
-
-
-
-&lt;p&gt;当我们在讨论领域驱动设计时，不止要谈到领域驱动设计固有的设计概念，结合开发语言和开发平台的设计实践，又会有其他设计概念穿插其中，它们之间的关系并非正交的，解决的问题和思考的角度都不太一致，许多设计概念更有其历史渊源，却又在提出之后或者被滥用，后者被错用，到了最后已经失去了它本来的面目。因此，我们首先需要揭开这些设计术语的历史迷雾，理解其本真的概念，然后再确定它的统一语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
     
   </entry>
   
