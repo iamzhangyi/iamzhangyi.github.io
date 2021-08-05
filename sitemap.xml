@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhangyi.xyz/recommendation-of-my-book/</loc>
+    
+    <lastmod>2021-08-05</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhangyi.xyz/presale-of-DDDE/</loc>
     
     <lastmod>2021-08-03</lastmod>
@@ -578,7 +585,7 @@
 
   <url>
     <loc>http://zhangyi.xyz/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -586,336 +593,336 @@
   
   <url>
     <loc>http://zhangyi.xyz/tags/DDD/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Requirement/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Writing/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Architecture/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Book/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Streaming/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Big-Data/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Flink/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Design/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/%E7%9F%A5%E8%AF%86%E6%98%9F%E7%90%83/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Micro-Service/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Thinking/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Career/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/BDD/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Agile/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Refactoring/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Clean-Code/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Design-OO/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/EA/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Event-Storming/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Coding/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Spark/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Scala/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/FP/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Design-Pattern/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/OO/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Kafka/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/HBase/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Spring-Boot/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/MongoDB/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Apex/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/DDD-Writing/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/GitChat/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/QA/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Python/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/SDD/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Design-OO-Design-Pattern/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/RDD/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Reactive-Programming/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/RxJava/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Akka/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Data-Warehouse/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Reading/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Spring-Cloud/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Java/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Legacy/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/TDD/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/tags/Open-Source/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -924,63 +931,63 @@
   
   <url>
     <loc>http://zhangyi.xyz/categories/DDD/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/Writing/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/BigData/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/Architecture/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/Thinking/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/Design/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/Coding/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://zhangyi.xyz/categories/Book/</loc>
-    <lastmod>2021-08-03</lastmod>
+    <lastmod>2021-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

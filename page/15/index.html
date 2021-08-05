@@ -164,6 +164,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/technical-choice-of-streaming-platform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/technical-choice-of-streaming-platform/" class="post-title-link" itemprop="url">大数据流处理平台的技术选型参考</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-09 09:08:43" itemprop="dateCreated datePublished" datetime="2018-02-09T09:08:43+08:00">2018-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-03-02 16:19:04" itemprop="dateModified" datetime="2018-03-02T16:19:04+08:00">2018-03-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/technical-choice-of-streaming-platform/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/technical-choice-of-streaming-platform/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>选择太多，是一件好事情，不过也容易乱花渐欲迷人眼。倘若每个平台（技术）都去动手操练一下，似乎又太耗时间。通过阅读一些文档，可以帮我们快速做一次筛选。在将选择范围进一步缩小后，接下来就可以结合自己的应用场景去深入Spike，做深度的甄别，这是我做技术选型的一个方法。</p>
+<p>技术没有最好，只有最适用。在做技术选型时，需要选择适合需求、适合项目类型、适合团队的技术。这是实用主义的判断，而非理想主义的追捧。若是在实用的技术选型中，再能点燃一些些技术上的情怀，那就perfect了！</p>
+<h3 id="属性矩阵-Attributes-Matrix"><a href="#属性矩阵-Attributes-Matrix" class="headerlink" title="属性矩阵(Attributes Matrix)"></a>属性矩阵(Attributes Matrix)</h3><p>我在《<a target="_blank" rel="noopener" href="https://iamzhangyi.github.io/Apache-Streaming-Projects/">Apache下流处理项目巡览</a>》一文中翻译了Janakiram的这篇文章，介绍了Apache基金会下最主流的流处理项目。巧的是，我在<a target="_blank" rel="noopener" href="http://www.infoq.com/cn/articles/overview-of-apache-streaming-technology">InfoQ</a>上又发现了Ian Hellstrom的文章，他用一张图给出了非常棒的总结。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/technical-choice-of-streaming-platform/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/apache-streaming-projects/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -621,118 +732,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/build-your-tech-tag/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="张逸">
-      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="张逸说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/build-your-tech-tag/" class="post-title-link" itemprop="url">构建你的技术标签</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-01 18:59:03" itemprop="dateCreated datePublished" datetime="2018-02-01T18:59:03+08:00">2018-02-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2018-03-02 16:16:32" itemprop="dateModified" datetime="2018-03-02T16:16:32+08:00">2018-03-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Thinking/" itemprop="url" rel="index"><span itemprop="name">Thinking</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/build-your-tech-tag/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/build-your-tech-tag/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/build-your-tech-tag/hungry.jpeg" class="">
-
-<p>作为一名程序员，又或者IT工作者，拼搏在技术快速变迁的大潮流中，其实是一种幸运，毕竟我们无需陷入重复的枯燥生活之中。然而要跟上技术发展的脚步，真的太累了，就怕步伐太慢，一不留神你就落伍了。</p>
-<p>或许有所谓通才与全才，又有那种最强大脑的天才们学什么都很快，除此之外，如我们这般的普通人，知识无涯生却有涯，就得聪明地利用有限的时间学习真正有用的。这种所谓“有用”，就是指学习之后能够给你贴上明显标签的那类知识。“标签”是一种信号，更像是某种声望。就是当团队面临对应问题时，人们会一拍脑袋首先想到你的那种声望。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/build-your-tech-tag/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -802,7 +801,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -862,12 +861,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">355k</span>
+    <span title="站点总字数">360k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:23</span>
+    <span title="站点阅读时长">5:27</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
