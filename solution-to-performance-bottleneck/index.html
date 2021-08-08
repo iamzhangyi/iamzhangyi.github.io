@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhangyi.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="都说“过早进行性能优化是万恶之源”，我宁肯相信这是为了“矫枉过正”而出此惊人之语，更何况，现在的IT时代已与Donald Knuth的时代已有很大差异了。重点还是在于“过早”这个词，之所以Knuth告诫我们不要过早进行性能优化，原因在于：  判断性能是否存在问题，不能太早 太早做性能优化，有可能并没有弄清楚性能瓶颈在哪里    图为Donald Knuth在斯坦福大学计算机科学William Ga">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决Flink流式任务的性能瓶颈">
+<meta property="og:url" content="http://zhangyi.xyz/solution-to-performance-bottleneck/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="都说“过早进行性能优化是万恶之源”，我宁肯相信这是为了“矫枉过正”而出此惊人之语，更何况，现在的IT时代已与Donald Knuth的时代已有很大差异了。重点还是在于“过早”这个词，之所以Knuth告诫我们不要过早进行性能优化，原因在于：  判断性能是否存在问题，不能太早 太早做性能优化，有可能并没有弄清楚性能瓶颈在哪里    图为Donald Knuth在斯坦福大学计算机科学William Ga">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/solution-to-performance-bottleneck/knuth.JPG">
+<meta property="og:image" content="http://zhangyi.xyz/solution-to-performance-bottleneck/before.png">
+<meta property="og:image" content="http://zhangyi.xyz/solution-to-performance-bottleneck/after.png">
+<meta property="article:published_time" content="2021-08-08T08:21:48.000Z">
+<meta property="article:modified_time" content="2021-08-08T10:38:57.369Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="Flink">
+<meta property="article:tag" content="BigData">
+<meta property="article:tag" content="ElasticSearch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/solution-to-performance-bottleneck/knuth.JPG">
+
+<link rel="canonical" href="http://zhangyi.xyz/solution-to-performance-bottleneck/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>解决Flink流式任务的性能瓶颈 | 张逸说</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">张逸说</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">出口成张，逸派胡言</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/solution-to-performance-bottleneck/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          解决Flink流式任务的性能瓶颈
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-08 16:21:48 / 修改时间：18:38:57" itemprop="dateCreated datePublished" datetime="2021-08-08T16:21:48+08:00">2021-08-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Architecture/" itemprop="url" rel="index"><span itemprop="name">Architecture</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/solution-to-performance-bottleneck/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/solution-to-performance-bottleneck/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>都说“过早进行性能优化是万恶之源”，我宁肯相信这是为了“矫枉过正”而出此惊人之语，更何况，现在的IT时代已与Donald Knuth的时代已有很大差异了。重点还是在于<strong>“过早”</strong>这个词，之所以Knuth告诫我们不要过早进行性能优化，原因在于：</p>
+<ul>
+<li>判断性能是否存在问题，不能太早</li>
+<li>太早做性能优化，有可能并没有弄清楚性能瓶颈在哪里</li>
+</ul>
+<img src="/solution-to-performance-bottleneck/knuth.JPG" class="">
+
+<p>图为Donald Knuth在斯坦福大学计算机科学William Gates大楼的办公室</p>
+<p>最近，我的团队成员正在着力于提高实时流处理任务的性能。由于客户为我们的测试环境仅提供了极度可怜的集群资源，我们需要在“螺蛳壳里做道场”，死扣性能，尽可能在方案与实现上将性能提升到极致。（顺带说，在测试时，不要奢侈地提供大量资源，反倒有可能尽早发现性能问题，从而让团队想办法解决之。）</p>
+<span id="more"></span>
+
+
+
+<p>一开始，我们想到的方案是增加Flink Streaming Job每个算子或算子链的并行度。Flink支持多个级别设置并行度，包括：</p>
+<ul>
+<li><p>环境级别：对Execution Environment进行<code>parallelism</code>的设置</p>
+</li>
+<li><p>客户端级别：客户端提交Job时通过命令参数-p进行设置</p>
+</li>
+<li><p>算子级别：调用每个算子的<code>setParallelism()</code>方法设置算子的并行度，在为算子设置并行度时，需要考虑它对算子链的影响。如果相邻算子的并行度不一样，两个算子就不能成为算子链。算子链可以减少不必要的线程切换，减少不必要的序列化和反序列化操作，减少延迟提高吞吐能力，因此，如果两个算子相邻，且中间没有数据的shuffle操作，应保证它们的并行度是相同的。</p>
+</li>
+</ul>
+<p>如果没有显式设置并行度，Flink的系统默认并行度为1。不同级别优先级不同，优先级按照高低，顺序依次为：</p>
+<p>算子级别 -&gt; 客户端级别 -&gt; 环境级别 -&gt; 系统默认级别</p>
+<p>Flink的并行度设置并不是说越大，数据处理的效率就越高，而是需要设置合理的并行度。并行度的设置数量取决于Task Manager的数量以及slot数量。通常可以认为Task Manager部署的节点有多少核CPU，就有多少个slot。</p>
+<p>设置了合理的并行度，就能有效地利用Worker节点的资源。但为何在实现之初，没有考虑并行度呢？原因在于引入并行度后，从上游传入的数据就会被Task Manager分配到不同的slot做并行处理，由于不同任务执行时间不同，slot的执行效率也可能不同，就可能无法保证同类数据多条数据的时序性。</p>
+<p>为了保证同类数据的执行时序性，我们引入了Flink的<code>keyBy</code>算子。它能够将相同key的元素散列到一个子任务中，且没有改变原来的元素数据结构。<code>keyBy</code>使用的key应使用数据的主键，即ID，如此就能保证拥有相同ID值的同类数据一定执行在同一个子任务中，进行同步处理，这就保证了数据处理的时序性。时序性与并行度带来的高性能，就能鱼与熊掌兼得了。</p>
+<p>即便如此，我们提升的性能依旧有限，毕竟受到资源的限制，我们不能盲目增大并行度。由于单条消息数据的处理逻辑非常复杂，它的处理能力已经达到我们能够优化的极限。最后，评估任务的处理能力，仅能做到每秒处理6条左右的数据，这一结果自然不能接受。一种立竿见影的手段是增加更多的资源，但我们还是想在没有更多资源支持下，看看能否竭尽所能提升性能。——这时，我们才想到去探索<strong>性能瓶颈</strong>到底在哪里？</p>
+<p>我们开始监控实时流任务的执行，通过日志记录执行时间，在单条数据处理能力已经无法优化的情况下，发现真正的性能瓶颈不在于Flink自身，而是任务末端将处理后的数据写入到ElasticSearch这一阶段。</p>
+<p>在执行流式处理过程中，上游一旦采集到数据，就会及时逐条处理，这也是流式处理的实时特征。根据我们的业务特征，平台在接收到上游采集的流式数据后，经过验证、清洗、转换与业务处理，会按照主题治理的要求，将处理后的数据写入到ElasticSearch。然而，这并非流任务处理的终点。数据在写入到ElasticSearch后，平台需要触发一个事件，应下游系统的要求，将上游传递的消息转换为出口消息。由于上游传递的消息不一定包含了出口消息的所有数据，在转换消息时，平台还需要查询ElasticSearch，获得包括最近更新的数据，作为组成出口消息的数据内容。</p>
+<p>这里仍然存在时序性问题！在组成出口消息时需要查询ElasticSearch，这就要求最新的数据已经写入成功并能被检索到。由于ElasticSearch要支持全文本检索，写入数据时需要为其建立索引，也就是Lucene中的Segments，使得每次写操作的延迟相对于读操作而言要高一些。为了提升写入性能，ElasticSearch引入了in-memory buffer（内存缓冲区），提供了refresh（刷新）的三种方式：</p>
+<ul>
+<li><p>即刻刷新</p>
+</li>
+<li><p>指定周期刷新，默认周期为1s，它也是ElasticSearch的默认值</p>
+</li>
+<li><p>当内存缓冲区满时刷新</p>
+</li>
+</ul>
+<p>只有即刻刷新，才能在一条数据写入到 Elasticsearch 后，能被马上搜索到。当上游采集的数据量非常多，且采用流式方式传入时，下游ElasticSearch的逐条写入与即刻刷新机制就成为了性能瓶颈。如果采用后两种刷新机制，又会导致索引未建立，无法即时搜索到最新数据，就会导致数据不一致。换言之，在我们的场景中，选择“即刻刷新”是必然的！要解决写入瓶颈的问题，最佳做法是放弃逐条写入，改为ElasticSearch支持的批量写入，如此即可减少不必要的连接，也能减少IO的次数。</p>
+<p>虽说上游传递的流式数据需要实时进行处理，却并未要求它必须实时写入ElasticSearch，也未要求它必须实时推送给下游系统。当然，也不能延迟太长的时间。</p>
+<p>为了权衡写入性能和数据正确性以及一致性，可以<strong>将实时写入改造为微批量的写入</strong>，如此，既能通过批量写入提升ElasticSearch的写入性能，又能保证数据必须成功写入到ElasticSearch后再推送消息，确保数据正确性与一致性。</p>
+<p>团队成员想到了引入Flink的窗口，具体说来，是使用Flink时间窗口中的会话窗口与滚动窗口。</p>
+<p>会话窗口的作用是在指定窗口周期内将相同key值的数据汇聚起来，我们为不同的key分配对应的会话窗口，而窗口好似一个桶，每个桶各自装各自key值的数据：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.keyBy(<span class="keyword">new</span> KeyById())</span><br><span class="line">.window(ProcessingTimeSessionWindows.withGap(Time.seconds(<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如此这般，就能将1秒内相同key值的数据放到相同的会话窗口中，然后，通过<code>reduce()</code>算子对同一会话窗口中的数据进行合并，形成状态：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.reduce(<span class="keyword">new</span> MergeWighSameId())</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这一方式虽然实现了相同key数据的合并，但由于窗口的数量太过分散，导致数据汇聚的作用并不明显，没有达到批量写入提升性能的目的。</p>
+<p>既然已经合并了相同key的数据，我们就可以减少窗口的数量，从而让不同key值的数据也能够汇聚到同一个窗口，形成数据的集合，交由下游进行批量写入。此时，选择的窗口为滚动窗口。</p>
+<p>虽说窗口数量需要减少，但为了更好地利用资源，最好保证窗口的数量等于并行度。通过<code>env.getParallelism()</code>方法可以获得当前环境的并行度，在对数据的ID（它是数据的key）进行哈希值计算后，将并行度作为因子进行取模，就能将窗口数量压缩，天然实现数据的汇聚：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 再执行了reduce后</span></span><br><span class="line">.keyBy(<span class="keyword">new</span> KeyById(env.getParallelism()))</span><br><span class="line">.window(TumblingProcessingTimeWindows.of(Time.second(<span class="number">1</span>)))</span><br><span class="line">.reduce(<span class="keyword">new</span> CellectEntities())</span><br><span class="line">...<span class="comment">// 汇聚后写入到ElasticSearch</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>对比改进前后的流式任务，下图是执行未加窗口的流式任务结果：</p>
+<img src="/solution-to-performance-bottleneck/before.png" class="">
+
+
+
+<p>下图是执行加窗口后的流式任务结果：</p>
+<img src="/solution-to-performance-bottleneck/after.png" class="">
+
+
+
+<p>相同环境下，前者处理流式数据的频率大概为6条/秒左右，后者则达到了20条/秒左右，整体性能提升了3倍多，实现了不通过横向添加资源就完成了流式任务的性能优化，归根结底，在于我们发现了性能瓶颈，然后再对症下药，方可取得疗效。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/solution-to-performance-bottleneck/" title="解决Flink流式任务的性能瓶颈">http://zhangyi.xyz/solution-to-performance-bottleneck/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Flink/" rel="tag"># Flink</a>
+              <a href="/tags/BigData/" rel="tag"># BigData</a>
+              <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/recommendation-of-my-book/" rel="prev" title="《解构领域驱动设计》推荐序">
+      <i class="fa fa-chevron-left"></i> 《解构领域驱动设计》推荐序
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">张逸</p>
+  <div class="site-description" itemprop="description">张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agiledon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agiledon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:brucezhang@tom.com" title="E-Mail → mailto:brucezhang@tom.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">363k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:30</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'wPVDNiDMLe1I6wcQzysBwx1G-gzGzoHsz',
+      appKey     : 'xSeNJmSjwgSFbu704F1RNHze',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

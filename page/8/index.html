@@ -164,6 +164,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/analysis-model-for-promotion/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/analysis-model-for-promotion/" class="post-title-link" itemprop="url">从拼多多事件看电商的促销模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-01-24 20:07:11" itemprop="dateCreated datePublished" datetime="2019-01-24T20:07:11+08:00">2019-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-01-25 05:14:24" itemprop="dateModified" datetime="2019-01-25T05:14:24+08:00">2019-01-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/analysis-model-for-promotion/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/analysis-model-for-promotion/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <img src="/analysis-model-for-promotion/cover.jpg" class="">
+
+<p>最近一段时间，电商圈出了一件大事情，拼多多再次吸引了大家的眼球。2019年1月20日，拼多多出现了数额巨大的羊毛Bug，起因在于一张无门槛的优惠券，券面价值100元，可以全场通用（特殊商品除外），有效期一年。如果仅仅从业务角度分析，定义这样的优惠券自身并没有任何问题。当然，也有人说像这样的无门槛券本身就不该用于花费充值、Q币充值等几乎等于现金业务的商品，这是从促销层面去考虑的问题。还有人提到风控问题，为何等到损失达200亿（事后拼多多说明这些优惠券涉及到千万）才发现问题？更有人质疑这是一次别出心裁的炒作。</p>
+<p>从薅羊毛的角度看这个Bug，似乎是因为该无门槛券可以被无限次使用导致的。本质上，这确实是一个Bug，我不明白这样的Bug是如何产生的，是测试不到位，还是说该优惠券本身是一个内部测试数据，被不小心放到生产环境？正好，最近正在考虑如何利用分析模式建立电商系统中的促销模型，算是应景之作吧。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/analysis-model-for-promotion/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/rewrite-and-refactoring-policy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -630,125 +742,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/ddd-strategic-design-workshop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="张逸">
-      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="张逸说">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/ddd-strategic-design-workshop/" class="post-title-link" itemprop="url">领域驱动战略设计工作坊</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2018-12-20 21:50:58 / 修改时间：22:38:04" itemprop="dateCreated datePublished" datetime="2018-12-20T21:50:58+08:00">2018-12-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/ddd-strategic-design-workshop/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/ddd-strategic-design-workshop/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/ddd-strategic-design-workshop/01.jpg" class="">
-
-<p>在2018年第二届领域驱动设计中国峰会，我作为讲师做了一个领域驱动战略设计工作坊——再现具有实操价值的架构方案。在这个工作坊中，我将敏捷实践中的Inception与领域驱动战略设计结合起来，并引入Event Storming和用例场景分析等方法，带着大家一起糊了墙，玩风暴，算是满意地完成了战略设计的预期目标。在这次工作坊的参与者中，我欣喜地看到了业务同学的加入。这些业务同学敏锐的分析目光与业务感给我们的用例场景分析带来了极好的助力，也为整个工作坊增加了不少亮点。</p>
-<p>我把整个工作坊分为了十个步骤，依次为：</p>
-<ul>
-<li>确定利益相关人</li>
-<li>确定业务期望和愿景</li>
-<li>对问题域的共同理解</li>
-<li>确定项目的业务范围</li>
-<li>确定业务流程</li>
-<li>史诗级故事和主故事</li>
-<li>运用用例分析场景</li>
-<li>通过边界识别限界上下文</li>
-<li>上下文映射</li>
-<li>领域架构</li>
-</ul>
-<p>我选择一些重要步骤对整个工作坊做一个简单的回顾。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ddd-strategic-design-workshop/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -818,7 +811,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -831,7 +824,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-count">50</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -878,12 +871,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">360k</span>
+    <span title="站点总字数">363k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:27</span>
+    <span title="站点阅读时长">5:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

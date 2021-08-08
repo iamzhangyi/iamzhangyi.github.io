@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://zhangyi.xyz/solution-to-performance-bottleneck/</loc>
+    <lastmod>2021-08-08</lastmod>
+  </url>
+  <url>
+    <loc>http://zhangyi.xyz/exception-handling-in-flink/</loc>
+    <lastmod>2021-08-08</lastmod>
+  </url>
+  <url>
     <loc>http://zhangyi.xyz/recommendation-of-my-book/</loc>
     <lastmod>2021-08-05</lastmod>
   </url>
@@ -19,10 +27,6 @@
   <url>
     <loc>http://zhangyi.xyz/mapping-to-application-architecture-from-business-architecture/</loc>
     <lastmod>2021-07-08</lastmod>
-  </url>
-  <url>
-    <loc>http://zhangyi.xyz/exception-handling-in-flink/</loc>
-    <lastmod>2021-07-03</lastmod>
   </url>
   <url>
     <loc>http://zhangyi.xyz/Report-the-progress-of-DDDE/</loc>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-08-05T14:54:26.689Z</updated>
+  <updated>2021-08-08T10:38:57.369Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决Flink流式任务的性能瓶颈</title>
+    <link href="http://zhangyi.xyz/solution-to-performance-bottleneck/"/>
+    <id>http://zhangyi.xyz/solution-to-performance-bottleneck/</id>
+    <published>2021-08-08T08:21:48.000Z</published>
+    <updated>2021-08-08T10:38:57.369Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;都说“过早进行性能优化是万恶之源”，我宁肯相信这是为了“矫枉过正”而出此惊人之语，更何况，现在的IT时代已与Donald Knuth的时代已有很大差异了。重点还是在于&lt;strong&gt;“过早”&lt;/strong&gt;这个词，之所以Knuth告诫我们不要过早进行性能优化，原因在于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;判断性能是否存在问题，不能太早&lt;/li&gt;
+&lt;li&gt;太早做性能优化，有可能并没有弄清楚性能瓶颈在哪里&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&quot;/solution-to-performance-bottleneck/knuth.JPG&quot; class=&quot;&quot;&gt;
+
+&lt;p&gt;图为Donald Knuth在斯坦福大学计算机科学William Gates大楼的办公室&lt;/p&gt;
+&lt;p&gt;最近，我的团队成员正在着力于提高实时流处理任务的性能。由于客户为我们的测试环境仅提供了极度可怜的集群资源，我们需要在“螺蛳壳里做道场”，死扣性能，尽可能在方案与实现上将性能提升到极致。（顺带说，在测试时，不要奢侈地提供大量资源，反倒有可能尽早发现性能问题，从而让团队想办法解决之。）&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/categories/Architecture/"/>
+    
+    
+      <category term="Flink" scheme="http://zhangyi.xyz/tags/Flink/"/>
+    
+      <category term="BigData" scheme="http://zhangyi.xyz/tags/BigData/"/>
+    
+      <category term="ElasticSearch" scheme="http://zhangyi.xyz/tags/ElasticSearch/"/>
+    
+  </entry>
   
   <entry>
     <title>《解构领域驱动设计》推荐序</title>
@@ -154,7 +186,7 @@
     <link href="http://zhangyi.xyz/exception-handling-in-flink/"/>
     <id>http://zhangyi.xyz/exception-handling-in-flink/</id>
     <published>2021-07-03T04:57:17.000Z</published>
-    <updated>2021-07-03T12:32:11.107Z</updated>
+    <updated>2021-08-08T08:40:45.853Z</updated>
     
     <summary type="html">
     
@@ -507,36 +539,6 @@
 
 &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在实施领域驱动设计的过程中，限界上下文（Bounded Context）扮演了关键角色：它既是维护领域模型完整性与一致性的重要边界，又是系统架构的重要组成部分。随着社区对限界上下文的重视，越来越多的人开始尝试将更多的架构实践与限界上下文融合在一起，创造出符合领域驱动设计的架构模式。&lt;/p&gt;
 &lt;p&gt;Eric Evans 在领域驱动设计中引入了分层架构（Layered Architecture），目的是希望能够分离领域，这意味着该模式本身是作用在整个系统层次。Vaughn Vernon 在《实现领域驱动设计》一书中，将 Alistair Cockburn 提出的六边形架构（Haxagonal Architecture）引入到领域驱动设计中，并将其与限界上下文结合在一起，清晰地体现了它内部的视图。这一模式的引入，实际上代表着限界上下文在架构中的核心地位。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>限界上下文的菱形对称架构</title>
-    <link href="http://zhangyi.xyz/diamond-symmetry-architecture-of-bounded-context/"/>
-    <id>http://zhangyi.xyz/diamond-symmetry-architecture-of-bounded-context/</id>
-    <published>2020-02-25T12:47:53.000Z</published>
-    <updated>2020-03-14T10:23:08.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;img src=&quot;/diamond-symmetry-architecture-of-bounded-context/chat.jpg&quot;
-        
-      
     
     </summary>
     
