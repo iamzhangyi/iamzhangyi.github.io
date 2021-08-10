@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-08-08T11:11:28.170Z</updated>
+  <updated>2021-08-10T06:42:21.122Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ZenUML与服务驱动设计</title>
+    <link href="http://zhangyi.xyz/service-driven-design-and-zenuml/"/>
+    <id>http://zhangyi.xyz/service-driven-design-and-zenuml/</id>
+    <published>2021-08-10T05:01:06.000Z</published>
+    <updated>2021-08-10T06:42:21.122Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在《&lt;a href=&quot;https://item.jd.com/10035002181202.html&quot;&gt;解构领域驱动设计&lt;/a&gt;》书中的领域建模阶段，我提出了以&lt;strong&gt;业务服务&lt;/strong&gt;为核心进行设计与建模的方法——&lt;strong&gt;服务驱动设计&lt;/strong&gt;。通过该方法可以在静态的领域设计模型基础之上，以业务服务规约为基础，通过分析需求，对业务服务进行任务分解，获得以子任务构成的任务树。这棵树以业务服务为根，组合任务为枝，原子任务为叶，既体现了业务服务的执行过程，又进行了适度的封装，建立了一定的封装层次。&lt;/p&gt;
+&lt;p&gt;一旦获得了子任务树，即可对树中的每一个子任务进行职责分配，根据其特点分别分配给远程服务、本地服务、领域服务、聚合、端口。它们是构成限界上下文的主要对象角色，我将其称之为“角色构造型”，可以和我提出的&lt;strong&gt;菱形对称架构&lt;/strong&gt;结合：&lt;/p&gt;
+&lt;img src=&quot;/service-driven-design-and-zenuml/rsa.jpg&quot; class=&quot;&quot;&gt;
+    
+    </summary>
+    
+      <category term="Tool" scheme="http://zhangyi.xyz/categories/Tool/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Tool" scheme="http://zhangyi.xyz/tags/Tool/"/>
+    
+  </entry>
   
   <entry>
     <title>解决Flink流式任务的性能瓶颈</title>
@@ -523,33 +547,6 @@
       <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
     
       <category term="Book" scheme="http://zhangyi.xyz/tags/Book/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>菱形对称架构</title>
-    <link href="http://zhangyi.xyz/rhombic-symmetric-architecture/"/>
-    <id>http://zhangyi.xyz/rhombic-symmetric-architecture/</id>
-    <published>2020-03-17T12:12:21.000Z</published>
-    <updated>2020-03-17T12:37:46.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;img src=&quot;/rhombic-symmetric-architecture/cover.jpeg&quot; class=&quot;&quot;&gt;
-
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在实施领域驱动设计的过程中，限界上下文（Bounded Context）扮演了关键角色：它既是维护领域模型完整性与一致性的重要边界，又是系统架构的重要组成部分。随着社区对限界上下文的重视，越来越多的人开始尝试将更多的架构实践与限界上下文融合在一起，创造出符合领域驱动设计的架构模式。&lt;/p&gt;
-&lt;p&gt;Eric Evans 在领域驱动设计中引入了分层架构（Layered Architecture），目的是希望能够分离领域，这意味着该模式本身是作用在整个系统层次。Vaughn Vernon 在《实现领域驱动设计》一书中，将 Alistair Cockburn 提出的六边形架构（Haxagonal Architecture）引入到领域驱动设计中，并将其与限界上下文结合在一起，清晰地体现了它内部的视图。这一模式的引入，实际上代表着限界上下文在架构中的核心地位。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
-    
-      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
     
   </entry>
   
