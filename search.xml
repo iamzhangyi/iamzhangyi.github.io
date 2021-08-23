@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>《解构领域驱动设计》前言</title>
+    <url>/Preface-of-DDD-Explained/</url>
+    <content><![CDATA[<p>写下本书内容第一个字的具体时间已不可考，从文档创建的时间看，本书的写作至少可以追溯到2017年11月，屈指算来，距今已是三载光阴流逝而过，为了本书，我已算得上呕心沥血。回想这悠悠三年，无论在万米高空的飞行途中，还是在蔚蓝海边的栖息之旅，抑或工作之余正襟危坐书桌之前，我的心弦一刻不敢放松，沉思于体系的构建，纠结于案例的选择，锱铢必较于每个文字的运用，我力求输出最好的文本，希望打造领域驱动设计技术书籍的经典！</p>
+<p>我在ThoughtWorks的前同事滕云开我的玩笑，说：“老人家，你写完这本书，也就功德圆满了！”老人家是我在ThoughtWorks的诨名，虽然我对此称呼一直敬谢不敏，不过写作此书至今，我已心力交瘁，老人家的称谓也算名实相副了，至于是否“功德圆满”，就要交给读者诸君来品评了。本书内容主要来自我在GitChat发布的课程《领域驱动设计实践》。该课程历经两年，完成于2020年1月21日。当时的我，颇有感慨地写下如此后记：</p>
+<blockquote>
+<p>课程写作结束了。战略篇一共 34 章，15 万 5 千字；战术篇一共 71 章，35 万 1 千字；合计 105 章，共 50 万 6 千余字，加上两篇开篇词与这篇可以称为写后感的后记，共108 章，算是凑齐了一百单八将。如此成果也足可慰藉我为之付出的两年多艰辛时光！</p>
+</blockquote>
+<p>我对《领域驱动设计实践》课程的内容还算满意，然而，随着我对领域驱动设计理解的蜕变与升华，我的“野心”也在不断膨胀，不仅希望讲清楚该如何实践领域驱动设计，还企图对这套方法体系进行深层次的解构。这也是本书书名《解构领域驱动设计》得名的由来。</p>
+<span id="more"></span>
+
+<p>所谓“解构”，就是解析与重构：</p>
+<ul>
+<li>解析，就是要做到知其然更知其所以然</li>
+<li>重构，则要做到青出于蓝而胜于蓝</li>
+</ul>
+<p>我钦佩并且尊敬Eric Evans对领域驱动设计革命性的创造，他对设计的洞见至今让我赞赏不已，尤其在我彻底吃透限界上下文的本质之后，结合微服务之大行其道，更让我彻底佩服他的远见卓识；然而，尊敬不是膜拜，佩服并非盲从，在实践领域驱动设计过程中，我确实发现了这套方法体系天生存在的不足，于是，我在本书提出了GitChat课程不曾涵盖的领域驱动设计统一过程（Domain-Driven Design Unified Process），相当于站在Eric Evans的巨人肩膀上，我构建了自己的一套领域驱动设计知识体系。</p>
+<p>领域驱动设计统一过程的提出，从根基上改变了本书的结构，我调整和梳理了写作的脉络，呈现出与《领域驱动设计实践》课程迥然有别的全新面貌，整本书不再满足于粗略地将内容划分为战略篇和战术篇，而是在领域驱动设计统一过程的指导下，将该过程的全部三个阶段作为本书的三个核心篇章：全局分析、架构映射与领域建模，再辅以开篇和融合，共分为五篇二十五章，全面而完整地表达了我对领域驱动设计的全部认知与最佳实践。在对内容做进一步精简后，本书仍然达到了43万余字，算得上是软件技术类别的大部头著作了。</p>
+<p>该如何阅读这样一本厚书？</p>
+<p>若你时间足够充裕，又渴望彻底探索领域驱动设计的全貌，建议还是按部就班、循序渐进地开始你的阅读之旅。或许在阅读开篇的三个章节时，你会因为太多信息量的一次性涌入，产生迷惑、困扰和不解，那只是因为我期望率先为读者呈现领域驱动设计的整体面貌，在获得整体印象之后，哪怕只是在脑海中存留了如雾一般朦胧的轮廓，也足以指导你开启对设计细节的理解和认识。</p>
+<p>若你追求高效阅读，又渴望寻求困惑于领域驱动设计问题的答案，当然可以根据目录按图索骥，精准定位你最为关心的技术讲解。或许你会失望，甚至产生质疑，从目录中你获得了太多全新的概念，而这些概念从未见诸于任何一本领域驱动设计的书籍，那只是因为这些概念都是我针对领域驱动设计提出的改进与补充，它们是我解构全新领域驱动设计知识体系的得意之笔。——要不然，一本技术书籍怎么会写三年之久呢？</p>
+<p>我自鸣得意的开创性概念一一罗列于此：</p>
+<ul>
+<li>业务活动：它是全局分析的基本业务单元，在统一语言的指导下完成对业务需求的抽象，既可帮助我们识别限界上下文，对它的细节分析还可以帮助开发团队开展领域分析建模、领域设计建模和领域实现建模；业务活动的粒度也是服务契约的粒度，由此拉近了需求分析与软件设计的距离，甚至可以说打通了需求分析与软件设计的鸿沟。</li>
+<li>菱形对称架构：虽然该模式脱胎于整洁架构与六边形架构，但它更为简洁，与限界上下文的搭配可谓珠联璧合，既保证了限界上下文作为基本架构单元的自治性，又融入了上下文映射的通信模式，极大了丰富了设计元素的角色构造型。</li>
+<li>场景驱动设计：采用过程式的设计思维，却又遵循面向对象的职责分配，从而在提高设计质量的同时降低了开发团队的设计门槛，完成了从领域分析模型到领域实现模型的无缝转换，并可作为测试驱动开发的前奏，让领域逻辑的实现变得更加稳健而高效。</li>
+</ul>
+<p>以上概念皆为领域驱动设计统一过程的设计元素，同时又能与领域驱动设计的固有模式有机融合。至于我对软件复杂度成因的剖析，对价值需求和业务需求的划分，在领域驱动设计统一过程基础上建立的领域驱动设计魔方、参考过程模型与能力评估模型，诸多新概念、新方法、新模式、新体系虽说都出自我的一孔之见，但自觉可圈可点，确乎来自于我的一线实践和总结。至于内容的优劣，还是交给读者诸君来品判吧。</p>
+<p>照例表示致谢！</p>
+<p>感谢GitChat创始人谢工女士，没有她的支持与鼓励，就不会有《领域驱动设计实践》课程的诞生，自然不会让我下定决心撰写本书。感谢人民邮电出版社异步图书的杨海玲女士，是她的宽容与耐心，使得我能够有足够充裕的时间精心打磨本书的内容，没有因为错过最好的出版时间窗口，而催促我逼迫我尽快交稿。感谢京东周吉鑫、Amazon高翊凱 (Kim, Kao) 、腾讯王立、阿里蚂蚁金服于君泽（花名右军）与ThoughtWorks王威诸兄的抬爱，不仅拨冗为我的著作写序，也给予了许多好的建议与指点，提升了本书的整体质量。感谢阿里的彭佳斌（花名言武）、自主创业人张闯、中航信杨成科、工商银行劳永安，四位兄台作为本书试读的第一批读者，花费了大量时间认真阅读了我的初稿，提出了非常宝贵的反馈意见，帮助我订正了不少错误。感谢我的领域驱动设计技术交流群，近1500名群友的耐心等待以及坚持不懈的催促，使得我能够坚持写完本书。</p>
+<p>之所以“三年磨一剑”，是希望通过我的努力让本书的质量对得起读者！可是，在态度上对得起读者的同时，我却对不起我生命中最重要的两个人：我的妻子漆茜与儿子张子瞻。这三年经历了风雨阳光，很遗憾，我把大部分业余时间都交给了《解构领域驱动设计》，多少个晚上笔耕不缀，妻子陪着儿子，我则陪着电脑。为了支持我的创作，没有怨怼，只有默默的支持。本书的出版，有他们一大半的功劳！最后，还要感谢我的父母，每次匆匆回家看望他们，极短的时间和他们聊天，挤出来的时间都留给本书的写作了！</p>
+<p>在写作本篇前言的前一天，我偶然读到苏东坡的一首小词：<br>春未老，风细柳斜斜。试上超然台上看，半壕春水一城花。烟雨暗千家。<br>寒食后，酒醒却咨嗟。休对故人思故国，且将新火试新茶。诗酒趁年华。</p>
+<p>蓦然内心被叩击，仿佛心弦被优美的辞章轻轻地带着诗意拨弄。吾身虽不能上超然台，然而书成之后，是否能够看到半壕春水一城花呢？未曾饮酒，却咨嗟，是否多情笑我早生华发？如今的我，已然焙出新火，恰当新火试新茶，却不知待到明年春未老时，能否做到何妨吟啸且徐行的落拓不羁？不管如何，还当诗酒趁年华，如此当——仰天大笑出门去，吾辈岂是蓬蒿人!</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>领域场景分析的6W模型</title>
     <url>/6w-model-based-on-scenario/</url>
     <content><![CDATA[<img src="/6w-model-based-on-scenario/logo.jpg" class="">
@@ -54,47 +95,6 @@
       <tags>
         <tag>DDD</tag>
         <tag>Requirement</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《解构领域驱动设计》前言</title>
-    <url>/Preface-of-DDD-Explained/</url>
-    <content><![CDATA[<p>写下本书内容第一个字的具体时间已不可考，从文档创建的时间看，本书的写作至少可以追溯到2017年11月，屈指算来，距今已是三载光阴流逝而过，为了本书，我已算得上呕心沥血。回想这悠悠三年，无论在万米高空的飞行途中，还是在蔚蓝海边的栖息之旅，抑或工作之余正襟危坐书桌之前，我的心弦一刻不敢放松，沉思于体系的构建，纠结于案例的选择，锱铢必较于每个文字的运用，我力求输出最好的文本，希望打造领域驱动设计技术书籍的经典！</p>
-<p>我在ThoughtWorks的前同事滕云开我的玩笑，说：“老人家，你写完这本书，也就功德圆满了！”老人家是我在ThoughtWorks的诨名，虽然我对此称呼一直敬谢不敏，不过写作此书至今，我已心力交瘁，老人家的称谓也算名实相副了，至于是否“功德圆满”，就要交给读者诸君来品评了。本书内容主要来自我在GitChat发布的课程《领域驱动设计实践》。该课程历经两年，完成于2020年1月21日。当时的我，颇有感慨地写下如此后记：</p>
-<blockquote>
-<p>课程写作结束了。战略篇一共 34 章，15 万 5 千字；战术篇一共 71 章，35 万 1 千字；合计 105 章，共 50 万 6 千余字，加上两篇开篇词与这篇可以称为写后感的后记，共108 章，算是凑齐了一百单八将。如此成果也足可慰藉我为之付出的两年多艰辛时光！</p>
-</blockquote>
-<p>我对《领域驱动设计实践》课程的内容还算满意，然而，随着我对领域驱动设计理解的蜕变与升华，我的“野心”也在不断膨胀，不仅希望讲清楚该如何实践领域驱动设计，还企图对这套方法体系进行深层次的解构。这也是本书书名《解构领域驱动设计》得名的由来。</p>
-<span id="more"></span>
-
-<p>所谓“解构”，就是解析与重构：</p>
-<ul>
-<li>解析，就是要做到知其然更知其所以然</li>
-<li>重构，则要做到青出于蓝而胜于蓝</li>
-</ul>
-<p>我钦佩并且尊敬Eric Evans对领域驱动设计革命性的创造，他对设计的洞见至今让我赞赏不已，尤其在我彻底吃透限界上下文的本质之后，结合微服务之大行其道，更让我彻底佩服他的远见卓识；然而，尊敬不是膜拜，佩服并非盲从，在实践领域驱动设计过程中，我确实发现了这套方法体系天生存在的不足，于是，我在本书提出了GitChat课程不曾涵盖的领域驱动设计统一过程（Domain-Driven Design Unified Process），相当于站在Eric Evans的巨人肩膀上，我构建了自己的一套领域驱动设计知识体系。</p>
-<p>领域驱动设计统一过程的提出，从根基上改变了本书的结构，我调整和梳理了写作的脉络，呈现出与《领域驱动设计实践》课程迥然有别的全新面貌，整本书不再满足于粗略地将内容划分为战略篇和战术篇，而是在领域驱动设计统一过程的指导下，将该过程的全部三个阶段作为本书的三个核心篇章：全局分析、架构映射与领域建模，再辅以开篇和融合，共分为五篇二十五章，全面而完整地表达了我对领域驱动设计的全部认知与最佳实践。在对内容做进一步精简后，本书仍然达到了43万余字，算得上是软件技术类别的大部头著作了。</p>
-<p>该如何阅读这样一本厚书？</p>
-<p>若你时间足够充裕，又渴望彻底探索领域驱动设计的全貌，建议还是按部就班、循序渐进地开始你的阅读之旅。或许在阅读开篇的三个章节时，你会因为太多信息量的一次性涌入，产生迷惑、困扰和不解，那只是因为我期望率先为读者呈现领域驱动设计的整体面貌，在获得整体印象之后，哪怕只是在脑海中存留了如雾一般朦胧的轮廓，也足以指导你开启对设计细节的理解和认识。</p>
-<p>若你追求高效阅读，又渴望寻求困惑于领域驱动设计问题的答案，当然可以根据目录按图索骥，精准定位你最为关心的技术讲解。或许你会失望，甚至产生质疑，从目录中你获得了太多全新的概念，而这些概念从未见诸于任何一本领域驱动设计的书籍，那只是因为这些概念都是我针对领域驱动设计提出的改进与补充，它们是我解构全新领域驱动设计知识体系的得意之笔。——要不然，一本技术书籍怎么会写三年之久呢？</p>
-<p>我自鸣得意的开创性概念一一罗列于此：</p>
-<ul>
-<li>业务活动：它是全局分析的基本业务单元，在统一语言的指导下完成对业务需求的抽象，既可帮助我们识别限界上下文，对它的细节分析还可以帮助开发团队开展领域分析建模、领域设计建模和领域实现建模；业务活动的粒度也是服务契约的粒度，由此拉近了需求分析与软件设计的距离，甚至可以说打通了需求分析与软件设计的鸿沟。</li>
-<li>菱形对称架构：虽然该模式脱胎于整洁架构与六边形架构，但它更为简洁，与限界上下文的搭配可谓珠联璧合，既保证了限界上下文作为基本架构单元的自治性，又融入了上下文映射的通信模式，极大了丰富了设计元素的角色构造型。</li>
-<li>场景驱动设计：采用过程式的设计思维，却又遵循面向对象的职责分配，从而在提高设计质量的同时降低了开发团队的设计门槛，完成了从领域分析模型到领域实现模型的无缝转换，并可作为测试驱动开发的前奏，让领域逻辑的实现变得更加稳健而高效。</li>
-</ul>
-<p>以上概念皆为领域驱动设计统一过程的设计元素，同时又能与领域驱动设计的固有模式有机融合。至于我对软件复杂度成因的剖析，对价值需求和业务需求的划分，在领域驱动设计统一过程基础上建立的领域驱动设计魔方、参考过程模型与能力评估模型，诸多新概念、新方法、新模式、新体系虽说都出自我的一孔之见，但自觉可圈可点，确乎来自于我的一线实践和总结。至于内容的优劣，还是交给读者诸君来品判吧。</p>
-<p>照例表示致谢！</p>
-<p>感谢GitChat创始人谢工女士，没有她的支持与鼓励，就不会有《领域驱动设计实践》课程的诞生，自然不会让我下定决心撰写本书。感谢人民邮电出版社异步图书的杨海玲女士，是她的宽容与耐心，使得我能够有足够充裕的时间精心打磨本书的内容，没有因为错过最好的出版时间窗口，而催促我逼迫我尽快交稿。感谢京东周吉鑫、Amazon高翊凱 (Kim, Kao) 、腾讯王立、阿里蚂蚁金服于君泽（花名右军）与ThoughtWorks王威诸兄的抬爱，不仅拨冗为我的著作写序，也给予了许多好的建议与指点，提升了本书的整体质量。感谢阿里的彭佳斌（花名言武）、自主创业人张闯、中航信杨成科、工商银行劳永安，四位兄台作为本书试读的第一批读者，花费了大量时间认真阅读了我的初稿，提出了非常宝贵的反馈意见，帮助我订正了不少错误。感谢我的领域驱动设计技术交流群，近1500名群友的耐心等待以及坚持不懈的催促，使得我能够坚持写完本书。</p>
-<p>之所以“三年磨一剑”，是希望通过我的努力让本书的质量对得起读者！可是，在态度上对得起读者的同时，我却对不起我生命中最重要的两个人：我的妻子漆茜与儿子张子瞻。这三年经历了风雨阳光，很遗憾，我把大部分业余时间都交给了《解构领域驱动设计》，多少个晚上笔耕不缀，妻子陪着儿子，我则陪着电脑。为了支持我的创作，没有怨怼，只有默默的支持。本书的出版，有他们一大半的功劳！最后，还要感谢我的父母，每次匆匆回家看望他们，极短的时间和他们聊天，挤出来的时间都留给本书的写作了！</p>
-<p>在写作本篇前言的前一天，我偶然读到苏东坡的一首小词：<br>春未老，风细柳斜斜。试上超然台上看，半壕春水一城花。烟雨暗千家。<br>寒食后，酒醒却咨嗟。休对故人思故国，且将新火试新茶。诗酒趁年华。</p>
-<p>蓦然内心被叩击，仿佛心弦被优美的辞章轻轻地带着诗意拨弄。吾身虽不能上超然台，然而书成之后，是否能够看到半壕春水一城花呢？未曾饮酒，却咨嗟，是否多情笑我早生华发？如今的我，已然焙出新火，恰当新火试新茶，却不知待到明年春未老时，能否做到何妨吟啸且徐行的落拓不羁？不管如何，还当诗酒趁年华，如此当——仰天大笑出门去，吾辈岂是蓬蒿人!</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
       </tags>
   </entry>
   <entry>
@@ -152,31 +152,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于《恰如其分的软件架构》</title>
-    <url>/about-just-enough-soft-arch/</url>
-    <content><![CDATA[<img src="/about-just-enough-soft-arch/just-enough.jpg" class="">
-<p>昨天，久（shi）违（san）多年的华中科技大学出版社徐定翔兄，以近乎于地下党接头的曲折方式联系上我。徐兄送来了好消息：“《恰如其分的软件架构》这两年又销售了近1000册，可以给<strong>大家</strong>申请1000册稿酬。”稿酬自然不多，但没想到这本译作过了如许几年，销量还能缓慢增长，令我惊喜。</p>
-<span id="more"></span>
-
-<p>消息中提及的<strong>大家</strong>，乃《恰如其分的软件架构》翻译三人组，即审校高翌翔，翻译倪健和我。我认识翌翔是通过InfoQ，当时我们同为InfoQ的兼职编辑，在北京有几次谋面。翌翔对技术的热爱令我印象颇深。倪健兄则属于神交，从未谋面。我是在拜读他的大作《<a href="https://book.douban.com/subject/4714092/">简单之美</a>》后，深感一个IT人能把文字写得如此动人，从而滋生“拉他下水”的想法。记得倪健兄定居上海，被我拉下水后，快手译书，倚马可待，终于使得本书的译作能够如期面试。遗憾的是，后来随着我工作变动、工作地点变动，翻译三人组慢慢失去了联系。回想起来，还是令我唏嘘不已。</p>
-<p>翻译Just Enough Software Architecture时，我在Thoughtworks就职，relocation在北京，居住在靠近东直门的蜗居内。每日公司宿舍两点一线，过着简朴而又纯粹的生活。过去的回忆一下子又在脑海中鲜活呈现。这篇博客是我写于2013年的旧文，真实记录了当初译稿交付后的点滴感受，叙述了当初翻译的艰难历程。如今发布出来，颇有些“忆往昔峥嵘岁月”的感觉。——是为记。</p>
-<hr>
-<p>华中科技大学出版社的徐定翔问我意见，了解我对Just Enough Software Architecture这本书的观感，看是否值得引进。时间是在2010年。从一开始，我就被书名中的Just Enough理念所吸引。它让我想起宋玉的东家姑娘，“增之一分则太长，减之一分则太短”那种不可言说的美丽。我在心里说，架构设计就需要这样。我当时并没有看到本书，只是到Amazon上找到了几篇英文原版样章。犹记得我在读到第一章介绍的RackSpace案例时那种兴奋之情。于是，我迫切地向徐定翔强烈推荐引进这本书，而我则毛遂自荐，希望能作为本书的译者。之后，我在InfoQ上看到对本书的《<a href="http://www.infoq.com/cn/articles/fairbanks-jesa">访谈和书摘</a>》，进一步加强了我翻译本书的信念。于是，出版社开始与作者Fairbanks联系，然而从此音讯如石沉大海。时针指向2011年，我对于本书是否被引进，是否由我翻译，一切未知。我觉得我可能错过了它，思之仍觉怅然。谁知到了九月，消息突然确定，而徐大编辑就不容分说地直接把原书给我寄来了。</p>
-<p>拿到沉甸甸的书，第一面就为本书的装帧而惊喜。心里想，我这一辈子若能写出这样一本书，绝对值得生命走过的这一遭了。我并没有迫不及待地开始翻译，这就好似遇到珍馐美味，需得先赏其色，闻其香，然后再品其味。我每天抱着这本书饶有兴味地开始阅读之旅。阅读之旅确乎如行山阴道，沿途之美，目不暇接；可一想到翻译，这种美景就成了一种折磨，因为我害怕辜负这一美景。翻译之初我就举步维艰，那些词语放在那里，我却无法解开“封印”将它们取出来，即使取出来，却又找不到存放的合适位置。一些翻译隐隐约约浮现着，当我竭力去揭开这些词语的真面目时，无论如何用力，总也不能够着。翻译就好像那些年我们一起追过的女孩——追不到，痛苦；追到了，销魂。翻译进度像蜗牛一样的爬着，我终于决定求助了。辗转寻找了好多朋友，都以各种理由拒绝或者放弃了。翻译讲解软件架构的书，确乎不是一件轻松的事儿。那个时候，我的Buddy肖鹏正从翻译《面向模式的软件架构》第五卷的泥潭中爬了出来。每一提及他的这段翻译经历，脸上就会浮现出不堪回首的表情，如看了恐怖片。终于，事情得到转机，最开始是倪健的雪中送炭，再有高翌翔的锦上添花，随着我们这个三人组的建立，翻译才算开始走向正规，我才有了交稿的信心。</p>
-<p>自从开始翻译这本书后，我与人谈架构，动辄就会提及“Just Enough，恰如其分”。我像祥林嫂一般地推介着Fairbanks提出的风险驱动模型，并认真地实践着这一模型。我开始对演进的架构有了更深入的理解。我写了《<a href="http://agiledon.github.io/blog/2011/10/10/design-just-enough-architecture/">设计恰如其分的架构</a>》这篇博客来详细阐述我对演进式架构的理解。在2011年我参加的技术会议上，我也反复讲解了如何遵循简单之美的原则，运用风险驱动模型设计恰如其分的架构。2012年，在我参加的一个项目中需要针对遗留系统进行技术栈迁移。我撰写了文章《<a href="http://www.infoq.com/cn/articles/legacy-system-migration">遗留系统的技术栈迁移</a>》，提到了“风险驱动模型”，并在2013年的Scrum Gathering会议上分享了我的一些想法。当然，这个模型并不是锤子，更不是银弹。它更近似于质量属性驱动的架构设计，我们要满足的质量属性，可能就是我们在做架构时需要面对的风险；而在Roy Fielding的那篇关于REST的著名论文中，也提到了对约束的识别，并演示了如何从一个空约束，通过逐步添加约束演化为REST风格的架构。从某种程度上，架构的约束可能是一种风险，也可能成为设计的驱动力。</p>
-<p>前几天，我参加Agile China 2013，与我新认识的一位朋友范钢聊到了关于架构重构的问题。事实上，面向对象软件开发到现在，已有十余年之久；各种经验、模式与原则甚嚣尘上并得到较好的推广。然而新的方法、新的语言乃至新的思想仍然层出不穷，尤其是在互联网开发、大数据处理以及移动开发的冲击下，传统软件开发似乎已经开始走向末路。“只见新人笑，不见旧人哭”！？？是，也不是。实际上，在传统的企业开发领域，各种大型系统仍然像一艘庞大如巨型海兽一般的船舰在海面缓缓行驶，它或许就是沉没之前的泰坦尼克，一切还都安然无恙，你甚至可以听到船头甲板传来的悠扬的小提琴声；然而，冰川就在远处出没，船长还未察觉。我们该怎么办？这样的巨型船舰，自然不可能如艨艟快艇那般的敏捷，即使是360度的转身，也可以玩得如此漂亮、优雅。这些大型的企业级软件系统已经走过了漫长的历程，它们如此巨大以至于我们只能看到它的一角，它们的零部件如此复杂以至于没有人能够彻底弄懂。我们必须认识到，这些系统是最有权力的系统，它们很有可能掌握了人类生活的根本命脉——金融管理、股市交易、生命健康、医疗管理、机械制造、国防安全、航空、航天……它们就像政治界、金融界的那些巨头，要是患了病咳嗽两声，也许世界都要抖一抖。它们可以轻易改变吗？不能！然而若是不寻求改变，这些系统会宿命地走向衰亡。若我们无法承受重写的成本，唯一的办法或许就是架构的重构。我们必须清晰地认识到这一点。而我认为，风险驱动模型恰恰可以作为架构重构的指导原则。在进行重构之前，我们需要充分评估重构的价值，回答“为什么我们需要重构”的问题；然后去识别风险。在开始重构之前，我们需要尽可能做到万无一失。风险自然是不可避免的，但如果我们能事先识别出这些风险，就能有的放矢地选择正确的技术。风险驱动模型的第三步，则是评估风险是否得到有效缓解。不要轻视这一步！重构往往意味着还债。可是，我们该用什么来说服管理者们付出成本去做一些看似没有产生直接利益的任务呢？答案就是用数据来说话，通过比较重构前后的系统健康指标，可以加重说服老板的砝码。当然，毫无疑问，这个过程一定是迭代的。</p>
-<p>我想，通过这次交谈，我进一步找到了“风险驱动模型”适用的场景。而这正是我翻译并推荐本书的根本意义。</p>
-<p>本书可以在<a href="http://product.dangdang.com/23320387.html">当当网</a>购买。</p>
-]]></content>
-      <categories>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>Architecture</tag>
-        <tag>Book</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>对Flink流处理模型的抽象</title>
     <url>/abstract-streaming-model-on-flink/</url>
     <content><![CDATA[<img src="/abstract-streaming-model-on-flink/cover.jpg" class="">
@@ -227,11 +202,36 @@
         <category>BigData</category>
       </categories>
       <tags>
-        <tag>Architecture</tag>
         <tag>Streaming</tag>
         <tag>Big Data</tag>
         <tag>Flink</tag>
+        <tag>Architecture</tag>
         <tag>Design</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于《恰如其分的软件架构》</title>
+    <url>/about-just-enough-soft-arch/</url>
+    <content><![CDATA[<img src="/about-just-enough-soft-arch/just-enough.jpg" class="">
+<p>昨天，久（shi）违（san）多年的华中科技大学出版社徐定翔兄，以近乎于地下党接头的曲折方式联系上我。徐兄送来了好消息：“《恰如其分的软件架构》这两年又销售了近1000册，可以给<strong>大家</strong>申请1000册稿酬。”稿酬自然不多，但没想到这本译作过了如许几年，销量还能缓慢增长，令我惊喜。</p>
+<span id="more"></span>
+
+<p>消息中提及的<strong>大家</strong>，乃《恰如其分的软件架构》翻译三人组，即审校高翌翔，翻译倪健和我。我认识翌翔是通过InfoQ，当时我们同为InfoQ的兼职编辑，在北京有几次谋面。翌翔对技术的热爱令我印象颇深。倪健兄则属于神交，从未谋面。我是在拜读他的大作《<a href="https://book.douban.com/subject/4714092/">简单之美</a>》后，深感一个IT人能把文字写得如此动人，从而滋生“拉他下水”的想法。记得倪健兄定居上海，被我拉下水后，快手译书，倚马可待，终于使得本书的译作能够如期面试。遗憾的是，后来随着我工作变动、工作地点变动，翻译三人组慢慢失去了联系。回想起来，还是令我唏嘘不已。</p>
+<p>翻译Just Enough Software Architecture时，我在Thoughtworks就职，relocation在北京，居住在靠近东直门的蜗居内。每日公司宿舍两点一线，过着简朴而又纯粹的生活。过去的回忆一下子又在脑海中鲜活呈现。这篇博客是我写于2013年的旧文，真实记录了当初译稿交付后的点滴感受，叙述了当初翻译的艰难历程。如今发布出来，颇有些“忆往昔峥嵘岁月”的感觉。——是为记。</p>
+<hr>
+<p>华中科技大学出版社的徐定翔问我意见，了解我对Just Enough Software Architecture这本书的观感，看是否值得引进。时间是在2010年。从一开始，我就被书名中的Just Enough理念所吸引。它让我想起宋玉的东家姑娘，“增之一分则太长，减之一分则太短”那种不可言说的美丽。我在心里说，架构设计就需要这样。我当时并没有看到本书，只是到Amazon上找到了几篇英文原版样章。犹记得我在读到第一章介绍的RackSpace案例时那种兴奋之情。于是，我迫切地向徐定翔强烈推荐引进这本书，而我则毛遂自荐，希望能作为本书的译者。之后，我在InfoQ上看到对本书的《<a href="http://www.infoq.com/cn/articles/fairbanks-jesa">访谈和书摘</a>》，进一步加强了我翻译本书的信念。于是，出版社开始与作者Fairbanks联系，然而从此音讯如石沉大海。时针指向2011年，我对于本书是否被引进，是否由我翻译，一切未知。我觉得我可能错过了它，思之仍觉怅然。谁知到了九月，消息突然确定，而徐大编辑就不容分说地直接把原书给我寄来了。</p>
+<p>拿到沉甸甸的书，第一面就为本书的装帧而惊喜。心里想，我这一辈子若能写出这样一本书，绝对值得生命走过的这一遭了。我并没有迫不及待地开始翻译，这就好似遇到珍馐美味，需得先赏其色，闻其香，然后再品其味。我每天抱着这本书饶有兴味地开始阅读之旅。阅读之旅确乎如行山阴道，沿途之美，目不暇接；可一想到翻译，这种美景就成了一种折磨，因为我害怕辜负这一美景。翻译之初我就举步维艰，那些词语放在那里，我却无法解开“封印”将它们取出来，即使取出来，却又找不到存放的合适位置。一些翻译隐隐约约浮现着，当我竭力去揭开这些词语的真面目时，无论如何用力，总也不能够着。翻译就好像那些年我们一起追过的女孩——追不到，痛苦；追到了，销魂。翻译进度像蜗牛一样的爬着，我终于决定求助了。辗转寻找了好多朋友，都以各种理由拒绝或者放弃了。翻译讲解软件架构的书，确乎不是一件轻松的事儿。那个时候，我的Buddy肖鹏正从翻译《面向模式的软件架构》第五卷的泥潭中爬了出来。每一提及他的这段翻译经历，脸上就会浮现出不堪回首的表情，如看了恐怖片。终于，事情得到转机，最开始是倪健的雪中送炭，再有高翌翔的锦上添花，随着我们这个三人组的建立，翻译才算开始走向正规，我才有了交稿的信心。</p>
+<p>自从开始翻译这本书后，我与人谈架构，动辄就会提及“Just Enough，恰如其分”。我像祥林嫂一般地推介着Fairbanks提出的风险驱动模型，并认真地实践着这一模型。我开始对演进的架构有了更深入的理解。我写了《<a href="http://agiledon.github.io/blog/2011/10/10/design-just-enough-architecture/">设计恰如其分的架构</a>》这篇博客来详细阐述我对演进式架构的理解。在2011年我参加的技术会议上，我也反复讲解了如何遵循简单之美的原则，运用风险驱动模型设计恰如其分的架构。2012年，在我参加的一个项目中需要针对遗留系统进行技术栈迁移。我撰写了文章《<a href="http://www.infoq.com/cn/articles/legacy-system-migration">遗留系统的技术栈迁移</a>》，提到了“风险驱动模型”，并在2013年的Scrum Gathering会议上分享了我的一些想法。当然，这个模型并不是锤子，更不是银弹。它更近似于质量属性驱动的架构设计，我们要满足的质量属性，可能就是我们在做架构时需要面对的风险；而在Roy Fielding的那篇关于REST的著名论文中，也提到了对约束的识别，并演示了如何从一个空约束，通过逐步添加约束演化为REST风格的架构。从某种程度上，架构的约束可能是一种风险，也可能成为设计的驱动力。</p>
+<p>前几天，我参加Agile China 2013，与我新认识的一位朋友范钢聊到了关于架构重构的问题。事实上，面向对象软件开发到现在，已有十余年之久；各种经验、模式与原则甚嚣尘上并得到较好的推广。然而新的方法、新的语言乃至新的思想仍然层出不穷，尤其是在互联网开发、大数据处理以及移动开发的冲击下，传统软件开发似乎已经开始走向末路。“只见新人笑，不见旧人哭”！？？是，也不是。实际上，在传统的企业开发领域，各种大型系统仍然像一艘庞大如巨型海兽一般的船舰在海面缓缓行驶，它或许就是沉没之前的泰坦尼克，一切还都安然无恙，你甚至可以听到船头甲板传来的悠扬的小提琴声；然而，冰川就在远处出没，船长还未察觉。我们该怎么办？这样的巨型船舰，自然不可能如艨艟快艇那般的敏捷，即使是360度的转身，也可以玩得如此漂亮、优雅。这些大型的企业级软件系统已经走过了漫长的历程，它们如此巨大以至于我们只能看到它的一角，它们的零部件如此复杂以至于没有人能够彻底弄懂。我们必须认识到，这些系统是最有权力的系统，它们很有可能掌握了人类生活的根本命脉——金融管理、股市交易、生命健康、医疗管理、机械制造、国防安全、航空、航天……它们就像政治界、金融界的那些巨头，要是患了病咳嗽两声，也许世界都要抖一抖。它们可以轻易改变吗？不能！然而若是不寻求改变，这些系统会宿命地走向衰亡。若我们无法承受重写的成本，唯一的办法或许就是架构的重构。我们必须清晰地认识到这一点。而我认为，风险驱动模型恰恰可以作为架构重构的指导原则。在进行重构之前，我们需要充分评估重构的价值，回答“为什么我们需要重构”的问题；然后去识别风险。在开始重构之前，我们需要尽可能做到万无一失。风险自然是不可避免的，但如果我们能事先识别出这些风险，就能有的放矢地选择正确的技术。风险驱动模型的第三步，则是评估风险是否得到有效缓解。不要轻视这一步！重构往往意味着还债。可是，我们该用什么来说服管理者们付出成本去做一些看似没有产生直接利益的任务呢？答案就是用数据来说话，通过比较重构前后的系统健康指标，可以加重说服老板的砝码。当然，毫无疑问，这个过程一定是迭代的。</p>
+<p>我想，通过这次交谈，我进一步找到了“风险驱动模型”适用的场景。而这正是我翻译并推荐本书的根本意义。</p>
+<p>本书可以在<a href="http://product.dangdang.com/23320387.html">当当网</a>购买。</p>
+]]></content>
+      <categories>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>Architecture</tag>
+        <tag>Book</tag>
       </tags>
   </entry>
   <entry>
@@ -392,9 +392,9 @@
         <category>BigData</category>
       </categories>
       <tags>
-        <tag>Architecture</tag>
         <tag>Streaming</tag>
         <tag>Big Data</tag>
+        <tag>Architecture</tag>
       </tags>
   </entry>
   <entry>
@@ -490,6 +490,43 @@
       </tags>
   </entry>
   <entry>
+    <title>行为驱动开发的简要介绍</title>
+    <url>/brief-introduce-bdd/</url>
+    <content><![CDATA[<p>行为驱动开发（Behavior-Driven Development， BDD）的概念来自于测试驱动开发，强调<strong>使用DSL（Domain Specific Language，领域特定语言）描述用户行为，定义业务需求，是需求分析人员、开发人员与测试人员进行沟通的有效方法</strong>。DSL是一种编码实现，相比自然语言更加精确，又能以符合领域概念的形式满足所谓“活文档（Living Document）”的要求。可以说，行为驱动开发将编码实现与业务行为描述完美地结合起来，走出了一条业务分析人员、开发人员与测试人员都能接受的中庸之道。</p>
+<span id="more"></span>
+
+<p>行为驱动开发的核心在于“<strong>行为</strong>”。当业务需求被划分为不同的业务场景，并以“Given-When-Then”的形式描述出来时，就形成了一种范式化的领域建模规约。编写领域特定语言的过程，其实就是不断发现领域概念的过程。因此，采用BDD进行开发，最重要的产出不是可以自动运行的验收测试，而是它提供了团队交流的平台，并在其约束之下完成了领域建模。由于团队的不同角色都参与了这个过程，就保证了领域模型的一致性与准确性。</p>
+<p>在进行行为驱动开发时，需要避免两种错误的倾向：</p>
+<ul>
+<li>从UI操作去表现业务行为</li>
+<li>描述技术实现而非业务需求</li>
+</ul>
+<p>例如，我们要编写“发送邮件”这个业务场景，可能会写成这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: send email</span><br><span class="line"></span><br><span class="line">Given a user &quot;James&quot; with password &quot;123456&quot;</span><br><span class="line">And I sign in</span><br><span class="line">And I fill in &quot;mike@dddpractice.com&quot; in &quot;to&quot; textbox </span><br><span class="line">And fill in &quot;test email&quot; in &quot;subject&quot; textbox</span><br><span class="line">And fill in &quot;This is a test email&quot; in &quot;body&quot; textarea</span><br><span class="line"></span><br><span class="line">When I click the &quot;send email&quot; button</span><br><span class="line"></span><br><span class="line">Then the email should be sent sucessfully</span><br><span class="line">And shown with message &quot;the email is sent sucessfully&quot;</span><br></pre></td></tr></table></figure>
+
+<p>该业务场景描写的不是业务行为，而是用户通过UI进行交互的操作流程。这种方式实则是让用户界面捆绑了你对领域行为的认知。准确地说，这种UI交互操作并非业务行为，例如上述场景中提到的button与textbox控件，与发送邮件的功能并没有关系。或许换一个UI设计，使用的控件又完全不同了。</p>
+<p>那么换成这样的写法呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: send email</span><br><span class="line"></span><br><span class="line">Given a user &quot;James&quot; with password &quot;123456&quot;</span><br><span class="line">And I sign in after OAuth authentification</span><br><span class="line">And I fill in &quot;mike@dddpractice.com&quot; as receiver</span><br><span class="line">And &quot;test email&quot; as subject</span><br><span class="line">And &quot;This is a test email&quot; as email body</span><br><span class="line"></span><br><span class="line">When I send the email</span><br><span class="line"></span><br><span class="line">Then it should connect smtp server</span><br><span class="line">And all messages should be composed to email</span><br><span class="line">And a composed email should be sent to receiver via smtp protocal</span><br></pre></td></tr></table></figure>
+
+<p>该场景的编写暴露了不必要的技术细节，如连接到smtp服务器、消息组合为邮件、邮件通过smtp协议发送等。<strong>对于BDD而言，场景应该关注于做什么（what），而不是怎么做（how）。</strong>如果在业务分析过程中，纠缠于技术细节，就可能导致我们忽略了业务价值。在业务建模阶段，业务才是重心，不能舍本逐末。</p>
+<p>那么，该怎么写？当我们使用DSL编写业务场景时，不要考虑任何UI操作，甚至需要抛开业已设计好的UI原型，也不要考虑任何技术细节。在编写好业务场景之后，可以验证：如果我们更换了UI设计，调整了UI布局，是否需要修改业务场景？同理，如果我们改变了技术实现方案，是否需要修改业务场景？如下场景采用业务行为的形式编写：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: send email</span><br><span class="line"></span><br><span class="line">Given a user &quot;James&quot; with password &quot;123456&quot;</span><br><span class="line">And I sign in</span><br><span class="line">And I fill in a subject with &quot;test email&quot;</span><br><span class="line">And a body with &quot;This is a test email&quot;</span><br><span class="line"></span><br><span class="line">When I send the email to &quot;Mike&quot; with address &quot;mike@dddpractice.com&quot;</span><br><span class="line"></span><br><span class="line">Then the email should be sent sucessfully</span><br></pre></td></tr></table></figure>
+
+<p>我们要将DSL描述的场景视为一种可读的需求规格（Specification），通过它准确地表现领域知识，就可以帮助我们提炼出隐含的领域概念。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: validate the given date for reporting period </span><br><span class="line"></span><br><span class="line">Given the reporting period as prior 13 month to report month</span><br><span class="line">And the reporting month is &quot;April 2018&quot;</span><br><span class="line">When user choose the &quot;April 2017&quot;</span><br><span class="line">Then validation result is true</span><br><span class="line">When user choose &quot;March 2017&quot;</span><br><span class="line">Then validation result is false</span><br></pre></td></tr></table></figure>
+
+<p>场景描述中的ReportingPeriod蕴含了与财务报表相关的领域知识，即有效报表周期为13个月，ReportingPeriod自身应该履行验证给定日期是否有效的职责。</p>
+]]></content>
+      <categories>
+        <category>Design</category>
+      </categories>
+      <tags>
+        <tag>Requirement</tag>
+        <tag>BDD</tag>
+        <tag>Agile</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>限界上下文的边界</title>
     <url>/boundary-of-bounded-context/</url>
     <content><![CDATA[<img src="/boundary-of-bounded-context/zhangyi.jpg" class="">
@@ -572,40 +609,46 @@
       </tags>
   </entry>
   <entry>
-    <title>行为驱动开发的简要介绍</title>
-    <url>/brief-introduce-bdd/</url>
-    <content><![CDATA[<p>行为驱动开发（Behavior-Driven Development， BDD）的概念来自于测试驱动开发，强调<strong>使用DSL（Domain Specific Language，领域特定语言）描述用户行为，定义业务需求，是需求分析人员、开发人员与测试人员进行沟通的有效方法</strong>。DSL是一种编码实现，相比自然语言更加精确，又能以符合领域概念的形式满足所谓“活文档（Living Document）”的要求。可以说，行为驱动开发将编码实现与业务行为描述完美地结合起来，走出了一条业务分析人员、开发人员与测试人员都能接受的中庸之道。</p>
+    <title>迪米特法则与重构</title>
+    <url>/demeter-law-and-refactoring/</url>
+    <content><![CDATA[<p>在面向对象设计的世界里，有一个寻常却又常常为人所忽略的原则——“迪米特（Law of Demeter）”法则。这个原则认为，任何一个对象或者方法，它应该只能调用下列对象：</p>
+<ul>
+<li>该对象本身</li>
+<li>作为参数传进来的对象（也可以是该对象的字段）</li>
+<li>在方法内创建的对象</li>
+</ul>
 <span id="more"></span>
 
-<p>行为驱动开发的核心在于“<strong>行为</strong>”。当业务需求被划分为不同的业务场景，并以“Given-When-Then”的形式描述出来时，就形成了一种范式化的领域建模规约。编写领域特定语言的过程，其实就是不断发现领域概念的过程。因此，采用BDD进行开发，最重要的产出不是可以自动运行的验收测试，而是它提供了团队交流的平台，并在其约束之下完成了领域建模。由于团队的不同角色都参与了这个过程，就保证了领域模型的一致性与准确性。</p>
-<p>在进行行为驱动开发时，需要避免两种错误的倾向：</p>
-<ul>
-<li>从UI操作去表现业务行为</li>
-<li>描述技术实现而非业务需求</li>
-</ul>
-<p>例如，我们要编写“发送邮件”这个业务场景，可能会写成这样：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: send email</span><br><span class="line"></span><br><span class="line">Given a user &quot;James&quot; with password &quot;123456&quot;</span><br><span class="line">And I sign in</span><br><span class="line">And I fill in &quot;mike@dddpractice.com&quot; in &quot;to&quot; textbox </span><br><span class="line">And fill in &quot;test email&quot; in &quot;subject&quot; textbox</span><br><span class="line">And fill in &quot;This is a test email&quot; in &quot;body&quot; textarea</span><br><span class="line"></span><br><span class="line">When I click the &quot;send email&quot; button</span><br><span class="line"></span><br><span class="line">Then the email should be sent sucessfully</span><br><span class="line">And shown with message &quot;the email is sent sucessfully&quot;</span><br></pre></td></tr></table></figure>
+<p>这个原则用以指导<strong>正确的对象协作</strong>，分清楚哪些对象应该产生协作，哪些对象则对于该对象而言，又应该是无知的。如何理解这个原则？我们可以看看David Bock就该原则给出的一个<a href="http://www.ccs.neu.edu/research/demeter/demeter-method/LawOfDemeter/paper-boy/demeter.pdf">绝佳案例</a>。假设一个超市购物的场景，顾客（Customer）到收银台结账，收银员（Paper Boy）负责收钱。我们来看看代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String firstName;</span><br><span class="line">    <span class="keyword">private</span> String lastName;</span><br><span class="line">    <span class="keyword">private</span> Wallet myWallet;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFirstName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> firstName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLastName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lastName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Wallet <span class="title">getWallet</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> myWallet;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wallet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> value;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTotalMoney</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTotalMoney</span><span class="params">(<span class="keyword">float</span> newValue)</span> </span>&#123;</span><br><span class="line">        value = newValue;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMoney</span><span class="params">(<span class="keyword">float</span> deposit)</span> </span>&#123;</span><br><span class="line">        value += deposit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subtractMoney</span><span class="params">(<span class="keyword">float</span> debit)</span> </span>&#123;</span><br><span class="line">        value -= debit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Paperboy</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">charge</span><span class="params">(Customer myCustomer, <span class="keyword">double</span> payment)</span> </span>&#123;</span><br><span class="line">        Wallet theWallet = myCustomer.getWallet();</span><br><span class="line">        <span class="keyword">if</span> (theWallet.getTotalMoney() &gt; payment) &#123;</span><br><span class="line">            theWallet.subtractMoney(payment);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//money not enough</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>该业务场景描写的不是业务行为，而是用户通过UI进行交互的操作流程。这种方式实则是让用户界面捆绑了你对领域行为的认知。准确地说，这种UI交互操作并非业务行为，例如上述场景中提到的button与textbox控件，与发送邮件的功能并没有关系。或许换一个UI设计，使用的控件又完全不同了。</p>
-<p>那么换成这样的写法呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: send email</span><br><span class="line"></span><br><span class="line">Given a user &quot;James&quot; with password &quot;123456&quot;</span><br><span class="line">And I sign in after OAuth authentification</span><br><span class="line">And I fill in &quot;mike@dddpractice.com&quot; as receiver</span><br><span class="line">And &quot;test email&quot; as subject</span><br><span class="line">And &quot;This is a test email&quot; as email body</span><br><span class="line"></span><br><span class="line">When I send the email</span><br><span class="line"></span><br><span class="line">Then it should connect smtp server</span><br><span class="line">And all messages should be composed to email</span><br><span class="line">And a composed email should be sent to receiver via smtp protocal</span><br></pre></td></tr></table></figure>
+<p>让我们将PaperBoy中<code>charge()</code>方法的代码翻译成这幕小话剧的对白。</p>
+<p>“把钱包交出来！”收银员算出顾客要买的商品总价后，“温柔”地对顾客说道。<br>顾客言听计从，赶紧将钱包掏出来，恭恭敬敬地递给收银员。<br>接过钱包，收银员毫不客气地打开，检查里面的钱够不够。噢，不错，钱够了。收银员从钱包取出钱，心满意足地笑了。</p>
+<p>如果你是顾客，你敢去这样的超市shopping吗？</p>
+<p>对于PaperBoy而言，Wallet不满足迪米特法则三个条件中的任何一个，因此让PaperBoy与Wallet对象直接交互是错误的行为。若从拟人化的角度思考，则Wallet其实属于Customer的<strong>隐私</strong>。如此重要的隐私，怎么能直接交给收银员这个陌生人呢？这里所谓的“隐私”，可以视为是“数据”，是“信息”，是“知识”，因此我们往往又将迪米特法则称之为<strong>“最小知识法则”</strong>。</p>
+<p>当我们理解“最小知识法则”时，又可以从<strong>职责</strong>的角度去思考以上代码。对于收银员角色，他的职责应该是负责收钱，而不用去管钱包里的钱够不够，如果够了怎么办，如果不够又该怎么办，这些统统都不属于他的职责。设想一下，当超市里人流如织，大家都在购买商品时，如果每一个收银员都要承担这般的职责时，会出现什么样的景象？所以“最小知识法则”乃善法，在对象社区中，我们就应该刻意减少对象之间彼此深入的了解。了解最小的知识，就意味着依赖最小，彼此产生的影响就会最小。这实际上是KISS（keep it simple and stupid）原则的体现。</p>
+<p><strong>信息专家模式</strong>告诉我们：“信息的持有者即为操作该信息的专家。”对于对象，所谓信息就是该对象内部的字段。在前面的例子中，Wallet是Customer的字段，那么操作Wallet的行为自然就应该分配给Customer了。这是题中应有之义。“信息专家模式”其实是面向对象最重要原则<strong>“数据与行为应该封装在一起”</strong>的别名。若在领域建模时能遵循该原则，则可以规避我们设计出贫血模型。</p>
+<p>如何修改以上代码？注意，<code>charge()</code>行为仍然属于PaperBoy的职责，因此我们不应该将该方法整体搬迁到Customer中，而应该先进行方法的提取：</p>
+<img src="/demeter-law-and-refactoring/demeter-refactor.jpg" class="">
 
-<p>该场景的编写暴露了不必要的技术细节，如连接到smtp服务器、消息组合为邮件、邮件通过smtp协议发送等。<strong>对于BDD而言，场景应该关注于做什么（what），而不是怎么做（how）。</strong>如果在业务分析过程中，纠缠于技术细节，就可能导致我们忽略了业务价值。在业务建模阶段，业务才是重心，不能舍本逐末。</p>
-<p>那么，该怎么写？当我们使用DSL编写业务场景时，不要考虑任何UI操作，甚至需要抛开业已设计好的UI原型，也不要考虑任何技术细节。在编写好业务场景之后，可以验证：如果我们更换了UI设计，调整了UI布局，是否需要修改业务场景？同理，如果我们改变了技术实现方案，是否需要修改业务场景？如下场景采用业务行为的形式编写：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: send email</span><br><span class="line"></span><br><span class="line">Given a user &quot;James&quot; with password &quot;123456&quot;</span><br><span class="line">And I sign in</span><br><span class="line">And I fill in a subject with &quot;test email&quot;</span><br><span class="line">And a body with &quot;This is a test email&quot;</span><br><span class="line"></span><br><span class="line">When I send the email to &quot;Mike&quot; with address &quot;mike@dddpractice.com&quot;</span><br><span class="line"></span><br><span class="line">Then the email should be sent sucessfully</span><br></pre></td></tr></table></figure>
+<p>提取的<code>pay()</code>的方法体与<code>charge()</code>方法完全相同，但是在PaperBoy类中却保留了<code>charge()</code>方法，只是这个方法什么也没有做，在接收方法请求后，转而将请求委派给了<code>pay()</code>方法。我们可以这样理解：在抽象层面，收款是收银员的职责；在实现层面，是<code>pay()</code>方法支持了收款行为，该实现归属于顾客。</p>
+<p>观察<code>pay()</code>方法，我们发现该方法操作的数据皆来自Customer。我们嗅到了一种坏味道，即Martin Fowler所谓的“特性依恋（Feature Envy）”。对于该坏味道，老马是这样阐释的：“函数对某个类的兴趣高过对自己所处类的兴趣。”不要再嫉妒了，桥归桥，路归路，让方法回到自己最喜欢的地方吧。运用“Move Method”重构手法，将<code>pay()</code>方法移动到Customer中：</p>
+<img src="/demeter-law-and-refactoring/demeter-refactor02.jpg" class="">
 
-<p>我们要将DSL描述的场景视为一种可读的需求规格（Specification），通过它准确地表现领域知识，就可以帮助我们提炼出隐含的领域概念。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Scenario: validate the given date for reporting period </span><br><span class="line"></span><br><span class="line">Given the reporting period as prior 13 month to report month</span><br><span class="line">And the reporting month is &quot;April 2018&quot;</span><br><span class="line">When user choose the &quot;April 2017&quot;</span><br><span class="line">Then validation result is true</span><br><span class="line">When user choose &quot;March 2017&quot;</span><br><span class="line">Then validation result is false</span><br></pre></td></tr></table></figure>
+<p>在将方法移到正确的位置后，我们发现暴露的<code>getWallet()</code>方法根本就没有意义。更何况，将钱包裸露出去，难道是想要炫富吗？还是低调一点为好，隐藏自己的“隐私”，总好过被人觊觎而招来飞来横祸之险。于是，内联（inline）之。</p>
+<p>判断一段代码是否违背了迪米特法则，有一个小窍门，就是看调用代码是否出现形如<code>a.m1().m2().m3().m4()</code>之类的代码。这种代码在Martin Fowler《重构》一书中，被名为“消息链条（Message Chain）”，有人更加夸张地名其为“火车残骸”。车祸现场啊，真是惨不忍睹。</p>
+<p>那么，如下代码是否这样的残骸呢？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">str.split(<span class="string">&quot;&amp;&quot;</span>)</span><br><span class="line">	.stream()</span><br><span class="line">	.map(str -&gt; str.contains(elementName) ? str.replace(elementName + <span class="string">&quot;=&quot;</span>, <span class="string">&quot;&quot;</span>) : <span class="string">&quot;&quot;</span>)</span><br><span class="line">	.filter(str -&gt; !str.isEmpty())</span><br><span class="line">	.reduce(<span class="string">&quot;&quot;</span>, (a, b) -&gt; a + <span class="string">&quot;,&quot;</span> + b);</span><br></pre></td></tr></table></figure>
 
-<p>场景描述中的ReportingPeriod蕴含了与财务报表相关的领域知识，即有效报表周期为13个月，ReportingPeriod自身应该履行验证给定日期是否有效的职责。</p>
+<p>不是的。这样的代码我们一般称之为“流畅接口或连贯接口（Fluent Interface）”。二者的区别在于观察形成链条的每个方法返回的是别的对象，还是对象自身。如果返回的是别的对象，就是消息链条。所谓<code>m1().m2().m3().m4()</code>的调用，其实是调用者不需要也不想知道的“知识”，把这些中间过程的细节暴露出来没有意义，调用者关心的是最终结果；而上述代码中的<code>map()</code>与<code>filter()</code>等方法其实返回的还是Stream类。这一调用方式其初衷并非告知中间过程的细节，而是一种<strong>声明式</strong>的DSL表达，调用者可以自由地组合它们。</p>
 ]]></content>
       <categories>
-        <category>Design</category>
+        <category>Coding</category>
       </categories>
       <tags>
-        <tag>Requirement</tag>
-        <tag>BDD</tag>
-        <tag>Agile</tag>
+        <tag>Design</tag>
+        <tag>Refactoring</tag>
+        <tag>Clean Code</tag>
       </tags>
   </entry>
   <entry>
@@ -693,49 +736,6 @@
       </tags>
   </entry>
   <entry>
-    <title>迪米特法则与重构</title>
-    <url>/demeter-law-and-refactoring/</url>
-    <content><![CDATA[<p>在面向对象设计的世界里，有一个寻常却又常常为人所忽略的原则——“迪米特（Law of Demeter）”法则。这个原则认为，任何一个对象或者方法，它应该只能调用下列对象：</p>
-<ul>
-<li>该对象本身</li>
-<li>作为参数传进来的对象（也可以是该对象的字段）</li>
-<li>在方法内创建的对象</li>
-</ul>
-<span id="more"></span>
-
-<p>这个原则用以指导<strong>正确的对象协作</strong>，分清楚哪些对象应该产生协作，哪些对象则对于该对象而言，又应该是无知的。如何理解这个原则？我们可以看看David Bock就该原则给出的一个<a href="http://www.ccs.neu.edu/research/demeter/demeter-method/LawOfDemeter/paper-boy/demeter.pdf">绝佳案例</a>。假设一个超市购物的场景，顾客（Customer）到收银台结账，收银员（Paper Boy）负责收钱。我们来看看代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String firstName;</span><br><span class="line">    <span class="keyword">private</span> String lastName;</span><br><span class="line">    <span class="keyword">private</span> Wallet myWallet;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFirstName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> firstName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLastName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lastName;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Wallet <span class="title">getWallet</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> myWallet;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Wallet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> value;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTotalMoney</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTotalMoney</span><span class="params">(<span class="keyword">float</span> newValue)</span> </span>&#123;</span><br><span class="line">        value = newValue;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMoney</span><span class="params">(<span class="keyword">float</span> deposit)</span> </span>&#123;</span><br><span class="line">        value += deposit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subtractMoney</span><span class="params">(<span class="keyword">float</span> debit)</span> </span>&#123;</span><br><span class="line">        value -= debit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Paperboy</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">charge</span><span class="params">(Customer myCustomer, <span class="keyword">double</span> payment)</span> </span>&#123;</span><br><span class="line">        Wallet theWallet = myCustomer.getWallet();</span><br><span class="line">        <span class="keyword">if</span> (theWallet.getTotalMoney() &gt; payment) &#123;</span><br><span class="line">            theWallet.subtractMoney(payment);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//money not enough</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>让我们将PaperBoy中<code>charge()</code>方法的代码翻译成这幕小话剧的对白。</p>
-<p>“把钱包交出来！”收银员算出顾客要买的商品总价后，“温柔”地对顾客说道。<br>顾客言听计从，赶紧将钱包掏出来，恭恭敬敬地递给收银员。<br>接过钱包，收银员毫不客气地打开，检查里面的钱够不够。噢，不错，钱够了。收银员从钱包取出钱，心满意足地笑了。</p>
-<p>如果你是顾客，你敢去这样的超市shopping吗？</p>
-<p>对于PaperBoy而言，Wallet不满足迪米特法则三个条件中的任何一个，因此让PaperBoy与Wallet对象直接交互是错误的行为。若从拟人化的角度思考，则Wallet其实属于Customer的<strong>隐私</strong>。如此重要的隐私，怎么能直接交给收银员这个陌生人呢？这里所谓的“隐私”，可以视为是“数据”，是“信息”，是“知识”，因此我们往往又将迪米特法则称之为<strong>“最小知识法则”</strong>。</p>
-<p>当我们理解“最小知识法则”时，又可以从<strong>职责</strong>的角度去思考以上代码。对于收银员角色，他的职责应该是负责收钱，而不用去管钱包里的钱够不够，如果够了怎么办，如果不够又该怎么办，这些统统都不属于他的职责。设想一下，当超市里人流如织，大家都在购买商品时，如果每一个收银员都要承担这般的职责时，会出现什么样的景象？所以“最小知识法则”乃善法，在对象社区中，我们就应该刻意减少对象之间彼此深入的了解。了解最小的知识，就意味着依赖最小，彼此产生的影响就会最小。这实际上是KISS（keep it simple and stupid）原则的体现。</p>
-<p><strong>信息专家模式</strong>告诉我们：“信息的持有者即为操作该信息的专家。”对于对象，所谓信息就是该对象内部的字段。在前面的例子中，Wallet是Customer的字段，那么操作Wallet的行为自然就应该分配给Customer了。这是题中应有之义。“信息专家模式”其实是面向对象最重要原则<strong>“数据与行为应该封装在一起”</strong>的别名。若在领域建模时能遵循该原则，则可以规避我们设计出贫血模型。</p>
-<p>如何修改以上代码？注意，<code>charge()</code>行为仍然属于PaperBoy的职责，因此我们不应该将该方法整体搬迁到Customer中，而应该先进行方法的提取：</p>
-<img src="/demeter-law-and-refactoring/demeter-refactor.jpg" class="">
-
-<p>提取的<code>pay()</code>的方法体与<code>charge()</code>方法完全相同，但是在PaperBoy类中却保留了<code>charge()</code>方法，只是这个方法什么也没有做，在接收方法请求后，转而将请求委派给了<code>pay()</code>方法。我们可以这样理解：在抽象层面，收款是收银员的职责；在实现层面，是<code>pay()</code>方法支持了收款行为，该实现归属于顾客。</p>
-<p>观察<code>pay()</code>方法，我们发现该方法操作的数据皆来自Customer。我们嗅到了一种坏味道，即Martin Fowler所谓的“特性依恋（Feature Envy）”。对于该坏味道，老马是这样阐释的：“函数对某个类的兴趣高过对自己所处类的兴趣。”不要再嫉妒了，桥归桥，路归路，让方法回到自己最喜欢的地方吧。运用“Move Method”重构手法，将<code>pay()</code>方法移动到Customer中：</p>
-<img src="/demeter-law-and-refactoring/demeter-refactor02.jpg" class="">
-
-<p>在将方法移到正确的位置后，我们发现暴露的<code>getWallet()</code>方法根本就没有意义。更何况，将钱包裸露出去，难道是想要炫富吗？还是低调一点为好，隐藏自己的“隐私”，总好过被人觊觎而招来飞来横祸之险。于是，内联（inline）之。</p>
-<p>判断一段代码是否违背了迪米特法则，有一个小窍门，就是看调用代码是否出现形如<code>a.m1().m2().m3().m4()</code>之类的代码。这种代码在Martin Fowler《重构》一书中，被名为“消息链条（Message Chain）”，有人更加夸张地名其为“火车残骸”。车祸现场啊，真是惨不忍睹。</p>
-<p>那么，如下代码是否这样的残骸呢？</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">str.split(<span class="string">&quot;&amp;&quot;</span>)</span><br><span class="line">	.stream()</span><br><span class="line">	.map(str -&gt; str.contains(elementName) ? str.replace(elementName + <span class="string">&quot;=&quot;</span>, <span class="string">&quot;&quot;</span>) : <span class="string">&quot;&quot;</span>)</span><br><span class="line">	.filter(str -&gt; !str.isEmpty())</span><br><span class="line">	.reduce(<span class="string">&quot;&quot;</span>, (a, b) -&gt; a + <span class="string">&quot;,&quot;</span> + b);</span><br></pre></td></tr></table></figure>
-
-<p>不是的。这样的代码我们一般称之为“流畅接口或连贯接口（Fluent Interface）”。二者的区别在于观察形成链条的每个方法返回的是别的对象，还是对象自身。如果返回的是别的对象，就是消息链条。所谓<code>m1().m2().m3().m4()</code>的调用，其实是调用者不需要也不想知道的“知识”，把这些中间过程的细节暴露出来没有意义，调用者关心的是最终结果；而上述代码中的<code>map()</code>与<code>filter()</code>等方法其实返回的还是Stream类。这一调用方式其初衷并非告知中间过程的细节，而是一种<strong>声明式</strong>的DSL表达，调用者可以自由地组合它们。</p>
-]]></content>
-      <categories>
-        <category>Coding</category>
-      </categories>
-      <tags>
-        <tag>Design</tag>
-        <tag>Refactoring</tag>
-        <tag>Clean Code</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>限界上下文的菱形对称架构</title>
     <url>/diamond-symmetry-architecture-of-bounded-context/</url>
     <content><![CDATA[<img src="/diamond-symmetry-architecture-of-bounded-context/chat.jpg" class="">
@@ -772,56 +772,6 @@
         <tag>DDD</tag>
         <tag>Architecture</tag>
         <tag>Design</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>设计一个小接口展开的讨论</title>
-    <url>/discuss-about-interface-design/</url>
-    <content><![CDATA[<p>蔡了戴着耳机一边哼着歌一边晃着头沉浸在自己的音乐世界里。8点45分，距离早会还有半个多小时，放松一下，抽空自娱自乐！</p>
-<p>“蔡了！”办公室传来中气十足的呼唤声，似乎整个写字楼都回荡着蔡了的名字。</p>
-<p>“哎，明明就只隔几个工位，还要吼得整栋楼都听得到，不明真相的，还以为我又犯什么错了呢！”蔡了一边腹诽着，一边回应着“来了来了”，丢下耳机就向马大叔的工位跑去——没办法，头儿的呼唤，怎敢不从？</p>
-<p>“马大叔！什么事啊？不会我的代码又没写好吧？”蔡了看着电脑屏幕的光线投射在马丁花那张老脸上，阴晴不明，心里一紧，说话也变得小心翼翼起来。</p>
-<p>“没事就不能叫你？”马丁花脸一板，像指挥军队的将军一般将手一挥，说到：“过来，过来！我今早一来就pull了代码，正好看到你提交的代码。”</p>
-<span id="more"></span>
-
-<p>蔡了一听，知道老马又要上课了，赶紧推了一把椅子，收了心里的腹诽，像个乖乖女一般规规矩矩地坐下来，看着老马屏幕上打开的一个类。正是昨天自己写的一个工厂类<code>Kafka251Factory</code>。</p>
-<p>“这样的工厂类我们写了很多，按理说你可以参考，但我看你写的代码却有些不同，为何这两个创建方法要定义为实例方法呢？”</p>
-<img src="/discuss-about-interface-design/01.png" class="">
-
-<p>“老大，我是这样想的。我觉得这两个创建方法传入的参数都一样，为了避免重复，我就将它们定义成了字段。因为要使用字段，就不能用静态方法罗！”蔡了一想到昨天自己灵机一动，通过提取字段有效避免了方法参数的重复定义，不免有些沾沾自喜。</p>
-<p>“哦，小蔡不错哟，都有很强的重用意识了！但是——”话锋一转，马丁花开启了循循善诱的教导模式，“你有没有好好比较两种不同定义的调用代码呢？”一边说，一边在电脑上敲出如下代码：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//方式1</span></span><br><span class="line"><span class="keyword">new</span> Kafka251Factory(config.kafka(), <span class="string">&quot;topic&quot;</span>).createSource();</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式2</span></span><br><span class="line">Kafka251Factory.createSource(config.kafka(), <span class="string">&quot;topic&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>“这个……”蔡了转着大大的眼睛，努力想说出点颇有见地的答案，只可惜转了半天，还是想不出一二三。</p>
-<p>马丁花看蔡了半天回答不上，也不着恼，缓缓说道：“你要学会站在调用者的角度看待API设计。这里虽然都是一行调用代码，但是要创建一个实例和直接调用类型的静态方法给人的观感还是不同的。虽然从可扩展性的角度看，面向对象鼓励我们尽可能定义实例方法，但对于工厂方法而言，方式2定义的静态工厂方法还是要更直接一些。更何况，作为一个工厂对象而言，频繁地创建工厂实例，既无必要，也增加了垃圾回收的负担。”</p>
-<p>蔡了点点头，说道：“大叔，我貌似懂了，就是说从调用者的直觉来看，这样的静态工厂方法应该更符合调用者的期望。我说得对吗？”</p>
-<p>“不错不错，朽木可雕也！”马丁花哈哈地笑起来，很欣慰自己的一番教导总算没有白费。可惜没有长长的胡须可以抚弄，否则倒有几分爷爷看孙女的感觉，如今这般笑着，无奈只得扫入怪大叔的行列了。</p>
-<p>“可是，这样的定义不是导致方法参数的重复了吗？”蔡了仍不甘心推倒自己的重用成果，指着重构为静态工厂方法的<code>Kafka251Factory</code>类，继续问道。</p>
-<img src="/discuss-about-interface-design/02.png" class="">
-
-<p>“如果一个类的多个实例方法接收的输入参数相同，确实可以将这些参数当做该类的字段，如此即可减少参数的传递，而且从生命周期来看，既然多个实例方法都会用到它们，说明它们的作用范围要广于方法的范围，可以认为是当前类自身携带的数据，将它们定义为字段，然后在构造函数中接收其值，这一设计是合理的。但是，对于静态方法来说，由于方法参数与当前类的生命周期并非一致，我们就不能贸然地将其改为实例方法，否则就会增加调用者的负担。如果静态方法的参数太多，大可以通过提取Parameter Object封装多个内聚的参数，减少方法参数数量。”</p>
-<p>马丁花说到这里，想了想，继续说道：“若要说重复，代码中的<code>config.item(label).topic()</code>出现了两次，有着很明显的重复代码坏味道，可以再改进一下。”</p>
-<p>“这个还不简单！”蔡了终于逮住表现自己的机会，一把抢过摆在电脑面前的键盘，熟练地将光标移到这行代码，按下Ctrl+Alt+M快捷键，将其提取为一个方法：</p>
-<img src="/discuss-about-interface-design/03.png" class="">
-
-<p>“看起来提取方法确实消除了重复，但你觉得它带来了有效的重用了吗？”马丁花点点头，又摇摇头，继续问道。</p>
-<p>蔡了皱起眉：“呃……提取的方法做到了重用，可惜要重用的代码实在太少，看起来区别不大啊！”</p>
-<p>“确实如此，然而……关键不在于这里。”马丁花说罢，接过键盘，把光标挪到getTopic方法下，解释道：“你看这里，两个工厂方法实际上希望获得的是topic，这个topic又是通过config的item与传入的label来获得的。虽说这段代码非常简短，实际上它仍然暴露了获取topic的细节。”马丁花的语气开始加重，这是要敲黑板了：“<strong>记住！当你发现调用一个对象时，频繁出现多个方法链式的调用，只要不是像Java Stream API那样的流畅接口，都说明它的封装不够彻底，属于Martin Fowler指出的Message Chain坏味道，有人也将这一坏味道称之为‘火车残骸’！</strong>”</p>
-<p>“哦！”蔡了恍然大悟！</p>
-<p>“还记得我给你讲过的<strong>信息专家模式</strong>与<strong>迪米特法则</strong>吗？你结合这两个原则想想这里的问题所在！”马丁花不愧是经验丰富的资深咨询师，逮住机会就开始启发式教育了。</p>
-<p>蔡了用手支住自己的小脸，开启大脑的Google搜索模式，似乎都能听到敲木鱼的声音，然后“叮”的一声，欢呼雀跃地叫到：“我知道了！如果根据迪米特法则，<code>KafkaConfig</code>的<code>Item</code>对象是<code>Kafka251Factory</code>的陌生人，根本就不需要知道它；根据信息专家模式，无论是<code>Item</code>还是<code>Topic</code>，其实都是<code>KafkaConfig</code>的信息，因而获取topic的职责就应该转移给<code>KafkaConfig</code>来承担，所以……”蔡了拿过键盘，流畅地按下F6，完成方法的移动，再通过ctrl+alt+shift+t调出重构万能键的快捷菜单，迅速通过convert to instance method重构手法将静态方法修改为实例方法。只见她白皙的双手在键盘上跳动着，像弹钢琴一般，动作如行云流水，十分好看，很快就完成了重构：</p>
-<img src="/discuss-about-interface-design/04.png" class="">
-
-<p>当然，<code>getTopic</code>方法已经顺理成章转移到了<code>KafkaConfig</code>那里。</p>
-<p>“不错，写代码就得有这样的态度！虽然代码的质量仅得到了微量的改进，却只有如此，<strong>代码才能不断打磨，趋于完美，你的技能也能不断精进</strong>。最关键的是，这样小步地重构既安全，也没有什么成本，何乐而不为呢？好了，要开站会了，赶紧去准备吧。你重构的代码我一会提交！”</p>
-<p>“好的！谢谢大叔！”蔡了知道自己水平菜，老马则是逮住机会就给自己学习的机会，这一声感谢，确实由衷而发。说完转过身，连蹦带跳地回到自己的工位。还没坐下来，又听到大叔一声吼：“蔡了，记得查一下资料，搞清楚静态工厂到底用了什么模式，它会对设计带来什么好处。明天的作业，我要检查哈！”</p>
-<p>“哦！”蔡了苦着脸应下来，心里不禁骂道：“这个死老头，都不让人轻松一点！我的命怎么这么苦啊！”心里对马丁花积累的5点好感值瞬间烟消云散了。</p>
-]]></content>
-      <categories>
-        <category>蔡了成长记</category>
-      </categories>
-      <tags>
-        <tag>Design, OO</tag>
       </tags>
   </entry>
   <entry>
@@ -890,46 +840,6 @@
       </tags>
   </entry>
   <entry>
-    <title>企业架构与领域驱动设计的融合</title>
-    <url>/enterprise-architecture-and-ddd/</url>
-    <content><![CDATA[<img src="/enterprise-architecture-and-ddd/2021-06-07.jpg" class="">
-
-<p>DDD的作用范围主要还是针对系统级的分析、架构与设计，在更高的层面上，即将问题空间扩大到超过系统范围，变成企业或组织范围之后，DDD的模式就显得捉襟见肘了。此时，可以考虑引入企业架构的思想，尤其是业务架构的内容，给了DDD很好的补充，又或者说，将企业架构与DDD融合起来，就能真正串联起战略和战术设计了。</p>
-<p>为什么在传统企业中，DDD开始得到了许多企业的追捧？不仅仅是微服务的原因，就我个人不成熟的判断，应该是数字化转型开始倒逼着传统企业的IT部门开始接纳了DDD这一方法体系。</p>
-<span id="more"></span>
-
-<p>数字化转型对企业的要求，表现在以下方面：</p>
-<ul>
-<li>企业架构与行业的结合程度</li>
-<li>数字化的企业IT架构</li>
-</ul>
-<p>所谓“行业”，也可以理解为“领域”，传统企业在互联网经济的冲击下，开始向更快、更强的要求转变，但真正的快，绝不是没有规划，恰恰相反，需要在战略上有着清晰的转型目标，而在战术（企业的战术层面，对应于DDD的战略层次）上需要沉淀企业的领域资产。不管这些领域资产是通过核心模型、服务还是其他组件形式，都需要对准转型方向的企业战略，并在战略指导下做到可复用业务能力的识别与沉淀。这个过程可以是计划式的，也可以是演进式的；可以是分解为服务的粒度，也可以是能力中心的粒度；可以采用领域驱动设计建立核心领域模型，也可以建立自治的微服务，也可以是中台的能力规划与战略。</p>
-<p>数字化转型必然不仅仅是业务的转型，还包括IT架构的转型。当前的一个趋势是在基础设施上，向着云原生架构转变；在能力建设上，要改变组织模式，同时也要从项目思维向产品思维转变；同时，还要加强对数据的重视，全面拥抱互联网数据、物联网数据，做到业务与数据的双向支撑；在技术复用方面，也提出了前所未有的高要求，不管是PaaS、SaaS还是中台的能力中心，或者微小粒度的服务与组件，更或者是近期炒得火热的低代码平台，其核心关键还是遵循八二原则，尽可能将能够复用的技术实现、业务模型（包括流程与规则）的开发成本降低，如此就能满足快速开发产品服务不断应对产品创新的需要，又能合理分配人力成本，花更多人力与物力去做好高价值的东西。</p>
-<p>要做好企业的数字化转型，就要“从企业整合运作、提升竞争力的角度出发，站在企业全局的高度，从理解企业所处行业、发展阶段、目标、战略、竞争环境等多方面入手，认清其核心能力及管理中存在的主要问题，在此基础上进行管控模式分析，提出关键业务流程的优化建议”[引自《微服务设计：企业架构转型之道》]，简单说来，数字化转型是企业层面的全面转型，同时也是企业高管的思维转型。为了规避风险，也为了企业的转型步子能够迈得更坚实，又需要根据轻重缓急分阶段实施。实施的过程必然是自上而下的，但是随着从顶层到底层的逐步细化，粒度也在不断缩小，待缩小到目标系统的层次时，就是DDD登上舞台的最佳时机了。</p>
-<p>我曾经和多位业务架构师聊过企业架构与DDD的关系，窃以为企业架构在宏观层面上有着自己一套成熟的体系方法，如TOGOF和Zachman等企业架构体系，它庞大的规范、标准与过程非常值得IT部门学习，值得将其引入到数字化转型作为参考；然而，这些方法的问题在于：</p>
-<ul>
-<li>过于复杂：虽然企业自身复杂度决定了体系的复杂性，但一套体系如果过于复杂，许多人穷其一生可能都无法掌握其全貌与细节，就很难掌控，更谈不上落地；</li>
-<li>过于宏观：利用企业架构的思想和方法对企业做完战略规划后，如何保证方案的落地，又如何保证落地过程完全遵循解决方案的要求不偏不倚地推进，缺乏有效的手段。</li>
-</ul>
-<p>企业架构就好似画出了企业战略规划的模板，模板中的空白部分就是落地需要的知识和能力。利用业务架构，已经对这些模板与空白进行了有效的切分，并明确了各自的边界，企业架构对业务架构向IT架构的映射给予了架构的指导，接下来，就可以通过DDD高质量地填充这些空白。</p>
-<p>因此，企业架构与领域驱动设计是完全能够融合在一起的，促进这一融合的催化剂是数字化转型，呼唤这种融合的需求来自于相对高高在上的企业架构需要具备落地的能力，至于这种融合为何在现在开始提出或得到重视，是因为当下这个时代，具备了向这个趋势发展的天时地利与人和：</p>
-<ul>
-<li>天时：数字化转型已经提上了大多数传统企业的议事日程，不得不上，也必须上，而且得快上；</li>
-<li>地利：各种IT基础架构已经满足了这一要求，无论是云原生、微服务、大数据，还是所谓的中台，为这一融合打下了良好的基础，敏捷思想已经深入人心，IT的管理能力与构建能力得到了大幅度的提高；</li>
-<li>人和：数字化转型让企业高层领导看到了转型的迫在眉睫，转型的战略规划与IT架构构建已经时不我待，业务人士与IT人士都看到了这一趋势，并开始打破业务与IT的壁垒，寻求全方位的合作。</li>
-</ul>
-<p>如果说以上内容指出了这一融合趋势，回答了融合的必要性，那么该怎么融合的问题就摆上了议事日程，毕竟二者并不处于同一层次，关心的角色也可能在身份地位上存在天壤之别。我的一个粗浅想法，是希望借鉴DDD的方法与思想，寻求对企业架构做必要的精简和简化，核心价值仍然是领域（业务）驱动，然后尝试建立不同层次的架构体系，即建立组织级与系统级的架构，让企业架构方法与DDD方法各司其职，组织级的棘手问题交给企业架构，系统级的落地问题交给DDD。</p>
-<p>以上观点很不成熟，个人对企业架构的认识也非常粗浅。从学习路线看，我算是自下而上的狂飙猛进，不再满足于领域驱动设计的系统层次，要向上开始向企业顶层设计“逆袭”，之后，不是高高在上去俯视IT众生，而是沉下心来，完成二者的真正融合——既要做得了规划，还能写得出方案，针对核心实现，还要能撸得出代码。如此就算是打通业务（领域）驱动的任督二脉了！</p>
-]]></content>
-      <categories>
-        <category>Architecture</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>EA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>事件风暴的设计要素与驱动力</title>
     <url>/event-storming-distill/</url>
     <content><![CDATA[<img src="/event-storming-distill/cover.jpg" class="">
@@ -973,60 +883,6 @@
         <tag>DDD</tag>
         <tag>Design</tag>
         <tag>Event Storming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>何时定义领域服务</title>
-    <url>/example-of-define-domain-service/</url>
-    <content><![CDATA[<p>若遵循基于面向对象设计范式的领域驱动设计，并用以应对纷繁复杂的业务逻辑，则强调领域模型的充血设计模型已成为社区不争事实。我将Eric提及的战术设计要素如Entity、Value Object、Domain Service、Aggregate、Repository与Factory视为<strong>设计模型</strong>。这其中，只有Entity、Value Object和Domain Service才能表达领域逻辑。</p>
-<span id="more"></span>
-
-<p>为避免贫血模型，在封装领域逻辑时，考虑设计要素的顺序为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Value Object -&gt; Entity -&gt; Domain Service</span><br></pre></td></tr></table></figure>
-
-<p>切记，我们必须将Domain Service作为承担业务逻辑的最后的救命稻草。之所以把Domain Service放在最后，是因为我太清楚领域服务的强大“魔力”了。开发人员总会有一种惰性，很多时候不愿意仔细思考所谓“职责（封装领域逻辑的行为）”的正确履行者，而领域服务恰恰是最便捷的选择。</p>
-<p>就我个人的理解，<strong>只有满足如下三个特征的领域行为才应该放到领域服务中</strong>：</p>
-<ul>
-<li>领域行为需要多个领域实体参与协作</li>
-<li>领域行为与状态无关</li>
-<li>领域行为需要与外部资源（尤其是DB）协作</li>
-</ul>
-<p>假设某系统的合同管理功能允许客户输入自编码，该自编码需要遵循一定的编码格式。在创建新合同时，客户输入自编码，系统需要检测该自编码是否在已有合同中已经存在。针对该需求，可以提炼出两个领域行为：</p>
-<ul>
-<li>验证输入的自编码是否符合业务规则</li>
-<li>检查自编码是否重复</li>
-</ul>
-<p>在寻找职责的履行者时，我们应首先遵循“<strong>信息专家模式</strong>”，即“拥有信息的对象就是操作该信息的专家”，因此可以提出一个问题：领域行为要操作的数据由谁拥有？针对第一个领域行为，就是要确认谁拥有自编码格式的验证规则？有两个候选：</p>
-<ul>
-<li>拥有自编码信息的“合同(Contract)”对象</li>
-<li>体现自编码知识概念自身的“自编码（CustomizedNumber）”对象</li>
-</ul>
-<p>我倾向于定义CustomizedNumber值对象，将该检测规则封装其内，并在构造函数中对其进行验证。在领域驱动设计中，值对象往往用于封装这些基础概念。由于自定义的类型可以封装领域行为，就可以有效地实现职责的“分治”，实现对象的协作。</p>
-<p>若要检查自编码是否重复，则需要从数据库中查找，这就需要通过Repository与DB协作。基于前面总结的三个特征，则该职责应该分配给一个领域服务，例如DuplicatedNumberChecker。</p>
-<p>从职责分配的角度看，实体Contract又或者值对象CustomizedNumber才应该是承担该职责的合理选择。为何我却定义了这么一条例外原则呢？究其原因，就是在领域驱动设计中，我们应尽量保证实体与值对象的纯粹性，尤其不应该依赖于Repository（资源库）。继续深挖根本原因，是因为<strong>实体与值对象的生命周期是由Repository管理的</strong>。倘若被管理的实体对象还依赖了Repository，就要求该实体对应的Repository在管理实体对象的生命周期的同时，还需要管理它与Repository的依赖，这并不合理。值对象在一个聚合（Aggregate)边界之内，道理相同。</p>
-<p>举例来说，假设Contract是聚合根，如果将检查重复编码的职责分配给该实体对象（或值对象CustomizedNumber），内部就需要依赖ContractRepository。然而，Contract的获取也是通过Repository得到，在基础设施层对ContractRepository的实现时，其实<strong>并不知道该如何管理二者之间的依赖</strong>。如果Contract实体还要依赖其他Repository，就更不可能了。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContractRepositoryImpl</span> <span class="keyword">implements</span> <span class="title">ContractRepository</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Contract <span class="title">contractById</span><span class="params">(Identity contractId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这里并不知道Contract对象需要注入ContractRepository对象自身</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>若真要解决此依赖管理问题，较简单的做法是为Contract提供一个<code>setContractRepository()</code>的依赖注入方法。不过，当Contract是通过Repository来获得时，如Spring、Guice之类的DI框架都无法注入这一依赖，因而需要显式调用，这就会引入对Repository具体实现的耦合。这样的耦合放在领域层，会导致本来单纯的领域层内核依赖了外部资源。倘若将这种具体耦合往外推，例如推到应用层，又会加重调用者的负担。</p>
-<p>领域服务则不存在此问题，因为它的生命周期不是由Repository管理。如下的领域服务定义是合情合理的：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DuplicatedNumberChecker</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Repository</span></span><br><span class="line">    <span class="keyword">private</span> ContractRepository repository;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDuplicate</span><span class="params">(CustomizedNumber number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> repository.existsNumber(number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们在分配领域逻辑时，领域服务是最轻易也是最便宜的首选。这会导致领域服务的泛滥，长此以往，对领域层的开发又会走向“贫血模型”的老路。所谓“服务”本身就是一个抽象概念。越抽象就越显得包容并蓄。例如定义一个OrderService，那么所有和订单有关的逻辑都可以往这个服务里面塞，而诸如Order之类的实体对象终归有不少限制，分配职责时需得思虑再三。因此，倘若在设计与开发时对职责的分配不加约束，所谓的“职责分治”就不过是一句空话罢了。</p>
-<p>归根结底，主流的领域驱动设计在战术层面考察的其实是面向对象的设计能力。我认为，所谓面向对象设计，核心就是<strong>角色</strong>、<strong>职责</strong>与<strong>协作</strong>。在分配职责时，应考虑将<strong>数据与行为封装在一起</strong>，这是面向对象设计的首要原则。</p>
-<p>为了避免程序员把领域服务当做一个“筐”，什么逻辑都往里面装，除了需要提高团队成员面向对象的设计能力，并加强代码评审之外，还有一个方法，就是对领域服务加以约束。</p>
-<p>没有任何语言可以在DDD设计要素上施加约束。Mat Wall与Nik Silver在对Guardian.co.uk网站推行DDD时的实践值得我们借鉴。他们在文章《<a href="http://www.infoq.com/cn/articles/ddd-evolving-architecture">演进架构中的领域驱动设计</a>》中建议：</p>
-<blockquote>
-<p>为了对付这一行为，我们对应用中的所有服务进行了代码评审，并进行重构，将逻辑移到适当的领域对象中。我们还制定了一个新的规则：任何服务对象在其名称中必须包含一个动词。这一简单的规则阻止了开发人员去创建类似于ArticleService的类。取而代之，我们创建 ArticlePublishingService和ArticleDeletionService这样的类。推动这一简单的命名规范的确帮助我们将领域逻辑移到了正确的地方，但我们仍要求对服务进行定期的代码评审，以确保我们在正轨上，以及对领域的建模接近于实际的业务观点。</p>
-</blockquote>
-<p>其实，这一别具一格的约束形式其实与服务的本质是一脉相承的，即服务应代表无状态的领域行为，甚至可以说领域服务是领域层面用例的体现。</p>
-<p>这一实践可能会导致更多细粒度的领域服务产生，但更有可能的结果是，当我们在创建一个新的领域服务时，可能会考虑暂时停下来，想一想，要分配给这个新服务的领域逻辑是否有更好的去处呢？即使因为该逻辑可能牵涉到多个领域实体，又或者需要与Repository协作而不得不放入到领域服务中，似乎也可以考虑将领域逻辑中与实体（或值对象）数据强相关的内容”摘“出来，分配到合适的地方，保证职责分配的合理均衡。<strong>和谐的协作机制</strong>是好的面向对象设计。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Design</tag>
       </tags>
   </entry>
   <entry>
@@ -1107,6 +963,60 @@
         <tag>DDD</tag>
         <tag>Design</tag>
         <tag>Event Storming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>何时定义领域服务</title>
+    <url>/example-of-define-domain-service/</url>
+    <content><![CDATA[<p>若遵循基于面向对象设计范式的领域驱动设计，并用以应对纷繁复杂的业务逻辑，则强调领域模型的充血设计模型已成为社区不争事实。我将Eric提及的战术设计要素如Entity、Value Object、Domain Service、Aggregate、Repository与Factory视为<strong>设计模型</strong>。这其中，只有Entity、Value Object和Domain Service才能表达领域逻辑。</p>
+<span id="more"></span>
+
+<p>为避免贫血模型，在封装领域逻辑时，考虑设计要素的顺序为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Value Object -&gt; Entity -&gt; Domain Service</span><br></pre></td></tr></table></figure>
+
+<p>切记，我们必须将Domain Service作为承担业务逻辑的最后的救命稻草。之所以把Domain Service放在最后，是因为我太清楚领域服务的强大“魔力”了。开发人员总会有一种惰性，很多时候不愿意仔细思考所谓“职责（封装领域逻辑的行为）”的正确履行者，而领域服务恰恰是最便捷的选择。</p>
+<p>就我个人的理解，<strong>只有满足如下三个特征的领域行为才应该放到领域服务中</strong>：</p>
+<ul>
+<li>领域行为需要多个领域实体参与协作</li>
+<li>领域行为与状态无关</li>
+<li>领域行为需要与外部资源（尤其是DB）协作</li>
+</ul>
+<p>假设某系统的合同管理功能允许客户输入自编码，该自编码需要遵循一定的编码格式。在创建新合同时，客户输入自编码，系统需要检测该自编码是否在已有合同中已经存在。针对该需求，可以提炼出两个领域行为：</p>
+<ul>
+<li>验证输入的自编码是否符合业务规则</li>
+<li>检查自编码是否重复</li>
+</ul>
+<p>在寻找职责的履行者时，我们应首先遵循“<strong>信息专家模式</strong>”，即“拥有信息的对象就是操作该信息的专家”，因此可以提出一个问题：领域行为要操作的数据由谁拥有？针对第一个领域行为，就是要确认谁拥有自编码格式的验证规则？有两个候选：</p>
+<ul>
+<li>拥有自编码信息的“合同(Contract)”对象</li>
+<li>体现自编码知识概念自身的“自编码（CustomizedNumber）”对象</li>
+</ul>
+<p>我倾向于定义CustomizedNumber值对象，将该检测规则封装其内，并在构造函数中对其进行验证。在领域驱动设计中，值对象往往用于封装这些基础概念。由于自定义的类型可以封装领域行为，就可以有效地实现职责的“分治”，实现对象的协作。</p>
+<p>若要检查自编码是否重复，则需要从数据库中查找，这就需要通过Repository与DB协作。基于前面总结的三个特征，则该职责应该分配给一个领域服务，例如DuplicatedNumberChecker。</p>
+<p>从职责分配的角度看，实体Contract又或者值对象CustomizedNumber才应该是承担该职责的合理选择。为何我却定义了这么一条例外原则呢？究其原因，就是在领域驱动设计中，我们应尽量保证实体与值对象的纯粹性，尤其不应该依赖于Repository（资源库）。继续深挖根本原因，是因为<strong>实体与值对象的生命周期是由Repository管理的</strong>。倘若被管理的实体对象还依赖了Repository，就要求该实体对应的Repository在管理实体对象的生命周期的同时，还需要管理它与Repository的依赖，这并不合理。值对象在一个聚合（Aggregate)边界之内，道理相同。</p>
+<p>举例来说，假设Contract是聚合根，如果将检查重复编码的职责分配给该实体对象（或值对象CustomizedNumber），内部就需要依赖ContractRepository。然而，Contract的获取也是通过Repository得到，在基础设施层对ContractRepository的实现时，其实<strong>并不知道该如何管理二者之间的依赖</strong>。如果Contract实体还要依赖其他Repository，就更不可能了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContractRepositoryImpl</span> <span class="keyword">implements</span> <span class="title">ContractRepository</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Contract <span class="title">contractById</span><span class="params">(Identity contractId)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这里并不知道Contract对象需要注入ContractRepository对象自身</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>若真要解决此依赖管理问题，较简单的做法是为Contract提供一个<code>setContractRepository()</code>的依赖注入方法。不过，当Contract是通过Repository来获得时，如Spring、Guice之类的DI框架都无法注入这一依赖，因而需要显式调用，这就会引入对Repository具体实现的耦合。这样的耦合放在领域层，会导致本来单纯的领域层内核依赖了外部资源。倘若将这种具体耦合往外推，例如推到应用层，又会加重调用者的负担。</p>
+<p>领域服务则不存在此问题，因为它的生命周期不是由Repository管理。如下的领域服务定义是合情合理的：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DuplicatedNumberChecker</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="meta">@Repository</span></span><br><span class="line">    <span class="keyword">private</span> ContractRepository repository;</span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDuplicate</span><span class="params">(CustomizedNumber number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> repository.existsNumber(number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在分配领域逻辑时，领域服务是最轻易也是最便宜的首选。这会导致领域服务的泛滥，长此以往，对领域层的开发又会走向“贫血模型”的老路。所谓“服务”本身就是一个抽象概念。越抽象就越显得包容并蓄。例如定义一个OrderService，那么所有和订单有关的逻辑都可以往这个服务里面塞，而诸如Order之类的实体对象终归有不少限制，分配职责时需得思虑再三。因此，倘若在设计与开发时对职责的分配不加约束，所谓的“职责分治”就不过是一句空话罢了。</p>
+<p>归根结底，主流的领域驱动设计在战术层面考察的其实是面向对象的设计能力。我认为，所谓面向对象设计，核心就是<strong>角色</strong>、<strong>职责</strong>与<strong>协作</strong>。在分配职责时，应考虑将<strong>数据与行为封装在一起</strong>，这是面向对象设计的首要原则。</p>
+<p>为了避免程序员把领域服务当做一个“筐”，什么逻辑都往里面装，除了需要提高团队成员面向对象的设计能力，并加强代码评审之外，还有一个方法，就是对领域服务加以约束。</p>
+<p>没有任何语言可以在DDD设计要素上施加约束。Mat Wall与Nik Silver在对Guardian.co.uk网站推行DDD时的实践值得我们借鉴。他们在文章《<a href="http://www.infoq.com/cn/articles/ddd-evolving-architecture">演进架构中的领域驱动设计</a>》中建议：</p>
+<blockquote>
+<p>为了对付这一行为，我们对应用中的所有服务进行了代码评审，并进行重构，将逻辑移到适当的领域对象中。我们还制定了一个新的规则：任何服务对象在其名称中必须包含一个动词。这一简单的规则阻止了开发人员去创建类似于ArticleService的类。取而代之，我们创建 ArticlePublishingService和ArticleDeletionService这样的类。推动这一简单的命名规范的确帮助我们将领域逻辑移到了正确的地方，但我们仍要求对服务进行定期的代码评审，以确保我们在正轨上，以及对领域的建模接近于实际的业务观点。</p>
+</blockquote>
+<p>其实，这一别具一格的约束形式其实与服务的本质是一脉相承的，即服务应代表无状态的领域行为，甚至可以说领域服务是领域层面用例的体现。</p>
+<p>这一实践可能会导致更多细粒度的领域服务产生，但更有可能的结果是，当我们在创建一个新的领域服务时，可能会考虑暂时停下来，想一想，要分配给这个新服务的领域逻辑是否有更好的去处呢？即使因为该逻辑可能牵涉到多个领域实体，又或者需要与Repository协作而不得不放入到领域服务中，似乎也可以考虑将领域逻辑中与实体（或值对象）数据强相关的内容”摘“出来，分配到合适的地方，保证职责分配的合理均衡。<strong>和谐的协作机制</strong>是好的面向对象设计。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Design</tag>
       </tags>
   </entry>
   <entry>
@@ -1446,6 +1356,65 @@
       </tags>
   </entry>
   <entry>
+    <title>识别实体与值对象的特征</title>
+    <url>/how-to-identify-entity-and-value-object/</url>
+    <content><![CDATA[<img src="/how-to-identify-entity-and-value-object/cover.jpg" class="">
+
+<p>甄别实体与值对象非常重要，正确与否会直接影响聚合的设计。</p>
+<h3 id="聚合是边界"><a href="#聚合是边界" class="headerlink" title="聚合是边界"></a>聚合是边界</h3><p>在DDD中，聚合是实体与值对象的边界。一个聚合对外代表了一个完整的领域概念，遵循面向对象设计的基本原则，聚合内部往往由多个细小的高内聚领域概念组成。聚合内部的领域模型形成了一棵树，树的根必须是实体，可以称之为是<strong>聚合根（Aggregate Root）</strong>，当然，也可以称之为<strong>根实体（Root Entity）</strong>，它是聚合的唯一入口或出口。例如订单聚合定义了<code>Order</code>根实体，它就是订单聚合的唯一代言人。</p>
+<p>在一个限界上下文的所有领域模型（实体和值对象）中，按照关系的强弱与概念的完整性，将其划分为多个聚合，就好像草原部落由一个个蒙古包构成了松散的聚居社群一般。</p>
+<span id="more"></span>
+
+<p>考虑到值对象与实体的差异，倘若需要管理它们的生命周期，则值对象不可能脱离聚合的边界单独存在。这就意味着，当我们要识别领域模型的聚合时，<strong>实体与值对象之间的强弱关系并不会影响到对聚合边界的界定</strong>。只要实体与值对象之间存在关系，无论关系强弱，该值对象都必须与存在关系的实体放在同一个聚合。如果一个值对象与多个实体之间存在关系，要么说明多个实体都属于一个聚合；要么意味着该值对象需要复制为多份，放到不同的聚合中，如下图所示：</p>
+<img src="/how-to-identify-entity-and-value-object/entity-vo.png" class="">
+
+
+
+<p>如此一来，对于聚合边界的识别，就变成了<strong>对实体关系强弱的判断</strong>。只要我们正确地甄别了实体与值对象，在识别聚合时，就可以不再考虑值对象，如此就能降低识别的难度。</p>
+<h3 id="上下文的影响"><a href="#上下文的影响" class="headerlink" title="上下文的影响"></a>上下文的影响</h3><p>虽然我们知道实体与值对象之间的本质差异在于是否具备唯一的身份标识（identity），然而许多时候，这一差异仍然显得似是而非。更何况，实体与值对象的定义并非绝对，在不同的上下文，同一个领域概念也可能定义为不同的设计类型。例如下图所示的钞票一枚：</p>
+<img src="/how-to-identify-entity-and-value-object/money.png" class="">
+
+
+
+<p>在购买上下文，买卖双方只关注钞票的面值与货币类型，只要值相等，即可认为是同一个对象，因而需定义为值对象；在印钞上下文，每张钞票都具有一个唯一的标识，即使同为100元的人民币，只要ID不同，也会认为是不同的对象，故而定义为实体。因此，要正确地甄别实体与值对象，需要结合具体的上下文。</p>
+<h3 id="识别的特征"><a href="#识别的特征" class="headerlink" title="识别的特征"></a>识别的特征</h3><p>即便如此，仍然缺乏相对客观的判断标准。为此，我总结了如下几个特征。</p>
+<h4 id="相等性"><a href="#相等性" class="headerlink" title="相等性"></a>相等性</h4><p>甄别实体与值对象，可以首先从<strong>相等性</strong>进行判断。只要一个领域模型对象的属性值相等，就认为是同一个对象，应优先考虑建模为值对象；否则，需要为领域模型对象定义唯一标识，并建模为实体。</p>
+<p><strong>注意：</strong>在进行相等性判断时，不能将作为唯一标识的ID视为领域模型的属性。</p>
+<p>例如地址领域概念，只要其属性值国家、省份、城市、街道与邮政编码相等，就可以认为是同一个地址，应将<code>Address</code>类定义为值对象。对于大家耳熟能详的订单领域概念，显然需要为其分配一个唯一的订单编号，因为理论上可能存在除订单编号外其他属性都相同的两个不同订单，应将<code>Order</code>定义为实体。</p>
+<p>然而，在对相等性进行判断时，可能出现ID与属性存在一种隐含的对应关系。例如，出版行业中作为正规出版物的图书，具有唯一的ISBN号，它相当于是图书领域概念的ID，所以<code>Book</code>应定义为实体。可在对<code>Book</code>相等性进行判断时，也可以不通过ISBN进行相等性判断，基本上，只要书名、作者（译者）、出版社、价格、出版日期、版次、页数、字数等属性值相同，也可以认为是同一本书，那是否意味着可以将<code>Book</code>定义为值对象呢？</p>
+<p>显然，在进行相等性判断时，考虑的属性越多，就会出现多个组合的属性形成一种“隐藏”的唯一标识特征，有一些体现业务规则的ID，自身就是根据属性值来定义的。例如，航班的唯一标识就可以根据承运公司二字码、航班号、起降机场三字码与执飞日期来决定。通过唯一标识固然可以决定是否同一个航班，根据映射的多个属性值，也可以判断相等性。这会让人在甄别实体与值对象时，显得摇摆不定。例如，腾讯会议的会议号是<code>Meeting</code>的身份标识，在比较会议的相等性时，倘若我们考虑了除会议号之外的其他属性，如会议名称、会议类型、开始时间、结束时间、创建人、创建时间等属性，不一样可以确定会议的相等性吗？</p>
+<p>因此，除了判断相等性，还需考虑<strong>不变性</strong>。</p>
+<h4 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h4><p>Eric Evans建议将值对象定义为不变的类，实则是因为根据值判等的值对象就应该具有不变性。仍以购买上下文的钞票为例，<code>50元+50元=100元</code>，这100元与原来的50元是另一张不同的钞票：</p>
+<img src="/how-to-identify-entity-and-value-object/money-plus.png" class="">
+
+
+
+<p>反之，一个对象除了ID，其余属性值都可以修改，不需要创建一个新的对象，就可以认为该领域对象是可变的，应考虑定义为实体。如前所述的<code>Meeting</code>对象，只要<code>meetingId</code>值不变，如会议名称、会议类型、开始时间、结束时间这样的属性值即使发生了天翻地覆的变化，我们也认为它是同一个会议。显然，应将<code>Meeting</code>定义为实体。</p>
+<p>再考虑一个典型的订单聚合：</p>
+<img src="/how-to-identify-entity-and-value-object/order.png" class="">
+
+
+
+<p>为什么我们要将订单聚合中的<code>OrderItem</code>定义为实体？如果不考虑ID属性，只要<code>orderId</code>、<code>product</code>与<code>quantity</code>值相同，完全可以认为是同一个订单项。然则，订单项的<code>quantity</code>值是可以更改的，更改了数量的订单项也不会认为是不同的订单项。订单项的可变性决定了它应该定义为实体。</p>
+<p>为何要将<code>OrderItem</code>的<code>Product</code>属性定义为值对象呢？要知道，该<code>Product</code>类型还定义了<code>productId</code>属性，既然具有身份标识，不应该定义为实体吗？因为在订单上下文中，商品的<code>productId</code>来自于商品上下文的商品ID，在订单聚合中，可以将<code>productId</code>视为<code>Product</code>类的属性值。只要<code>productId</code>、<code>name</code>和<code>price</code>值相同，就可以认为是同一个商品，且它们的值是不变的。这正是将<code>Product</code>定义为值对象的原因所在。</p>
+<h4 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h4><p>即使考虑了相等性和不变性，仍有一种例外情形，那就是考虑<strong>独立性</strong>特征。值对象作为实体的属性必定附属于实体，不能单独存在；如果一个领域对象既满足了相等性，又满足了不变性，可定义为值对象；可是，如果它单独存在，且需要管理其生命周期，就需要将这样的类“升级”为实体。</p>
+<p>考虑考勤上下文的假期领域概念。由于中国农历假期的缘故，每年都需要配置新的假期。假期概念对应的<code>Holiday</code>类定义为：</p>
+<img src="/how-to-identify-entity-and-value-object/holiday.png" class="">
+
+
+
+<p>显然，该类的所有属性值相等，即可认为是同一个假期，一旦修改了假期的值，也可以认为是不同的假期，即<code>Holiday</code>类同时满足相等性和不变性，应定义为值对象。可是，在考勤上下文的领域模型中，<code>Holiday</code>类是完全独立的，不依附于其他任何实体，而它也需要管理生命周期。这时，就应遵循独立性特征，将其“升级”为实体。</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p> 以上三个特征并无重要性排列，需综合考虑。如果仍然无法判断，就遵循<strong>优先级</strong>原则：优先将领域概念建模为值对象。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Design</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面向接口设计与角色接口</title>
     <url>/interface-oriented-design-and-role-interface/</url>
     <content><![CDATA[<p><strong>问题：</strong>在做项目的时候，是不是所有包含非静态方法的类，都要写一个接口？是因为这样的目的是为了解耦，然后通过DI注入实现吗？</p>
@@ -1595,6 +1564,96 @@
       <tags>
         <tag>DDD</tag>
         <tag>Architecture</tag>
+        <tag>EA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>设计一个小接口展开的讨论</title>
+    <url>/discuss-about-interface-design/</url>
+    <content><![CDATA[<p>蔡了戴着耳机一边哼着歌一边晃着头沉浸在自己的音乐世界里。8点45分，距离早会还有半个多小时，放松一下，抽空自娱自乐！</p>
+<p>“蔡了！”办公室传来中气十足的呼唤声，似乎整个写字楼都回荡着蔡了的名字。</p>
+<p>“哎，明明就只隔几个工位，还要吼得整栋楼都听得到，不明真相的，还以为我又犯什么错了呢！”蔡了一边腹诽着，一边回应着“来了来了”，丢下耳机就向马大叔的工位跑去——没办法，头儿的呼唤，怎敢不从？</p>
+<p>“马大叔！什么事啊？不会我的代码又没写好吧？”蔡了看着电脑屏幕的光线投射在马丁花那张老脸上，阴晴不明，心里一紧，说话也变得小心翼翼起来。</p>
+<p>“没事就不能叫你？”马丁花脸一板，像指挥军队的将军一般将手一挥，说到：“过来，过来！我今早一来就pull了代码，正好看到你提交的代码。”</p>
+<span id="more"></span>
+
+<p>蔡了一听，知道老马又要上课了，赶紧推了一把椅子，收了心里的腹诽，像个乖乖女一般规规矩矩地坐下来，看着老马屏幕上打开的一个类。正是昨天自己写的一个工厂类<code>Kafka251Factory</code>。</p>
+<p>“这样的工厂类我们写了很多，按理说你可以参考，但我看你写的代码却有些不同，为何这两个创建方法要定义为实例方法呢？”</p>
+<img src="/discuss-about-interface-design/01.png" class="">
+
+<p>“老大，我是这样想的。我觉得这两个创建方法传入的参数都一样，为了避免重复，我就将它们定义成了字段。因为要使用字段，就不能用静态方法罗！”蔡了一想到昨天自己灵机一动，通过提取字段有效避免了方法参数的重复定义，不免有些沾沾自喜。</p>
+<p>“哦，小蔡不错哟，都有很强的重用意识了！但是——”话锋一转，马丁花开启了循循善诱的教导模式，“你有没有好好比较两种不同定义的调用代码呢？”一边说，一边在电脑上敲出如下代码：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//方式1</span></span><br><span class="line"><span class="keyword">new</span> Kafka251Factory(config.kafka(), <span class="string">&quot;topic&quot;</span>).createSource();</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式2</span></span><br><span class="line">Kafka251Factory.createSource(config.kafka(), <span class="string">&quot;topic&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>“这个……”蔡了转着大大的眼睛，努力想说出点颇有见地的答案，只可惜转了半天，还是想不出一二三。</p>
+<p>马丁花看蔡了半天回答不上，也不着恼，缓缓说道：“你要学会站在调用者的角度看待API设计。这里虽然都是一行调用代码，但是要创建一个实例和直接调用类型的静态方法给人的观感还是不同的。虽然从可扩展性的角度看，面向对象鼓励我们尽可能定义实例方法，但对于工厂方法而言，方式2定义的静态工厂方法还是要更直接一些。更何况，作为一个工厂对象而言，频繁地创建工厂实例，既无必要，也增加了垃圾回收的负担。”</p>
+<p>蔡了点点头，说道：“大叔，我貌似懂了，就是说从调用者的直觉来看，这样的静态工厂方法应该更符合调用者的期望。我说得对吗？”</p>
+<p>“不错不错，朽木可雕也！”马丁花哈哈地笑起来，很欣慰自己的一番教导总算没有白费。可惜没有长长的胡须可以抚弄，否则倒有几分爷爷看孙女的感觉，如今这般笑着，无奈只得扫入怪大叔的行列了。</p>
+<p>“可是，这样的定义不是导致方法参数的重复了吗？”蔡了仍不甘心推倒自己的重用成果，指着重构为静态工厂方法的<code>Kafka251Factory</code>类，继续问道。</p>
+<img src="/discuss-about-interface-design/02.png" class="">
+
+<p>“如果一个类的多个实例方法接收的输入参数相同，确实可以将这些参数当做该类的字段，如此即可减少参数的传递，而且从生命周期来看，既然多个实例方法都会用到它们，说明它们的作用范围要广于方法的范围，可以认为是当前类自身携带的数据，将它们定义为字段，然后在构造函数中接收其值，这一设计是合理的。但是，对于静态方法来说，由于方法参数与当前类的生命周期并非一致，我们就不能贸然地将其改为实例方法，否则就会增加调用者的负担。如果静态方法的参数太多，大可以通过提取Parameter Object封装多个内聚的参数，减少方法参数数量。”</p>
+<p>马丁花说到这里，想了想，继续说道：“若要说重复，代码中的<code>config.item(label).topic()</code>出现了两次，有着很明显的重复代码坏味道，可以再改进一下。”</p>
+<p>“这个还不简单！”蔡了终于逮住表现自己的机会，一把抢过摆在电脑面前的键盘，熟练地将光标移到这行代码，按下Ctrl+Alt+M快捷键，将其提取为一个方法：</p>
+<img src="/discuss-about-interface-design/03.png" class="">
+
+<p>“看起来提取方法确实消除了重复，但你觉得它带来了有效的重用了吗？”马丁花点点头，又摇摇头，继续问道。</p>
+<p>蔡了皱起眉：“呃……提取的方法做到了重用，可惜要重用的代码实在太少，看起来区别不大啊！”</p>
+<p>“确实如此，然而……关键不在于这里。”马丁花说罢，接过键盘，把光标挪到getTopic方法下，解释道：“你看这里，两个工厂方法实际上希望获得的是topic，这个topic又是通过config的item与传入的label来获得的。虽说这段代码非常简短，实际上它仍然暴露了获取topic的细节。”马丁花的语气开始加重，这是要敲黑板了：“<strong>记住！当你发现调用一个对象时，频繁出现多个方法链式的调用，只要不是像Java Stream API那样的流畅接口，都说明它的封装不够彻底，属于Martin Fowler指出的Message Chain坏味道，有人也将这一坏味道称之为‘火车残骸’！</strong>”</p>
+<p>“哦！”蔡了恍然大悟！</p>
+<p>“还记得我给你讲过的<strong>信息专家模式</strong>与<strong>迪米特法则</strong>吗？你结合这两个原则想想这里的问题所在！”马丁花不愧是经验丰富的资深咨询师，逮住机会就开始启发式教育了。</p>
+<p>蔡了用手支住自己的小脸，开启大脑的Google搜索模式，似乎都能听到敲木鱼的声音，然后“叮”的一声，欢呼雀跃地叫到：“我知道了！如果根据迪米特法则，<code>KafkaConfig</code>的<code>Item</code>对象是<code>Kafka251Factory</code>的陌生人，根本就不需要知道它；根据信息专家模式，无论是<code>Item</code>还是<code>Topic</code>，其实都是<code>KafkaConfig</code>的信息，因而获取topic的职责就应该转移给<code>KafkaConfig</code>来承担，所以……”蔡了拿过键盘，流畅地按下F6，完成方法的移动，再通过ctrl+alt+shift+t调出重构万能键的快捷菜单，迅速通过convert to instance method重构手法将静态方法修改为实例方法。只见她白皙的双手在键盘上跳动着，像弹钢琴一般，动作如行云流水，十分好看，很快就完成了重构：</p>
+<img src="/discuss-about-interface-design/04.png" class="">
+
+<p>当然，<code>getTopic</code>方法已经顺理成章转移到了<code>KafkaConfig</code>那里。</p>
+<p>“不错，写代码就得有这样的态度！虽然代码的质量仅得到了微量的改进，却只有如此，<strong>代码才能不断打磨，趋于完美，你的技能也能不断精进</strong>。最关键的是，这样小步地重构既安全，也没有什么成本，何乐而不为呢？好了，要开站会了，赶紧去准备吧。你重构的代码我一会提交！”</p>
+<p>“好的！谢谢大叔！”蔡了知道自己水平菜，老马则是逮住机会就给自己学习的机会，这一声感谢，确实由衷而发。说完转过身，连蹦带跳地回到自己的工位。还没坐下来，又听到大叔一声吼：“蔡了，记得查一下资料，搞清楚静态工厂到底用了什么模式，它会对设计带来什么好处。明天的作业，我要检查哈！”</p>
+<p>“哦！”蔡了苦着脸应下来，心里不禁骂道：“这个死老头，都不让人轻松一点！我的命怎么这么苦啊！”心里对马丁花积累的5点好感值瞬间烟消云散了。</p>
+]]></content>
+      <categories>
+        <category>蔡了成长记</category>
+      </categories>
+      <tags>
+        <tag>Design, OO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>企业架构与领域驱动设计的融合</title>
+    <url>/enterprise-architecture-and-ddd/</url>
+    <content><![CDATA[<img src="/enterprise-architecture-and-ddd/2021-06-07.jpg" class="">
+
+<p>DDD的作用范围主要还是针对系统级的分析、架构与设计，在更高的层面上，即将问题空间扩大到超过系统范围，变成企业或组织范围之后，DDD的模式就显得捉襟见肘了。此时，可以考虑引入企业架构的思想，尤其是业务架构的内容，给了DDD很好的补充，又或者说，将企业架构与DDD融合起来，就能真正串联起战略和战术设计了。</p>
+<p>为什么在传统企业中，DDD开始得到了许多企业的追捧？不仅仅是微服务的原因，就我个人不成熟的判断，应该是数字化转型开始倒逼着传统企业的IT部门开始接纳了DDD这一方法体系。</p>
+<span id="more"></span>
+
+<p>数字化转型对企业的要求，表现在以下方面：</p>
+<ul>
+<li>企业架构与行业的结合程度</li>
+<li>数字化的企业IT架构</li>
+</ul>
+<p>所谓“行业”，也可以理解为“领域”，传统企业在互联网经济的冲击下，开始向更快、更强的要求转变，但真正的快，绝不是没有规划，恰恰相反，需要在战略上有着清晰的转型目标，而在战术（企业的战术层面，对应于DDD的战略层次）上需要沉淀企业的领域资产。不管这些领域资产是通过核心模型、服务还是其他组件形式，都需要对准转型方向的企业战略，并在战略指导下做到可复用业务能力的识别与沉淀。这个过程可以是计划式的，也可以是演进式的；可以是分解为服务的粒度，也可以是能力中心的粒度；可以采用领域驱动设计建立核心领域模型，也可以建立自治的微服务，也可以是中台的能力规划与战略。</p>
+<p>数字化转型必然不仅仅是业务的转型，还包括IT架构的转型。当前的一个趋势是在基础设施上，向着云原生架构转变；在能力建设上，要改变组织模式，同时也要从项目思维向产品思维转变；同时，还要加强对数据的重视，全面拥抱互联网数据、物联网数据，做到业务与数据的双向支撑；在技术复用方面，也提出了前所未有的高要求，不管是PaaS、SaaS还是中台的能力中心，或者微小粒度的服务与组件，更或者是近期炒得火热的低代码平台，其核心关键还是遵循八二原则，尽可能将能够复用的技术实现、业务模型（包括流程与规则）的开发成本降低，如此就能满足快速开发产品服务不断应对产品创新的需要，又能合理分配人力成本，花更多人力与物力去做好高价值的东西。</p>
+<p>要做好企业的数字化转型，就要“从企业整合运作、提升竞争力的角度出发，站在企业全局的高度，从理解企业所处行业、发展阶段、目标、战略、竞争环境等多方面入手，认清其核心能力及管理中存在的主要问题，在此基础上进行管控模式分析，提出关键业务流程的优化建议”[引自《微服务设计：企业架构转型之道》]，简单说来，数字化转型是企业层面的全面转型，同时也是企业高管的思维转型。为了规避风险，也为了企业的转型步子能够迈得更坚实，又需要根据轻重缓急分阶段实施。实施的过程必然是自上而下的，但是随着从顶层到底层的逐步细化，粒度也在不断缩小，待缩小到目标系统的层次时，就是DDD登上舞台的最佳时机了。</p>
+<p>我曾经和多位业务架构师聊过企业架构与DDD的关系，窃以为企业架构在宏观层面上有着自己一套成熟的体系方法，如TOGOF和Zachman等企业架构体系，它庞大的规范、标准与过程非常值得IT部门学习，值得将其引入到数字化转型作为参考；然而，这些方法的问题在于：</p>
+<ul>
+<li>过于复杂：虽然企业自身复杂度决定了体系的复杂性，但一套体系如果过于复杂，许多人穷其一生可能都无法掌握其全貌与细节，就很难掌控，更谈不上落地；</li>
+<li>过于宏观：利用企业架构的思想和方法对企业做完战略规划后，如何保证方案的落地，又如何保证落地过程完全遵循解决方案的要求不偏不倚地推进，缺乏有效的手段。</li>
+</ul>
+<p>企业架构就好似画出了企业战略规划的模板，模板中的空白部分就是落地需要的知识和能力。利用业务架构，已经对这些模板与空白进行了有效的切分，并明确了各自的边界，企业架构对业务架构向IT架构的映射给予了架构的指导，接下来，就可以通过DDD高质量地填充这些空白。</p>
+<p>因此，企业架构与领域驱动设计是完全能够融合在一起的，促进这一融合的催化剂是数字化转型，呼唤这种融合的需求来自于相对高高在上的企业架构需要具备落地的能力，至于这种融合为何在现在开始提出或得到重视，是因为当下这个时代，具备了向这个趋势发展的天时地利与人和：</p>
+<ul>
+<li>天时：数字化转型已经提上了大多数传统企业的议事日程，不得不上，也必须上，而且得快上；</li>
+<li>地利：各种IT基础架构已经满足了这一要求，无论是云原生、微服务、大数据，还是所谓的中台，为这一融合打下了良好的基础，敏捷思想已经深入人心，IT的管理能力与构建能力得到了大幅度的提高；</li>
+<li>人和：数字化转型让企业高层领导看到了转型的迫在眉睫，转型的战略规划与IT架构构建已经时不我待，业务人士与IT人士都看到了这一趋势，并开始打破业务与IT的壁垒，寻求全方位的合作。</li>
+</ul>
+<p>如果说以上内容指出了这一融合趋势，回答了融合的必要性，那么该怎么融合的问题就摆上了议事日程，毕竟二者并不处于同一层次，关心的角色也可能在身份地位上存在天壤之别。我的一个粗浅想法，是希望借鉴DDD的方法与思想，寻求对企业架构做必要的精简和简化，核心价值仍然是领域（业务）驱动，然后尝试建立不同层次的架构体系，即建立组织级与系统级的架构，让企业架构方法与DDD方法各司其职，组织级的棘手问题交给企业架构，系统级的落地问题交给DDD。</p>
+<p>以上观点很不成熟，个人对企业架构的认识也非常粗浅。从学习路线看，我算是自下而上的狂飙猛进，不再满足于领域驱动设计的系统层次，要向上开始向企业顶层设计“逆袭”，之后，不是高高在上去俯视IT众生，而是沉下心来，完成二者的真正融合——既要做得了规划，还能写得出方案，针对核心实现，还要能撸得出代码。如此就算是打通业务（领域）驱动的任督二脉了！</p>
+]]></content>
+      <categories>
+        <category>Architecture</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
         <tag>EA</tag>
       </tags>
   </entry>
@@ -1826,6 +1885,60 @@
       </tags>
   </entry>
   <entry>
+    <title>领域驱动设计概览</title>
+    <url>/overview-of-ddd/</url>
+    <content><![CDATA[<h2 id="领域驱动设计概览"><a href="#领域驱动设计概览" class="headerlink" title="领域驱动设计概览"></a>领域驱动设计概览</h2><p>领域驱动设计（Domain Driven Design，DDD）是由Eric Evans最早提出的综合软件系统分析和设计的面向对象建模方法，如今已经发展为一种针对大型复杂系统的领域建模与分析方法。它完全改变了传统软件开发工程师针对数据库进行的建模方法，从而<strong>将要解决的业务概念和业务规则转换为软件系统中的类型以及类型的属性与行为，通过合理运用面向对象的封装、继承、多态等设计要素</strong>，降低或隐藏整个系统的业务复杂性，并使得系统具有更好的扩展性，应对纷繁多变的现实业务问题。</p>
+<span id="more"></span>
+
+<h3 id="领域驱动设计的开放性"><a href="#领域驱动设计的开放性" class="headerlink" title="领域驱动设计的开放性"></a>领域驱动设计的开放性</h3><p>领域驱动设计是一种方法论（Methodology）。根据维基百科的定义，方法论是一套运用到某个研究领域的系统与理论分析方法。领域驱动设计就是针对软件开发领域提出的一套系统与理论分析方法。Eric Evans在创造性地提出领域驱动设计时，实则是针对当时项目中聚焦在以数据以及数据样式为核心的系统建模方法的批判。面向数据的建模方法是关系数据库理论的延续，关注的是数据表以及数据表之间关系的设计。这是典型的面向技术实现的建模方法，面对日渐复杂的业务逻辑，这种设计方法欠缺灵活性与可扩展性，也无法更好地利用面向对象设计思想以及设计模式，建立可重用的、可扩展的代码单元。领域驱动设计的提出，是<strong>设计观念的转变，蕴含了全新的设计思想、设计原则与设计过程</strong>。</p>
+<p>由于领域驱动设计是一套方法论，它建立了<strong>以领域为核心驱动力</strong>的设计体系，因而具有一定的开放性。在这个体系中，你可以使用不限于领域驱动设计提出的任何一种方法来解决这些问题。例如，我们可以使用用例（Use Case）、测试驱动开发（TDD）、用户故事（User Story）帮助我们对领域建立模型；我们可以引入整洁架构思想以及六边形架构，以帮助我们建立一个层次分明、结构清晰的系统架构；我们可以引入函数式编程思想，利用纯函数与抽象代数结构的不变性以及函数的组合性来表达领域模型。这些实践方法与模型已经超越了Eric Evans最初提出的领域驱动设计范畴，但在体系上却是一脉相承的。这也是为什么在领域驱动设计社区，能够不断诞生诸如CQRS模式、事件溯源（Event Sourcing）模式与事件风暴（Event Storming）等新概念的原因；领域驱动设计也以开放的心态拥抱微服务（Micro Service），甚至能够将它的设计思想与原则运用到微服务架构设计中。</p>
+<h3 id="领域驱动设计过程"><a href="#领域驱动设计过程" class="headerlink" title="领域驱动设计过程"></a>领域驱动设计过程</h3><p>领域驱动设计当然不是架构方法，也并非设计模式。准确地说，它其实是“一种思维方式，也是一组优先任务，它旨在加速那些必须处理复杂领域的软件项目的开发”。领域驱动设计贯穿了整个软件开发的生命周期，包括对需求的分析，建模，架构，设计，甚至最终的编码实现，乃至对编码的测试与重构。</p>
+<p>领域驱动设计强调领域模型的重要性，并通过模型驱动设计来保障领域模型与程序设计的一致。从业务需求中提炼出统一语言（Ubiquitous Language），再基于统一语言建立领域模型；这个领域模型会指导着程序设计以及编码实现；最后，又通过重构来发现隐式概念，并运用设计模式改进设计与开发质量。这个过程如下图所示：</p>
+<img src="/overview-of-ddd/01-01.png" class="">
+
+<p>这个过程是一个覆盖软件全生命周期的设计闭环，每个环节的输出都可以作为下一个环节的输入，而在其中扮演重要指导作用的则是“领域模型”。这个设计闭环是一个螺旋上升的迭代设计过程，领域模型会在这个迭代过程中逐渐演进，在保证模型完整性与正确性的同时，具有新鲜的活力，使得领域模型能够始终如一的贯穿领域驱动设计过程，阐释着领域逻辑，指导着程序设计，验证着编码质量。</p>
+<p>如果仔细审视这个设计闭环，我们发现在针对问题域和业务期望提炼统一语言，并通过统一语言进行领域建模时，可能会面临高复杂度的挑战。这是因为对于一个复杂的软件系统而言，我们要处理的问题域实在太庞大了。在为问题域寻求解决方案时，需要从宏观层次划分不同业务关注点的子领域，然后再深入到子领域中从微观层次对领域进行建模。宏观层次是战略的层面，微观层次是战术的层面，只有将战略设计与战术设计结合起来，才是完整的领域驱动设计。</p>
+<h4 id="战略设计阶段"><a href="#战略设计阶段" class="headerlink" title="战略设计阶段"></a>战略设计阶段</h4><p>领域驱动设计的战略设计阶段是从两个方面来考量的：</p>
+<ul>
+<li>问题域方面：针对问题域，引入<strong>限界上下文（Bounded Context）</strong>和<strong>上下文映射（Context Map）</strong>对问题域进行合理的分解，识别出<strong>核心领域（Core Domain）</strong>与<strong>子领域（SubDomain）</strong>，并确定领域的边界以及它们之间的关系，维持模型的完整性。</li>
+<li>架构方面：通过<strong>分层架构</strong>来隔离关注点，尤其是将领域实现独立出来，可以更利于领域模型的单一性与稳定性；引入<strong>六边形架构</strong>清晰地表达领域与技术基础设施的边界；CQRS模式则分离了查询场景和命令场景，针对不同场景选择使用同步或异步操作，提高架构的低延迟性与高并发能力。</li>
+</ul>
+<p>Eric Evans提出战略设计的初衷是要<strong>保持模型的完整性</strong>。限界上下文的边界可以保护上下文内部和其他上下文之间的领域概念互不冲突。然而，如果我们将领域驱动设计的战略设计模式引入到架构过程中，就会发现限界上下文不仅限于对领域模型的控制，而在于分离关注点之后，使得整个上下文可以成为独立部署的设计单元，这就是“微服务”的概念，上下文映射的诸多模式则对应了微服务之间的协作。因此在战略设计阶段，微服务扩展了领域驱动设计的内容，反过来领域驱动设计又能够保证良好的微服务设计。</p>
+<p>一旦确立了限界上下文的边界，尤其是作为物理边界，则分层架构就不再针对整个软件系统，而仅仅针对粒度更小的限界上下文。此时，限界上下文定义了技术实现的边界，对当前上下文的领域与技术实现进行了封装，我们只需要关心对外暴露的接口与集成方式，形成了在服务层次的设计单元重用。</p>
+<p>边界给了实现限界上下文内部的最大自由度。这也是战略设计在<strong>分治</strong>上起到的效用。我们可以在不同的限界上下文选择不同的架构模式，例如针对订单的查询与处理，选择CQRS模式来分别处理同步与异步场景；还可以针对核心领域与子领域重要性的不同，分别选择领域模型（Domain Model）和事务脚本（Transaction Script）模式，灵活地平衡开发成本与开发质量。在宏观层面，面对整个软件系统，我们可以采用前后端分离与基于REST的微服务架构，保证系统具有一致的架构风格。</p>
+<h4 id="战术设计阶段"><a href="#战术设计阶段" class="headerlink" title="战术设计阶段"></a>战术设计阶段</h4><p>整个软件系统被分解为多个限界上下文（或领域）后，我们就可以分而治之，对每个限界上下文进行战术设计。领域驱动设计并不牵涉到技术层面的实现细节，在战术层面，它主要应对的是领域的复杂性。领域驱动设计用以表示模型的主要要素包括：</p>
+<ul>
+<li>值对象（Value Object）</li>
+<li>实体（Entity）</li>
+<li>领域服务（Domain Service）</li>
+<li>领域事件（Domain Event）</li>
+<li>资源库（Repository）</li>
+<li>工厂（Factory）</li>
+<li>聚合（Aggregate）</li>
+<li>应用服务（Application Service）</li>
+</ul>
+<p>Eric Evans通过下图勾勒了战术设计诸要素之间的关系：</p>
+<img src="/overview-of-ddd/01-02.png" class="">
+
+<p>领域驱动设计围绕着领域模型进行设计，通过<strong>分层架构（Layered Architecture）</strong>将领域独立出来。表示领域模型的对象包括：<strong>实体</strong>、<strong>值对象</strong>和<strong>领域服务</strong>。<strong>领域逻辑都应该封装在这些对象中</strong>。这一严格的设计原则可以避免业务逻辑渗透到领域层之外，导致技术实现与业务逻辑的混淆。在领域驱动设计的演进中，又引入了<strong>领域事件</strong>来丰富领域模型。</p>
+<p><strong>聚合</strong>是一种边界，它可以封装一到多个<strong>实体</strong>与<strong>值对象</strong>，并维持该边界范围之内的业务完整性。在聚合中，至少包含一个实体，且只有实体才能作为<strong>聚合根（Aggregate Root）</strong>。注意，在领域驱动设计中，没有任何一个类是单独的聚合，因为聚合代表的是边界概念，而非领域概念。极端情况下，一个聚合可能有且只有一个实体。</p>
+<p><strong>工厂</strong>和<strong>资源库</strong>都是对领域对象生命周期的管理。前者负责领域对象的创建，往往用于封装复杂或者可能变化的创建逻辑。后者则负责从存放资源的位置（数据库、内存或者其他Web资源）获取、添加、删除或者修改领域对象。领域模型中的资源库不应该暴露访问领域对象的技术实现细节。</p>
+<h4 id="演进的领域驱动设计过程"><a href="#演进的领域驱动设计过程" class="headerlink" title="演进的领域驱动设计过程"></a>演进的领域驱动设计过程</h4><p>战略设计会控制和分解战术设计的边界与粒度，战术设计则以实证角度验证领域模型的有效性、完整性与一致性，进而以演进的方式对之前的战略设计阶段进行迭代，从而形成一种螺旋式上升的迭代设计过程，如下图所示：</p>
+<img src="/overview-of-ddd/01-03.png" class="">
+
+<p>面对客户的业务需求，由领域专家与开发团队展开充分的交流，经过需求分析与知识提炼，获得清晰的问题域。通过对问题域进行分析和建模，识别限界上下文，利用它划分相对独立的领域，再通过上下文映射建立它们之间的关系，辅以分层架构与六边形架构划分系统的逻辑边界与物理边界，界定领域与技术之间的界限。之后，进入战术设计阶段，深入到限界上下文内对领域进行建模，并以领域模型指导程序设计与编码实现。若在实现过程中，发现领域模型存在重复、错位或缺失时，再进而对已有模型进行重构，甚至重新划分限界上下文。</p>
+<p>两个不同阶段的设计目标是保持一致的，它们是一个连贯的过程，彼此之间又相互指导与规范，并最终保证<strong>一个有效的领域模型和一个富有表达力的实现同时演进</strong>。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Architecture</tag>
+        <tag>Design</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Apache Apex的Operators</title>
     <url>/operators-of-apache-apex/</url>
     <content><![CDATA[<p>Operator是Apache Apex平台进行数据处理的最基本构建模块。Apex将要处理的数据抽象为tuple，而tuple就是流动在operator之间。Apex的operator可以通过由DAG（Directed Acyclic Graph，有向无环图）组成的Stream进行连接。因此，在Apex架构体系与数据流模型中，一个典型的Apex流应用是由DAG来呈现的，而DAG又包括了数据流（称之为streams）与操作（称之为operators）。</p>
@@ -1883,60 +1996,6 @@
         <tag>Streaming</tag>
         <tag>Big Data</tag>
         <tag>Apex</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>领域驱动设计概览</title>
-    <url>/overview-of-ddd/</url>
-    <content><![CDATA[<h2 id="领域驱动设计概览"><a href="#领域驱动设计概览" class="headerlink" title="领域驱动设计概览"></a>领域驱动设计概览</h2><p>领域驱动设计（Domain Driven Design，DDD）是由Eric Evans最早提出的综合软件系统分析和设计的面向对象建模方法，如今已经发展为一种针对大型复杂系统的领域建模与分析方法。它完全改变了传统软件开发工程师针对数据库进行的建模方法，从而<strong>将要解决的业务概念和业务规则转换为软件系统中的类型以及类型的属性与行为，通过合理运用面向对象的封装、继承、多态等设计要素</strong>，降低或隐藏整个系统的业务复杂性，并使得系统具有更好的扩展性，应对纷繁多变的现实业务问题。</p>
-<span id="more"></span>
-
-<h3 id="领域驱动设计的开放性"><a href="#领域驱动设计的开放性" class="headerlink" title="领域驱动设计的开放性"></a>领域驱动设计的开放性</h3><p>领域驱动设计是一种方法论（Methodology）。根据维基百科的定义，方法论是一套运用到某个研究领域的系统与理论分析方法。领域驱动设计就是针对软件开发领域提出的一套系统与理论分析方法。Eric Evans在创造性地提出领域驱动设计时，实则是针对当时项目中聚焦在以数据以及数据样式为核心的系统建模方法的批判。面向数据的建模方法是关系数据库理论的延续，关注的是数据表以及数据表之间关系的设计。这是典型的面向技术实现的建模方法，面对日渐复杂的业务逻辑，这种设计方法欠缺灵活性与可扩展性，也无法更好地利用面向对象设计思想以及设计模式，建立可重用的、可扩展的代码单元。领域驱动设计的提出，是<strong>设计观念的转变，蕴含了全新的设计思想、设计原则与设计过程</strong>。</p>
-<p>由于领域驱动设计是一套方法论，它建立了<strong>以领域为核心驱动力</strong>的设计体系，因而具有一定的开放性。在这个体系中，你可以使用不限于领域驱动设计提出的任何一种方法来解决这些问题。例如，我们可以使用用例（Use Case）、测试驱动开发（TDD）、用户故事（User Story）帮助我们对领域建立模型；我们可以引入整洁架构思想以及六边形架构，以帮助我们建立一个层次分明、结构清晰的系统架构；我们可以引入函数式编程思想，利用纯函数与抽象代数结构的不变性以及函数的组合性来表达领域模型。这些实践方法与模型已经超越了Eric Evans最初提出的领域驱动设计范畴，但在体系上却是一脉相承的。这也是为什么在领域驱动设计社区，能够不断诞生诸如CQRS模式、事件溯源（Event Sourcing）模式与事件风暴（Event Storming）等新概念的原因；领域驱动设计也以开放的心态拥抱微服务（Micro Service），甚至能够将它的设计思想与原则运用到微服务架构设计中。</p>
-<h3 id="领域驱动设计过程"><a href="#领域驱动设计过程" class="headerlink" title="领域驱动设计过程"></a>领域驱动设计过程</h3><p>领域驱动设计当然不是架构方法，也并非设计模式。准确地说，它其实是“一种思维方式，也是一组优先任务，它旨在加速那些必须处理复杂领域的软件项目的开发”。领域驱动设计贯穿了整个软件开发的生命周期，包括对需求的分析，建模，架构，设计，甚至最终的编码实现，乃至对编码的测试与重构。</p>
-<p>领域驱动设计强调领域模型的重要性，并通过模型驱动设计来保障领域模型与程序设计的一致。从业务需求中提炼出统一语言（Ubiquitous Language），再基于统一语言建立领域模型；这个领域模型会指导着程序设计以及编码实现；最后，又通过重构来发现隐式概念，并运用设计模式改进设计与开发质量。这个过程如下图所示：</p>
-<img src="/overview-of-ddd/01-01.png" class="">
-
-<p>这个过程是一个覆盖软件全生命周期的设计闭环，每个环节的输出都可以作为下一个环节的输入，而在其中扮演重要指导作用的则是“领域模型”。这个设计闭环是一个螺旋上升的迭代设计过程，领域模型会在这个迭代过程中逐渐演进，在保证模型完整性与正确性的同时，具有新鲜的活力，使得领域模型能够始终如一的贯穿领域驱动设计过程，阐释着领域逻辑，指导着程序设计，验证着编码质量。</p>
-<p>如果仔细审视这个设计闭环，我们发现在针对问题域和业务期望提炼统一语言，并通过统一语言进行领域建模时，可能会面临高复杂度的挑战。这是因为对于一个复杂的软件系统而言，我们要处理的问题域实在太庞大了。在为问题域寻求解决方案时，需要从宏观层次划分不同业务关注点的子领域，然后再深入到子领域中从微观层次对领域进行建模。宏观层次是战略的层面，微观层次是战术的层面，只有将战略设计与战术设计结合起来，才是完整的领域驱动设计。</p>
-<h4 id="战略设计阶段"><a href="#战略设计阶段" class="headerlink" title="战略设计阶段"></a>战略设计阶段</h4><p>领域驱动设计的战略设计阶段是从两个方面来考量的：</p>
-<ul>
-<li>问题域方面：针对问题域，引入<strong>限界上下文（Bounded Context）</strong>和<strong>上下文映射（Context Map）</strong>对问题域进行合理的分解，识别出<strong>核心领域（Core Domain）</strong>与<strong>子领域（SubDomain）</strong>，并确定领域的边界以及它们之间的关系，维持模型的完整性。</li>
-<li>架构方面：通过<strong>分层架构</strong>来隔离关注点，尤其是将领域实现独立出来，可以更利于领域模型的单一性与稳定性；引入<strong>六边形架构</strong>清晰地表达领域与技术基础设施的边界；CQRS模式则分离了查询场景和命令场景，针对不同场景选择使用同步或异步操作，提高架构的低延迟性与高并发能力。</li>
-</ul>
-<p>Eric Evans提出战略设计的初衷是要<strong>保持模型的完整性</strong>。限界上下文的边界可以保护上下文内部和其他上下文之间的领域概念互不冲突。然而，如果我们将领域驱动设计的战略设计模式引入到架构过程中，就会发现限界上下文不仅限于对领域模型的控制，而在于分离关注点之后，使得整个上下文可以成为独立部署的设计单元，这就是“微服务”的概念，上下文映射的诸多模式则对应了微服务之间的协作。因此在战略设计阶段，微服务扩展了领域驱动设计的内容，反过来领域驱动设计又能够保证良好的微服务设计。</p>
-<p>一旦确立了限界上下文的边界，尤其是作为物理边界，则分层架构就不再针对整个软件系统，而仅仅针对粒度更小的限界上下文。此时，限界上下文定义了技术实现的边界，对当前上下文的领域与技术实现进行了封装，我们只需要关心对外暴露的接口与集成方式，形成了在服务层次的设计单元重用。</p>
-<p>边界给了实现限界上下文内部的最大自由度。这也是战略设计在<strong>分治</strong>上起到的效用。我们可以在不同的限界上下文选择不同的架构模式，例如针对订单的查询与处理，选择CQRS模式来分别处理同步与异步场景；还可以针对核心领域与子领域重要性的不同，分别选择领域模型（Domain Model）和事务脚本（Transaction Script）模式，灵活地平衡开发成本与开发质量。在宏观层面，面对整个软件系统，我们可以采用前后端分离与基于REST的微服务架构，保证系统具有一致的架构风格。</p>
-<h4 id="战术设计阶段"><a href="#战术设计阶段" class="headerlink" title="战术设计阶段"></a>战术设计阶段</h4><p>整个软件系统被分解为多个限界上下文（或领域）后，我们就可以分而治之，对每个限界上下文进行战术设计。领域驱动设计并不牵涉到技术层面的实现细节，在战术层面，它主要应对的是领域的复杂性。领域驱动设计用以表示模型的主要要素包括：</p>
-<ul>
-<li>值对象（Value Object）</li>
-<li>实体（Entity）</li>
-<li>领域服务（Domain Service）</li>
-<li>领域事件（Domain Event）</li>
-<li>资源库（Repository）</li>
-<li>工厂（Factory）</li>
-<li>聚合（Aggregate）</li>
-<li>应用服务（Application Service）</li>
-</ul>
-<p>Eric Evans通过下图勾勒了战术设计诸要素之间的关系：</p>
-<img src="/overview-of-ddd/01-02.png" class="">
-
-<p>领域驱动设计围绕着领域模型进行设计，通过<strong>分层架构（Layered Architecture）</strong>将领域独立出来。表示领域模型的对象包括：<strong>实体</strong>、<strong>值对象</strong>和<strong>领域服务</strong>。<strong>领域逻辑都应该封装在这些对象中</strong>。这一严格的设计原则可以避免业务逻辑渗透到领域层之外，导致技术实现与业务逻辑的混淆。在领域驱动设计的演进中，又引入了<strong>领域事件</strong>来丰富领域模型。</p>
-<p><strong>聚合</strong>是一种边界，它可以封装一到多个<strong>实体</strong>与<strong>值对象</strong>，并维持该边界范围之内的业务完整性。在聚合中，至少包含一个实体，且只有实体才能作为<strong>聚合根（Aggregate Root）</strong>。注意，在领域驱动设计中，没有任何一个类是单独的聚合，因为聚合代表的是边界概念，而非领域概念。极端情况下，一个聚合可能有且只有一个实体。</p>
-<p><strong>工厂</strong>和<strong>资源库</strong>都是对领域对象生命周期的管理。前者负责领域对象的创建，往往用于封装复杂或者可能变化的创建逻辑。后者则负责从存放资源的位置（数据库、内存或者其他Web资源）获取、添加、删除或者修改领域对象。领域模型中的资源库不应该暴露访问领域对象的技术实现细节。</p>
-<h4 id="演进的领域驱动设计过程"><a href="#演进的领域驱动设计过程" class="headerlink" title="演进的领域驱动设计过程"></a>演进的领域驱动设计过程</h4><p>战略设计会控制和分解战术设计的边界与粒度，战术设计则以实证角度验证领域模型的有效性、完整性与一致性，进而以演进的方式对之前的战略设计阶段进行迭代，从而形成一种螺旋式上升的迭代设计过程，如下图所示：</p>
-<img src="/overview-of-ddd/01-03.png" class="">
-
-<p>面对客户的业务需求，由领域专家与开发团队展开充分的交流，经过需求分析与知识提炼，获得清晰的问题域。通过对问题域进行分析和建模，识别限界上下文，利用它划分相对独立的领域，再通过上下文映射建立它们之间的关系，辅以分层架构与六边形架构划分系统的逻辑边界与物理边界，界定领域与技术之间的界限。之后，进入战术设计阶段，深入到限界上下文内对领域进行建模，并以领域模型指导程序设计与编码实现。若在实现过程中，发现领域模型存在重复、错位或缺失时，再进而对已有模型进行重构，甚至重新划分限界上下文。</p>
-<p>两个不同阶段的设计目标是保持一致的，它们是一个连贯的过程，彼此之间又相互指导与规范，并最终保证<strong>一个有效的领域模型和一个富有表达力的实现同时演进</strong>。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Architecture</tag>
-        <tag>Design</tag>
       </tags>
   </entry>
   <entry>
@@ -2052,6 +2111,139 @@
       </tags>
   </entry>
   <entry>
+    <title>《解构领域驱动设计》终于可以预购了</title>
+    <url>/presale-of-DDDE/</url>
+    <content><![CDATA[<img src="/presale-of-DDDE/cover-small.jpg" class="">
+
+<p>四年了，《解构领域驱动设计》<strong>终于</strong>可以在异步社区的<a href="https://www.epubit.com/bookDetails?id=UB77d68d84212a6&typeName=%E6%90%9C%E7%B4%A2">官方网站上预购</a>了！这意味着，我的著作<strong>终于</strong>出版了！有没有普天同庆的赶脚？总之，当我收到这一消息后，长长地吁了一口气……终于，终于，四年了，真不容易啊！</p>
+<p>许多次，我在给别人介绍这本著作时，总有人问我哪里可以买到，而我则尴尬地回答：嗯，这个，这个，还没有出版呢。许多次，读者圈的朋友在问这本书多久出版时，我从2020年承诺年底出版，然后推迟到4月，然后推迟到6月，最后推迟到7月，进度的delay已经让人产生抱怨了！而在许多年前，我总是说我的第一本书《<a href="https://book.douban.com/subject/2058073/">软件设计精要与模式</a>》，言外之意，我还有第二本书，可是自从2007年出版我的第一本书，到2009年出版<a href="http://product.china-pub.com/196623">该书的第二版</a>之后，我的第二本书终于在14年后诞生了。</p>
+<p>一些信息可以侧面证明本书写作的不容易。</p>
+<span id="more"></span>
+
+<p>本书内容首先诞生于我在GitChat上发布的<a href="https://gitchat.csdn.net/column/5cdab7fb34b6ed1398fd8de7">领域驱动设计课程</a>，该课程分为《战略篇》与《战术篇》，战略篇一共34章，15.5万字；战术篇一共71章，35.1万字。合计105章，50.6余万字。发布战术篇的最后一章是在2020年1月21日，完成本书初稿是在2020年11月24日。</p>
+<p>个人认为，领域驱动设计课程的内容已经足够完整了，对于课程内容，几乎没有差评（至少我没有看到）；但我仍嫌不足，在完成该课程后，又对内容进行了大刀阔斧地修改与调整，彻底改变了从战略到战术这条线的章节安排，引入了我总结的<strong>领域驱动设计统一过程</strong>，增加了三章与需求分析有关的内容，完善了战略篇，将其进化为架构映射的内容，丰富了限界上下文的定义，引入了菱形对称架构与领域驱动架构风格，完善了战术篇，将其进化为领域建模的内容，使得领域建模的过程与方法更加完整，并具备可操作性。同时，也删减了该课程中部分与领域驱动设计关系不大的内容，使得内容变得更精简也更有条理，最后成书包括4篇推荐序、1篇前言、20章正文组成五个篇章，以及4章附录，总字数（不包括空白、空行与标点符号）约43万字。</p>
+<p>虽然本书初稿完成在2020年11月24日，然而在交稿后，又几度批阅删改，甚至在2021年1月基本定稿后，因为字数和章节的不合理性，于2月4日向出版社提出修改要求，为此牺牲了春节的休假时间，调整内容包括：</p>
+<ul>
+<li>去掉了原稿的第16章、第21章</li>
+<li>将原稿的第7章、第14章和第22章合并，并做了大量删减，放到了新稿的第20章，它们合起来是一个完整的案例；</li>
+<li>将原稿的第17章、第19章和第20章中的一个案例做了合并，并做了少量调整，放到了新稿的第17章；</li>
+<li>调整了正文和附录的分布，从原书的25章调整为正文20章、附录3章（后在5月份又增加了一章附录）</li>
+</ul>
+<p>这一改动几乎等于乾坤大挪移，严重影响了出版进度。编辑需要针对之前基本完成加工的书稿进行重新梳理，极大地拖慢了出版进度，同时，因为图片字体版权问题，又对本书所有图片进行了再度编辑和调整，直到4月22日最终定稿。确定后的书稿先后经历出版社的一审、二审、三审，再经我个人审校后，编辑做一校、二校、三校，种种工作，不一而足，最终等到书稿付梓印刷，并在今日开启了本书的预售工作。</p>
+<h3 id="内容简介"><a href="#内容简介" class="headerlink" title="内容简介"></a>内容简介</h3><p>本书全面阐释了领域驱动设计的知识体系，内容覆盖领域驱动设计的主要模式与主流方法，并在此基础上提出领域驱动设计统一过程，将整个软件构建过程划分为全局分析、架构映射和领域建模3个阶段。除给出诸多案例阐释领域驱动设计过程中的方法与模式之外，本书还通过一个真实而完整的案例全面展现了如何进行领域驱动设计统一过程的实施和落地。为了更好地运用领域驱动设计统一过程，本书还开创性地引入了业务服务、菱形对称架构、领域驱动架构、服务驱动设计等方法与模式，总结了领域驱动设计参考过程模型与能力评估模型。本书提出的一整套方法体系已在多个项目得到推广和落地。</p>
+<p>本书适合希望体会软件架构本质、提高软件架构能力的软件架构师，希望提高领域建模能力、打磨软件设计能力的开发人员，希望掌握业务分析与建模方法的业务分析人员，希望学习领域驱动设计并将该方法运用到项目中的软件从业人员阅读参考。</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>本书目录为：</p>
+<ul>
+<li>推荐序四篇</li>
+<li>前言</li>
+<li>第一篇 开篇<ul>
+<li>第1章 软件复杂度剖析</li>
+<li>第2章 领域驱动设计概览</li>
+<li>第3章 领域驱动设计统一过程</li>
+</ul>
+</li>
+<li>第二篇 全局分析<ul>
+<li>第4章 问题空间探索</li>
+<li>第5章 价值需求分析</li>
+<li>第6章 业务需求分析</li>
+</ul>
+</li>
+<li>第三篇 架构映射<ul>
+<li>第7章 同构系统</li>
+<li>第8章 系统上下文</li>
+<li>第9章 限界上下文</li>
+<li>第10章 上下文映射</li>
+<li>第11章 服务契约设计</li>
+<li>第12章 领域驱动架构</li>
+</ul>
+</li>
+<li>第四篇 领域建模<ul>
+<li>第13章 模型驱动设计</li>
+<li>第14章 领域分析建模</li>
+<li>第15章 领域模型设计要素</li>
+<li>第16章 领域设计建模</li>
+<li>第17章 领域实现建模</li>
+</ul>
+</li>
+<li>第五篇 融合<ul>
+<li>第18章 领域驱动设计的战略考量</li>
+<li>第19章 领域驱动设计的战术考量</li>
+<li>第20章 领域驱动设计体系</li>
+</ul>
+</li>
+<li>附录<ul>
+<li>附录A 领域建模范式</li>
+<li>附录B 事件驱动模型</li>
+<li>附录C 领域驱动设计魔方</li>
+<li>附录D 领域驱动设计统一过程交付物</li>
+</ul>
+</li>
+<li>参考文献</li>
+</ul>
+<h3 id="样章阅读"><a href="#样章阅读" class="headerlink" title="样章阅读"></a>样章阅读</h3><ul>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=aa089770eea74021958ecb1fe622fb5d&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序一</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=2fd7c627096a4ee588d41964a358d3c9&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序二</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=8f9fff26f6894b899f128002a0c34a83&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序三</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=06e257cf62464431b7f31386c61d9568&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序四</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=61537b18f42440f1ae4d90c57c798e35&pid=2d58f18fed9243aaaaeabf1a6fd8c539">前言</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=ecbfb8ca1e434e9eb7d1d8da9569006a&pid=2d58f18fed9243aaaaeabf1a6fd8c539">第1章 软件复杂度剖析</a></li>
+<li><a href="">第2章 领域驱动设计概览</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=9542d12f7f254de8b138c247a420eeea&pid=2d58f18fed9243aaaaeabf1a6fd8c539">第3章 领域驱动设计统一过程</a></li>
+<li><a href="https://www.epubit.com/onlineEbookReader?id=2f52844d824b4d1aa8602f338f301cf0&pid=2d58f18fed9243aaaaeabf1a6fd8c539">第20章 领域驱动设计体系</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Writing</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《解构领域驱动设计》篇首语</title>
+    <url>/prologue-of-every-volumn-of-ddd-explained/</url>
+    <content><![CDATA[<p>《解构领域驱动设计》在领域驱动设计统一过程的指导下，将该过程的全部三个阶段作为本书的三个核心篇章：全局分析、架构映射与领域建模，再辅以开篇和融合，共分为五篇二十五章，全面而完整地表达了我对领域驱动设计的全部认知与最佳实践。</p>
+<span id="more"></span>
+
+<h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>开篇，明义。<br>领域驱动设计需要应对软件复杂度的挑战！那么，软件复杂度的成因究竟是什么？又该如何应对？概括而言，即：<br>* 规模：通过分而治之控制规模<br>* 结构：通过边界保证清晰有序<br>* 变化：顺应变化方向</p>
+<p>领域驱动设计对软件复杂度的应对之道可进一步阐述为：<br>* 规模：以子领域、限界上下文分而治之<br>* 结构：以分层架构隔离业务复杂度与技术复杂度，形成清晰的架构<br>* 变化：通过领域建模抽象为以聚合为核心的领域模型，响应需求之变化</p>
+<p>子领域、限界上下文、分层架构与聚合皆为领域驱动设计的核心元模型，分属战略设计和战术设计，贯穿了从问题空间到解空间的全过程。</p>
+<p>领域驱动设计的开放性是其生命长青的基石，但它过于开放的灵活性也让运用领域驱动设计的开发团队变得举步维艰。我之所以提出领域驱动设计统一过程，正是要在开放的方法体系指导之下，摸索出一条行之有效的软件构建之路。它既不悖于领域驱动设计之精神，又不吝于运用设计元模型，通过提供简单有效的实践方法，建立具有目的性和操作性的构建过程。</p>
+<p>领域驱动设计统一过程分为三个阶段：<br>* 全局分析阶段<br>* 架构映射阶段<br>* 领域建模阶段</p>
+<p>每个阶段的过程工作流既融合了领域驱动设计既有的设计元模型，又提出了新的模式、方法与实践，丰富了领域驱动设计的外延。领域驱动设计统一过程对项目管理、需求管理与团队管理也提出了明确的要求，它们虽然不属于领域驱动设计关注的范畴，却是影响领域驱动设计实践与落地成功与否的重要因素。<br>领域驱动设计统一过程是对领域驱动设计进行解构的核心内容！</p>
+<h3 id="全局分析"><a href="#全局分析" class="headerlink" title="全局分析"></a>全局分析</h3><p>解决问题的第一要务是明确问题，问题尚不知，就尝试求解，自然就是无的放矢了。全局分析的目标就是确定问题空间，在统一语言的指导下，通过各种可视化手段，由领域专家与团队一起完成对问题空间的探索，帮助领域驱动设计对准问题，输出价值需求和业务需求。</p>
+<p>价值需求既是目标系统的目标，也是对目标系统问题空间的界定和约束，它指导着业务需求分析。业务需求由动态的业务流程和静态的业务活动组成，二者的结合依靠业务场景按照时间点和业务目标对业务流程的切分。通过运用商业模式画布，可以获得组成价值需求的利益相关者、系统愿景和系统范围。</p>
+<p>业务流程的梳理可以帮助团队对问题空间的各条业务线构成一个整体认识，弄清楚各种角色如何参与到一个完整的流程中，流程的时序性也可以避免识别业务活动时可能出现的缺失。业务流程图与服务蓝图以可视化的方式形象地呈现每一个提供了业务价值的业务流程。</p>
+<p>业务活动是角色与目标系统之间的一次功能性交互，是体现了服务价值的功能行为。一直以来，该如何确定业务需求层次，划分业务需求粒度，总是众说纷纭，没有一个客观的标准；业务活动将目标系统视为一个黑盒子，从功能性交互的完整性保证了每个业务活动都是正交的，就无需再考虑业务活动的层次和粒度，或者说，只要确定了完整性，保障了正交性，业务活动的层次与粒度也就确定下来了。业务活动可以使用用例、用户故事或事件风暴中的事件来表达。</p>
+<p>业务活动是全局分析阶段的基本业务单元，它的输出对于架构映射与领域建模具有重要意义：<br>* 架构映射：业务活动是识别限界上下文、确定上下文映射的基础，同时，它的粒度正好对应每个限界上下文向外公开的服务契约；<br>* 领域模型：业务需求分析细化的业务活动既是领域分析建模的重要参考，同时又作为服务场景成为场景驱动设计的起点。</p>
+<p>全局分析是领域驱动设计统一过程的起点，它的目的是探索问题空间，使团队就问题空间的价值需求和业务需求达成共识，并在统一语言的指导下将其清晰地呈现出来。只有问题定义清楚了，团队才能更好地寻求解决方案。</p>
+<h3 id="架构映射"><a href="#架构映射" class="headerlink" title="架构映射"></a>架构映射</h3><p>架构映射对应解空间的战略设计层次。</p>
+<p>本阶段，映射成为了获得架构的主要设计手段。价值需求中利益相关者、系统愿景和系统范围可映射为系统上下文，业务活动通过对业务相关性的归类与归纳可映射为限界上下文，二者又是构成系统架构的重要层次，前者勾勒出解空间的控制边界，后者勾勒出领域模型的知识边界，组成了一个稳定而又具有演进能力的领域驱动架构。<br>限界上下文是架构映射阶段的基本架构单元，决定一个限界上下文边界的元素包括：领域对象、领域知识、角色和活动。限界上下文是领域模型的知识语境，又是业务能力的纵向切分，它满足自治单元的四个要素：最小完备、自我履行、稳定空间、独立进化。一个自治的限界上下文一定遵循菱形对称架构模式。</p>
+<p>菱形对称架构模式将整个限界上下文分为内部的领域层和外部的网关层，网关层根据调用方向分为北向网关和南向网关。北向网关体现了“封装”的设计思想，根据通信方式的不同分为远程服务与应用服务；南向网关体现了“抽象”的设计思想，将抽象与实现分离，分为端口与适配器。在诸多上下文映射模式中，除了共享内核与遵奉者模式，都应在菱形对称架构网关层的控制下进行协作。</p>
+<p>系统上下文对应了解空间的范围，它站在组织层面思考利益相关者、目标系统与伴生系统之间的关系。它通过系统分层架构体现目标系统的逻辑结构，并按照子领域价值的不同，为限界上下文确定了不同的层次。根据康威定律的规定，系统分层架构可以映射为由前端组件团队、领域特性团队与组件团队组成的开发团队。</p>
+<p>限界上下文是顺应业务变化进行功能分解的软件元素，菱形对称架构规定了限界上下文之间、限界上下文与外部环境之间的关系，由系统分层架构模式与菱形对称架构模式组成的领域驱动架构风格则是指导架构设计与演进的原则。这些内容符合架构的定义，同时也是对控制软件复杂度的呼应。</p>
+<p>领域建模要在架构的约束下进行，系统上下文和限界上下文的边界对领域模型起到了设计约束的作用。根据限界上下文的价值高低，属于支撑子领域和通用子领域的限界上下文，往往因为业务简单，无需进行领域建模，如此就能快速开发，降低开发成本。因此，架构映射是领域建模的前提，也可以认为是战略对战术的设计指导。</p>
+<h3 id="领域建模"><a href="#领域建模" class="headerlink" title="领域建模"></a>领域建模</h3><p>领域建模的过程，是模型驱动设计的过程，也是迭代建模的过程。</p>
+<p>不可妄求一蹴而就能获得完整的领域模型，也不可殚精竭虑地追求领域模型的尽善尽美。领域建模的分析、设计和实现是循序渐进的增量建模，建模目标与侧重点也不尽相同。</p>
+<p>领域分析模型负责捕捉表示领域知识的领域概念，明确它们之间的关系，形成反映现实世界的对象概念图。获得的分析模型全面而粗疏，既不至于遗漏重要的领域概念导致模型的缺失，又不至于锱铢必较地因为过分定义领域属性而陷入分析瘫痪。</p>
+<p>领域设计模型在领域分析模型的基础上加入对设计和实现的思考，为对象概念图戴上聚合的镣铐，在保证概念完整性、独立性、不变量与一致性的基础上，更好地管理对象的生命周期。场景驱动设计则赋予了领域模型以动能，在对服务场景进行任务分解的基础上，由外自内由各种角色构造型参与协作，形成了连续执行的消息链条，驱动出远程服务、应用服务、领域服务、聚合和各种端口的方法，既验证了领域模型对象的正确性与完整性，又丰富了领域模型的内容。</p>
+<p>领域实现模型基于场景驱动设计输出的任务列表和序列图脚本开展测试驱动开发，领域层的产品代码与测试代码共同构成领域实现模型。由于拥有单元测试的保护，及时重构又改进了代码的质量，使得领域实现模型变得整洁而稳定，形成具有运行能力的核心领域资产。在实现领域模型时，也是对领域设计模型和领域分析模型的一次验证。</p>
+<p>聚合是领域建模阶段的基本设计单元。领域分析模型向领域设计模型的演进是通过识别聚合完成的，聚合边界的约束能力使得领域设计模型在保证细粒度对象定义的同时，又能通过封装实体与值对象的细节简化对象模型，降低领域模型的复杂度。一旦确定了聚合，就可以由此定义资源库端口和领域服务，并按照信息专家模式将体现领域逻辑的原子任务分配给聚合，建立富领域模型。聚合是纯粹的，它不依赖于任何访问外部资源的端口，因此它也是稳定的；因为聚合是稳定的，使得围绕着它为核心建立的领域模型也变得更加稳定。</p>
+<h3 id="融合"><a href="#融合" class="headerlink" title="融合"></a>融合</h3><p>融合，就是战略和战术的融合，为了让软件运行起来，还需考虑领域逻辑与技术实现的融合，即领域层与网关层的融合。</p>
+<p>在战略层次，需在领域驱动架构风格的约束和指导下考虑限界上下文之间的协作，思考并决策限界上下文的通信边界，思考从单体架构向微服务架构的演进，同时，因为进程间通信引起的诸多影响，需评估分布式通信、事务以及受技术因素驱动的命令查询职责分离模式是否对领域模型造成了影响。</p>
+<p>事实证明，遵循领域驱动架构风格的系统完全满足架构演进的要求，只需付出少量修改成本，即可支持单体架构、SOA架构、微服务架构与事件驱动架构，同时还满足了领域模型的稳定性。</p>
+<p>在战术层次，通过建立设计概念的统一语言，保证团队在领域建模时避免因概念理解的偏差出现设计的不一致，甚至做出有违领域驱动设计理念的错误决策。通过领域模型驱动设计获得的领域模型还需要考虑如何与持久化结合，解决对象关系映射的阻抗不匹配问题，以更加优雅的方式实现资源库，保证作为端口的资源库实现不会侵入领域模型，破坏领域的纯粹性。</p>
+<p>无论战略还是战术，抑或二者的融合，都需要在领域驱动设计知识体系的指导下进行。结合领域驱动设计社区的发展与我个人的设计经验，尝试对领域驱动设计做进一步梳理和升华，建立了全方位多维度的领域驱动设计魔方，基于领域驱动设计统一过程给出了具有可操作性的参考过程模型，提炼了领域驱动设计的精髓，面向团队给出领域驱动设计的能力评估模型，如此就能将方法、过程、模式有机地融合起来，给出行之有效的指导意见。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD, Writing</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>领域驱动战术设计进度说明</title>
     <url>/process-of-domain-driven-tactic-design/</url>
     <content><![CDATA[<p>我在GitChat发布的《领域驱动战略设计》课程于2018年10月结束，原计划是在2018年底或2019年初再发布《领域驱动战术设计》课程，没想到一拖再拖，而我自己也终于体会到起点作者的那种催更压力。我本想揣着鸵鸟的心态躲在后面默默地写、慢慢地写，不给自己设定最终期限，没想到读者群里的众多读者已经开始发出了自己的呼声：</p>
@@ -2109,49 +2301,6 @@
       <tags>
         <tag>DDD</tag>
         <tag>Writing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《解构领域驱动设计》篇首语</title>
-    <url>/prologue-of-every-volumn-of-ddd-explained/</url>
-    <content><![CDATA[<p>《解构领域驱动设计》在领域驱动设计统一过程的指导下，将该过程的全部三个阶段作为本书的三个核心篇章：全局分析、架构映射与领域建模，再辅以开篇和融合，共分为五篇二十五章，全面而完整地表达了我对领域驱动设计的全部认知与最佳实践。</p>
-<span id="more"></span>
-
-<h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><p>开篇，明义。<br>领域驱动设计需要应对软件复杂度的挑战！那么，软件复杂度的成因究竟是什么？又该如何应对？概括而言，即：<br>* 规模：通过分而治之控制规模<br>* 结构：通过边界保证清晰有序<br>* 变化：顺应变化方向</p>
-<p>领域驱动设计对软件复杂度的应对之道可进一步阐述为：<br>* 规模：以子领域、限界上下文分而治之<br>* 结构：以分层架构隔离业务复杂度与技术复杂度，形成清晰的架构<br>* 变化：通过领域建模抽象为以聚合为核心的领域模型，响应需求之变化</p>
-<p>子领域、限界上下文、分层架构与聚合皆为领域驱动设计的核心元模型，分属战略设计和战术设计，贯穿了从问题空间到解空间的全过程。</p>
-<p>领域驱动设计的开放性是其生命长青的基石，但它过于开放的灵活性也让运用领域驱动设计的开发团队变得举步维艰。我之所以提出领域驱动设计统一过程，正是要在开放的方法体系指导之下，摸索出一条行之有效的软件构建之路。它既不悖于领域驱动设计之精神，又不吝于运用设计元模型，通过提供简单有效的实践方法，建立具有目的性和操作性的构建过程。</p>
-<p>领域驱动设计统一过程分为三个阶段：<br>* 全局分析阶段<br>* 架构映射阶段<br>* 领域建模阶段</p>
-<p>每个阶段的过程工作流既融合了领域驱动设计既有的设计元模型，又提出了新的模式、方法与实践，丰富了领域驱动设计的外延。领域驱动设计统一过程对项目管理、需求管理与团队管理也提出了明确的要求，它们虽然不属于领域驱动设计关注的范畴，却是影响领域驱动设计实践与落地成功与否的重要因素。<br>领域驱动设计统一过程是对领域驱动设计进行解构的核心内容！</p>
-<h3 id="全局分析"><a href="#全局分析" class="headerlink" title="全局分析"></a>全局分析</h3><p>解决问题的第一要务是明确问题，问题尚不知，就尝试求解，自然就是无的放矢了。全局分析的目标就是确定问题空间，在统一语言的指导下，通过各种可视化手段，由领域专家与团队一起完成对问题空间的探索，帮助领域驱动设计对准问题，输出价值需求和业务需求。</p>
-<p>价值需求既是目标系统的目标，也是对目标系统问题空间的界定和约束，它指导着业务需求分析。业务需求由动态的业务流程和静态的业务活动组成，二者的结合依靠业务场景按照时间点和业务目标对业务流程的切分。通过运用商业模式画布，可以获得组成价值需求的利益相关者、系统愿景和系统范围。</p>
-<p>业务流程的梳理可以帮助团队对问题空间的各条业务线构成一个整体认识，弄清楚各种角色如何参与到一个完整的流程中，流程的时序性也可以避免识别业务活动时可能出现的缺失。业务流程图与服务蓝图以可视化的方式形象地呈现每一个提供了业务价值的业务流程。</p>
-<p>业务活动是角色与目标系统之间的一次功能性交互，是体现了服务价值的功能行为。一直以来，该如何确定业务需求层次，划分业务需求粒度，总是众说纷纭，没有一个客观的标准；业务活动将目标系统视为一个黑盒子，从功能性交互的完整性保证了每个业务活动都是正交的，就无需再考虑业务活动的层次和粒度，或者说，只要确定了完整性，保障了正交性，业务活动的层次与粒度也就确定下来了。业务活动可以使用用例、用户故事或事件风暴中的事件来表达。</p>
-<p>业务活动是全局分析阶段的基本业务单元，它的输出对于架构映射与领域建模具有重要意义：<br>* 架构映射：业务活动是识别限界上下文、确定上下文映射的基础，同时，它的粒度正好对应每个限界上下文向外公开的服务契约；<br>* 领域模型：业务需求分析细化的业务活动既是领域分析建模的重要参考，同时又作为服务场景成为场景驱动设计的起点。</p>
-<p>全局分析是领域驱动设计统一过程的起点，它的目的是探索问题空间，使团队就问题空间的价值需求和业务需求达成共识，并在统一语言的指导下将其清晰地呈现出来。只有问题定义清楚了，团队才能更好地寻求解决方案。</p>
-<h3 id="架构映射"><a href="#架构映射" class="headerlink" title="架构映射"></a>架构映射</h3><p>架构映射对应解空间的战略设计层次。</p>
-<p>本阶段，映射成为了获得架构的主要设计手段。价值需求中利益相关者、系统愿景和系统范围可映射为系统上下文，业务活动通过对业务相关性的归类与归纳可映射为限界上下文，二者又是构成系统架构的重要层次，前者勾勒出解空间的控制边界，后者勾勒出领域模型的知识边界，组成了一个稳定而又具有演进能力的领域驱动架构。<br>限界上下文是架构映射阶段的基本架构单元，决定一个限界上下文边界的元素包括：领域对象、领域知识、角色和活动。限界上下文是领域模型的知识语境，又是业务能力的纵向切分，它满足自治单元的四个要素：最小完备、自我履行、稳定空间、独立进化。一个自治的限界上下文一定遵循菱形对称架构模式。</p>
-<p>菱形对称架构模式将整个限界上下文分为内部的领域层和外部的网关层，网关层根据调用方向分为北向网关和南向网关。北向网关体现了“封装”的设计思想，根据通信方式的不同分为远程服务与应用服务；南向网关体现了“抽象”的设计思想，将抽象与实现分离，分为端口与适配器。在诸多上下文映射模式中，除了共享内核与遵奉者模式，都应在菱形对称架构网关层的控制下进行协作。</p>
-<p>系统上下文对应了解空间的范围，它站在组织层面思考利益相关者、目标系统与伴生系统之间的关系。它通过系统分层架构体现目标系统的逻辑结构，并按照子领域价值的不同，为限界上下文确定了不同的层次。根据康威定律的规定，系统分层架构可以映射为由前端组件团队、领域特性团队与组件团队组成的开发团队。</p>
-<p>限界上下文是顺应业务变化进行功能分解的软件元素，菱形对称架构规定了限界上下文之间、限界上下文与外部环境之间的关系，由系统分层架构模式与菱形对称架构模式组成的领域驱动架构风格则是指导架构设计与演进的原则。这些内容符合架构的定义，同时也是对控制软件复杂度的呼应。</p>
-<p>领域建模要在架构的约束下进行，系统上下文和限界上下文的边界对领域模型起到了设计约束的作用。根据限界上下文的价值高低，属于支撑子领域和通用子领域的限界上下文，往往因为业务简单，无需进行领域建模，如此就能快速开发，降低开发成本。因此，架构映射是领域建模的前提，也可以认为是战略对战术的设计指导。</p>
-<h3 id="领域建模"><a href="#领域建模" class="headerlink" title="领域建模"></a>领域建模</h3><p>领域建模的过程，是模型驱动设计的过程，也是迭代建模的过程。</p>
-<p>不可妄求一蹴而就能获得完整的领域模型，也不可殚精竭虑地追求领域模型的尽善尽美。领域建模的分析、设计和实现是循序渐进的增量建模，建模目标与侧重点也不尽相同。</p>
-<p>领域分析模型负责捕捉表示领域知识的领域概念，明确它们之间的关系，形成反映现实世界的对象概念图。获得的分析模型全面而粗疏，既不至于遗漏重要的领域概念导致模型的缺失，又不至于锱铢必较地因为过分定义领域属性而陷入分析瘫痪。</p>
-<p>领域设计模型在领域分析模型的基础上加入对设计和实现的思考，为对象概念图戴上聚合的镣铐，在保证概念完整性、独立性、不变量与一致性的基础上，更好地管理对象的生命周期。场景驱动设计则赋予了领域模型以动能，在对服务场景进行任务分解的基础上，由外自内由各种角色构造型参与协作，形成了连续执行的消息链条，驱动出远程服务、应用服务、领域服务、聚合和各种端口的方法，既验证了领域模型对象的正确性与完整性，又丰富了领域模型的内容。</p>
-<p>领域实现模型基于场景驱动设计输出的任务列表和序列图脚本开展测试驱动开发，领域层的产品代码与测试代码共同构成领域实现模型。由于拥有单元测试的保护，及时重构又改进了代码的质量，使得领域实现模型变得整洁而稳定，形成具有运行能力的核心领域资产。在实现领域模型时，也是对领域设计模型和领域分析模型的一次验证。</p>
-<p>聚合是领域建模阶段的基本设计单元。领域分析模型向领域设计模型的演进是通过识别聚合完成的，聚合边界的约束能力使得领域设计模型在保证细粒度对象定义的同时，又能通过封装实体与值对象的细节简化对象模型，降低领域模型的复杂度。一旦确定了聚合，就可以由此定义资源库端口和领域服务，并按照信息专家模式将体现领域逻辑的原子任务分配给聚合，建立富领域模型。聚合是纯粹的，它不依赖于任何访问外部资源的端口，因此它也是稳定的；因为聚合是稳定的，使得围绕着它为核心建立的领域模型也变得更加稳定。</p>
-<h3 id="融合"><a href="#融合" class="headerlink" title="融合"></a>融合</h3><p>融合，就是战略和战术的融合，为了让软件运行起来，还需考虑领域逻辑与技术实现的融合，即领域层与网关层的融合。</p>
-<p>在战略层次，需在领域驱动架构风格的约束和指导下考虑限界上下文之间的协作，思考并决策限界上下文的通信边界，思考从单体架构向微服务架构的演进，同时，因为进程间通信引起的诸多影响，需评估分布式通信、事务以及受技术因素驱动的命令查询职责分离模式是否对领域模型造成了影响。</p>
-<p>事实证明，遵循领域驱动架构风格的系统完全满足架构演进的要求，只需付出少量修改成本，即可支持单体架构、SOA架构、微服务架构与事件驱动架构，同时还满足了领域模型的稳定性。</p>
-<p>在战术层次，通过建立设计概念的统一语言，保证团队在领域建模时避免因概念理解的偏差出现设计的不一致，甚至做出有违领域驱动设计理念的错误决策。通过领域模型驱动设计获得的领域模型还需要考虑如何与持久化结合，解决对象关系映射的阻抗不匹配问题，以更加优雅的方式实现资源库，保证作为端口的资源库实现不会侵入领域模型，破坏领域的纯粹性。</p>
-<p>无论战略还是战术，抑或二者的融合，都需要在领域驱动设计知识体系的指导下进行。结合领域驱动设计社区的发展与我个人的设计经验，尝试对领域驱动设计做进一步梳理和升华，建立了全方位多维度的领域驱动设计魔方，基于领域驱动设计统一过程给出了具有可操作性的参考过程模型，提炼了领域驱动设计的精髓，面向团队给出领域驱动设计的能力评估模型，如此就能将方法、过程、模式有机地融合起来，给出行之有效的指导意见。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD, Writing</tag>
       </tags>
   </entry>
   <entry>
@@ -2314,6 +2463,57 @@
         <tag>Spark</tag>
         <tag>Scala</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《解构领域驱动设计》推荐序</title>
+    <url>/recommendation-of-my-book/</url>
+    <content><![CDATA[<p>我的书《<a href="https://www.epubit.com/bookDetails?id=UB77d68d84212a6&typeName=">解构领域驱动设计</a>》即将由人民邮电出版社异步社区出版，目前已经可以在出版社的官网预定，很快就能够在电商平台上架开售。历时近四年的写作委实不易，当然，也离不开各位朋友的支持与帮助。正如我在本书前言中提到的“感谢京东周吉鑫、AWS高翊凯（Kim Kao）、腾讯王立与技术专家于君泽（花名“右军”）诸兄的抬爱，他们不仅拨冗为我的著作作序，也给了我许多好的建议与指点，提升了本书的整体质量。”</p>
+<p>为此，在这里我抢先发布这些朋友为本书写的推荐序，以飨读者。</p>
+<span id="more"></span>
+
+
+
+<h3 id="推荐序一"><a href="#推荐序一" class="headerlink" title="推荐序一"></a>推荐序一</h3><p>本书的读者是幸运的！我运用领域驱动设计磕磕绊绊十余年，读过本书的内容之后，深感它是一本可与《领域驱动设计》和《实现领域驱动设计》互补的书，它在领域驱动设计落地方面尤其出色。</p>
+<p>2007年，我阅读了Eric Evans的《领域驱动设计》。2014年，我又阅读了由Eric Evans作序、Vaughn Vernon编写的《实现领域驱动设计》，后来，我有幸认识了该书的审校者张逸老师，和张逸老师的沟通令我受益匪浅。虽然知道张逸老师在领域驱动设计方面功力颇深，但在拜读了张逸老师的这本书的初稿之后，我依然非常吃惊，觉得张逸老师真正做到了将领域驱动设计知识融会贯通。张逸老师在这本书中对限界上下文、聚合、领域服务概念进行了深刻阐述，并通过案例的运用让研发人员在使用这些概念时不再迷惑。他还在参透了六边形整洁架构、架构与分层架构的本质后，大胆突破，提出了精简的菱形对称架构，从架构角度让领域驱动设计更加容易理解和落地，并通过服务驱动设计，以任务分解的方式让测试驱动开发和领域驱动设计无缝结合，让设计可以推导验证，让开发人员可以自然而然写出不再“贫血”的代码。</p>
+<p>本书不仅具备国内作者难得的宽阔视野和理论深度，而且有丰富的案例与实战经验总结，其中一些总结还细心地标明了出处，如关于过度设计和设计不足的权衡案例后面的总结：“具有实证主义态度的设计理念是面对不可预测的变化时，应首先保证方案的简单性；当变化真正发生时，可以通过诸如提炼接口（extract interface）[6]341的重构手法，满足解析逻辑的扩展。”</p>
+<p>本书中有很多这样的总结，因此阅读这本书相当于吸收了很多本书的精华。记得张逸老师曾向我推荐过Robert Martin的《架构整洁之道》，当时我告诉他那是我2019年读的最好的一本书，而今天，我要告诉他，他的这本书是我2020年读到的最好的一本书！</p>
+<p><strong>作者：</strong>周吉鑫，京东资深业务架构师，2011年起至今在京东公司进行物流系统的建模、分析和设计工作，主要工作包括京东亚洲一号WMS、WMS3.0～WMS6.0系统、云仓、国际化物流系统、无人仓系统等的建模、分析和设计。</p>
+<h3 id="推荐序二"><a href="#推荐序二" class="headerlink" title="推荐序二"></a>推荐序二</h3><p>2019年的冬天，我从台湾赶往上海，为公司内的团队进行领域驱动设计（DDD）与事件风暴的培训，在完成了培训工作后马不停蹄地赶往北京，只为了与领域驱动设计社区的伙伴王威、张逸相聚。在2019年领域驱动设计中国峰会（2019 DDD China Conference）上，我们分享了领域驱动设计台湾社区对领域驱动设计的理解与实践方式。是日恰巧迎来了北京的初雪，趁着此情此景，一行人把酒言欢，正是“初雪纷飞夜访，奇闻经历共话，点拨思绪再整，把酒笑谈学涯”。</p>
+<p>当时我们探讨了一个很重要的话题：很多人在学习领域驱动设计时，往往初探不得其窍门，而工作背景不同的人看待这一方法又往往仅侧重于一部分战略指导，或者只关注战略设计实践的代码层级，但不管侧重于哪一部分，都会让这种经典的指导协作与实现业务战略目标的软件工程方法略显失重，无法尽得其精要。</p>
+<p>2003年，Eric Evans的著作《领域驱动设计》从欧洲席卷而来，乃至于全球的软件工作者都渴望从他提出的领域建模方法中得到帮助，但十多年来，Eric Evans本人经常被问到：“有没有一种方法可以很好地指引我们进行业务建模？什么样的建模才是合理的，或者说可以一次就成其事达其标？”Eric Evans本人在很多公开场合都提过，其实这一切都依然需要依赖一些经验和持续积累的领域知识。对于这样需要由高度经验法则施行的领域驱动设计，一般的软件架构师、程序员以及相关的从业人员往往望而却步，个中原因便是始终少了一个系统性的指引，将业务流程梳理的产物对接到后续的程序开发中，实现从业务架构到系统架构的良好实践，使常见的业务与技术之间的隔阂降到最低。</p>
+<p>对于这本书，我首先要向张逸老师表达感激之情，然后祝贺本书的读者！感激张逸老师花了多年时间梳理并融合了其在软件设计领域的实务经验，将战略推进到战术过程中佚失的部分，并通过领域驱动设计统一过程（DDDUP），使领域驱动设计方法更加完备。祝贺本书的读者在拿到本书时就几乎综览了过去20多年的软件开发历程所提到的诸多重要元素。本书结合大量实务案例来探讨为何需要战略指导、为何需要以固有的战术设计范式指导实践，并辅以领域驱动设计统一过程的指导原则，指引读者逐步落地。本书不单纯以领域驱动设计来讲老生常谈的方法，而更像一位坐在你身边的资深架构师，与你结对进行系统架构设计，一起探索软件架构设计的奥秘。</p>
+<p>如果读者对软件工程有极大的热情，渴望更好地理解、实施领域驱动设计，解决复杂的业务问题，就千万别错过这本书。但我最真切地提醒读者，在购书之后务必阅读与身体力行兼具。行之才是学之。</p>
+<p><strong>作者：</strong>高翊凯（Kim Kao），Amazon Web Services（AWS）资深解决方案架构师，领域驱动设计台湾社区共同发起人之一。他的专长是软件系统设计，并致力于无服务器服务推广，推动企业透过领域驱动设计与便捷的云端服务打造更适切的建构系统方案，解决实际的业务问题。</p>
+<h3 id="推荐序三"><a href="#推荐序三" class="headerlink" title="推荐序三"></a>推荐序三</h3><p>自2003年Eric Evans的著作《领域驱动设计》面世以来，领域驱动设计（DDD）相关的实践书籍并不多，整体的理论发展速度并不快，以至于很长一段时间，开发团队的实践过程总是磕磕绊绊，这让他们觉得领域驱动设计的门槛很高，甚至有人怀疑领域驱动设计是否是一种足够成熟与体系化的方法论。根据我个人的经验，我确实发现其中不少问题仍旧没有什么经典论著能完全覆盖与讨论。看过这本书的内容后，我的感受是：无论是理论还是实践，领域驱动设计知识体系确实都已经成熟了，与国内外的经典领域驱动设计著作相比，这本书包含了更多案例，覆盖了更多问题场景，回答了更多人们不常考虑的细节。本书作者不仅继承了各类经典著作的精华，更难得的是他能够在实践中深入细节进行推敲，批判与改良一些不成熟的理论，甚至有了自己的理论创新，例如，提出了菱形架构概念、对强一致事务与聚合的边界的一致性提出挑战……特别是，他还创造性地提出了领域驱动设计统一过程（DDDUP），很好地总结了完整的领域驱动设计知识体系。</p>
+<p>有些读者可能不理解本书为什么这么厚。网络上有大量碎片式的领域驱动设计文章，一个案例只有几页，市场上也有不少领域驱动设计方面的培训，两天就能帮我们“搞定”领域驱动设计，领域驱动设计的知识体系似乎并没有我们想象的那么丰满。但事实上，这本书将告诉我们，领域驱动设计背后完整的知识体系并没有那么简单，我们需要掌握的是从业务到技术的整个技能栈。我们必须接受的事实是：领域驱动设计是有一定学习曲线的。所以，不要拒绝一本足够厚的书，这恰恰是其价值的体现。这本书的各个部分不是泛泛而谈，而是通过展开细节，层层推进，帮助读者建立扎实的理论基础，并通过大量翔实的案例，让读者能灵活运用理论知识。对于初学者，本书尽可能详尽地把问题展开、讲透；对于有一定经验的老手，本书也有更多有深度的细节思考和理论拓展。相信这本书会成为国内领域驱动设计技术书籍的一个标杆。</p>
+<p>张逸先生是我国最早一批接触并实践领域驱动设计的先行者，经验极其丰富。本书不仅是他在该领域十多年实战经验的沉淀和升华，也是他多年教学经验的总结和提炼。他曾经为很多行业巨头提供过咨询服务，是国内在领域驱动设计方面影响力最大的布道者之一。看到张逸先生的书终于要出版了，我感到非常高兴，我们太需要这样一本既有理论升华又如此接地气的大作了。</p>
+<p>我熟读了几乎所有的领域驱动设计经典著作，但仍旧从张逸先生的书中获益良多。我认为本书的广度、深度与创新性已经可以与该领域的国际经典著作看齐，这也是国人的骄傲。本书的出版是领域驱动设计理论界的一个重要事件，是对软件行业在领域驱动设计方面的巨大贡献，必将降低整个行业掌握领域驱动设计的门槛，加速领域驱动设计的普及。能为这本书作序是我的荣幸，同为领域驱动设计布道者，我将向我的同行强烈推荐本书。这本书也是我本人将来开展工作的重要理论指导。</p>
+<p><strong>作者：</strong>王立，微信支付12级专家工程师、技术领导者。他从2006年起开始研究领域驱动设计，曾经在阿里巴巴、神州数码、网宿科技等上市公司担任技术专家与技术经理，现在负责微信支付技术团队在领域建模、分析和设计方面的实践指导。</p>
+<h3 id="推荐序四"><a href="#推荐序四" class="headerlink" title="推荐序四"></a>推荐序四</h3><p>领域驱动设计方面的书现在不是太多，而是太少。想必不少读者受过《领域驱动设计》和《实现领域驱动设计》两本书的启蒙。本书是我特别推荐的领域驱动设计方面的技术书，为何特别推荐，且听下文。</p>
+<p>大约在2007年，我第一次读《领域驱动设计》一书时，如读天书，主要记住了类似实体、值对象、工厂、仓储等概念。近年来，随着微服务的流行，国内对领域驱动设计的研究和实践愈发多了起来。</p>
+<p>我对领域驱动设计的态度是：相对于战术设计，应该更看重战略设计。数年前，我醉心于研究领域模型。领域是业务变化中接近不变性的部分，业务包括领域对象、业务逻辑和界面交互3个层次，其中领域对象是最稳定的。2015年我组织领域建模工作坊活动时，用的就是《分析模式：可复用的对象模型》一书中的一个需求场景。2016年我写了一篇文章，强调了问题域和解决方案域的区分。张逸兄在GitChat上的两个连载专栏历时两年，创作数十万字，内容之丰满，关键节点探讨之深刻，于我之所见，浩瀚领域专家，无出其右者。虽大家都各自奔忙，仅偶有线上问候或者面聊，但皆有受益。本书的成书过程尤其令人钦佩，张逸兄不是直接将专栏调整成书，而是重新组织架构，提炼出自己的方法体系，可以说是推陈出新，自成一家。</p>
+<p>张逸兄敢言人之所未言。领域驱动设计有四大不足：领域驱动设计缺乏规范的统一过程，领域驱动设计缺乏与之匹配的需求管理体系，领域驱动设计缺乏规范化的、具有指导意义的架构体系，领域驱动设计的领域建模方法缺乏固化的指导方法。他创造性地提出领域驱动设计统一过程，虽然此方法有无调整空间，一定是要在不断实践中去检验的，但单就他的这份胆识和专业，足以让人钦佩。</p>
+<p>如果说非要给本书提一点儿意见的话，我觉得本书有点儿厚了。我认为一本好书也要兼顾读者的情况，最好能达到让读者快速上手的学习效果。但张逸兄坚持让本书以集大成者的面貌出现，洋洋洒洒数十万字，力求让其成为一本值得珍藏的技术书。</p>
+<p>凡学习，须循序渐进。我建议读者把面向对象的分析（object-oriented analysis，OOA）、面向对象的设计（object-oriented design，OOD）、统一建模语言（unified modeling language，UML）、模式等相关知识作为阅读本书的前序内容。《领域驱动设计》一书也特别提到了“复杂性”，有一定的软件从业经验的朋友对“复杂性”更感同身受。</p>
+<p>每个人心中都有一个哈姆雷特，每一位读者都可以登临领域驱动设计的阁楼，从不同的角度或俯瞰、或仰望、或凝视。我之所得：于道，是对限界上下文特别有共鸣的部分，以及问题空间（域）与解空间（域）；于术，是作者提出的领域驱动设计的“三大纪律八项注意”，可作为团队执行作战任务的纪律规范。其中，“三大纪律”是实施领域驱动设计的准则：</p>
+<ul>
+<li><p>领域专家与开发团队在一起工作；</p>
+</li>
+<li><p>领域模型必须遵循统一语言；</p>
+</li>
+<li><p>时刻坚守两重分析边界与四重设计边界。</p>
+</li>
+</ul>
+<p>信笔至此，兹为张兄推荐。本书精彩之处甚多，留待读者去发现。祝阅读愉快！</p>
+<p><strong>作者：</strong>于君泽（右军），技术专家，《深入分布式缓存：从原理到实践》和《程序员的三门课：技术精进、架构修炼、管理探秘》联合作者。</p>
+]]></content>
+      <categories>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Writing</tag>
       </tags>
   </entry>
   <entry>
@@ -2541,6 +2741,79 @@
       </tags>
   </entry>
   <entry>
+    <title>ZenUML与服务驱动设计</title>
+    <url>/service-driven-design-and-zenuml/</url>
+    <content><![CDATA[<p>在《<a href="https://item.jd.com/10035002181202.html">解构领域驱动设计</a>》书中的领域建模阶段，我提出了以<strong>业务服务</strong>为核心进行设计与建模的方法——<strong>服务驱动设计</strong>。通过该方法可以在静态的领域设计模型基础之上，以业务服务规约为基础，通过分析需求，对业务服务进行任务分解，获得以子任务构成的任务树。这棵树以业务服务为根，组合任务为枝，原子任务为叶，既体现了业务服务的执行过程，又进行了适度的封装，建立了一定的封装层次。</p>
+<p>一旦获得了子任务树，即可对树中的每一个子任务进行职责分配，根据其特点分别分配给远程服务、本地服务、领域服务、聚合、端口。它们是构成限界上下文的主要对象角色，我将其称之为“角色构造型”，可以和我提出的<strong>菱形对称架构</strong>结合：</p>
+<img src="/service-driven-design-and-zenuml/rsa.jpg" class="">
+
+<span id="more"></span>
+
+<p>分配的过程可以呈现为序列图，作为动态的领域设计模型，它与静态的领域设计模型共同组成领域设计模型。然则，绘制序列图总是不太方便，于是，我提出了编写序列图脚本的方法。以提交订单业务服务为例，分解获得的子任务树为：</p>
+<img src="/service-driven-design-and-zenuml/task-tree.jpg" class="">
+
+
+
+<p>根据职责分配的规则，业务服务分配给远程服务与本地服务，组合任务分配给领域服务，原子任务分配给聚合或端口，就可以编写出如下的序列图脚本：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">OrderController.placeOrder(placingOrderRequest) &#123;  <span class="comment">// 业务服务对应远程服务</span></span><br><span class="line">   OrderAppService.placeOrder(placingOrderRequest) &#123;<span class="comment">//应用服务的方法体现服务价值</span></span><br><span class="line">      OrderService.placeOrder(order) &#123; <span class="comment">// 领域服务对应组合任务，避免领域逻辑泄露到应用服务</span></span><br><span class="line">         OrderService.validate(order) &#123; <span class="comment">// 领域服务对应组合任务</span></span><br><span class="line">            Order.validate();   <span class="comment">// 聚合承担原子任务</span></span><br><span class="line">            InventoryCheckingClient.check(order); <span class="comment">// 客户端端口指向库存上下文的边界服务</span></span><br><span class="line">         &#125;</span><br><span class="line">         OrderRepository.save(order); <span class="comment">// 资源库端口操作订单数据表</span></span><br><span class="line">         ShoppingCartService.removeItems(customerId,cartItems) &#123; <span class="comment">// 领域服务对应组合任务</span></span><br><span class="line">            ShoppingCartRepository.cartOf(customerId); <span class="comment">// 资源库端口操作购物车数据表</span></span><br><span class="line">            ShoppingCart.removeItems(cartItems);  <span class="comment">// 聚合承担原子任务</span></span><br><span class="line">            ShoppingCartRepository.save(shoppingCart); <span class="comment">// 资源库端口操作购物车数据表</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      OrderPlacedPublisher.publish(orderPlacedEvent); <span class="comment">// 发布者端口发布订单已提交的应用事件</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>序列图脚本的创意并非我的创举，而是<a href="https://zenuml.com/">ZenUML</a>给予我的启发。我还在ThoughtWorks的时候，我的Sponser肖鹏正在打磨这个工具。我们二人都认同UML的序列图对于领域建模与设计颇有助力。一方面，序列图这一可视化方式可以提供给设计者一些特征，用于甄别设计的坏味道；另一方面，绘制序列图时，是由外向内逐层递进的，可以更好地站在调用者的角度去思考设计，消息的定义也会产生一种驱动力。我在为GitChat编写领域驱动设计课程时，就想到了这一工具，它提供的脚本语法非常接近Java语法，于是，我就采用拿来主义，将其搬到我的文章里，在融入业务服务、菱形对称架构、角色构造型后，组成了服务驱动设计，其完整过程如下图所示：</p>
+<img src="/service-driven-design-and-zenuml/sdd.jpg" class="">
+
+
+
+<p>在《解构领域驱动设计》一书即将出版前，我准备修改<a href="https://gitee.com/agiledon/diamond">针对菱形对称架构提供的一个案例</a>，预备在代码库中增加提交订单的序列图脚本。忽然想起之前与肖鹏交流时，他曾提及ZenUML已经为IntelliJ IDEA开发了插件。果然在Settings -&gt; Plugins中找到了ZenUML的插件：</p>
+<img src="/service-driven-design-and-zenuml/zenuml-plugin.png" class="">
+
+
+
+<p>它的使用方式非常简单，在安装了该插件后，你可以在代码库的任意位置（建议在项目根目录下定义一个文件夹），新建一个扩展名为<code>.zen</code>的文件，然后在文件内根据语法编写序列图脚本，工具就可以自动生成序列图了：</p>
+<img src="/service-driven-design-and-zenuml/zenuml-script-sequence.png" class="">
+
+
+
+<p>在上图右上方的View工具栏上，还可以切换视图类型，从左到右依次为：</p>
+<ul>
+<li>仅显示编辑器：此时只会显示时序图脚本</li>
+<li>显示编辑器和预览：如上图所示，同时显示时序图脚本和预览的时序图效果</li>
+<li>仅显示预览：此时只会显示序列图</li>
+<li>在浏览器中打开</li>
+</ul>
+<p>如果将ZenUML工具运用到服务驱动设计方法中，即可在领域设计建模阶段尝试通过IDE建模，分析需求后，尝试编写序列图脚本，然后对照生成的序列图对脚本进行调整。调整的成本很低，完全可以随时修订。一旦确定了最终的序列图，即可按照测试驱动开发的流程，优先为聚合承担的原子任务和组合任务编写测试用例，通过测试驱动出该业务服务的实现代码。</p>
+<p>ZenUML的功能当然不限于此，在驱动出最终的实现代码后，也可以将真实代码转换为序列图。例如在IntelliJ IDEA中，打开已经实现好的远程服务类<code>OrderController</code>，将光标移到要生成序列图的方法体内，右键弹出快捷菜单，即可看到如下的菜单项：</p>
+<img src="/service-driven-design-and-zenuml/zenuml-menu.png" class="">
+
+
+
+<p>选择该菜单项，就会自动生成序列图脚本与对应的序列图，生成的文件为<code>buffer&#123;n&#125;.zen</code>：</p>
+<img src="/service-driven-design-and-zenuml/zenuml-generated.png" class="">
+
+
+
+<p>如果你不喜欢它默认提供的呈现样式，也可以到Languages &amp; Frameworks中找到ZenUML，添加CSS规则，以改变呈现样式：</p>
+<img src="/service-driven-design-and-zenuml/zenuml-css.jpg" class="">
+
+
+
+<p>ZenUml除了<a href="https://app.zenuml.com/">Web APP</a>之外，还提供了<a href="https://marketplace.atlassian.com/apps/1218380/zenuml-sequence-diagram">Confluence插件</a>，以便于我们编写设计文档。不出意料之外，它也为主流的浏览器提供了扩展，例如，在Microsoft Edge浏览器中可找到ZenUML Sequence扩展，安装后，工具栏会出现它的图标，打开，即可输入序列图脚本生成序列图：</p>
+<img src="/service-driven-design-and-zenuml/zenuml-explorer.png" class="">
+
+
+
+<p>真的是太方便了！ZenUML简直就是为服务驱动设计量身定做的。至于该怎么实践服务驱动设计，在《解构领域驱动设计》书中你可以找到答案。该如何使用ZenUML？那就太简单了，它的脚本语法基本和Java相同，使用也非常简单，无论是通过浏览器还是IDE，实际去使用一下，很快就能理解它的价值。</p>
+<p>如果你的开发流程和开发工具中需要序列图，也可以直接在系统中把ZenUML作为一个前端库进行集成。目前已经有多家企业在自己的构建流程中集成了ZenUML。某国内企业在构建过程中使用ZenUML在文档中嵌入序列图；某国外企业则开发了Python转ZenUML工具，从代码直接生成序列图。ZenUML的文本转序列图的功能以免费的形式发布在<a href="https://www.npmjs.com/package/vue-sequence">npm</a>上面。ZenUML开发者提供（有限的）免费技术支持。</p>
+]]></content>
+      <categories>
+        <category>Tool</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Tool</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>简单工厂不简单</title>
     <url>/simple-factory-is-not-simple/</url>
     <content><![CDATA[<img src="/simple-factory-is-not-simple/cover.jpeg" class="">
@@ -2637,6 +2910,91 @@
         <tag>DDD</tag>
         <tag>Design</tag>
         <tag>Micro Service</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决Flink流式任务的性能瓶颈</title>
+    <url>/solution-to-performance-bottleneck/</url>
+    <content><![CDATA[<p>都说“过早进行性能优化是万恶之源”，我宁肯相信这是为了“矫枉过正”而出此惊人之语，更何况，现在的IT时代已与Donald Knuth的时代已有很大差异了。重点还是在于<strong>“过早”</strong>这个词，之所以Knuth告诫我们不要过早进行性能优化，原因在于：</p>
+<ul>
+<li>判断性能是否存在问题，不能太早</li>
+<li>太早做性能优化，有可能并没有弄清楚性能瓶颈在哪里</li>
+</ul>
+<img src="/solution-to-performance-bottleneck/knuth.JPG" class="">
+
+<p>图为Donald Knuth在斯坦福大学计算机科学William Gates大楼的办公室</p>
+<p>最近，我的团队成员正在着力于提高实时流处理任务的性能。由于客户为我们的测试环境仅提供了极度可怜的集群资源，我们需要在“螺蛳壳里做道场”，死扣性能，尽可能在方案与实现上将性能提升到极致。（顺带说，在测试时，不要奢侈地提供大量资源，反倒有可能尽早发现性能问题，从而让团队想办法解决之。）</p>
+<span id="more"></span>
+
+
+
+<p>一开始，我们想到的方案是增加Flink Streaming Job每个算子或算子链的并行度。Flink支持多个级别设置并行度，包括：</p>
+<ul>
+<li><p>环境级别：对Execution Environment进行<code>parallelism</code>的设置</p>
+</li>
+<li><p>客户端级别：客户端提交Job时通过命令参数-p进行设置</p>
+</li>
+<li><p>算子级别：调用每个算子的<code>setParallelism()</code>方法设置算子的并行度，在为算子设置并行度时，需要考虑它对算子链的影响。如果相邻算子的并行度不一样，两个算子就不能成为算子链。算子链可以减少不必要的线程切换，减少不必要的序列化和反序列化操作，减少延迟提高吞吐能力，因此，如果两个算子相邻，且中间没有数据的shuffle操作，应保证它们的并行度是相同的。</p>
+</li>
+</ul>
+<p>如果没有显式设置并行度，Flink的系统默认并行度为1。不同级别优先级不同，优先级按照高低，顺序依次为：</p>
+<p>算子级别 -&gt; 客户端级别 -&gt; 环境级别 -&gt; 系统默认级别</p>
+<p>Flink的并行度设置并不是说越大，数据处理的效率就越高，而是需要设置合理的并行度。并行度的设置数量取决于Task Manager的数量以及slot数量。通常可以认为Task Manager部署的节点有多少核CPU，就有多少个slot。</p>
+<p>设置了合理的并行度，就能有效地利用Worker节点的资源。但为何在实现之初，没有考虑并行度呢？原因在于引入并行度后，从上游传入的数据就会被Task Manager分配到不同的slot做并行处理，由于不同任务执行时间不同，slot的执行效率也可能不同，就可能无法保证同类数据多条数据的时序性。</p>
+<p>为了保证同类数据的执行时序性，我们引入了Flink的<code>keyBy</code>算子。它能够将相同key的元素散列到一个子任务中，且没有改变原来的元素数据结构。<code>keyBy</code>使用的key应使用数据的主键，即ID，如此就能保证拥有相同ID值的同类数据一定执行在同一个子任务中，进行同步处理，这就保证了数据处理的时序性。时序性与并行度带来的高性能，就能鱼与熊掌兼得了。</p>
+<p>即便如此，我们提升的性能依旧有限，毕竟受到资源的限制，我们不能盲目增大并行度。由于单条消息数据的处理逻辑非常复杂，它的处理能力已经达到我们能够优化的极限。最后，评估任务的处理能力，仅能做到每秒处理6条左右的数据，这一结果自然不能接受。一种立竿见影的手段是增加更多的资源，但我们还是想在没有更多资源支持下，看看能否竭尽所能提升性能。——这时，我们才想到去探索<strong>性能瓶颈</strong>到底在哪里？</p>
+<p>我们开始监控实时流任务的执行，通过日志记录执行时间，在单条数据处理能力已经无法优化的情况下，发现真正的性能瓶颈不在于Flink自身，而是任务末端将处理后的数据写入到ElasticSearch这一阶段。</p>
+<p>在执行流式处理过程中，上游一旦采集到数据，就会及时逐条处理，这也是流式处理的实时特征。根据我们的业务特征，平台在接收到上游采集的流式数据后，经过验证、清洗、转换与业务处理，会按照主题治理的要求，将处理后的数据写入到ElasticSearch。然而，这并非流任务处理的终点。数据在写入到ElasticSearch后，平台需要触发一个事件，应下游系统的要求，将上游传递的消息转换为出口消息。由于上游传递的消息不一定包含了出口消息的所有数据，在转换消息时，平台还需要查询ElasticSearch，获得包括最近更新的数据，作为组成出口消息的数据内容。</p>
+<p>这里仍然存在时序性问题！在组成出口消息时需要查询ElasticSearch，这就要求最新的数据已经写入成功并能被检索到。由于ElasticSearch要支持全文本检索，写入数据时需要为其建立索引，也就是Lucene中的Segments，使得每次写操作的延迟相对于读操作而言要高一些。为了提升写入性能，ElasticSearch引入了in-memory buffer（内存缓冲区），提供了refresh（刷新）的三种方式：</p>
+<ul>
+<li><p>即刻刷新</p>
+</li>
+<li><p>指定周期刷新，默认周期为1s，它也是ElasticSearch的默认值</p>
+</li>
+<li><p>当内存缓冲区满时刷新</p>
+</li>
+</ul>
+<p>只有即刻刷新，才能在一条数据写入到 Elasticsearch 后，能被马上搜索到。当上游采集的数据量非常多，且采用流式方式传入时，下游ElasticSearch的逐条写入与即刻刷新机制就成为了性能瓶颈。如果采用后两种刷新机制，又会导致索引未建立，无法即时搜索到最新数据，就会导致数据不一致。换言之，在我们的场景中，选择“即刻刷新”是必然的！要解决写入瓶颈的问题，最佳做法是放弃逐条写入，改为ElasticSearch支持的批量写入，如此即可减少不必要的连接，也能减少IO的次数。</p>
+<p>虽说上游传递的流式数据需要实时进行处理，却并未要求它必须实时写入ElasticSearch，也未要求它必须实时推送给下游系统。当然，也不能延迟太长的时间。</p>
+<p>为了权衡写入性能和数据正确性以及一致性，可以<strong>将实时写入改造为微批量的写入</strong>，如此，既能通过批量写入提升ElasticSearch的写入性能，又能保证数据必须成功写入到ElasticSearch后再推送消息，确保数据正确性与一致性。</p>
+<p>团队成员想到了引入Flink的窗口，具体说来，是使用Flink时间窗口中的会话窗口与滚动窗口。</p>
+<p>会话窗口的作用是在指定窗口周期内将相同key值的数据汇聚起来，我们为不同的key分配对应的会话窗口，而窗口好似一个桶，每个桶各自装各自key值的数据：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.keyBy(<span class="keyword">new</span> KeyById())</span><br><span class="line">.window(ProcessingTimeSessionWindows.withGap(Time.seconds(<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>如此这般，就能将1秒内相同key值的数据放到相同的会话窗口中，然后，通过<code>reduce()</code>算子对同一会话窗口中的数据进行合并，形成状态：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.reduce(<span class="keyword">new</span> MergeWighSameId())</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这一方式虽然实现了相同key数据的合并，但由于窗口的数量太过分散，导致数据汇聚的作用并不明显，没有达到批量写入提升性能的目的。</p>
+<p>既然已经合并了相同key的数据，我们就可以减少窗口的数量，从而让不同key值的数据也能够汇聚到同一个窗口，形成数据的集合，交由下游进行批量写入。此时，选择的窗口为滚动窗口。</p>
+<p>虽说窗口数量需要减少，但为了更好地利用资源，最好保证窗口的数量等于并行度。通过<code>env.getParallelism()</code>方法可以获得当前环境的并行度，在对数据的ID（它是数据的key）进行哈希值计算后，将并行度作为因子进行取模，就能将窗口数量压缩，天然实现数据的汇聚：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 再执行了reduce后</span></span><br><span class="line">.keyBy(<span class="keyword">new</span> KeyById(env.getParallelism()))</span><br><span class="line">.window(TumblingProcessingTimeWindows.of(Time.second(<span class="number">1</span>)))</span><br><span class="line">.reduce(<span class="keyword">new</span> CellectEntities())</span><br><span class="line">...<span class="comment">// 汇聚后写入到ElasticSearch</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>对比改进前后的流式任务，下图是执行未加窗口的流式任务结果：</p>
+<img src="/solution-to-performance-bottleneck/before.png" class="">
+
+
+
+<p>下图是执行加窗口后的流式任务结果：</p>
+<img src="/solution-to-performance-bottleneck/after.png" class="">
+
+
+
+<p>相同环境下，前者处理流式数据的频率大概为6条/秒左右，后者则达到了20条/秒左右，整体性能提升了3倍多，实现了不通过横向添加资源就完成了流式任务的性能优化，归根结底，在于我们发现了性能瓶颈，然后再对症下药，方可取得疗效。</p>
+<p><strong>说明：</strong>本文的技术方案与部分内容来自我的团队成员郑雄杰同学。</p>
+]]></content>
+      <categories>
+        <category>Architecture</category>
+      </categories>
+      <tags>
+        <tag>Flink</tag>
+        <tag>BigData</tag>
+        <tag>ElasticSearch</tag>
       </tags>
   </entry>
   <entry>
@@ -2900,66 +3258,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GitChat独家采访：聊聊领域驱动设计</title>
-    <url>/talking-with-gitchat-about-ddd/</url>
-    <content><![CDATA[<img src="/talking-with-gitchat-about-ddd/ddd-tactic.jpeg" class="">
-
-<p>相信很多朋友对领域驱动设计会有这样或那样的困惑，比如领域驱动设计是什么？它在工作中有什么作用？为什么国内关于这方面的书籍少之又少？……为了解决这些困惑，有幸邀请到专家张逸老师来聊聊领域驱动设计，下面是GitChat独家采访记录。</p>
-<span id="more"></span>
-
-<p>GitChat：在探讨领域驱动设计问题时，每个人都有每个人的认识，有的时候可能谁也无法说服对方，这时候该怎么办呢？</p>
-<p>张逸：简单说，就是show me your code。不管领域设计做得怎么样，最终都是要落地的，看实现的效果最有说服力。当然，为了保证交流的顺畅与效率，代码这种形式可能容易让人迷失到纷繁复杂的细节中去，因此还有一种方式就是show me your model。</p>
-<p>这里说的model就是领域模型。注意，团队在交流领域驱动设计问题时，不应该只是对建模活动的产出物进行讨论，建模的过程同样非常重要。现在诸如Event Storming等活动都非常强调利用可视化手段把业务专家与开发团队都包含进来，大家一块协作一块交流，并利用便利贴等工具直观地展现建模活动中的每一个步骤，可以更容易消除误会与分歧。</p>
-<p>GitChat：可以谈谈领域驱动设计的流程吗？比如是先建模？还是做设计？以及应用的场景是什么？</p>
-<p>张逸：领域驱动设计强调的是将分析、设计与实现统一到一个领域模型中来，同时又相对清晰地划分为战略设计和战术设计两个阶段。当然，这两个阶段并非瀑布式的，而是迭代和演进的过程。</p>
-<p>我认同领域模型对分析、设计与实现的统一，这个思想没有问题。但在我亲身经历的项目中，我还是发现由于沟通角色与建模目标的不同，分析、设计与实现在三个不同的活动是无法完全统一的，就好像在重构时不能实现新功能，这三顶帽子自然也不能同时戴起来。因此，我在《领域驱动战术设计实践》GitChat课程中，清晰地将这三个活动称之为领域分析建模、领域设计建模与领域实现建模，它们各自的产出是领域分析模型、领域设计模型与领域实现模型，这三者合起来就是领域模型，而这个过程就是领域模型驱动设计。</p>
-<p>之所以在模型驱动设计前面加上“领域”作为定语，是因为我认为二者不能划等号，例如采用数据模型的，同样是模型驱动设计。在《领域驱动战术设计实践》GitChat课程中，我根据建模视角的不同，将其分别定义为数据模型驱动设计、服务模型驱动设计、领域模型驱动设计，并用了相当篇幅的内容分别介绍了这三种不同的模型驱动设计过程。</p>
-<p>GitChat：针对一些设计能力不足的开发团队，可以采用领域驱动设计来改进设计和编码质量吗？</p>
-<p>张逸：我个人的观点，这二者之间有关系，但并非必要关系。领域驱动设计的关键不是设计能力，而是要抓住设计的驱动力，必须是领域，且必须要求领域专家参与到分析建模活动中来。</p>
-<p>要说明的是，这个所谓“领域专家”不是一个头衔，也不是对技能级别的要求，它其实就是一个指代，代表“懂业务”的人：可以是客户，可以是Product Owner，可以是业务分析师，可以是产品经理，也可以是懂业务的开发人员，甚至可以是一个负责业务分析的团队。</p>
-<p>领域驱动设计能否成功，还是要看建模尤其是分析建模做得是否足够好，这其实是整个设计过程的上游。至于设计能力，则要看领域驱动设计与什么样的编程范式结合？常见的编程范式包括结构范式、对象范式和函数范式。所以这里的“设计能力不足”，究竟指的是哪方面的设计能力不足呢？</p>
-<p>当然，从主流的领域驱动设计来看，主要采用的还是对象范式的设计思想与领域驱动设计结合，这就要求团队掌握基本的面向对象设计能力。这方面能力不足的团队，确实会影响到最终的设计和编码质量。这是必须要正视的问题，因此我建议那些希望实践领域驱动设计的团队，不要忘了去提高团队的面向对象设计能力。</p>
-<p>提升设计能力并非一朝一夕就可以做到。正是考虑到面向对象设计能力不足对领域驱动设计的影响，我在《领域驱动战术设计实践》GitChat课程中尝试总结了一个<strong>相对固化</strong>的设计过程。这个过程结合了DCI、职责驱动设计等设计方法，它不要求团队掌握太多面向对象设计思想、原则与模式，只要懂业务，完全可以以“知其然而不知其所以然”的方式去实践领域驱动设计。</p>
-<p>这种方法不能让你的设计变得非常优秀，却可以保证你的设计不至于太糟糕，甚至可以说是不错的设计。</p>
-<p>GitChat：应用服务与领域服务的区别是什么呢？</p>
-<p>张逸：这个是老生常谈的问题了。从分层架构的角度看，应用服务属于应用层，领域服务属于领域层。应用层是一个包装的外观，按照该层的职责来说，应用服务根本就不该干业务的活儿，它只是一个对外公开的接口而已。</p>
-<p>从业务粒度看，应用服务的每个公开方法会对应一个具有业务价值的业务场景或者说用例。领域服务则不然，它实现了业务功能，这个业务功能或者是无状态的，又或者是因为需要协调多个聚合，又或者需要和外部资源协作。</p>
-<p>在针对业务场景驱动设计时，应用服务的一个方法往往会暴露给调用者，然后它再将该请求委派给领域层的对象。一般要求领域服务的粒度要小，这样可以避免设计为事务脚本的过程方式，也可以在一定程度上避免贫血模型。</p>
-<p>总结：</p>
-<ul>
-<li>应用服务：一组面向业务场景的业务外观方法，只是一个对外提供接口、对内分配职责的协作对象，属于应用层。</li>
-<li>领域服务：一个领域服务对应最多一个业务场景，往往需要和聚合、Repository、甚至领域服务一起协作。</li>
-</ul>
-<p>GitChat：已经上线的《领域驱动战略设计实践》与刚上线的《领域驱动战术设计实践》之间的区别是？有学习的先后顺序吗？</p>
-<p>张逸：这两个课程刚好对应领域驱动设计的战略设计与战术设计。</p>
-<p>前者强调系统层面的架构模式，包括限界上下文、上下文映射、分层架构等，可以运用这些模式对整个系统的领域进行“分而治之”，从而降低业务复杂度，同时围绕“领域”为核心，建立业务复杂度与技术复杂度的边界。</p>
-<p>后者强调领域层面的设计模式，以“模型驱动设计”为主线，贯穿分析、设计与编码实现这三个不同的建模活动，并引入领域驱动设计的战术设计要素，如实体、值对象、领域服务、领域事件、聚合、资源库、工厂等。</p>
-<p>当然在我的《领域驱动战术设计实践》课程中，我扩大了领域驱动战术设计的范畴，讲解了数据模型驱动与服务模型驱动，探讨了建模范式与编程范式之间的关系。同时，在设计过程中，我引入了职责驱动设计和DCI模式来阐释实体、值对象、领域服务与应用服务之间的协作关系。在编码实现过程中，我又引入了测试驱动开发来推进从设计模型到实现模型。</p>
-<p>战略设计和战术设计并非单向的过程，而是一个迭代演进与不断融合的过程。整体来讲，前者更偏向于架构设计，后者更偏向于详细设计与编码。主要还是看读者的关注点与侧重点，并没有一个绝对的学习先后顺序。我个人还是建议先学习《领域驱动战略设计实践》，虽然它更偏向于理论，难度更高一些，但是它毕竟概括了领域驱动设计的全貌。</p>
-<p>GitChat：<strong>战略</strong>这个课程分析了“EAS 系统”，在<strong>战术</strong>课程也介绍了“EAS 系统”，两者的侧重点有什么不同吗？</p>
-<p>张逸：与战略设计和战术设计的侧重点一样，在战术课程中，会针对EAS系统进行领域建模，并最终对其进行编码实现。从内容来看，后者会更接地气一些，毕竟讲的是落地的实现。</p>
-<p>将战略和战术的EAS系统案例结合起来，就是一个系统的完整设计案例了。</p>
-<hr>
-<p>购买我在GitChat上发布的《领域驱动战略设计实践》+《领域驱动战术设计实践》套餐，请扫描下图的二维码：</p>
-<img src="/talking-with-gitchat-about-ddd/ddd-all.jpeg" class="">
-
-<p>购买我在GitChat上发布的《领域驱动战略设计实践》课程，请扫描下图的二维码：</p>
-<img src="/talking-with-gitchat-about-ddd/ddd-strategy.jpeg" class="">
-
-<p>购买我在GitChat上发布的《领域驱动战术设计实践》课程，请扫描下图的二维码：</p>
-<img src="/talking-with-gitchat-about-ddd/ddd-tactic-small.jpeg" class="">
-
-
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Design</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>大数据流处理平台的技术选型参考</title>
     <url>/technical-choice-of-streaming-platform/</url>
     <content><![CDATA[<p>选择太多，是一件好事情，不过也容易乱花渐欲迷人眼。倘若每个平台（技术）都去动手操练一下，似乎又太耗时间。通过阅读一些文档，可以帮我们快速做一次筛选。在将选择范围进一步缩小后，接下来就可以结合自己的应用场景去深入Spike，做深度的甄别，这是我做技术选型的一个方法。</p>
@@ -3107,6 +3405,66 @@
       </tags>
   </entry>
   <entry>
+    <title>GitChat独家采访：聊聊领域驱动设计</title>
+    <url>/talking-with-gitchat-about-ddd/</url>
+    <content><![CDATA[<img src="/talking-with-gitchat-about-ddd/ddd-tactic.jpeg" class="">
+
+<p>相信很多朋友对领域驱动设计会有这样或那样的困惑，比如领域驱动设计是什么？它在工作中有什么作用？为什么国内关于这方面的书籍少之又少？……为了解决这些困惑，有幸邀请到专家张逸老师来聊聊领域驱动设计，下面是GitChat独家采访记录。</p>
+<span id="more"></span>
+
+<p>GitChat：在探讨领域驱动设计问题时，每个人都有每个人的认识，有的时候可能谁也无法说服对方，这时候该怎么办呢？</p>
+<p>张逸：简单说，就是show me your code。不管领域设计做得怎么样，最终都是要落地的，看实现的效果最有说服力。当然，为了保证交流的顺畅与效率，代码这种形式可能容易让人迷失到纷繁复杂的细节中去，因此还有一种方式就是show me your model。</p>
+<p>这里说的model就是领域模型。注意，团队在交流领域驱动设计问题时，不应该只是对建模活动的产出物进行讨论，建模的过程同样非常重要。现在诸如Event Storming等活动都非常强调利用可视化手段把业务专家与开发团队都包含进来，大家一块协作一块交流，并利用便利贴等工具直观地展现建模活动中的每一个步骤，可以更容易消除误会与分歧。</p>
+<p>GitChat：可以谈谈领域驱动设计的流程吗？比如是先建模？还是做设计？以及应用的场景是什么？</p>
+<p>张逸：领域驱动设计强调的是将分析、设计与实现统一到一个领域模型中来，同时又相对清晰地划分为战略设计和战术设计两个阶段。当然，这两个阶段并非瀑布式的，而是迭代和演进的过程。</p>
+<p>我认同领域模型对分析、设计与实现的统一，这个思想没有问题。但在我亲身经历的项目中，我还是发现由于沟通角色与建模目标的不同，分析、设计与实现在三个不同的活动是无法完全统一的，就好像在重构时不能实现新功能，这三顶帽子自然也不能同时戴起来。因此，我在《领域驱动战术设计实践》GitChat课程中，清晰地将这三个活动称之为领域分析建模、领域设计建模与领域实现建模，它们各自的产出是领域分析模型、领域设计模型与领域实现模型，这三者合起来就是领域模型，而这个过程就是领域模型驱动设计。</p>
+<p>之所以在模型驱动设计前面加上“领域”作为定语，是因为我认为二者不能划等号，例如采用数据模型的，同样是模型驱动设计。在《领域驱动战术设计实践》GitChat课程中，我根据建模视角的不同，将其分别定义为数据模型驱动设计、服务模型驱动设计、领域模型驱动设计，并用了相当篇幅的内容分别介绍了这三种不同的模型驱动设计过程。</p>
+<p>GitChat：针对一些设计能力不足的开发团队，可以采用领域驱动设计来改进设计和编码质量吗？</p>
+<p>张逸：我个人的观点，这二者之间有关系，但并非必要关系。领域驱动设计的关键不是设计能力，而是要抓住设计的驱动力，必须是领域，且必须要求领域专家参与到分析建模活动中来。</p>
+<p>要说明的是，这个所谓“领域专家”不是一个头衔，也不是对技能级别的要求，它其实就是一个指代，代表“懂业务”的人：可以是客户，可以是Product Owner，可以是业务分析师，可以是产品经理，也可以是懂业务的开发人员，甚至可以是一个负责业务分析的团队。</p>
+<p>领域驱动设计能否成功，还是要看建模尤其是分析建模做得是否足够好，这其实是整个设计过程的上游。至于设计能力，则要看领域驱动设计与什么样的编程范式结合？常见的编程范式包括结构范式、对象范式和函数范式。所以这里的“设计能力不足”，究竟指的是哪方面的设计能力不足呢？</p>
+<p>当然，从主流的领域驱动设计来看，主要采用的还是对象范式的设计思想与领域驱动设计结合，这就要求团队掌握基本的面向对象设计能力。这方面能力不足的团队，确实会影响到最终的设计和编码质量。这是必须要正视的问题，因此我建议那些希望实践领域驱动设计的团队，不要忘了去提高团队的面向对象设计能力。</p>
+<p>提升设计能力并非一朝一夕就可以做到。正是考虑到面向对象设计能力不足对领域驱动设计的影响，我在《领域驱动战术设计实践》GitChat课程中尝试总结了一个<strong>相对固化</strong>的设计过程。这个过程结合了DCI、职责驱动设计等设计方法，它不要求团队掌握太多面向对象设计思想、原则与模式，只要懂业务，完全可以以“知其然而不知其所以然”的方式去实践领域驱动设计。</p>
+<p>这种方法不能让你的设计变得非常优秀，却可以保证你的设计不至于太糟糕，甚至可以说是不错的设计。</p>
+<p>GitChat：应用服务与领域服务的区别是什么呢？</p>
+<p>张逸：这个是老生常谈的问题了。从分层架构的角度看，应用服务属于应用层，领域服务属于领域层。应用层是一个包装的外观，按照该层的职责来说，应用服务根本就不该干业务的活儿，它只是一个对外公开的接口而已。</p>
+<p>从业务粒度看，应用服务的每个公开方法会对应一个具有业务价值的业务场景或者说用例。领域服务则不然，它实现了业务功能，这个业务功能或者是无状态的，又或者是因为需要协调多个聚合，又或者需要和外部资源协作。</p>
+<p>在针对业务场景驱动设计时，应用服务的一个方法往往会暴露给调用者，然后它再将该请求委派给领域层的对象。一般要求领域服务的粒度要小，这样可以避免设计为事务脚本的过程方式，也可以在一定程度上避免贫血模型。</p>
+<p>总结：</p>
+<ul>
+<li>应用服务：一组面向业务场景的业务外观方法，只是一个对外提供接口、对内分配职责的协作对象，属于应用层。</li>
+<li>领域服务：一个领域服务对应最多一个业务场景，往往需要和聚合、Repository、甚至领域服务一起协作。</li>
+</ul>
+<p>GitChat：已经上线的《领域驱动战略设计实践》与刚上线的《领域驱动战术设计实践》之间的区别是？有学习的先后顺序吗？</p>
+<p>张逸：这两个课程刚好对应领域驱动设计的战略设计与战术设计。</p>
+<p>前者强调系统层面的架构模式，包括限界上下文、上下文映射、分层架构等，可以运用这些模式对整个系统的领域进行“分而治之”，从而降低业务复杂度，同时围绕“领域”为核心，建立业务复杂度与技术复杂度的边界。</p>
+<p>后者强调领域层面的设计模式，以“模型驱动设计”为主线，贯穿分析、设计与编码实现这三个不同的建模活动，并引入领域驱动设计的战术设计要素，如实体、值对象、领域服务、领域事件、聚合、资源库、工厂等。</p>
+<p>当然在我的《领域驱动战术设计实践》课程中，我扩大了领域驱动战术设计的范畴，讲解了数据模型驱动与服务模型驱动，探讨了建模范式与编程范式之间的关系。同时，在设计过程中，我引入了职责驱动设计和DCI模式来阐释实体、值对象、领域服务与应用服务之间的协作关系。在编码实现过程中，我又引入了测试驱动开发来推进从设计模型到实现模型。</p>
+<p>战略设计和战术设计并非单向的过程，而是一个迭代演进与不断融合的过程。整体来讲，前者更偏向于架构设计，后者更偏向于详细设计与编码。主要还是看读者的关注点与侧重点，并没有一个绝对的学习先后顺序。我个人还是建议先学习《领域驱动战略设计实践》，虽然它更偏向于理论，难度更高一些，但是它毕竟概括了领域驱动设计的全貌。</p>
+<p>GitChat：<strong>战略</strong>这个课程分析了“EAS 系统”，在<strong>战术</strong>课程也介绍了“EAS 系统”，两者的侧重点有什么不同吗？</p>
+<p>张逸：与战略设计和战术设计的侧重点一样，在战术课程中，会针对EAS系统进行领域建模，并最终对其进行编码实现。从内容来看，后者会更接地气一些，毕竟讲的是落地的实现。</p>
+<p>将战略和战术的EAS系统案例结合起来，就是一个系统的完整设计案例了。</p>
+<hr>
+<p>购买我在GitChat上发布的《领域驱动战略设计实践》+《领域驱动战术设计实践》套餐，请扫描下图的二维码：</p>
+<img src="/talking-with-gitchat-about-ddd/ddd-all.jpeg" class="">
+
+<p>购买我在GitChat上发布的《领域驱动战略设计实践》课程，请扫描下图的二维码：</p>
+<img src="/talking-with-gitchat-about-ddd/ddd-strategy.jpeg" class="">
+
+<p>购买我在GitChat上发布的《领域驱动战术设计实践》课程，请扫描下图的二维码：</p>
+<img src="/talking-with-gitchat-about-ddd/ddd-tactic-small.jpeg" class="">
+
+
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Design</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>主题数据区的设计</title>
     <url>/the-design-of-topic-data/</url>
     <content><![CDATA[<p>关于主题数据区的设计，首先需要明确的是按照什么对数据进行归类。大的原则，当然还是按照业务来分类，但是分类的出发点不同，划分的类别也不相同。例如针对机场数据，可以从业务特征分类，那么可以分为运行保障、旅客服务、航班资源等；如果按照功能区分类，则可以分为空侧、陆侧、航站楼侧等。</p>
@@ -3149,6 +3507,61 @@
       <tags>
         <tag>Big Data</tag>
         <tag>Data Warehouse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>领域驱动建模与面向对象建模的差异</title>
+    <url>/the-difference-between-ddd-and-oo/</url>
+    <content><![CDATA[<p>即便采用面向对象建模范式，领域驱动设计的建模仍与面向对象建模存在较大差异，原因在于领域驱动设计引入了<strong>限界上下文（Bounded Context）</strong>与<strong>聚合（Aggregate）</strong>，使得建模的风景变得迥然不同。二者为领域模型引入了边界的约束，使得建模者不能随心所欲地建模，亦改变了模型的面貌。</p>
+<p>在我的《解构领域驱动设计》一书中，提炼了领域驱动设计之精髓，在于对边界的控制。其中，限界上下文与聚合是解空间边界控制中最为重要的两个要素。我们构建的领域模型必然位于限界上下文中，构成领域模型中的主力军——实体和值对象——又必然位于聚合的边界内：</p>
+<span id="more"></span>
+
+<img src="/the-difference-between-ddd-and-oo/boundary.png" class="">
+
+
+
+<p>虽然限界上下文只是逻辑边界，但它的<strong>自治</strong>特性需要保证其内部领域模型的独立性，建模时，必须避免出现跨限界上下文之间领域模型的直接引用。至于聚合之间的协作，社区的大多数声音认为：聚合之间需通过根实体的ID建立协作关系。</p>
+<p>限界上下文与聚合边界的约束，使得我们需要重新正视领域模型类之间的关系，在面向对象世界中，设计者耳熟能详的继承、组合、依赖关系，可能需要做出改变。</p>
+<p>以教育领域之用户模型为例。学生、教师、家长是3种不同类型的用户，各自业务不同，又有一些共用业务，如：修改密码。从面向对象的角度思考模型的建立，自然会想到通过为它们建立继承关系，将用户定义为基类，封装共同的领域逻辑满足复用的要求。由此形成如下的领域模型：</p>
+<img src="/the-difference-between-ddd-and-oo/OO-user.png" class="">
+
+
+
+<p>我将限界上下文视为<strong>领域模型的知识语境</strong>，通过它形成领域知识的逻辑边界。对相同的一个领域概念因为观察视角的不同，需要关注的领域知识（属性与行为）各有不同。犹如盲人摸象，在此，并非讽刺盲人只见大象之局部而错以为是整头大象，相反，代表了一种正面的含义，即从当前上下文观之，虽然明知此乃大象之局部，我仍然认为它就是大象之整体。</p>
+<img src="/the-difference-between-ddd-and-oo/elephant.png" class="">    
+
+
+
+<p>无论现实世界还是软件世界，谁又能穷尽任意一个领域概念的全部呢？就以“人”这一领域概念而言，在居民身份管理系统中，关注公民这一身份，除了姓名、性别、出生年月等基本信息之外，需关注籍贯、户籍所在地、照片等与公民身份有关的重要属性；在员工管理系统中，关注的内容又变成角色、职位以及教育背景、工作经验等与员工能力息息相关的属性。如果将一个“人”的所有属性加在一起，可以认为是一头完整的“大象”的话，居民身份管理系统与员工管理系统看到的“人”，何尝不像是盲人看到的大象局部呢？而在各自的上下文中，公民与员工就是当前需要关注的全部了。</p>
+<p>系统如此，限界上下文亦如此，只是边界更小罢了。因而在教育领域的身份上下文，用户的全部就是诸如姓名、账号、密码以及身份认证等领域知识；切换到学籍上下文，知识语境发生了变化，用户变为了学生，关注的领域知识不再是对身份的认证，而是对学生信息如学籍号的管理，此时的家长，作为学生附带属性的一部分，表达了学生的家庭关系，抽象其概念，可以表示为“家庭成员”；再切换到教务上下文，则需要建立以教师、课程、年级、班级为核心的领域模型，此时的学生概念，变成了教学活动的参与者，建立了班级与学生之间的关系，需要明确学生的“学号”而非“学籍号”，抽象其概念，实则代表了“班级成员”。</p>
+<p>在各自知识语境的界定下，如果仍然要保持学生、家长、教师与用户之间的继承关系，就显得“不合时宜”了。本质上，它们是同一个概念在不同语境下的局部知识，在切换上下文时，每个建模者看到的局部概念，都应视为一个整体，如果让学籍管理上下文的学生继承自身份管理上下文的用户，就好似让一头“局部的大象”去继承另外一头“局部的大象”，真是匪夷所思了！正确的领域模型应该如下图所示：</p>
+<img src="/the-difference-between-ddd-and-oo/model-in-bc.png" class="">
+
+
+
+<p>因此，在领域驱动设计的领域建模中，需要建立<strong>上下文为王</strong>的意识。形成的一个个自治的限界上下文，就是领域模型的“独立王国”，除了需要调用必须的对外公开的业务能力之外，它们几乎是”老死不相往来“的。在跨限界上下文的领域模型之间，即便是相对弱耦合的依赖关系也当避免，更不用说继承、合成与聚合关系了。除非，我们将某个限界上下文设计为“共享内核（shared kernel）”。</p>
+<p>在领域驱动设计获得的设计模型中，一个聚合作为边界封装了实体和值对象。我们可以将聚合“伪装”为一个完整的类（其实质是领域模型的边界），与之对应的设计要素还包括管理聚合生命周期的资源库（repository）和负责协作外部资源或多聚合的领域服务（domain service）。多数情况下，一个聚合、一个资源库和一个领域服务可能都需要定义，它们的关系如下图所示：</p>
+<img src="/the-difference-between-ddd-and-oo/service-repo-agg.png" class="">
+
+
+
+<p>资源库和领域服务在操作聚合时，是将<strong>聚合当作一个完整的整体概念来看待</strong>的。领域驱动设计尤其重视聚合对领域模型的边界控制。在设计领域模型时，需要清晰定义出聚合的边界，然后再由此推导出资源库和领域服务。在学籍管理上下文中，我将家长放到了以学生为根实体的聚合中，如下图所示：</p>
+<img src="/the-difference-between-ddd-and-oo/student.png" class="">
+
+
+
+<p>一方面，家长信息如家庭住址一般都是学生的属性，另一方面，需要约束学生与家长关系的<strong>不变量（Invariant）</strong>，例如，在为学生添加家长信息时，总不能出现两个父亲吧？——谁愿意呢！</p>
+<p>由此可知，当限界上下文作为领域模型的边界时，一方面它限制了跨限界上下文之间领域模型的关系，另一方面它作为知识语境，分离了同一个领域概念的不同视角。我将限界上下文称为<strong>战略设计的基本架构单元</strong>。</p>
+<p>聚合作为领域模型的边界，维护的是当前上下文领域概念的完整性，并将其作为一个不可分割的整体，由资源库管理其生命周期。它平衡了领域对象粒度与数量的矛盾，既可以确保每个领域概念的细粒度，又可通过聚合根的封装在形式上减少领域对象的数量。通过聚合边界的控制，减少了领域对象之间不必要的依赖，并通过约束聚合之间的关系来降低耦合。我将聚合称为<strong>战术设计的基本设计单元</strong>。</p>
+<p>对象建模范式的领域建模确乎是建立在面向对象思想之上的，但领域驱动设计考虑了软件世界与理想的对象世界之差异，不只是考虑领域模型的关系与协作，还考虑领域模型与外部资源的关系，这就需要施加恰当的约束，进一步保证领域模型的质量。这是我们在进行领域建模时务必谨记的要点。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Design</tag>
+        <tag>OO</tag>
       </tags>
   </entry>
   <entry>
@@ -3666,6 +4079,170 @@
       <tags>
         <tag>DDD</tag>
         <tag>Design</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《解构领域驱动设计》第一章</title>
+    <url>/chapter-1-of-ddde/</url>
+    <content><![CDATA[<p>计算机编程的本质就是控制复杂度。</p>
+<p>——Brian Kernighan</p>
+<p>复杂的事物中蕴含着无穷的变化，让人既沉迷其美，又深恐自己无法掌控。我们每日每时对软件的构建就在与复杂的斗争中不断前行。软件系统的复杂度让我觉得设计有趣，因为每次发现不同的问题，都会有一种让人耳目一新的滋味油然而生，仿佛开启了新的旅程，看到了不同的风景。同时，软件系统的复杂度又让我觉得设计无趣，因为要探索的空间实在太辽阔，一旦视野被风景所惑，就会迷失前进的方向，感到复杂难以掌控，从而失去构建高质量系统的信心。</p>
+<p>那么，什么是复杂系统？</p>
+<span id="more"></span>
+
+
+
+<h2 id="1-1-什么是复杂系统"><a href="#1-1-什么是复杂系统" class="headerlink" title="1.1　什么是复杂系统"></a>1.1　什么是复杂系统</h2><p>我们很难给复杂系统下一个举世公认的定义。专门从事复杂系统研究的Melanie Mitchell在接受Ubiquity杂志专访时，“勉为其难”地为复杂系统给出了一个相对通俗的定义：”由大量相互作用的部分组成的系统。与整个系统比起来，这些组成部分相对简单，没有中央控制，组成部分之间也没有全局性的通信，并且组成部分的相互作用导致了复杂行为。”</p>
+<p>这个定义庶几可以表达软件复杂度的特征。定义中的“组成部分”对于软件系统，就是所谓的“软件元素”，基于粒度的不同可以是函数、类、模块、组件和服务等。这些软件元素相对简单，然而彼此之间的相互作用却导致了软件系统的复杂行为。软件系统符合复杂系统的定义，不过是进一步证明了软件系统的复杂度。然而该如何控制软件系统的复杂度呢？恐怕还要从复杂度的成因开始剖析。</p>
+<p>Jurgen Appelo从理解能力与预测能力两个维度分析了复杂度的成因。这两个维度各自分为不同的复杂层次：</p>
+<ul>
+<li><p>理解能力维度——简单的（simple）和复杂的（complicated）；</p>
+</li>
+<li><p>预测能力维度——有序的（ordered）、复杂的（complex）和混沌的（chaotic）。</p>
+</li>
+</ul>
+<p>两个维度都蕴含了“复杂”的含义：前者与简单相对，意为复杂至难以理解，可阐释为“复杂难解”；后者与有序相对，意为它的发展规律难以预测，可阐释为“复杂难测”。在预测能力维度，“难测”还不是最复杂的层次，最高层次为混沌，即根本不可预测。两个维度交叉，可以形成6种代表不同复杂意义的层次定义，Jurgen Appelo通过图1-1形象地说明了各个复杂层次的特征。</p>
+<img src="/chapter-1-of-ddde/1-1.png" class="">
+
+<p>图1-1　复杂系统的特征 </p>
+<p>以下是Jurgen Appelo对这些例子给出的说明：</p>
+<blockquote>
+<p> 我的内衣很简单。我很容易理解它们的工作原理。我的手表是精密复杂的，如果把它拆开，我需要很长时间才能了解其设计原理和组件。但是我的手表或我的内衣都没有什么让人吃惊的（至少对我而言）。它们是有序的、可以预测的系统。</p>
+</blockquote>
+<blockquote>
+<p> 一个三人软件开发团队也是简单的，只需要开几次会议，提供一些晚餐，外加几杯啤酒，就可以了解这个团队的每一个人了。一座城市是不简单的、繁杂的，出租车司机需要几年时间才能熟悉这座城市的所有街道、胡同、宾馆和饭店。但同时，团队和城市又都是复杂的。不管你有多了解它们，总会有意想不到的事情发生它们身上。在某种程度上，它们是可预测的，但是你永远不清楚明天会发生什么。</p>
+</blockquote>
+<blockquote>
+<p> 双摆（两个摆锤互相连接）也是一个简单的系统，容易制作也很容易理解。但因为对钟摆的初始设置具有高度敏感性，所以它进行的是不可预测的混沌运动。股票市场也是混沌的，根据定义，它是不可预测的，否则每个人都知道怎么利用股票交易来赚钱，就会导致整个系统崩盘。但是，股票市场又不像钟摆那样，它是相当繁杂的。</p>
+</blockquote>
+<p>软件系统属于哪一个复杂层次呢？</p>
+<p>大多数软件系统需要实现的整体功能往往是难以理解的，同时，随着需求的不断演进，它又在一定程度具有未来的不可预测性，这意味着软件系统的“复杂”同时覆盖了“复杂难解”（complicated）与“复杂难测”（complex）两个层面，对标图1-1给出的案例，就是一座城市的复杂特征。无独有偶，Pete Goodliffe也将软件系统类比为城市，他说：“软件系统就像一座由建筑和后面的路构成的城市——由公路和旅馆构成的错综复杂的网络。在繁忙的城市里发生着许多事情，控制流不断产生，它们的生命在城市中交织在一起，然后死亡。丰富的数据积聚在一起、存储起来，然后销毁。有各式各样的建筑：有的高大美丽，有的低矮实用，还有的坍塌破损。数据围绕着它们流动，形成了交通堵塞和追尾、高峰时段和道路维护。”既然如此，那么设计一个软件系统就像规划一座城市，既要考虑城市布局，以便居民的生活与工作，满足外来游客或商务人员的旅游或出差需求，又要考虑未来因素的变化，例如“当居民对城市的使用方式有所变化，或者受到外力的影响时，城市就会相应地演化”。参考城市的复杂度特征，我们要剖析软件系统的复杂度，就可以从理解能力与预测能力这两个维度探索软件复杂度的成因。</p>
+<h2 id="1-2-理解能力"><a href="#1-2-理解能力" class="headerlink" title="1.2　理解能力"></a>1.2　理解能力</h2><p>是什么阻碍了开发人员对软件系统的理解？设想项目组招入一位新人，当这位新人需要理解整个项目时，就像一位游客来到一座陌生的城市。他是否会迷失在错综复杂的城市交通体系中，不辨方向？倘若这座城市实则是乡野郊外的一座村落，只有房屋数间，一条街道连通城市的两头，他还会生出迷失之感吗？</p>
+<p>因而，影响理解能力的第一要素是规模。</p>
+<h3 id="1-2-1-规模"><a href="#1-2-1-规模" class="headerlink" title="1.2.1　规模"></a>1.2.1　规模</h3><p>软件的需求决定了系统的规模。一个只有数十万行代码的软件系统自然不可与有数千万行代码的大规模系统相提并论。软件系统的规模取决于需求的数量，更何况需求还会像树木那样生长。一棵小树会随着时间增长渐渐长成一棵参天大树，只有到了某个时间节点，需求的数量才会慢慢稳定下来。当需求呈现线性增长的趋势时，为了实现这些功能，软件规模也会以近似的速度增长。</p>
+<p>系统规模的扩张，不仅取决需求的数量，还取决于需求功能点之间的关系。需求的每个功能不可能做到完全独立，彼此之间相互影响相互依赖，修改一处就会牵一发而动全身，就好似城市中的某条道路因为施工需要临时关闭，车辆只得改道绕行，这又导致了其他原本已经饱和的道路因为涌入更多车辆而变得更加拥堵。这种拥堵现象又会顺势向其他分叉道路蔓延，形成辐射效应。</p>
+<p>软件开发的拥堵现象或许更严重，这是因为：</p>
+<ul>
+<li><p>函数存在副作用，调用时可能对函数的结果做了隐含的假设；</p>
+</li>
+<li><p>类的职责繁多，导致开发人员不敢轻易修改，因为不知会影响到哪些模块；</p>
+</li>
+<li><p>热点代码被频繁变更，职责被包裹了一层又一层，没有清晰的边界；</p>
+</li>
+<li><p>在系统某个角落，隐藏着伺机而动的bug，当诱发条件具备时，就会让整条调用链瘫痪；</p>
+</li>
+<li><p>不同的业务场景包含了不同的例外场景，每种例外场景的处理方式都各不相同；</p>
+</li>
+<li><p>同步处理代码与异步处理代码纠缠在一起，不可预知程序执行的顺序。</p>
+</li>
+</ul>
+<p>随着软件系统规模的扩张，软件复杂度也会增长。这种增长并非线性的，而是呈现出更加陡峭的指数级趋势。这实际上是软件的熵发挥着副作用。正如David Thomas与Andrew Hunt认为的：“虽然软件开发不受绝大多数物理法则的约束，但我们无法躲避来自熵的增加的重击。熵是一个物理学术语，它定义了一个系统的‘无序’总量。不幸的是，热力学法则决定了宇宙中的熵会趋向最大化。当软件中的无序化增加时，程序员会说‘软件在腐烂’。”</p>
+<p>软件之所以无法躲避熵的重击，源于我们在构建软件时无法避免技术债（technical debt） 。不管软件的架构师与开发人员有多么的优秀，他们针对目前需求做出的看似合理的技术决策，都会随着软件的演化变得不堪一击，区别仅在于债务的多少，以及偿还的利息有多高。根据Ward Cunningham的建议，对付技术债的唯一方案就是尽量让它可见，例如通过技术债列表或者技术债雷达等可视化形式及时呈现给团队成员，并制订计划主动地消除或降低技术债。</p>
+<p>我曾经负责设计与开发一款商业智能（business intelligence，BI）产品，它需要展现报表下的所有视图。这些视图的数据来自多个不同的数据集，视图的展现类型多种多样，如柱状图、折线图、散点图和热力图等。在这个“逼仄”的报表问题空间中，需要满足如下业务需求：</p>
+<ul>
+<li><p>在编辑状态下，支持对每个视图进行拖曳以改变视图的位置；</p>
+</li>
+<li><p>在编辑状态下，允许通过拖曳边框调整视图的尺寸；</p>
+</li>
+<li><p>点击视图的图形区域时，应高亮显示当前图形对应的组成部分；</p>
+</li>
+<li><p>点击视图的图形区域时，获取当前值，并对属于相同数据集的视图进行联动；</p>
+</li>
+<li><p>如果打开钻取开关，则在点击视图的图形区域时，获取当前值，并根据事先设定的钻取路径对视图进行钻取；</p>
+</li>
+<li><p>支持创建筛选器这样的特殊视图，通过筛选器选择数据，对当前报表中所有相同数据集的视图进行筛选。</p>
+</li>
+</ul>
+<p>以上业务需求都是事先规划好，并且可以清晰预见的，由于它们都对视图进行操作，因此视图控件的多个操作之间出现冲突。例如，高亮与级联都需要响应相同的点击事件。钻取同样如此，不同之处在于它要判断钻取开关是否已经打开。在操作效果上，高亮与钻取仅针对当前视图，联动与筛选则会因为当前视图的操作影响到同一张报表下相同数据集的其他视图。对于拖曳操作，虽然它监听的是MouseDown事件，但该事件与Click事件存在一定的冲突。</p>
+<p>多个功能点的开发实现以及功能点之间存在的千丝万缕的关系带来了软件规模的成倍扩张：不同的业务场景会增加不同的分支，导致圈复杂度的增加；设计上如果未能做到功能之间的正交，就会是的功能之间相互影响，导致代码维护成本的增加；没有为业务逻辑编写单元测试，建立功能代码的测试网，就可能因为对某一处功能实现的修改引入了潜在的缺陷，导致系统运行的风险增加。纷至沓来的技术债逐渐积累，一旦累积到某个临界点，就会由量变引起质变，在软件系统的规模达到巅峰之时，迅速步入衰亡的老年期，成为“可怕”的遗留系统（legacy system）。这遵循了饲养场的奶牛规则：奶牛逐渐衰老，最终无奶可挤；与此同时，奶牛的饲养成本却在上升。</p>
+<p>软件规模的一个显著特征是代码行数（lines of code）。然而，代码行数常常具有欺骗性。如果需求的功能数量与代码行数之间呈现出不成比例的关系，说明该系统的生命体征可能出现了异常，例如，代码行数的庞大其实可能是一种肥胖症，意味着可能出现了大量的重复代码。</p>
+<p>我曾经利用Sonar工具对咨询项目的一个模块执行代码静态分析，分析结果如图1-2所示。</p>
+<img src="/chapter-1-of-ddde/1-2.png" class="">
+
+<p>图1-2　代码静态分析结果</p>
+<p>该模块代码共计40多万行，重复代码竟然占到了惊人的33.9%，超过一半的代码文件混入了重复代码。显然，这里估算的代码行数并没有真实地体现软件规模；相反，重复的代码还额外增加了软件的复杂度。</p>
+<p>Neal Ford认为需要通过指标指导设计 ，例如使用面向对象设计质量评估的平台工具iPlasma，通过它生成的指标可以作为评价软件规模的要素，如表1-1所示。</p>
+<p>表1-1　质量评估指标</p>
+<img src="/chapter-1-of-ddde/t1-1.png" class="">
+
+
+
+
+<p>在面向对象设计的软件项目里，除了代码行数，包、类、方法的数量，继承的层次以及方法的调用数，还有我们常常提及的圈复杂度，都会或多或少地影响整个软件系统的规模。</p>
+<h3 id="1-2-2-结构"><a href="#1-2-2-结构" class="headerlink" title="1.2.2　结构"></a>1.2.2　结构</h3><p>你去过迷宫吗？相似而回旋繁复的结构使得封闭狭小的空间被魔法般地扩展为一个无限的空间，变得无穷大，仿佛这空间被安置了一个循环，倘若没有找到正确的退出条件，循环就会无休无止，永远无法退出。许多规模较小却格外复杂的软件系统，就好似这样的一座迷宫。</p>
+<p>此时，结构成了决定系统复杂度的一个关键因素。</p>
+<p>结构之所以变得复杂，多数情况下还是由系统的质量属性（quality attribute）决定的。例如，我们需要满足高性能、高并发的需求，就需要考虑在系统中引入缓存、并行处理、CDN、异步消息以及支持分区的可伸缩结构；又例如，我们需要支持对海量数据的高效分析，就得考虑这些海量数据该如何分布存储，并如何有效地利用各个节点的内存与CPU资源执行运算。</p>
+<p>从系统结构的视角看，单体架构一定比微服务架构更简单，更便于掌控，正如单细胞生物比人体的生理结构要简单。那么，为何还有这么多软件组织开始清算自己的软件资产，花费大量人力物力对现有的单体架构进行重构，走向微服务化？究其主因，还是系统的质量属性。</p>
+<p>纵观软件设计的历史，不是分久必合合久必分，而是不断拆分的微型化过程。分解的软件元素不可能单兵作战。怎么协同，怎么通信，就成了系统分解后面临的主要问题。如果没有控制好，这些问题固有的复杂度甚至会在某些场景下超过分解带来的收益。例如，对企业IT系统而言，系统与系统之间的集成往往通过与平台无关的消息通信来完成，由此就会在各个系统乃至模块之间形成复杂的通信网结构。要理清这种通信网结构的脉络，就得弄清楚系统之间消息的传递方式，明确消息格式的定义，即使在系统之间引入企业服务总线（Enterprise Service Bus，ESB），也只能减少点对点的通信量，而不能改变分布式系统固有的复杂度，例如消息通信不可靠，数据不一致等因为分布式通信导致的意外场景。换言之，系统因为结构的繁复增加了复杂度。</p>
+<p>软件系统的结构繁复还会增加软件组织的复杂度。系统架构的分解促成了软件构建工作的分工，这种分工虽然使得高效的并行开发成为可能，却也可能因为沟通成本的增加为管理带来挑战。管理一个十人团队和百人团队，其难度显然不可相提并论，对百人团队的管理也不仅仅是细分为10个十人团队这么简单，这其中牵涉到团队的划分依据、团队的协作模式、团队成员组成与角色构成等管理因素。</p>
+<p>康威定律（Conway’s law） 就指出：“任何组织在设计一套系统（广义概念上的系统）时，所交付的设计方案在结构上都与该组织的沟通结构保持一致。”Sam Newman认为是需要“适应沟通途径”使得康威定律在软件结构与组织结构中生效。他分析了一种典型的分处异地的分布式团队。整个团队共享单个服务的代码所有权，由于分布式团队的地域和时区界限使得沟通成本变高，因此团队之间只能进行粗粒度的沟通。当协调变化的成本增加后，人们就会想方设法降低协调和沟通的成本。直截了当的做法就是分解代码，分配代码所有权，物理分隔的团队各自负责一部分代码库，从而能够更容易地修改代码，团队之间会有更多关于如何集成两部分代码的粗粒度的沟通。最终，与这种沟通路径匹配形成的粗粒度应用程序编程接口（application programming interface，API）构成了代码库中两部分之间的边界。</p>
+<p>注意，与设计方案相匹配的团队结构指的是负责开发的团队组织，而非使用软件产品的客户团队。我们常常遇见分布式的客户团队，例如，一些客户团队的不同的部门位于不同的地理位置，他们的使用场景也不尽相同，甚至用户的角色也不相同，但在对软件系统进行架构设计时，我们却不能按照部门组织、地理位置或用户角色来分解模块（服务），并错以为这遵循了康威定律。</p>
+<p>我曾经参与过一款通信产品的改进与维护工作。这是一款为通信运营商提供对宽带网的授权、认证与计费工作的产品，它的终端用户主要由两种角色组成：营业厅的营业员与购买宽带网服务的消费者。最初，设计该产品的架构师就错误地按照这两种不同的角色，将整个软件系统划分为后台管理系统与服务门户两个完全独立的子系统，为营业员与消费者都提供了资费套餐管理、话单查询、客户信息维护等相似的业务。两个子系统产生了大量重复代码，增加了软件系统的复杂度。在我接手该通信产品时，因为数据库性能瓶颈而考虑对话单数据库进行分库分表，发现该方案的调整需要同时修改后台管理系统与服务门户的话单查询功能。</p>
+<p>无论设计是优雅还是拙劣，系统结构都可能因为某种设计权衡而变得复杂。唯一的区别在于前者是主动地控制结构的复杂度，而后者带来的复杂度是偶发的，是错误的滋生，是一种技术债，它会随着系统规模的增大产生一种无序设计。《架构之美》中第2章“两个系统的故事：现代软件神话”详细地罗列了无序设计系统的几种警告信号：</p>
+<ul>
+<li><p>代码没有显而易见的进入系统中的路径；</p>
+</li>
+<li><p>不存在一致性，不存在风格，也没有能够将不同的部分组织在一起的统一概念；</p>
+</li>
+<li><p>系统中的控制流让人觉得不舒服，无法预测；</p>
+</li>
+<li><p>系统中有太多的“坏味道”；</p>
+</li>
+<li><p>数据很少放在它被使用的地方，经常引入额外的巴洛克式缓存层，试图让数据停留在更方便的地方。</p>
+</li>
+</ul>
+<p>看一个无序设计的软件系统，就好像隔着一层半透明的玻璃观察事物，系统的软件元素都变得模糊不清，充斥着各种技术债。细节层面，代码污浊不堪，违背了“高内聚松耦合”的设计原则，要么许多代码放错了位置，要么出现重复的代码块；架构层面，缺乏清晰的边界，各种通信与调用依赖纠缠在一起，同一问题空间的解决方案各式各样，让人眼花缭乱，仿佛进入了没有规则的无序社会。</p>
+<p>分层架构的引入原本是为了维护系统的有序性，而如果团队却不注意维护逻辑分层确定的边界，不按照架构规定的层次分配各个类的职责，就会随着职责的乱入让逻辑分层形成的边界变得越来越模糊。我在对一个项目进行架构评审时，曾看到图1-3所示的三层架构。</p>
+<img src="/chapter-1-of-ddde/1-3.png" class="">
+
+<p>图1-3　层次混乱的架构</p>
+<p>虽然架构师根据关注点的不同划分了不同的层次，但各个逻辑层没有守住自己的边界：业务逻辑层定义了EditableControlBase、EditablePageBase与PageBase等类，它们都继承自ASP.NET框架的UserControl用户控件类，同时又作为自定义用户控件的父类，提供了控件数据加载、提交等通用职责；继承这些父类的子类属于用户控件，定义在用户展现层，如EditablePageBase类的子类（如DictionaryTypeView、DictionaryView和DictionaryTypeList等）。一旦逻辑层没有守住自己的边界，分层架构模式就失去了规划清晰结构的价值。随着需求的增加，系统结构会变得越来越混乱，最终陷入无序设计的泥沼。</p>
+<h2 id="1-3-预测能力"><a href="#1-3-预测能力" class="headerlink" title="1.3　预测能力"></a>1.3　预测能力</h2><p>当我们掌握了事物发展的客观规律时，就具有了一定的对未来的预测能力。例如，我们洞察了万有引力的本质，就能够对观察到的宇宙天体建立模型，相对准确地推测出各个天体在未来一段时间的运行轨迹。然而，宇宙空间变化莫测，或许一个星球“死亡”产生的黑洞的吸噬能力，就可能导致那一片星域产生剧烈的动荡，这种动荡会传递到更远的星空，从而使天体的运行轨迹偏离我们的预测结果。毫无疑问，影响预测能力的关键要素在于变化。对变化的应对不妥，就会导致过度设计或设计不足。</p>
+<h3 id="1-3-1-过度设计"><a href="#1-3-1-过度设计" class="headerlink" title="1.3.1　过度设计"></a>1.3.1　过度设计</h3><p>设计软件系统时，变化让我们患得患失，不知道如何把握系统设计的度。若拒绝对变化做出理智的预测，系统的设计会变得僵化，一旦有新的变化发生，修改的成本会非常大；若过于看重变化产生的影响，渴望涵盖一切变化的可能，若预期的变化没有发生，我们之前为变化付出的成本就再也补偿不回来了，这就是所谓的“过度设计”。</p>
+<p>我曾经在设计一款教育行业产品时，因为考虑太多未来可能的变化，引入了不必要的抽象来保证产品的可扩展性，使得整个设计方案变得过于复杂。更加不幸的是，我所预知的变化根本不曾发生。该设计方案针对产品的UI引擎（UI engine）模块。作为驱动界面的引擎，它主要负责从界面元数据获取与界面相关的视图属性，并根据这些属性来构造界面，实现界面的可定制。产品展现的视图由诸多视图元素组合而成，这些视图元素的属性通过界面元数据进行定制。为此，我为视图元素定义了抽象的ViewElement接口，作为所有视图元素类型包括SelectView、CheckboxGroupView的抽象类型。</p>
+<p>ViewElement决定了视图元素的类型，从而确定呈现的格式；至于真正生成视图呈现代码的职责，则交给了视图元素的解析器。由于我认为视图元素的呈现除需要支持现有的JSP之外，未来可能还要支持HTML、Excel等实现元素，因此在设计解析器时，定义了ViewElementResolver接口：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ViewElementResolver</span> </span>&#123;</span><br><span class="line">   <span class="function">String <span class="title">resolve</span><span class="params">(ViewElement element)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>ViewElementResolver接口确保了解析功能的可扩展性，为了更好地满足未来功能的变化，我又引入了解析器的工厂接口ViewElementResolverFactory以及实现该接口的抽象工厂类AbstractViewElementResolverFactory：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ViewElementResolverFactory</span> </span>&#123;</span><br><span class="line">   <span class="function">ViewElementResolver <span class="title">create</span><span class="params">(String viewElementClassName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractViewElementResolverFactory</span> <span class="keyword">implements</span> </span></span><br><span class="line"><span class="class">    <span class="title">ViewElementResolverFactory</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> ViewElementResolver <span class="title">create</span><span class="params">(String viewElementClassName)</span> </span>&#123;</span><br><span class="line">      String className = generateResolverClassName(viewElementClassName);</span><br><span class="line">      <span class="comment">//通过反射创建ViewElementResolver对象</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> String <span class="title">generateResolverClassName</span><span class="params">(String viewElementClassName)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> getPrefix() + viewElementClassName + <span class="string">&quot;Resolver&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> String <span class="title">getPrefix</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JspViewElementResolverFactory</span> <span class="keyword">extends</span> <span class="title">AbstractViewElementResolverFactory</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> String <span class="title">getPrefix</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;Jsp&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>ViewElement接口可以注入ViewElementResolverFactory对象，由它来创建ViewElementResolver，由此完成视图元素的呈现，例如SelectViewElement：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectViewElement</span> <span class="keyword">implements</span> <span class="title">ViewElement</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> ViewElementResolver resolver;</span><br><span class="line">   <span class="keyword">private</span> ViewElementResolverFactory resolverFactory;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setViewElementResolverFactory</span><span class="params">(ViewElementResolverFactory resolverFactory)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.resolverFactory = resolverFactory;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">Render</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      resolverFactory.create(<span class="keyword">this</span>.getClass().getName()).resolve(<span class="keyword">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>整个UI引擎模块的设计如图1-4所示。</p>
+<img src="/chapter-1-of-ddde/1-4.png" class="">
+
+<p>图1-4　UI引擎模块的类图</p>
+<p>如此设计看似保证了视图元素呈现的可扩展性，也遵循了单一职责原则，却因为抽象过度而增加了方案的复杂度。扩展式设计是为不可知的未来做投资，一旦未来的变化不符合预期，就会导致过度设计。具有实证主义态度的设计理念是面对不可预测的变化时，应首先保证方案的简单性。当变化真正发生时，可以通过诸如提炼接口（extract interface）的重构手法，满足解析逻辑的扩展。方案中工厂接口与抽象工厂类的引入，根本没有贡献任何解耦与扩展的价值，反而带来了不必要的间接逻辑，让设计变得更加复杂。到产品研发的后期，我所预期的HTML和Excel呈现的需求变化实际并没有发生。</p>
+<h3 id="1-3-2-设计不足"><a href="#1-3-2-设计不足" class="headerlink" title="1.3.2　设计不足"></a>1.3.2　设计不足</h3><p>要应对需求变化，终归需要一些设计技巧。很多时候，因为设计人员的技能不足，没有明确识别出未来确认会发生的变化，或者对需求变化发展的方向缺乏前瞻，所以导致整个设计变得过于僵化，修改的成本太高，从而走向了过度设计的另外一个极端，我将这一问题称为“设计不足”。</p>
+<p>设计不足的方案只顾眼前，对于一定要发生的变化视而不见，这不仅导致方案缺乏可扩展性，甚至有可能出现技术实现方向的错误。这样的设计不是恰如其分的简单设计，而是对于糟糕质量视而不见的简陋处置，是为了应付进度蒙混过关用的临时花招，表面看来满足了进度要求，但在未来偿还欠下的债务时，需要付出几倍的成本。如果整个软件系统都由这样设计不足的方案构成，那么未来任何一次需求的变更或增加，都可能成为压垮系统的最后一根稻草。</p>
+<p>我曾负责一个基于大数据的数据平台的设计与开发，该数据平台需要实时采集来自某行业各个系统各种协议的业务数据，并按照主题区的数据模型标准来治理数据。当时，我对整个行业的数据标准与规范尚不了解，对于数据平台未来的产品规划也缺乏充分认识。迫于进度压力，我选择了采用快速而简洁的硬编码方式实现从原始数据到主题区模型对象的转换，这一设计让我们能够在规定的进度周期满足同时应对多家客户治理数据的要求。</p>
+<p>然而，作为一款数据平台产品，在该行业内进行广泛推广时，随着面向的客户越来越多，需要采集数据的上游系统也变得越来越多。此时，回首之前的方案设计，不由后悔不迭：方案的简陋导致了开发质量的低下和生产力的降低。此时的主题区划分已经趋于稳定，虽然需要支持的客户和上游系统越来越多，但要治理的数据所属的主题仍然在已有主题区范围之内，换言之，原始数据的协议是变化的，主题区的范围却相对稳定。通过对主题区模型与数据治理逻辑进行共性与可变性分析[7]，我识别出了原始数据消息的共性特征，建立了抽象的消息模型，又为主题区模型抽象出一套树形结构的核心主题模型，并基于此核心模型建立新的主题区模型。在确保主题区模型不变的情况下，找到数据治理逻辑中不变的转换过程与规则，将不同上游系统遵循不同数据协议而带来的变化转移到一个定义映射关系的样式配置文件中，形成对变化的隔离，实现了一个相对稳定的数据治理方案，如图1-5所示。</p>
+<img src="/chapter-1-of-ddde/1-5.png" class="">
+
+<p>图1-5　隔离变化的设计方案</p>
+<p>采用新方案之后，如果需要采集一个不超出主题区范围的全新系统，只需定义一个样式映射文件，并付出极少量定制开发的成本，就能以最快的迭代进度满足新的数据治理需求。正因为改进了旧有方案，团队才能够在不断涌入新需求的功能压力下，基本满足产品研发的进度要求。只可惜，之前的数据治理功能已经被多家客户广泛运用到生产环境中，对应的数据交换逻辑也依托于旧的主题区模型，使得整个数据平台产品在近两年的开发周期中一直处于新旧两套主题区模型共存的尴尬局面。由于一部分数据治理和数据交换逻辑要对接两套主题区模型，因此，迫于无奈，也必须实现两套数据治理和数据交换逻辑，无谓地增加了团队的工作量。由于改造旧模型的工作量极为繁重，团队一直未能获得喘息的机会对模型以新汰旧，因此这一尴尬局面还会在一段时间内继续维持下去。这正是设计不足在应对变化时带来的负面影响。</p>
+<p>我们无法预知未来，自然就无法预测未来可能发生的变化，这就带来了软件系统的不可预测性。软件设计者不可能对变化听之任之，却又因为它的不可预测性而无可适从。在软件系统不断演化的过程中，面对变化，我们需要尽可能地保证方案的平衡：既要避免因为设计不足使得变化对系统产生根本影响，又要防止因为满足可扩展性让方案变得格外复杂，最后背上过度设计的坏名声。故而，变化之难，难在如何在设计不足与过度设计之间取得平衡。</p>
+<p><strong>说明：</strong>本章为《解构领域驱动设计》第一章。若希望购买本书，请点击如下链接：</p>
+<p><a href="https://item.jd.com/13378760.html">京东图书</a></p>
+<p><a href="http://product.dangdang.com/684576584.html">当当图书</a></p>
+<p><a href="https://www.epubit.com/bookDetails?id=UB77d68d84212a6">异步社区</a></p>
+]]></content>
+      <categories>
+        <category>Writing</category>
+      </categories>
+      <tags>
+        <tag>DDD</tag>
+        <tag>Architecture</tag>
       </tags>
   </entry>
   <entry>
@@ -5149,583 +5726,6 @@
         <tag>OO</tag>
         <tag>Java</tag>
         <tag>TDD</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>识别实体与值对象的特征</title>
-    <url>/how-to-identify-entity-and-value-object/</url>
-    <content><![CDATA[<img src="/how-to-identify-entity-and-value-object/cover.jpg" class="">
-
-<p>甄别实体与值对象非常重要，正确与否会直接影响聚合的设计。</p>
-<h3 id="聚合是边界"><a href="#聚合是边界" class="headerlink" title="聚合是边界"></a>聚合是边界</h3><p>在DDD中，聚合是实体与值对象的边界。一个聚合对外代表了一个完整的领域概念，遵循面向对象设计的基本原则，聚合内部往往由多个细小的高内聚领域概念组成。聚合内部的领域模型形成了一棵树，树的根必须是实体，可以称之为是<strong>聚合根（Aggregate Root）</strong>，当然，也可以称之为<strong>根实体（Root Entity）</strong>，它是聚合的唯一入口或出口。例如订单聚合定义了<code>Order</code>根实体，它就是订单聚合的唯一代言人。</p>
-<p>在一个限界上下文的所有领域模型（实体和值对象）中，按照关系的强弱与概念的完整性，将其划分为多个聚合，就好像草原部落由一个个蒙古包构成了松散的聚居社群一般。</p>
-<span id="more"></span>
-
-<p>考虑到值对象与实体的差异，倘若需要管理它们的生命周期，则值对象不可能脱离聚合的边界单独存在。这就意味着，当我们要识别领域模型的聚合时，<strong>实体与值对象之间的强弱关系并不会影响到对聚合边界的界定</strong>。只要实体与值对象之间存在关系，无论关系强弱，该值对象都必须与存在关系的实体放在同一个聚合。如果一个值对象与多个实体之间存在关系，要么说明多个实体都属于一个聚合；要么意味着该值对象需要复制为多份，放到不同的聚合中，如下图所示：</p>
-<img src="/how-to-identify-entity-and-value-object/entity-vo.png" class="">
-
-
-
-<p>如此一来，对于聚合边界的识别，就变成了<strong>对实体关系强弱的判断</strong>。只要我们正确地甄别了实体与值对象，在识别聚合时，就可以不再考虑值对象，如此就能降低识别的难度。</p>
-<h3 id="上下文的影响"><a href="#上下文的影响" class="headerlink" title="上下文的影响"></a>上下文的影响</h3><p>虽然我们知道实体与值对象之间的本质差异在于是否具备唯一的身份标识（identity），然而许多时候，这一差异仍然显得似是而非。更何况，实体与值对象的定义并非绝对，在不同的上下文，同一个领域概念也可能定义为不同的设计类型。例如下图所示的钞票一枚：</p>
-<img src="/how-to-identify-entity-and-value-object/money.png" class="">
-
-
-
-<p>在购买上下文，买卖双方只关注钞票的面值与货币类型，只要值相等，即可认为是同一个对象，因而需定义为值对象；在印钞上下文，每张钞票都具有一个唯一的标识，即使同为100元的人民币，只要ID不同，也会认为是不同的对象，故而定义为实体。因此，要正确地甄别实体与值对象，需要结合具体的上下文。</p>
-<h3 id="识别的特征"><a href="#识别的特征" class="headerlink" title="识别的特征"></a>识别的特征</h3><p>即便如此，仍然缺乏相对客观的判断标准。为此，我总结了如下几个特征。</p>
-<h4 id="相等性"><a href="#相等性" class="headerlink" title="相等性"></a>相等性</h4><p>甄别实体与值对象，可以首先从<strong>相等性</strong>进行判断。只要一个领域模型对象的属性值相等，就认为是同一个对象，应优先考虑建模为值对象；否则，需要为领域模型对象定义唯一标识，并建模为实体。</p>
-<p><strong>注意：</strong>在进行相等性判断时，不能将作为唯一标识的ID视为领域模型的属性。</p>
-<p>例如地址领域概念，只要其属性值国家、省份、城市、街道与邮政编码相等，就可以认为是同一个地址，应将<code>Address</code>类定义为值对象。对于大家耳熟能详的订单领域概念，显然需要为其分配一个唯一的订单编号，因为理论上可能存在除订单编号外其他属性都相同的两个不同订单，应将<code>Order</code>定义为实体。</p>
-<p>然而，在对相等性进行判断时，可能出现ID与属性存在一种隐含的对应关系。例如，出版行业中作为正规出版物的图书，具有唯一的ISBN号，它相当于是图书领域概念的ID，所以<code>Book</code>应定义为实体。可在对<code>Book</code>相等性进行判断时，也可以不通过ISBN进行相等性判断，基本上，只要书名、作者（译者）、出版社、价格、出版日期、版次、页数、字数等属性值相同，也可以认为是同一本书，那是否意味着可以将<code>Book</code>定义为值对象呢？</p>
-<p>显然，在进行相等性判断时，考虑的属性越多，就会出现多个组合的属性形成一种“隐藏”的唯一标识特征，有一些体现业务规则的ID，自身就是根据属性值来定义的。例如，航班的唯一标识就可以根据承运公司二字码、航班号、起降机场三字码与执飞日期来决定。通过唯一标识固然可以决定是否同一个航班，根据映射的多个属性值，也可以判断相等性。这会让人在甄别实体与值对象时，显得摇摆不定。例如，腾讯会议的会议号是<code>Meeting</code>的身份标识，在比较会议的相等性时，倘若我们考虑了除会议号之外的其他属性，如会议名称、会议类型、开始时间、结束时间、创建人、创建时间等属性，不一样可以确定会议的相等性吗？</p>
-<p>因此，除了判断相等性，还需考虑<strong>不变性</strong>。</p>
-<h4 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h4><p>Eric Evans建议将值对象定义为不变的类，实则是因为根据值判等的值对象就应该具有不变性。仍以购买上下文的钞票为例，<code>50元+50元=100元</code>，这100元与原来的50元是另一张不同的钞票：</p>
-<img src="/how-to-identify-entity-and-value-object/money-plus.png" class="">
-
-
-
-<p>反之，一个对象除了ID，其余属性值都可以修改，不需要创建一个新的对象，就可以认为该领域对象是可变的，应考虑定义为实体。如前所述的<code>Meeting</code>对象，只要<code>meetingId</code>值不变，如会议名称、会议类型、开始时间、结束时间这样的属性值即使发生了天翻地覆的变化，我们也认为它是同一个会议。显然，应将<code>Meeting</code>定义为实体。</p>
-<p>再考虑一个典型的订单聚合：</p>
-<img src="/how-to-identify-entity-and-value-object/order.png" class="">
-
-
-
-<p>为什么我们要将订单聚合中的<code>OrderItem</code>定义为实体？如果不考虑ID属性，只要<code>orderId</code>、<code>product</code>与<code>quantity</code>值相同，完全可以认为是同一个订单项。然则，订单项的<code>quantity</code>值是可以更改的，更改了数量的订单项也不会认为是不同的订单项。订单项的可变性决定了它应该定义为实体。</p>
-<p>为何要将<code>OrderItem</code>的<code>Product</code>属性定义为值对象呢？要知道，该<code>Product</code>类型还定义了<code>productId</code>属性，既然具有身份标识，不应该定义为实体吗？因为在订单上下文中，商品的<code>productId</code>来自于商品上下文的商品ID，在订单聚合中，可以将<code>productId</code>视为<code>Product</code>类的属性值。只要<code>productId</code>、<code>name</code>和<code>price</code>值相同，就可以认为是同一个商品，且它们的值是不变的。这正是将<code>Product</code>定义为值对象的原因所在。</p>
-<h4 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h4><p>即使考虑了相等性和不变性，仍有一种例外情形，那就是考虑<strong>独立性</strong>特征。值对象作为实体的属性必定附属于实体，不能单独存在；如果一个领域对象既满足了相等性，又满足了不变性，可定义为值对象；可是，如果它单独存在，且需要管理其生命周期，就需要将这样的类“升级”为实体。</p>
-<p>考虑考勤上下文的假期领域概念。由于中国农历假期的缘故，每年都需要配置新的假期。假期概念对应的<code>Holiday</code>类定义为：</p>
-<img src="/how-to-identify-entity-and-value-object/holiday.png" class="">
-
-
-
-<p>显然，该类的所有属性值相等，即可认为是同一个假期，一旦修改了假期的值，也可以认为是不同的假期，即<code>Holiday</code>类同时满足相等性和不变性，应定义为值对象。可是，在考勤上下文的领域模型中，<code>Holiday</code>类是完全独立的，不依附于其他任何实体，而它也需要管理生命周期。这时，就应遵循独立性特征，将其“升级”为实体。</p>
-<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p> 以上三个特征并无重要性排列，需综合考虑。如果仍然无法判断，就遵循<strong>优先级</strong>原则：优先将领域概念建模为值对象。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Design</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>领域驱动建模与面向对象建模的差异</title>
-    <url>/the-difference-between-ddd-and-oo/</url>
-    <content><![CDATA[<p>即便采用面向对象建模范式，领域驱动设计的建模仍与面向对象建模存在较大差异，原因在于领域驱动设计引入了<strong>限界上下文（Bounded Context）</strong>与<strong>聚合（Aggregate）</strong>，使得建模的风景变得迥然不同。二者为领域模型引入了边界的约束，使得建模者不能随心所欲地建模，亦改变了模型的面貌。</p>
-<p>在我的《解构领域驱动设计》一书中，提炼了领域驱动设计之精髓，在于对边界的控制。其中，限界上下文与聚合是解空间边界控制中最为重要的两个要素。我们构建的领域模型必然位于限界上下文中，构成领域模型中的主力军——实体和值对象——又必然位于聚合的边界内：</p>
-<span id="more"></span>
-
-<img src="/the-difference-between-ddd-and-oo/boundary.png" class="">
-
-
-
-<p>虽然限界上下文只是逻辑边界，但它的<strong>自治</strong>特性需要保证其内部领域模型的独立性，建模时，必须避免出现跨限界上下文之间领域模型的直接引用。至于聚合之间的协作，社区的大多数声音认为：聚合之间需通过根实体的ID建立协作关系。</p>
-<p>限界上下文与聚合边界的约束，使得我们需要重新正视领域模型类之间的关系，在面向对象世界中，设计者耳熟能详的继承、组合、依赖关系，可能需要做出改变。</p>
-<p>以教育领域之用户模型为例。学生、教师、家长是3种不同类型的用户，各自业务不同，又有一些共用业务，如：修改密码。从面向对象的角度思考模型的建立，自然会想到通过为它们建立继承关系，将用户定义为基类，封装共同的领域逻辑满足复用的要求。由此形成如下的领域模型：</p>
-<img src="/the-difference-between-ddd-and-oo/OO-user.png" class="">
-
-
-
-<p>我将限界上下文视为<strong>领域模型的知识语境</strong>，通过它形成领域知识的逻辑边界。对相同的一个领域概念因为观察视角的不同，需要关注的领域知识（属性与行为）各有不同。犹如盲人摸象，在此，并非讽刺盲人只见大象之局部而错以为是整头大象，相反，代表了一种正面的含义，即从当前上下文观之，虽然明知此乃大象之局部，我仍然认为它就是大象之整体。</p>
-<img src="/the-difference-between-ddd-and-oo/elephant.png" class="">    
-
-
-
-<p>无论现实世界还是软件世界，谁又能穷尽任意一个领域概念的全部呢？就以“人”这一领域概念而言，在居民身份管理系统中，关注公民这一身份，除了姓名、性别、出生年月等基本信息之外，需关注籍贯、户籍所在地、照片等与公民身份有关的重要属性；在员工管理系统中，关注的内容又变成角色、职位以及教育背景、工作经验等与员工能力息息相关的属性。如果将一个“人”的所有属性加在一起，可以认为是一头完整的“大象”的话，居民身份管理系统与员工管理系统看到的“人”，何尝不像是盲人看到的大象局部呢？而在各自的上下文中，公民与员工就是当前需要关注的全部了。</p>
-<p>系统如此，限界上下文亦如此，只是边界更小罢了。因而在教育领域的身份上下文，用户的全部就是诸如姓名、账号、密码以及身份认证等领域知识；切换到学籍上下文，知识语境发生了变化，用户变为了学生，关注的领域知识不再是对身份的认证，而是对学生信息如学籍号的管理，此时的家长，作为学生附带属性的一部分，表达了学生的家庭关系，抽象其概念，可以表示为“家庭成员”；再切换到教务上下文，则需要建立以教师、课程、年级、班级为核心的领域模型，此时的学生概念，变成了教学活动的参与者，建立了班级与学生之间的关系，需要明确学生的“学号”而非“学籍号”，抽象其概念，实则代表了“班级成员”。</p>
-<p>在各自知识语境的界定下，如果仍然要保持学生、家长、教师与用户之间的继承关系，就显得“不合时宜”了。本质上，它们是同一个概念在不同语境下的局部知识，在切换上下文时，每个建模者看到的局部概念，都应视为一个整体，如果让学籍管理上下文的学生继承自身份管理上下文的用户，就好似让一头“局部的大象”去继承另外一头“局部的大象”，真是匪夷所思了！正确的领域模型应该如下图所示：</p>
-<img src="/the-difference-between-ddd-and-oo/model-in-bc.png" class="">
-
-
-
-<p>因此，在领域驱动设计的领域建模中，需要建立<strong>上下文为王</strong>的意识。形成的一个个自治的限界上下文，就是领域模型的“独立王国”，除了需要调用必须的对外公开的业务能力之外，它们几乎是”老死不相往来“的。在跨限界上下文的领域模型之间，即便是相对弱耦合的依赖关系也当避免，更不用说继承、合成与聚合关系了。除非，我们将某个限界上下文设计为“共享内核（shared kernel）”。</p>
-<p>在领域驱动设计获得的设计模型中，一个聚合作为边界封装了实体和值对象。我们可以将聚合“伪装”为一个完整的类（其实质是领域模型的边界），与之对应的设计要素还包括管理聚合生命周期的资源库（repository）和负责协作外部资源或多聚合的领域服务（domain service）。多数情况下，一个聚合、一个资源库和一个领域服务可能都需要定义，它们的关系如下图所示：</p>
-<img src="/the-difference-between-ddd-and-oo/service-repo-agg.png" class="">
-
-
-
-<p>资源库和领域服务在操作聚合时，是将<strong>聚合当作一个完整的整体概念来看待</strong>的。领域驱动设计尤其重视聚合对领域模型的边界控制。在设计领域模型时，需要清晰定义出聚合的边界，然后再由此推导出资源库和领域服务。在学籍管理上下文中，我将家长放到了以学生为根实体的聚合中，如下图所示：</p>
-<img src="/the-difference-between-ddd-and-oo/student.png" class="">
-
-
-
-<p>一方面，家长信息如家庭住址一般都是学生的属性，另一方面，需要约束学生与家长关系的<strong>不变量（Invariant）</strong>，例如，在为学生添加家长信息时，总不能出现两个父亲吧？——谁愿意呢！</p>
-<p>由此可知，当限界上下文作为领域模型的边界时，一方面它限制了跨限界上下文之间领域模型的关系，另一方面它作为知识语境，分离了同一个领域概念的不同视角。我将限界上下文称为<strong>战略设计的基本架构单元</strong>。</p>
-<p>聚合作为领域模型的边界，维护的是当前上下文领域概念的完整性，并将其作为一个不可分割的整体，由资源库管理其生命周期。它平衡了领域对象粒度与数量的矛盾，既可以确保每个领域概念的细粒度，又可通过聚合根的封装在形式上减少领域对象的数量。通过聚合边界的控制，减少了领域对象之间不必要的依赖，并通过约束聚合之间的关系来降低耦合。我将聚合称为<strong>战术设计的基本设计单元</strong>。</p>
-<p>对象建模范式的领域建模确乎是建立在面向对象思想之上的，但领域驱动设计考虑了软件世界与理想的对象世界之差异，不只是考虑领域模型的关系与协作，还考虑领域模型与外部资源的关系，这就需要施加恰当的约束，进一步保证领域模型的质量。这是我们在进行领域建模时务必谨记的要点。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Design</tag>
-        <tag>OO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《解构领域驱动设计》终于可以预购了</title>
-    <url>/presale-of-DDDE/</url>
-    <content><![CDATA[<img src="/presale-of-DDDE/cover-small.jpg" class="">
-
-<p>四年了，《解构领域驱动设计》<strong>终于</strong>可以在异步社区的<a href="https://www.epubit.com/bookDetails?id=UB77d68d84212a6&typeName=%E6%90%9C%E7%B4%A2">官方网站上预购</a>了！这意味着，我的著作<strong>终于</strong>出版了！有没有普天同庆的赶脚？总之，当我收到这一消息后，长长地吁了一口气……终于，终于，四年了，真不容易啊！</p>
-<p>许多次，我在给别人介绍这本著作时，总有人问我哪里可以买到，而我则尴尬地回答：嗯，这个，这个，还没有出版呢。许多次，读者圈的朋友在问这本书多久出版时，我从2020年承诺年底出版，然后推迟到4月，然后推迟到6月，最后推迟到7月，进度的delay已经让人产生抱怨了！而在许多年前，我总是说我的第一本书《<a href="https://book.douban.com/subject/2058073/">软件设计精要与模式</a>》，言外之意，我还有第二本书，可是自从2007年出版我的第一本书，到2009年出版<a href="http://product.china-pub.com/196623">该书的第二版</a>之后，我的第二本书终于在14年后诞生了。</p>
-<p>一些信息可以侧面证明本书写作的不容易。</p>
-<span id="more"></span>
-
-<p>本书内容首先诞生于我在GitChat上发布的<a href="https://gitchat.csdn.net/column/5cdab7fb34b6ed1398fd8de7">领域驱动设计课程</a>，该课程分为《战略篇》与《战术篇》，战略篇一共34章，15.5万字；战术篇一共71章，35.1万字。合计105章，50.6余万字。发布战术篇的最后一章是在2020年1月21日，完成本书初稿是在2020年11月24日。</p>
-<p>个人认为，领域驱动设计课程的内容已经足够完整了，对于课程内容，几乎没有差评（至少我没有看到）；但我仍嫌不足，在完成该课程后，又对内容进行了大刀阔斧地修改与调整，彻底改变了从战略到战术这条线的章节安排，引入了我总结的<strong>领域驱动设计统一过程</strong>，增加了三章与需求分析有关的内容，完善了战略篇，将其进化为架构映射的内容，丰富了限界上下文的定义，引入了菱形对称架构与领域驱动架构风格，完善了战术篇，将其进化为领域建模的内容，使得领域建模的过程与方法更加完整，并具备可操作性。同时，也删减了该课程中部分与领域驱动设计关系不大的内容，使得内容变得更精简也更有条理，最后成书包括4篇推荐序、1篇前言、20章正文组成五个篇章，以及4章附录，总字数（不包括空白、空行与标点符号）约43万字。</p>
-<p>虽然本书初稿完成在2020年11月24日，然而在交稿后，又几度批阅删改，甚至在2021年1月基本定稿后，因为字数和章节的不合理性，于2月4日向出版社提出修改要求，为此牺牲了春节的休假时间，调整内容包括：</p>
-<ul>
-<li>去掉了原稿的第16章、第21章</li>
-<li>将原稿的第7章、第14章和第22章合并，并做了大量删减，放到了新稿的第20章，它们合起来是一个完整的案例；</li>
-<li>将原稿的第17章、第19章和第20章中的一个案例做了合并，并做了少量调整，放到了新稿的第17章；</li>
-<li>调整了正文和附录的分布，从原书的25章调整为正文20章、附录3章（后在5月份又增加了一章附录）</li>
-</ul>
-<p>这一改动几乎等于乾坤大挪移，严重影响了出版进度。编辑需要针对之前基本完成加工的书稿进行重新梳理，极大地拖慢了出版进度，同时，因为图片字体版权问题，又对本书所有图片进行了再度编辑和调整，直到4月22日最终定稿。确定后的书稿先后经历出版社的一审、二审、三审，再经我个人审校后，编辑做一校、二校、三校，种种工作，不一而足，最终等到书稿付梓印刷，并在今日开启了本书的预售工作。</p>
-<h3 id="内容简介"><a href="#内容简介" class="headerlink" title="内容简介"></a>内容简介</h3><p>本书全面阐释了领域驱动设计的知识体系，内容覆盖领域驱动设计的主要模式与主流方法，并在此基础上提出领域驱动设计统一过程，将整个软件构建过程划分为全局分析、架构映射和领域建模3个阶段。除给出诸多案例阐释领域驱动设计过程中的方法与模式之外，本书还通过一个真实而完整的案例全面展现了如何进行领域驱动设计统一过程的实施和落地。为了更好地运用领域驱动设计统一过程，本书还开创性地引入了业务服务、菱形对称架构、领域驱动架构、服务驱动设计等方法与模式，总结了领域驱动设计参考过程模型与能力评估模型。本书提出的一整套方法体系已在多个项目得到推广和落地。</p>
-<p>本书适合希望体会软件架构本质、提高软件架构能力的软件架构师，希望提高领域建模能力、打磨软件设计能力的开发人员，希望掌握业务分析与建模方法的业务分析人员，希望学习领域驱动设计并将该方法运用到项目中的软件从业人员阅读参考。</p>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>本书目录为：</p>
-<ul>
-<li>推荐序四篇</li>
-<li>前言</li>
-<li>第一篇 开篇<ul>
-<li>第1章 软件复杂度剖析</li>
-<li>第2章 领域驱动设计概览</li>
-<li>第3章 领域驱动设计统一过程</li>
-</ul>
-</li>
-<li>第二篇 全局分析<ul>
-<li>第4章 问题空间探索</li>
-<li>第5章 价值需求分析</li>
-<li>第6章 业务需求分析</li>
-</ul>
-</li>
-<li>第三篇 架构映射<ul>
-<li>第7章 同构系统</li>
-<li>第8章 系统上下文</li>
-<li>第9章 限界上下文</li>
-<li>第10章 上下文映射</li>
-<li>第11章 服务契约设计</li>
-<li>第12章 领域驱动架构</li>
-</ul>
-</li>
-<li>第四篇 领域建模<ul>
-<li>第13章 模型驱动设计</li>
-<li>第14章 领域分析建模</li>
-<li>第15章 领域模型设计要素</li>
-<li>第16章 领域设计建模</li>
-<li>第17章 领域实现建模</li>
-</ul>
-</li>
-<li>第五篇 融合<ul>
-<li>第18章 领域驱动设计的战略考量</li>
-<li>第19章 领域驱动设计的战术考量</li>
-<li>第20章 领域驱动设计体系</li>
-</ul>
-</li>
-<li>附录<ul>
-<li>附录A 领域建模范式</li>
-<li>附录B 事件驱动模型</li>
-<li>附录C 领域驱动设计魔方</li>
-<li>附录D 领域驱动设计统一过程交付物</li>
-</ul>
-</li>
-<li>参考文献</li>
-</ul>
-<h3 id="样章阅读"><a href="#样章阅读" class="headerlink" title="样章阅读"></a>样章阅读</h3><ul>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=aa089770eea74021958ecb1fe622fb5d&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序一</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=2fd7c627096a4ee588d41964a358d3c9&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序二</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=8f9fff26f6894b899f128002a0c34a83&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序三</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=06e257cf62464431b7f31386c61d9568&pid=2d58f18fed9243aaaaeabf1a6fd8c539">序四</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=61537b18f42440f1ae4d90c57c798e35&pid=2d58f18fed9243aaaaeabf1a6fd8c539">前言</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=ecbfb8ca1e434e9eb7d1d8da9569006a&pid=2d58f18fed9243aaaaeabf1a6fd8c539">第1章 软件复杂度剖析</a></li>
-<li><a href="">第2章 领域驱动设计概览</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=9542d12f7f254de8b138c247a420eeea&pid=2d58f18fed9243aaaaeabf1a6fd8c539">第3章 领域驱动设计统一过程</a></li>
-<li><a href="https://www.epubit.com/onlineEbookReader?id=2f52844d824b4d1aa8602f338f301cf0&pid=2d58f18fed9243aaaaeabf1a6fd8c539">第20章 领域驱动设计体系</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Writing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《解构领域驱动设计》推荐序</title>
-    <url>/recommendation-of-my-book/</url>
-    <content><![CDATA[<p>我的书《<a href="https://www.epubit.com/bookDetails?id=UB77d68d84212a6&typeName=">解构领域驱动设计</a>》即将由人民邮电出版社异步社区出版，目前已经可以在出版社的官网预定，很快就能够在电商平台上架开售。历时近四年的写作委实不易，当然，也离不开各位朋友的支持与帮助。正如我在本书前言中提到的“感谢京东周吉鑫、AWS高翊凯（Kim Kao）、腾讯王立与技术专家于君泽（花名“右军”）诸兄的抬爱，他们不仅拨冗为我的著作作序，也给了我许多好的建议与指点，提升了本书的整体质量。”</p>
-<p>为此，在这里我抢先发布这些朋友为本书写的推荐序，以飨读者。</p>
-<span id="more"></span>
-
-
-
-<h3 id="推荐序一"><a href="#推荐序一" class="headerlink" title="推荐序一"></a>推荐序一</h3><p>本书的读者是幸运的！我运用领域驱动设计磕磕绊绊十余年，读过本书的内容之后，深感它是一本可与《领域驱动设计》和《实现领域驱动设计》互补的书，它在领域驱动设计落地方面尤其出色。</p>
-<p>2007年，我阅读了Eric Evans的《领域驱动设计》。2014年，我又阅读了由Eric Evans作序、Vaughn Vernon编写的《实现领域驱动设计》，后来，我有幸认识了该书的审校者张逸老师，和张逸老师的沟通令我受益匪浅。虽然知道张逸老师在领域驱动设计方面功力颇深，但在拜读了张逸老师的这本书的初稿之后，我依然非常吃惊，觉得张逸老师真正做到了将领域驱动设计知识融会贯通。张逸老师在这本书中对限界上下文、聚合、领域服务概念进行了深刻阐述，并通过案例的运用让研发人员在使用这些概念时不再迷惑。他还在参透了六边形整洁架构、架构与分层架构的本质后，大胆突破，提出了精简的菱形对称架构，从架构角度让领域驱动设计更加容易理解和落地，并通过服务驱动设计，以任务分解的方式让测试驱动开发和领域驱动设计无缝结合，让设计可以推导验证，让开发人员可以自然而然写出不再“贫血”的代码。</p>
-<p>本书不仅具备国内作者难得的宽阔视野和理论深度，而且有丰富的案例与实战经验总结，其中一些总结还细心地标明了出处，如关于过度设计和设计不足的权衡案例后面的总结：“具有实证主义态度的设计理念是面对不可预测的变化时，应首先保证方案的简单性；当变化真正发生时，可以通过诸如提炼接口（extract interface）[6]341的重构手法，满足解析逻辑的扩展。”</p>
-<p>本书中有很多这样的总结，因此阅读这本书相当于吸收了很多本书的精华。记得张逸老师曾向我推荐过Robert Martin的《架构整洁之道》，当时我告诉他那是我2019年读的最好的一本书，而今天，我要告诉他，他的这本书是我2020年读到的最好的一本书！</p>
-<p><strong>作者：</strong>周吉鑫，京东资深业务架构师，2011年起至今在京东公司进行物流系统的建模、分析和设计工作，主要工作包括京东亚洲一号WMS、WMS3.0～WMS6.0系统、云仓、国际化物流系统、无人仓系统等的建模、分析和设计。</p>
-<h3 id="推荐序二"><a href="#推荐序二" class="headerlink" title="推荐序二"></a>推荐序二</h3><p>2019年的冬天，我从台湾赶往上海，为公司内的团队进行领域驱动设计（DDD）与事件风暴的培训，在完成了培训工作后马不停蹄地赶往北京，只为了与领域驱动设计社区的伙伴王威、张逸相聚。在2019年领域驱动设计中国峰会（2019 DDD China Conference）上，我们分享了领域驱动设计台湾社区对领域驱动设计的理解与实践方式。是日恰巧迎来了北京的初雪，趁着此情此景，一行人把酒言欢，正是“初雪纷飞夜访，奇闻经历共话，点拨思绪再整，把酒笑谈学涯”。</p>
-<p>当时我们探讨了一个很重要的话题：很多人在学习领域驱动设计时，往往初探不得其窍门，而工作背景不同的人看待这一方法又往往仅侧重于一部分战略指导，或者只关注战略设计实践的代码层级，但不管侧重于哪一部分，都会让这种经典的指导协作与实现业务战略目标的软件工程方法略显失重，无法尽得其精要。</p>
-<p>2003年，Eric Evans的著作《领域驱动设计》从欧洲席卷而来，乃至于全球的软件工作者都渴望从他提出的领域建模方法中得到帮助，但十多年来，Eric Evans本人经常被问到：“有没有一种方法可以很好地指引我们进行业务建模？什么样的建模才是合理的，或者说可以一次就成其事达其标？”Eric Evans本人在很多公开场合都提过，其实这一切都依然需要依赖一些经验和持续积累的领域知识。对于这样需要由高度经验法则施行的领域驱动设计，一般的软件架构师、程序员以及相关的从业人员往往望而却步，个中原因便是始终少了一个系统性的指引，将业务流程梳理的产物对接到后续的程序开发中，实现从业务架构到系统架构的良好实践，使常见的业务与技术之间的隔阂降到最低。</p>
-<p>对于这本书，我首先要向张逸老师表达感激之情，然后祝贺本书的读者！感激张逸老师花了多年时间梳理并融合了其在软件设计领域的实务经验，将战略推进到战术过程中佚失的部分，并通过领域驱动设计统一过程（DDDUP），使领域驱动设计方法更加完备。祝贺本书的读者在拿到本书时就几乎综览了过去20多年的软件开发历程所提到的诸多重要元素。本书结合大量实务案例来探讨为何需要战略指导、为何需要以固有的战术设计范式指导实践，并辅以领域驱动设计统一过程的指导原则，指引读者逐步落地。本书不单纯以领域驱动设计来讲老生常谈的方法，而更像一位坐在你身边的资深架构师，与你结对进行系统架构设计，一起探索软件架构设计的奥秘。</p>
-<p>如果读者对软件工程有极大的热情，渴望更好地理解、实施领域驱动设计，解决复杂的业务问题，就千万别错过这本书。但我最真切地提醒读者，在购书之后务必阅读与身体力行兼具。行之才是学之。</p>
-<p><strong>作者：</strong>高翊凯（Kim Kao），Amazon Web Services（AWS）资深解决方案架构师，领域驱动设计台湾社区共同发起人之一。他的专长是软件系统设计，并致力于无服务器服务推广，推动企业透过领域驱动设计与便捷的云端服务打造更适切的建构系统方案，解决实际的业务问题。</p>
-<h3 id="推荐序三"><a href="#推荐序三" class="headerlink" title="推荐序三"></a>推荐序三</h3><p>自2003年Eric Evans的著作《领域驱动设计》面世以来，领域驱动设计（DDD）相关的实践书籍并不多，整体的理论发展速度并不快，以至于很长一段时间，开发团队的实践过程总是磕磕绊绊，这让他们觉得领域驱动设计的门槛很高，甚至有人怀疑领域驱动设计是否是一种足够成熟与体系化的方法论。根据我个人的经验，我确实发现其中不少问题仍旧没有什么经典论著能完全覆盖与讨论。看过这本书的内容后，我的感受是：无论是理论还是实践，领域驱动设计知识体系确实都已经成熟了，与国内外的经典领域驱动设计著作相比，这本书包含了更多案例，覆盖了更多问题场景，回答了更多人们不常考虑的细节。本书作者不仅继承了各类经典著作的精华，更难得的是他能够在实践中深入细节进行推敲，批判与改良一些不成熟的理论，甚至有了自己的理论创新，例如，提出了菱形架构概念、对强一致事务与聚合的边界的一致性提出挑战……特别是，他还创造性地提出了领域驱动设计统一过程（DDDUP），很好地总结了完整的领域驱动设计知识体系。</p>
-<p>有些读者可能不理解本书为什么这么厚。网络上有大量碎片式的领域驱动设计文章，一个案例只有几页，市场上也有不少领域驱动设计方面的培训，两天就能帮我们“搞定”领域驱动设计，领域驱动设计的知识体系似乎并没有我们想象的那么丰满。但事实上，这本书将告诉我们，领域驱动设计背后完整的知识体系并没有那么简单，我们需要掌握的是从业务到技术的整个技能栈。我们必须接受的事实是：领域驱动设计是有一定学习曲线的。所以，不要拒绝一本足够厚的书，这恰恰是其价值的体现。这本书的各个部分不是泛泛而谈，而是通过展开细节，层层推进，帮助读者建立扎实的理论基础，并通过大量翔实的案例，让读者能灵活运用理论知识。对于初学者，本书尽可能详尽地把问题展开、讲透；对于有一定经验的老手，本书也有更多有深度的细节思考和理论拓展。相信这本书会成为国内领域驱动设计技术书籍的一个标杆。</p>
-<p>张逸先生是我国最早一批接触并实践领域驱动设计的先行者，经验极其丰富。本书不仅是他在该领域十多年实战经验的沉淀和升华，也是他多年教学经验的总结和提炼。他曾经为很多行业巨头提供过咨询服务，是国内在领域驱动设计方面影响力最大的布道者之一。看到张逸先生的书终于要出版了，我感到非常高兴，我们太需要这样一本既有理论升华又如此接地气的大作了。</p>
-<p>我熟读了几乎所有的领域驱动设计经典著作，但仍旧从张逸先生的书中获益良多。我认为本书的广度、深度与创新性已经可以与该领域的国际经典著作看齐，这也是国人的骄傲。本书的出版是领域驱动设计理论界的一个重要事件，是对软件行业在领域驱动设计方面的巨大贡献，必将降低整个行业掌握领域驱动设计的门槛，加速领域驱动设计的普及。能为这本书作序是我的荣幸，同为领域驱动设计布道者，我将向我的同行强烈推荐本书。这本书也是我本人将来开展工作的重要理论指导。</p>
-<p><strong>作者：</strong>王立，微信支付12级专家工程师、技术领导者。他从2006年起开始研究领域驱动设计，曾经在阿里巴巴、神州数码、网宿科技等上市公司担任技术专家与技术经理，现在负责微信支付技术团队在领域建模、分析和设计方面的实践指导。</p>
-<h3 id="推荐序四"><a href="#推荐序四" class="headerlink" title="推荐序四"></a>推荐序四</h3><p>领域驱动设计方面的书现在不是太多，而是太少。想必不少读者受过《领域驱动设计》和《实现领域驱动设计》两本书的启蒙。本书是我特别推荐的领域驱动设计方面的技术书，为何特别推荐，且听下文。</p>
-<p>大约在2007年，我第一次读《领域驱动设计》一书时，如读天书，主要记住了类似实体、值对象、工厂、仓储等概念。近年来，随着微服务的流行，国内对领域驱动设计的研究和实践愈发多了起来。</p>
-<p>我对领域驱动设计的态度是：相对于战术设计，应该更看重战略设计。数年前，我醉心于研究领域模型。领域是业务变化中接近不变性的部分，业务包括领域对象、业务逻辑和界面交互3个层次，其中领域对象是最稳定的。2015年我组织领域建模工作坊活动时，用的就是《分析模式：可复用的对象模型》一书中的一个需求场景。2016年我写了一篇文章，强调了问题域和解决方案域的区分。张逸兄在GitChat上的两个连载专栏历时两年，创作数十万字，内容之丰满，关键节点探讨之深刻，于我之所见，浩瀚领域专家，无出其右者。虽大家都各自奔忙，仅偶有线上问候或者面聊，但皆有受益。本书的成书过程尤其令人钦佩，张逸兄不是直接将专栏调整成书，而是重新组织架构，提炼出自己的方法体系，可以说是推陈出新，自成一家。</p>
-<p>张逸兄敢言人之所未言。领域驱动设计有四大不足：领域驱动设计缺乏规范的统一过程，领域驱动设计缺乏与之匹配的需求管理体系，领域驱动设计缺乏规范化的、具有指导意义的架构体系，领域驱动设计的领域建模方法缺乏固化的指导方法。他创造性地提出领域驱动设计统一过程，虽然此方法有无调整空间，一定是要在不断实践中去检验的，但单就他的这份胆识和专业，足以让人钦佩。</p>
-<p>如果说非要给本书提一点儿意见的话，我觉得本书有点儿厚了。我认为一本好书也要兼顾读者的情况，最好能达到让读者快速上手的学习效果。但张逸兄坚持让本书以集大成者的面貌出现，洋洋洒洒数十万字，力求让其成为一本值得珍藏的技术书。</p>
-<p>凡学习，须循序渐进。我建议读者把面向对象的分析（object-oriented analysis，OOA）、面向对象的设计（object-oriented design，OOD）、统一建模语言（unified modeling language，UML）、模式等相关知识作为阅读本书的前序内容。《领域驱动设计》一书也特别提到了“复杂性”，有一定的软件从业经验的朋友对“复杂性”更感同身受。</p>
-<p>每个人心中都有一个哈姆雷特，每一位读者都可以登临领域驱动设计的阁楼，从不同的角度或俯瞰、或仰望、或凝视。我之所得：于道，是对限界上下文特别有共鸣的部分，以及问题空间（域）与解空间（域）；于术，是作者提出的领域驱动设计的“三大纪律八项注意”，可作为团队执行作战任务的纪律规范。其中，“三大纪律”是实施领域驱动设计的准则：</p>
-<ul>
-<li><p>领域专家与开发团队在一起工作；</p>
-</li>
-<li><p>领域模型必须遵循统一语言；</p>
-</li>
-<li><p>时刻坚守两重分析边界与四重设计边界。</p>
-</li>
-</ul>
-<p>信笔至此，兹为张兄推荐。本书精彩之处甚多，留待读者去发现。祝阅读愉快！</p>
-<p><strong>作者：</strong>于君泽（右军），技术专家，《深入分布式缓存：从原理到实践》和《程序员的三门课：技术精进、架构修炼、管理探秘》联合作者。</p>
-]]></content>
-      <categories>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Writing</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决Flink流式任务的性能瓶颈</title>
-    <url>/solution-to-performance-bottleneck/</url>
-    <content><![CDATA[<p>都说“过早进行性能优化是万恶之源”，我宁肯相信这是为了“矫枉过正”而出此惊人之语，更何况，现在的IT时代已与Donald Knuth的时代已有很大差异了。重点还是在于<strong>“过早”</strong>这个词，之所以Knuth告诫我们不要过早进行性能优化，原因在于：</p>
-<ul>
-<li>判断性能是否存在问题，不能太早</li>
-<li>太早做性能优化，有可能并没有弄清楚性能瓶颈在哪里</li>
-</ul>
-<img src="/solution-to-performance-bottleneck/knuth.JPG" class="">
-
-<p>图为Donald Knuth在斯坦福大学计算机科学William Gates大楼的办公室</p>
-<p>最近，我的团队成员正在着力于提高实时流处理任务的性能。由于客户为我们的测试环境仅提供了极度可怜的集群资源，我们需要在“螺蛳壳里做道场”，死扣性能，尽可能在方案与实现上将性能提升到极致。（顺带说，在测试时，不要奢侈地提供大量资源，反倒有可能尽早发现性能问题，从而让团队想办法解决之。）</p>
-<span id="more"></span>
-
-
-
-<p>一开始，我们想到的方案是增加Flink Streaming Job每个算子或算子链的并行度。Flink支持多个级别设置并行度，包括：</p>
-<ul>
-<li><p>环境级别：对Execution Environment进行<code>parallelism</code>的设置</p>
-</li>
-<li><p>客户端级别：客户端提交Job时通过命令参数-p进行设置</p>
-</li>
-<li><p>算子级别：调用每个算子的<code>setParallelism()</code>方法设置算子的并行度，在为算子设置并行度时，需要考虑它对算子链的影响。如果相邻算子的并行度不一样，两个算子就不能成为算子链。算子链可以减少不必要的线程切换，减少不必要的序列化和反序列化操作，减少延迟提高吞吐能力，因此，如果两个算子相邻，且中间没有数据的shuffle操作，应保证它们的并行度是相同的。</p>
-</li>
-</ul>
-<p>如果没有显式设置并行度，Flink的系统默认并行度为1。不同级别优先级不同，优先级按照高低，顺序依次为：</p>
-<p>算子级别 -&gt; 客户端级别 -&gt; 环境级别 -&gt; 系统默认级别</p>
-<p>Flink的并行度设置并不是说越大，数据处理的效率就越高，而是需要设置合理的并行度。并行度的设置数量取决于Task Manager的数量以及slot数量。通常可以认为Task Manager部署的节点有多少核CPU，就有多少个slot。</p>
-<p>设置了合理的并行度，就能有效地利用Worker节点的资源。但为何在实现之初，没有考虑并行度呢？原因在于引入并行度后，从上游传入的数据就会被Task Manager分配到不同的slot做并行处理，由于不同任务执行时间不同，slot的执行效率也可能不同，就可能无法保证同类数据多条数据的时序性。</p>
-<p>为了保证同类数据的执行时序性，我们引入了Flink的<code>keyBy</code>算子。它能够将相同key的元素散列到一个子任务中，且没有改变原来的元素数据结构。<code>keyBy</code>使用的key应使用数据的主键，即ID，如此就能保证拥有相同ID值的同类数据一定执行在同一个子任务中，进行同步处理，这就保证了数据处理的时序性。时序性与并行度带来的高性能，就能鱼与熊掌兼得了。</p>
-<p>即便如此，我们提升的性能依旧有限，毕竟受到资源的限制，我们不能盲目增大并行度。由于单条消息数据的处理逻辑非常复杂，它的处理能力已经达到我们能够优化的极限。最后，评估任务的处理能力，仅能做到每秒处理6条左右的数据，这一结果自然不能接受。一种立竿见影的手段是增加更多的资源，但我们还是想在没有更多资源支持下，看看能否竭尽所能提升性能。——这时，我们才想到去探索<strong>性能瓶颈</strong>到底在哪里？</p>
-<p>我们开始监控实时流任务的执行，通过日志记录执行时间，在单条数据处理能力已经无法优化的情况下，发现真正的性能瓶颈不在于Flink自身，而是任务末端将处理后的数据写入到ElasticSearch这一阶段。</p>
-<p>在执行流式处理过程中，上游一旦采集到数据，就会及时逐条处理，这也是流式处理的实时特征。根据我们的业务特征，平台在接收到上游采集的流式数据后，经过验证、清洗、转换与业务处理，会按照主题治理的要求，将处理后的数据写入到ElasticSearch。然而，这并非流任务处理的终点。数据在写入到ElasticSearch后，平台需要触发一个事件，应下游系统的要求，将上游传递的消息转换为出口消息。由于上游传递的消息不一定包含了出口消息的所有数据，在转换消息时，平台还需要查询ElasticSearch，获得包括最近更新的数据，作为组成出口消息的数据内容。</p>
-<p>这里仍然存在时序性问题！在组成出口消息时需要查询ElasticSearch，这就要求最新的数据已经写入成功并能被检索到。由于ElasticSearch要支持全文本检索，写入数据时需要为其建立索引，也就是Lucene中的Segments，使得每次写操作的延迟相对于读操作而言要高一些。为了提升写入性能，ElasticSearch引入了in-memory buffer（内存缓冲区），提供了refresh（刷新）的三种方式：</p>
-<ul>
-<li><p>即刻刷新</p>
-</li>
-<li><p>指定周期刷新，默认周期为1s，它也是ElasticSearch的默认值</p>
-</li>
-<li><p>当内存缓冲区满时刷新</p>
-</li>
-</ul>
-<p>只有即刻刷新，才能在一条数据写入到 Elasticsearch 后，能被马上搜索到。当上游采集的数据量非常多，且采用流式方式传入时，下游ElasticSearch的逐条写入与即刻刷新机制就成为了性能瓶颈。如果采用后两种刷新机制，又会导致索引未建立，无法即时搜索到最新数据，就会导致数据不一致。换言之，在我们的场景中，选择“即刻刷新”是必然的！要解决写入瓶颈的问题，最佳做法是放弃逐条写入，改为ElasticSearch支持的批量写入，如此即可减少不必要的连接，也能减少IO的次数。</p>
-<p>虽说上游传递的流式数据需要实时进行处理，却并未要求它必须实时写入ElasticSearch，也未要求它必须实时推送给下游系统。当然，也不能延迟太长的时间。</p>
-<p>为了权衡写入性能和数据正确性以及一致性，可以<strong>将实时写入改造为微批量的写入</strong>，如此，既能通过批量写入提升ElasticSearch的写入性能，又能保证数据必须成功写入到ElasticSearch后再推送消息，确保数据正确性与一致性。</p>
-<p>团队成员想到了引入Flink的窗口，具体说来，是使用Flink时间窗口中的会话窗口与滚动窗口。</p>
-<p>会话窗口的作用是在指定窗口周期内将相同key值的数据汇聚起来，我们为不同的key分配对应的会话窗口，而窗口好似一个桶，每个桶各自装各自key值的数据：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.keyBy(<span class="keyword">new</span> KeyById())</span><br><span class="line">.window(ProcessingTimeSessionWindows.withGap(Time.seconds(<span class="number">1</span>)))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如此这般，就能将1秒内相同key值的数据放到相同的会话窗口中，然后，通过<code>reduce()</code>算子对同一会话窗口中的数据进行合并，形成状态：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">.reduce(<span class="keyword">new</span> MergeWighSameId())</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这一方式虽然实现了相同key数据的合并，但由于窗口的数量太过分散，导致数据汇聚的作用并不明显，没有达到批量写入提升性能的目的。</p>
-<p>既然已经合并了相同key的数据，我们就可以减少窗口的数量，从而让不同key值的数据也能够汇聚到同一个窗口，形成数据的集合，交由下游进行批量写入。此时，选择的窗口为滚动窗口。</p>
-<p>虽说窗口数量需要减少，但为了更好地利用资源，最好保证窗口的数量等于并行度。通过<code>env.getParallelism()</code>方法可以获得当前环境的并行度，在对数据的ID（它是数据的key）进行哈希值计算后，将并行度作为因子进行取模，就能将窗口数量压缩，天然实现数据的汇聚：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 再执行了reduce后</span></span><br><span class="line">.keyBy(<span class="keyword">new</span> KeyById(env.getParallelism()))</span><br><span class="line">.window(TumblingProcessingTimeWindows.of(Time.second(<span class="number">1</span>)))</span><br><span class="line">.reduce(<span class="keyword">new</span> CellectEntities())</span><br><span class="line">...<span class="comment">// 汇聚后写入到ElasticSearch</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>对比改进前后的流式任务，下图是执行未加窗口的流式任务结果：</p>
-<img src="/solution-to-performance-bottleneck/before.png" class="">
-
-
-
-<p>下图是执行加窗口后的流式任务结果：</p>
-<img src="/solution-to-performance-bottleneck/after.png" class="">
-
-
-
-<p>相同环境下，前者处理流式数据的频率大概为6条/秒左右，后者则达到了20条/秒左右，整体性能提升了3倍多，实现了不通过横向添加资源就完成了流式任务的性能优化，归根结底，在于我们发现了性能瓶颈，然后再对症下药，方可取得疗效。</p>
-<p><strong>说明：</strong>本文的技术方案与部分内容来自我的团队成员郑雄杰同学。</p>
-]]></content>
-      <categories>
-        <category>Architecture</category>
-      </categories>
-      <tags>
-        <tag>Flink</tag>
-        <tag>BigData</tag>
-        <tag>ElasticSearch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ZenUML与服务驱动设计</title>
-    <url>/service-driven-design-and-zenuml/</url>
-    <content><![CDATA[<p>在《<a href="https://item.jd.com/10035002181202.html">解构领域驱动设计</a>》书中的领域建模阶段，我提出了以<strong>业务服务</strong>为核心进行设计与建模的方法——<strong>服务驱动设计</strong>。通过该方法可以在静态的领域设计模型基础之上，以业务服务规约为基础，通过分析需求，对业务服务进行任务分解，获得以子任务构成的任务树。这棵树以业务服务为根，组合任务为枝，原子任务为叶，既体现了业务服务的执行过程，又进行了适度的封装，建立了一定的封装层次。</p>
-<p>一旦获得了子任务树，即可对树中的每一个子任务进行职责分配，根据其特点分别分配给远程服务、本地服务、领域服务、聚合、端口。它们是构成限界上下文的主要对象角色，我将其称之为“角色构造型”，可以和我提出的<strong>菱形对称架构</strong>结合：</p>
-<img src="/service-driven-design-and-zenuml/rsa.jpg" class="">
-
-<span id="more"></span>
-
-<p>分配的过程可以呈现为序列图，作为动态的领域设计模型，它与静态的领域设计模型共同组成领域设计模型。然则，绘制序列图总是不太方便，于是，我提出了编写序列图脚本的方法。以提交订单业务服务为例，分解获得的子任务树为：</p>
-<img src="/service-driven-design-and-zenuml/task-tree.jpg" class="">
-
-
-
-<p>根据职责分配的规则，业务服务分配给远程服务与本地服务，组合任务分配给领域服务，原子任务分配给聚合或端口，就可以编写出如下的序列图脚本：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">OrderController.placeOrder(placingOrderRequest) &#123;  <span class="comment">// 业务服务对应远程服务</span></span><br><span class="line">   OrderAppService.placeOrder(placingOrderRequest) &#123;<span class="comment">//应用服务的方法体现服务价值</span></span><br><span class="line">      OrderService.placeOrder(order) &#123; <span class="comment">// 领域服务对应组合任务，避免领域逻辑泄露到应用服务</span></span><br><span class="line">         OrderService.validate(order) &#123; <span class="comment">// 领域服务对应组合任务</span></span><br><span class="line">            Order.validate();   <span class="comment">// 聚合承担原子任务</span></span><br><span class="line">            InventoryCheckingClient.check(order); <span class="comment">// 客户端端口指向库存上下文的边界服务</span></span><br><span class="line">         &#125;</span><br><span class="line">         OrderRepository.save(order); <span class="comment">// 资源库端口操作订单数据表</span></span><br><span class="line">         ShoppingCartService.removeItems(customerId,cartItems) &#123; <span class="comment">// 领域服务对应组合任务</span></span><br><span class="line">            ShoppingCartRepository.cartOf(customerId); <span class="comment">// 资源库端口操作购物车数据表</span></span><br><span class="line">            ShoppingCart.removeItems(cartItems);  <span class="comment">// 聚合承担原子任务</span></span><br><span class="line">            ShoppingCartRepository.save(shoppingCart); <span class="comment">// 资源库端口操作购物车数据表</span></span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      OrderPlacedPublisher.publish(orderPlacedEvent); <span class="comment">// 发布者端口发布订单已提交的应用事件</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>序列图脚本的创意并非我的创举，而是<a href="https://zenuml.com/">ZenUML</a>给予我的启发。我还在ThoughtWorks的时候，我的Sponser肖鹏正在打磨这个工具。我们二人都认同UML的序列图对于领域建模与设计颇有助力。一方面，序列图这一可视化方式可以提供给设计者一些特征，用于甄别设计的坏味道；另一方面，绘制序列图时，是由外向内逐层递进的，可以更好地站在调用者的角度去思考设计，消息的定义也会产生一种驱动力。我在为GitChat编写领域驱动设计课程时，就想到了这一工具，它提供的脚本语法非常接近Java语法，于是，我就采用拿来主义，将其搬到我的文章里，在融入业务服务、菱形对称架构、角色构造型后，组成了服务驱动设计，其完整过程如下图所示：</p>
-<img src="/service-driven-design-and-zenuml/sdd.jpg" class="">
-
-
-
-<p>在《解构领域驱动设计》一书即将出版前，我准备修改<a href="https://gitee.com/agiledon/diamond">针对菱形对称架构提供的一个案例</a>，预备在代码库中增加提交订单的序列图脚本。忽然想起之前与肖鹏交流时，他曾提及ZenUML已经为IntelliJ IDEA开发了插件。果然在Settings -&gt; Plugins中找到了ZenUML的插件：</p>
-<img src="/service-driven-design-and-zenuml/zenuml-plugin.png" class="">
-
-
-
-<p>它的使用方式非常简单，在安装了该插件后，你可以在代码库的任意位置（建议在项目根目录下定义一个文件夹），新建一个扩展名为<code>.zen</code>的文件，然后在文件内根据语法编写序列图脚本，工具就可以自动生成序列图了：</p>
-<img src="/service-driven-design-and-zenuml/zenuml-script-sequence.png" class="">
-
-
-
-<p>在上图右上方的View工具栏上，还可以切换视图类型，从左到右依次为：</p>
-<ul>
-<li>仅显示编辑器：此时只会显示时序图脚本</li>
-<li>显示编辑器和预览：如上图所示，同时显示时序图脚本和预览的时序图效果</li>
-<li>仅显示预览：此时只会显示序列图</li>
-<li>在浏览器中打开</li>
-</ul>
-<p>如果将ZenUML工具运用到服务驱动设计方法中，即可在领域设计建模阶段尝试通过IDE建模，分析需求后，尝试编写序列图脚本，然后对照生成的序列图对脚本进行调整。调整的成本很低，完全可以随时修订。一旦确定了最终的序列图，即可按照测试驱动开发的流程，优先为聚合承担的原子任务和组合任务编写测试用例，通过测试驱动出该业务服务的实现代码。</p>
-<p>ZenUML的功能当然不限于此，在驱动出最终的实现代码后，也可以将真实代码转换为序列图。例如在IntelliJ IDEA中，打开已经实现好的远程服务类<code>OrderController</code>，将光标移到要生成序列图的方法体内，右键弹出快捷菜单，即可看到如下的菜单项：</p>
-<img src="/service-driven-design-and-zenuml/zenuml-menu.png" class="">
-
-
-
-<p>选择该菜单项，就会自动生成序列图脚本与对应的序列图，生成的文件为<code>buffer&#123;n&#125;.zen</code>：</p>
-<img src="/service-driven-design-and-zenuml/zenuml-generated.png" class="">
-
-
-
-<p>如果你不喜欢它默认提供的呈现样式，也可以到Languages &amp; Frameworks中找到ZenUML，添加CSS规则，以改变呈现样式：</p>
-<img src="/service-driven-design-and-zenuml/zenuml-css.jpg" class="">
-
-
-
-<p>ZenUml除了<a href="https://app.zenuml.com/">Web APP</a>之外，还提供了<a href="https://marketplace.atlassian.com/apps/1218380/zenuml-sequence-diagram">Confluence插件</a>，以便于我们编写设计文档。不出意料之外，它也为主流的浏览器提供了扩展，例如，在Microsoft Edge浏览器中可找到ZenUML Sequence扩展，安装后，工具栏会出现它的图标，打开，即可输入序列图脚本生成序列图：</p>
-<img src="/service-driven-design-and-zenuml/zenuml-explorer.png" class="">
-
-
-
-<p>真的是太方便了！ZenUML简直就是为服务驱动设计量身定做的。至于该怎么实践服务驱动设计，在《解构领域驱动设计》书中你可以找到答案。该如何使用ZenUML？那就太简单了，它的脚本语法基本和Java相同，使用也非常简单，无论是通过浏览器还是IDE，实际去使用一下，很快就能理解它的价值。</p>
-<p>如果你的开发流程和开发工具中需要序列图，也可以直接在系统中把ZenUML作为一个前端库进行集成。目前已经有多家企业在自己的构建流程中集成了ZenUML。某国内企业在构建过程中使用ZenUML在文档中嵌入序列图；某国外企业则开发了Python转ZenUML工具，从代码直接生成序列图。ZenUML的文本转序列图的功能以免费的形式发布在<a href="https://www.npmjs.com/package/vue-sequence">npm</a>上面。ZenUML开发者提供（有限的）免费技术支持。</p>
-]]></content>
-      <categories>
-        <category>Tool</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Tool</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《解构领域驱动设计》第一章</title>
-    <url>/chapter-1-of-ddde/</url>
-    <content><![CDATA[<p>计算机编程的本质就是控制复杂度。</p>
-<p>——Brian Kernighan</p>
-<p>复杂的事物中蕴含着无穷的变化，让人既沉迷其美，又深恐自己无法掌控。我们每日每时对软件的构建就在与复杂的斗争中不断前行。软件系统的复杂度让我觉得设计有趣，因为每次发现不同的问题，都会有一种让人耳目一新的滋味油然而生，仿佛开启了新的旅程，看到了不同的风景。同时，软件系统的复杂度又让我觉得设计无趣，因为要探索的空间实在太辽阔，一旦视野被风景所惑，就会迷失前进的方向，感到复杂难以掌控，从而失去构建高质量系统的信心。</p>
-<p>那么，什么是复杂系统？</p>
-<span id="more"></span>
-
-
-
-<h2 id="1-1-什么是复杂系统"><a href="#1-1-什么是复杂系统" class="headerlink" title="1.1　什么是复杂系统"></a>1.1　什么是复杂系统</h2><p>我们很难给复杂系统下一个举世公认的定义。专门从事复杂系统研究的Melanie Mitchell在接受Ubiquity杂志专访时，“勉为其难”地为复杂系统给出了一个相对通俗的定义：”由大量相互作用的部分组成的系统。与整个系统比起来，这些组成部分相对简单，没有中央控制，组成部分之间也没有全局性的通信，并且组成部分的相互作用导致了复杂行为。”</p>
-<p>这个定义庶几可以表达软件复杂度的特征。定义中的“组成部分”对于软件系统，就是所谓的“软件元素”，基于粒度的不同可以是函数、类、模块、组件和服务等。这些软件元素相对简单，然而彼此之间的相互作用却导致了软件系统的复杂行为。软件系统符合复杂系统的定义，不过是进一步证明了软件系统的复杂度。然而该如何控制软件系统的复杂度呢？恐怕还要从复杂度的成因开始剖析。</p>
-<p>Jurgen Appelo从理解能力与预测能力两个维度分析了复杂度的成因。这两个维度各自分为不同的复杂层次：</p>
-<ul>
-<li><p>理解能力维度——简单的（simple）和复杂的（complicated）；</p>
-</li>
-<li><p>预测能力维度——有序的（ordered）、复杂的（complex）和混沌的（chaotic）。</p>
-</li>
-</ul>
-<p>两个维度都蕴含了“复杂”的含义：前者与简单相对，意为复杂至难以理解，可阐释为“复杂难解”；后者与有序相对，意为它的发展规律难以预测，可阐释为“复杂难测”。在预测能力维度，“难测”还不是最复杂的层次，最高层次为混沌，即根本不可预测。两个维度交叉，可以形成6种代表不同复杂意义的层次定义，Jurgen Appelo通过图1-1形象地说明了各个复杂层次的特征。</p>
-<img src="/chapter-1-of-ddde/1-1.png" class="">
-
-<p>图1-1　复杂系统的特征 </p>
-<p>以下是Jurgen Appelo对这些例子给出的说明：</p>
-<blockquote>
-<p> 我的内衣很简单。我很容易理解它们的工作原理。我的手表是精密复杂的，如果把它拆开，我需要很长时间才能了解其设计原理和组件。但是我的手表或我的内衣都没有什么让人吃惊的（至少对我而言）。它们是有序的、可以预测的系统。</p>
-</blockquote>
-<blockquote>
-<p> 一个三人软件开发团队也是简单的，只需要开几次会议，提供一些晚餐，外加几杯啤酒，就可以了解这个团队的每一个人了。一座城市是不简单的、繁杂的，出租车司机需要几年时间才能熟悉这座城市的所有街道、胡同、宾馆和饭店。但同时，团队和城市又都是复杂的。不管你有多了解它们，总会有意想不到的事情发生它们身上。在某种程度上，它们是可预测的，但是你永远不清楚明天会发生什么。</p>
-</blockquote>
-<blockquote>
-<p> 双摆（两个摆锤互相连接）也是一个简单的系统，容易制作也很容易理解。但因为对钟摆的初始设置具有高度敏感性，所以它进行的是不可预测的混沌运动。股票市场也是混沌的，根据定义，它是不可预测的，否则每个人都知道怎么利用股票交易来赚钱，就会导致整个系统崩盘。但是，股票市场又不像钟摆那样，它是相当繁杂的。</p>
-</blockquote>
-<p>软件系统属于哪一个复杂层次呢？</p>
-<p>大多数软件系统需要实现的整体功能往往是难以理解的，同时，随着需求的不断演进，它又在一定程度具有未来的不可预测性，这意味着软件系统的“复杂”同时覆盖了“复杂难解”（complicated）与“复杂难测”（complex）两个层面，对标图1-1给出的案例，就是一座城市的复杂特征。无独有偶，Pete Goodliffe也将软件系统类比为城市，他说：“软件系统就像一座由建筑和后面的路构成的城市——由公路和旅馆构成的错综复杂的网络。在繁忙的城市里发生着许多事情，控制流不断产生，它们的生命在城市中交织在一起，然后死亡。丰富的数据积聚在一起、存储起来，然后销毁。有各式各样的建筑：有的高大美丽，有的低矮实用，还有的坍塌破损。数据围绕着它们流动，形成了交通堵塞和追尾、高峰时段和道路维护。”既然如此，那么设计一个软件系统就像规划一座城市，既要考虑城市布局，以便居民的生活与工作，满足外来游客或商务人员的旅游或出差需求，又要考虑未来因素的变化，例如“当居民对城市的使用方式有所变化，或者受到外力的影响时，城市就会相应地演化”。参考城市的复杂度特征，我们要剖析软件系统的复杂度，就可以从理解能力与预测能力这两个维度探索软件复杂度的成因。</p>
-<h2 id="1-2-理解能力"><a href="#1-2-理解能力" class="headerlink" title="1.2　理解能力"></a>1.2　理解能力</h2><p>是什么阻碍了开发人员对软件系统的理解？设想项目组招入一位新人，当这位新人需要理解整个项目时，就像一位游客来到一座陌生的城市。他是否会迷失在错综复杂的城市交通体系中，不辨方向？倘若这座城市实则是乡野郊外的一座村落，只有房屋数间，一条街道连通城市的两头，他还会生出迷失之感吗？</p>
-<p>因而，影响理解能力的第一要素是规模。</p>
-<h3 id="1-2-1-规模"><a href="#1-2-1-规模" class="headerlink" title="1.2.1　规模"></a>1.2.1　规模</h3><p>软件的需求决定了系统的规模。一个只有数十万行代码的软件系统自然不可与有数千万行代码的大规模系统相提并论。软件系统的规模取决于需求的数量，更何况需求还会像树木那样生长。一棵小树会随着时间增长渐渐长成一棵参天大树，只有到了某个时间节点，需求的数量才会慢慢稳定下来。当需求呈现线性增长的趋势时，为了实现这些功能，软件规模也会以近似的速度增长。</p>
-<p>系统规模的扩张，不仅取决需求的数量，还取决于需求功能点之间的关系。需求的每个功能不可能做到完全独立，彼此之间相互影响相互依赖，修改一处就会牵一发而动全身，就好似城市中的某条道路因为施工需要临时关闭，车辆只得改道绕行，这又导致了其他原本已经饱和的道路因为涌入更多车辆而变得更加拥堵。这种拥堵现象又会顺势向其他分叉道路蔓延，形成辐射效应。</p>
-<p>软件开发的拥堵现象或许更严重，这是因为：</p>
-<ul>
-<li><p>函数存在副作用，调用时可能对函数的结果做了隐含的假设；</p>
-</li>
-<li><p>类的职责繁多，导致开发人员不敢轻易修改，因为不知会影响到哪些模块；</p>
-</li>
-<li><p>热点代码被频繁变更，职责被包裹了一层又一层，没有清晰的边界；</p>
-</li>
-<li><p>在系统某个角落，隐藏着伺机而动的bug，当诱发条件具备时，就会让整条调用链瘫痪；</p>
-</li>
-<li><p>不同的业务场景包含了不同的例外场景，每种例外场景的处理方式都各不相同；</p>
-</li>
-<li><p>同步处理代码与异步处理代码纠缠在一起，不可预知程序执行的顺序。</p>
-</li>
-</ul>
-<p>随着软件系统规模的扩张，软件复杂度也会增长。这种增长并非线性的，而是呈现出更加陡峭的指数级趋势。这实际上是软件的熵发挥着副作用。正如David Thomas与Andrew Hunt认为的：“虽然软件开发不受绝大多数物理法则的约束，但我们无法躲避来自熵的增加的重击。熵是一个物理学术语，它定义了一个系统的‘无序’总量。不幸的是，热力学法则决定了宇宙中的熵会趋向最大化。当软件中的无序化增加时，程序员会说‘软件在腐烂’。”</p>
-<p>软件之所以无法躲避熵的重击，源于我们在构建软件时无法避免技术债（technical debt） 。不管软件的架构师与开发人员有多么的优秀，他们针对目前需求做出的看似合理的技术决策，都会随着软件的演化变得不堪一击，区别仅在于债务的多少，以及偿还的利息有多高。根据Ward Cunningham的建议，对付技术债的唯一方案就是尽量让它可见，例如通过技术债列表或者技术债雷达等可视化形式及时呈现给团队成员，并制订计划主动地消除或降低技术债。</p>
-<p>我曾经负责设计与开发一款商业智能（business intelligence，BI）产品，它需要展现报表下的所有视图。这些视图的数据来自多个不同的数据集，视图的展现类型多种多样，如柱状图、折线图、散点图和热力图等。在这个“逼仄”的报表问题空间中，需要满足如下业务需求：</p>
-<ul>
-<li><p>在编辑状态下，支持对每个视图进行拖曳以改变视图的位置；</p>
-</li>
-<li><p>在编辑状态下，允许通过拖曳边框调整视图的尺寸；</p>
-</li>
-<li><p>点击视图的图形区域时，应高亮显示当前图形对应的组成部分；</p>
-</li>
-<li><p>点击视图的图形区域时，获取当前值，并对属于相同数据集的视图进行联动；</p>
-</li>
-<li><p>如果打开钻取开关，则在点击视图的图形区域时，获取当前值，并根据事先设定的钻取路径对视图进行钻取；</p>
-</li>
-<li><p>支持创建筛选器这样的特殊视图，通过筛选器选择数据，对当前报表中所有相同数据集的视图进行筛选。</p>
-</li>
-</ul>
-<p>以上业务需求都是事先规划好，并且可以清晰预见的，由于它们都对视图进行操作，因此视图控件的多个操作之间出现冲突。例如，高亮与级联都需要响应相同的点击事件。钻取同样如此，不同之处在于它要判断钻取开关是否已经打开。在操作效果上，高亮与钻取仅针对当前视图，联动与筛选则会因为当前视图的操作影响到同一张报表下相同数据集的其他视图。对于拖曳操作，虽然它监听的是MouseDown事件，但该事件与Click事件存在一定的冲突。</p>
-<p>多个功能点的开发实现以及功能点之间存在的千丝万缕的关系带来了软件规模的成倍扩张：不同的业务场景会增加不同的分支，导致圈复杂度的增加；设计上如果未能做到功能之间的正交，就会是的功能之间相互影响，导致代码维护成本的增加；没有为业务逻辑编写单元测试，建立功能代码的测试网，就可能因为对某一处功能实现的修改引入了潜在的缺陷，导致系统运行的风险增加。纷至沓来的技术债逐渐积累，一旦累积到某个临界点，就会由量变引起质变，在软件系统的规模达到巅峰之时，迅速步入衰亡的老年期，成为“可怕”的遗留系统（legacy system）。这遵循了饲养场的奶牛规则：奶牛逐渐衰老，最终无奶可挤；与此同时，奶牛的饲养成本却在上升。</p>
-<p>软件规模的一个显著特征是代码行数（lines of code）。然而，代码行数常常具有欺骗性。如果需求的功能数量与代码行数之间呈现出不成比例的关系，说明该系统的生命体征可能出现了异常，例如，代码行数的庞大其实可能是一种肥胖症，意味着可能出现了大量的重复代码。</p>
-<p>我曾经利用Sonar工具对咨询项目的一个模块执行代码静态分析，分析结果如图1-2所示。</p>
-<img src="/chapter-1-of-ddde/1-2.png" class="">
-
-<p>图1-2　代码静态分析结果</p>
-<p>该模块代码共计40多万行，重复代码竟然占到了惊人的33.9%，超过一半的代码文件混入了重复代码。显然，这里估算的代码行数并没有真实地体现软件规模；相反，重复的代码还额外增加了软件的复杂度。</p>
-<p>Neal Ford认为需要通过指标指导设计 ，例如使用面向对象设计质量评估的平台工具iPlasma，通过它生成的指标可以作为评价软件规模的要素，如表1-1所示。</p>
-<p>表1-1　质量评估指标</p>
-<img src="/chapter-1-of-ddde/t1-1.png" class="">
-
-
-
-
-<p>在面向对象设计的软件项目里，除了代码行数，包、类、方法的数量，继承的层次以及方法的调用数，还有我们常常提及的圈复杂度，都会或多或少地影响整个软件系统的规模。</p>
-<h3 id="1-2-2-结构"><a href="#1-2-2-结构" class="headerlink" title="1.2.2　结构"></a>1.2.2　结构</h3><p>你去过迷宫吗？相似而回旋繁复的结构使得封闭狭小的空间被魔法般地扩展为一个无限的空间，变得无穷大，仿佛这空间被安置了一个循环，倘若没有找到正确的退出条件，循环就会无休无止，永远无法退出。许多规模较小却格外复杂的软件系统，就好似这样的一座迷宫。</p>
-<p>此时，结构成了决定系统复杂度的一个关键因素。</p>
-<p>结构之所以变得复杂，多数情况下还是由系统的质量属性（quality attribute）决定的。例如，我们需要满足高性能、高并发的需求，就需要考虑在系统中引入缓存、并行处理、CDN、异步消息以及支持分区的可伸缩结构；又例如，我们需要支持对海量数据的高效分析，就得考虑这些海量数据该如何分布存储，并如何有效地利用各个节点的内存与CPU资源执行运算。</p>
-<p>从系统结构的视角看，单体架构一定比微服务架构更简单，更便于掌控，正如单细胞生物比人体的生理结构要简单。那么，为何还有这么多软件组织开始清算自己的软件资产，花费大量人力物力对现有的单体架构进行重构，走向微服务化？究其主因，还是系统的质量属性。</p>
-<p>纵观软件设计的历史，不是分久必合合久必分，而是不断拆分的微型化过程。分解的软件元素不可能单兵作战。怎么协同，怎么通信，就成了系统分解后面临的主要问题。如果没有控制好，这些问题固有的复杂度甚至会在某些场景下超过分解带来的收益。例如，对企业IT系统而言，系统与系统之间的集成往往通过与平台无关的消息通信来完成，由此就会在各个系统乃至模块之间形成复杂的通信网结构。要理清这种通信网结构的脉络，就得弄清楚系统之间消息的传递方式，明确消息格式的定义，即使在系统之间引入企业服务总线（Enterprise Service Bus，ESB），也只能减少点对点的通信量，而不能改变分布式系统固有的复杂度，例如消息通信不可靠，数据不一致等因为分布式通信导致的意外场景。换言之，系统因为结构的繁复增加了复杂度。</p>
-<p>软件系统的结构繁复还会增加软件组织的复杂度。系统架构的分解促成了软件构建工作的分工，这种分工虽然使得高效的并行开发成为可能，却也可能因为沟通成本的增加为管理带来挑战。管理一个十人团队和百人团队，其难度显然不可相提并论，对百人团队的管理也不仅仅是细分为10个十人团队这么简单，这其中牵涉到团队的划分依据、团队的协作模式、团队成员组成与角色构成等管理因素。</p>
-<p>康威定律（Conway’s law） 就指出：“任何组织在设计一套系统（广义概念上的系统）时，所交付的设计方案在结构上都与该组织的沟通结构保持一致。”Sam Newman认为是需要“适应沟通途径”使得康威定律在软件结构与组织结构中生效。他分析了一种典型的分处异地的分布式团队。整个团队共享单个服务的代码所有权，由于分布式团队的地域和时区界限使得沟通成本变高，因此团队之间只能进行粗粒度的沟通。当协调变化的成本增加后，人们就会想方设法降低协调和沟通的成本。直截了当的做法就是分解代码，分配代码所有权，物理分隔的团队各自负责一部分代码库，从而能够更容易地修改代码，团队之间会有更多关于如何集成两部分代码的粗粒度的沟通。最终，与这种沟通路径匹配形成的粗粒度应用程序编程接口（application programming interface，API）构成了代码库中两部分之间的边界。</p>
-<p>注意，与设计方案相匹配的团队结构指的是负责开发的团队组织，而非使用软件产品的客户团队。我们常常遇见分布式的客户团队，例如，一些客户团队的不同的部门位于不同的地理位置，他们的使用场景也不尽相同，甚至用户的角色也不相同，但在对软件系统进行架构设计时，我们却不能按照部门组织、地理位置或用户角色来分解模块（服务），并错以为这遵循了康威定律。</p>
-<p>我曾经参与过一款通信产品的改进与维护工作。这是一款为通信运营商提供对宽带网的授权、认证与计费工作的产品，它的终端用户主要由两种角色组成：营业厅的营业员与购买宽带网服务的消费者。最初，设计该产品的架构师就错误地按照这两种不同的角色，将整个软件系统划分为后台管理系统与服务门户两个完全独立的子系统，为营业员与消费者都提供了资费套餐管理、话单查询、客户信息维护等相似的业务。两个子系统产生了大量重复代码，增加了软件系统的复杂度。在我接手该通信产品时，因为数据库性能瓶颈而考虑对话单数据库进行分库分表，发现该方案的调整需要同时修改后台管理系统与服务门户的话单查询功能。</p>
-<p>无论设计是优雅还是拙劣，系统结构都可能因为某种设计权衡而变得复杂。唯一的区别在于前者是主动地控制结构的复杂度，而后者带来的复杂度是偶发的，是错误的滋生，是一种技术债，它会随着系统规模的增大产生一种无序设计。《架构之美》中第2章“两个系统的故事：现代软件神话”详细地罗列了无序设计系统的几种警告信号：</p>
-<ul>
-<li><p>代码没有显而易见的进入系统中的路径；</p>
-</li>
-<li><p>不存在一致性，不存在风格，也没有能够将不同的部分组织在一起的统一概念；</p>
-</li>
-<li><p>系统中的控制流让人觉得不舒服，无法预测；</p>
-</li>
-<li><p>系统中有太多的“坏味道”；</p>
-</li>
-<li><p>数据很少放在它被使用的地方，经常引入额外的巴洛克式缓存层，试图让数据停留在更方便的地方。</p>
-</li>
-</ul>
-<p>看一个无序设计的软件系统，就好像隔着一层半透明的玻璃观察事物，系统的软件元素都变得模糊不清，充斥着各种技术债。细节层面，代码污浊不堪，违背了“高内聚松耦合”的设计原则，要么许多代码放错了位置，要么出现重复的代码块；架构层面，缺乏清晰的边界，各种通信与调用依赖纠缠在一起，同一问题空间的解决方案各式各样，让人眼花缭乱，仿佛进入了没有规则的无序社会。</p>
-<p>分层架构的引入原本是为了维护系统的有序性，而如果团队却不注意维护逻辑分层确定的边界，不按照架构规定的层次分配各个类的职责，就会随着职责的乱入让逻辑分层形成的边界变得越来越模糊。我在对一个项目进行架构评审时，曾看到图1-3所示的三层架构。</p>
-<img src="/chapter-1-of-ddde/1-3.png" class="">
-
-<p>图1-3　层次混乱的架构</p>
-<p>虽然架构师根据关注点的不同划分了不同的层次，但各个逻辑层没有守住自己的边界：业务逻辑层定义了EditableControlBase、EditablePageBase与PageBase等类，它们都继承自ASP.NET框架的UserControl用户控件类，同时又作为自定义用户控件的父类，提供了控件数据加载、提交等通用职责；继承这些父类的子类属于用户控件，定义在用户展现层，如EditablePageBase类的子类（如DictionaryTypeView、DictionaryView和DictionaryTypeList等）。一旦逻辑层没有守住自己的边界，分层架构模式就失去了规划清晰结构的价值。随着需求的增加，系统结构会变得越来越混乱，最终陷入无序设计的泥沼。</p>
-<h2 id="1-3-预测能力"><a href="#1-3-预测能力" class="headerlink" title="1.3　预测能力"></a>1.3　预测能力</h2><p>当我们掌握了事物发展的客观规律时，就具有了一定的对未来的预测能力。例如，我们洞察了万有引力的本质，就能够对观察到的宇宙天体建立模型，相对准确地推测出各个天体在未来一段时间的运行轨迹。然而，宇宙空间变化莫测，或许一个星球“死亡”产生的黑洞的吸噬能力，就可能导致那一片星域产生剧烈的动荡，这种动荡会传递到更远的星空，从而使天体的运行轨迹偏离我们的预测结果。毫无疑问，影响预测能力的关键要素在于变化。对变化的应对不妥，就会导致过度设计或设计不足。</p>
-<h3 id="1-3-1-过度设计"><a href="#1-3-1-过度设计" class="headerlink" title="1.3.1　过度设计"></a>1.3.1　过度设计</h3><p>设计软件系统时，变化让我们患得患失，不知道如何把握系统设计的度。若拒绝对变化做出理智的预测，系统的设计会变得僵化，一旦有新的变化发生，修改的成本会非常大；若过于看重变化产生的影响，渴望涵盖一切变化的可能，若预期的变化没有发生，我们之前为变化付出的成本就再也补偿不回来了，这就是所谓的“过度设计”。</p>
-<p>我曾经在设计一款教育行业产品时，因为考虑太多未来可能的变化，引入了不必要的抽象来保证产品的可扩展性，使得整个设计方案变得过于复杂。更加不幸的是，我所预知的变化根本不曾发生。该设计方案针对产品的UI引擎（UI engine）模块。作为驱动界面的引擎，它主要负责从界面元数据获取与界面相关的视图属性，并根据这些属性来构造界面，实现界面的可定制。产品展现的视图由诸多视图元素组合而成，这些视图元素的属性通过界面元数据进行定制。为此，我为视图元素定义了抽象的ViewElement接口，作为所有视图元素类型包括SelectView、CheckboxGroupView的抽象类型。</p>
-<p>ViewElement决定了视图元素的类型，从而确定呈现的格式；至于真正生成视图呈现代码的职责，则交给了视图元素的解析器。由于我认为视图元素的呈现除需要支持现有的JSP之外，未来可能还要支持HTML、Excel等实现元素，因此在设计解析器时，定义了ViewElementResolver接口：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ViewElementResolver</span> </span>&#123;</span><br><span class="line">   <span class="function">String <span class="title">resolve</span><span class="params">(ViewElement element)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>ViewElementResolver接口确保了解析功能的可扩展性，为了更好地满足未来功能的变化，我又引入了解析器的工厂接口ViewElementResolverFactory以及实现该接口的抽象工厂类AbstractViewElementResolverFactory：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ViewElementResolverFactory</span> </span>&#123;</span><br><span class="line">   <span class="function">ViewElementResolver <span class="title">create</span><span class="params">(String viewElementClassName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractViewElementResolverFactory</span> <span class="keyword">implements</span> </span></span><br><span class="line"><span class="class">    <span class="title">ViewElementResolverFactory</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> ViewElementResolver <span class="title">create</span><span class="params">(String viewElementClassName)</span> </span>&#123;</span><br><span class="line">      String className = generateResolverClassName(viewElementClassName);</span><br><span class="line">      <span class="comment">//通过反射创建ViewElementResolver对象</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> String <span class="title">generateResolverClassName</span><span class="params">(String viewElementClassName)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> getPrefix() + viewElementClassName + <span class="string">&quot;Resolver&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> String <span class="title">getPrefix</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JspViewElementResolverFactory</span> <span class="keyword">extends</span> <span class="title">AbstractViewElementResolverFactory</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> String <span class="title">getPrefix</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;Jsp&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>ViewElement接口可以注入ViewElementResolverFactory对象，由它来创建ViewElementResolver，由此完成视图元素的呈现，例如SelectViewElement：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SelectViewElement</span> <span class="keyword">implements</span> <span class="title">ViewElement</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> ViewElementResolver resolver;</span><br><span class="line">   <span class="keyword">private</span> ViewElementResolverFactory resolverFactory;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setViewElementResolverFactory</span><span class="params">(ViewElementResolverFactory resolverFactory)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.resolverFactory = resolverFactory;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">Render</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      resolverFactory.create(<span class="keyword">this</span>.getClass().getName()).resolve(<span class="keyword">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>整个UI引擎模块的设计如图1-4所示。</p>
-<img src="/chapter-1-of-ddde/1-4.png" class="">
-
-<p>图1-4　UI引擎模块的类图</p>
-<p>如此设计看似保证了视图元素呈现的可扩展性，也遵循了单一职责原则，却因为抽象过度而增加了方案的复杂度。扩展式设计是为不可知的未来做投资，一旦未来的变化不符合预期，就会导致过度设计。具有实证主义态度的设计理念是面对不可预测的变化时，应首先保证方案的简单性。当变化真正发生时，可以通过诸如提炼接口（extract interface）的重构手法，满足解析逻辑的扩展。方案中工厂接口与抽象工厂类的引入，根本没有贡献任何解耦与扩展的价值，反而带来了不必要的间接逻辑，让设计变得更加复杂。到产品研发的后期，我所预期的HTML和Excel呈现的需求变化实际并没有发生。</p>
-<h3 id="1-3-2-设计不足"><a href="#1-3-2-设计不足" class="headerlink" title="1.3.2　设计不足"></a>1.3.2　设计不足</h3><p>要应对需求变化，终归需要一些设计技巧。很多时候，因为设计人员的技能不足，没有明确识别出未来确认会发生的变化，或者对需求变化发展的方向缺乏前瞻，所以导致整个设计变得过于僵化，修改的成本太高，从而走向了过度设计的另外一个极端，我将这一问题称为“设计不足”。</p>
-<p>设计不足的方案只顾眼前，对于一定要发生的变化视而不见，这不仅导致方案缺乏可扩展性，甚至有可能出现技术实现方向的错误。这样的设计不是恰如其分的简单设计，而是对于糟糕质量视而不见的简陋处置，是为了应付进度蒙混过关用的临时花招，表面看来满足了进度要求，但在未来偿还欠下的债务时，需要付出几倍的成本。如果整个软件系统都由这样设计不足的方案构成，那么未来任何一次需求的变更或增加，都可能成为压垮系统的最后一根稻草。</p>
-<p>我曾负责一个基于大数据的数据平台的设计与开发，该数据平台需要实时采集来自某行业各个系统各种协议的业务数据，并按照主题区的数据模型标准来治理数据。当时，我对整个行业的数据标准与规范尚不了解，对于数据平台未来的产品规划也缺乏充分认识。迫于进度压力，我选择了采用快速而简洁的硬编码方式实现从原始数据到主题区模型对象的转换，这一设计让我们能够在规定的进度周期满足同时应对多家客户治理数据的要求。</p>
-<p>然而，作为一款数据平台产品，在该行业内进行广泛推广时，随着面向的客户越来越多，需要采集数据的上游系统也变得越来越多。此时，回首之前的方案设计，不由后悔不迭：方案的简陋导致了开发质量的低下和生产力的降低。此时的主题区划分已经趋于稳定，虽然需要支持的客户和上游系统越来越多，但要治理的数据所属的主题仍然在已有主题区范围之内，换言之，原始数据的协议是变化的，主题区的范围却相对稳定。通过对主题区模型与数据治理逻辑进行共性与可变性分析[7]，我识别出了原始数据消息的共性特征，建立了抽象的消息模型，又为主题区模型抽象出一套树形结构的核心主题模型，并基于此核心模型建立新的主题区模型。在确保主题区模型不变的情况下，找到数据治理逻辑中不变的转换过程与规则，将不同上游系统遵循不同数据协议而带来的变化转移到一个定义映射关系的样式配置文件中，形成对变化的隔离，实现了一个相对稳定的数据治理方案，如图1-5所示。</p>
-<img src="/chapter-1-of-ddde/1-5.png" class="">
-
-<p>图1-5　隔离变化的设计方案</p>
-<p>采用新方案之后，如果需要采集一个不超出主题区范围的全新系统，只需定义一个样式映射文件，并付出极少量定制开发的成本，就能以最快的迭代进度满足新的数据治理需求。正因为改进了旧有方案，团队才能够在不断涌入新需求的功能压力下，基本满足产品研发的进度要求。只可惜，之前的数据治理功能已经被多家客户广泛运用到生产环境中，对应的数据交换逻辑也依托于旧的主题区模型，使得整个数据平台产品在近两年的开发周期中一直处于新旧两套主题区模型共存的尴尬局面。由于一部分数据治理和数据交换逻辑要对接两套主题区模型，因此，迫于无奈，也必须实现两套数据治理和数据交换逻辑，无谓地增加了团队的工作量。由于改造旧模型的工作量极为繁重，团队一直未能获得喘息的机会对模型以新汰旧，因此这一尴尬局面还会在一段时间内继续维持下去。这正是设计不足在应对变化时带来的负面影响。</p>
-<p>我们无法预知未来，自然就无法预测未来可能发生的变化，这就带来了软件系统的不可预测性。软件设计者不可能对变化听之任之，却又因为它的不可预测性而无可适从。在软件系统不断演化的过程中，面对变化，我们需要尽可能地保证方案的平衡：既要避免因为设计不足使得变化对系统产生根本影响，又要防止因为满足可扩展性让方案变得格外复杂，最后背上过度设计的坏名声。故而，变化之难，难在如何在设计不足与过度设计之间取得平衡。</p>
-<p><strong>说明：</strong>本章为《解构领域驱动设计》第一章。若希望购买本书，请点击如下链接：</p>
-<p><a href="https://item.jd.com/13378760.html">京东图书</a></p>
-<p><a href="http://product.dangdang.com/684576584.html">当当图书</a></p>
-<p><a href="https://www.epubit.com/bookDetails?id=UB77d68d84212a6">异步社区</a></p>
-]]></content>
-      <categories>
-        <category>Writing</category>
-      </categories>
-      <tags>
-        <tag>DDD</tag>
-        <tag>Architecture</tag>
       </tags>
   </entry>
 </search>
