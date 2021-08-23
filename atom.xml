@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-08-10T06:42:21.122Z</updated>
+  <updated>2021-08-23T03:06:40.096Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《解构领域驱动设计》第一章</title>
+    <link href="http://zhangyi.xyz/chapter-1-of-ddde/"/>
+    <id>http://zhangyi.xyz/chapter-1-of-ddde/</id>
+    <published>2021-08-23T02:15:02.000Z</published>
+    <updated>2021-08-23T03:06:40.096Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;计算机编程的本质就是控制复杂度。&lt;/p&gt;
+&lt;p&gt;——Brian Kernighan&lt;/p&gt;
+&lt;p&gt;复杂的事物中蕴含着无穷的变化，让人既沉迷其美，又深恐自己无法掌控。我们每日每时对软件的构建就在与复杂的斗争中不断前行。软件系统的复杂度让我觉得设计有趣，因为每次发现不同的问题，都会有一种让人耳目一新的滋味油然而生，仿佛开启了新的旅程，看到了不同的风景。同时，软件系统的复杂度又让我觉得设计无趣，因为要探索的空间实在太辽阔，一旦视野被风景所惑，就会迷失前进的方向，感到复杂难以掌控，从而失去构建高质量系统的信心。&lt;/p&gt;
+&lt;p&gt;那么，什么是复杂系统？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/categories/Writing/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+  </entry>
   
   <entry>
     <title>ZenUML与服务驱动设计</title>
@@ -521,32 +546,6 @@
     
     
       <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《解构领域驱动设计》目录</title>
-    <link href="http://zhangyi.xyz/toc-of-ddd-explained/"/>
-    <id>http://zhangyi.xyz/toc-of-ddd-explained/</id>
-    <published>2020-09-03T11:56:26.000Z</published>
-    <updated>2020-09-03T13:31:02.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;《解构领域驱动设计》目录&quot;&gt;&lt;a href=&quot;#《解构领域驱动设计》目录&quot; class=&quot;headerlink&quot; title=&quot;《解构领域驱动设计》目录&quot;&gt;&lt;/a&gt;《解构领域驱动设计》目录&lt;/h2&gt;&lt;p&gt;本书经过近4年的准备和写作，基于GitChat《领域驱动设计实践》战略篇和战术篇的内容，我又历经一年的时间来打磨本书，相信本书呈现给读者的内容已经达到我目前的极限了。书名暂定为《解构领域驱动设计（Domain-Driven Design Explained）》，说明了我的“野心”也罢，“宏图”也罢，就是要全方位的解构领域驱动设计这一套方法体系。&lt;/p&gt;
-&lt;p&gt;一些订阅了我的GitChat课程的同学可能会问，这本即将出版的纸质书与GitChat课程有什么差别呢？实际上，基于线上更新的写作方式，进度压力颇大，很多内容缺乏系统的梳理，在写作时，难免会有前后矛盾、重复之处，有的内容待写在后面会有更深刻的理解，因为时间关系，也就没有来得及调整。当然，这些内容差别都是细节差异，最主要的差别还是因为我重新梳理了DDD的体系，提出了所谓的“领域驱动设计统一过程（Domain-Driven Design Unified Process）”。&lt;/p&gt;
-&lt;p&gt;总结出的这个过程对我而言意义重大，正是因为有此过程，我整本书的结构才明晰起来，有了一个前后呼应且成体系的目录结构，这个过程还弥补了我一直认为非常重要的“需求分析”的知识，因为我一直认为要做到好的领域驱动设计，必须要有好的需求分析为基础。于是，针对这套统一过程，我对GitChat课程的内容做了全方位的手术，如果仅仅是对比文字，你会发现纸质版的内容很少与GitChat课程内容重复，并非我对内容做了彻底改写，而是对内容做了修改、修饰和调整，改变了原来内容相对粗糙的一面，这也是为何从GitChat课程到纸质书的完成，居然花了我一年时间的缘故。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Book" scheme="http://zhangyi.xyz/categories/Book/"/>
-    
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
-    
-      <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
-    
-      <category term="Book" scheme="http://zhangyi.xyz/tags/Book/"/>
     
   </entry>
   
