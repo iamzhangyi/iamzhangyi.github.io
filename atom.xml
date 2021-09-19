@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-09-08T08:53:04.230Z</updated>
+  <updated>2021-09-19T04:23:01.814Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>领域驱动设计对依赖的控制</title>
+    <link href="http://zhangyi.xyz/control-dependencies-in-DDD/"/>
+    <id>http://zhangyi.xyz/control-dependencies-in-DDD/</id>
+    <published>2021-09-19T02:22:00.000Z</published>
+    <updated>2021-09-19T04:23:01.814Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我在《解构领域驱动设计》一书中分析了软件复杂度的成因，一曰规模，一曰结构，还有一个则是变化的影响。规模与结构存在一定的矛盾关系：解决规模复杂度的有效方法为“分而治之”，一旦系统被分解为多个更为细小的软件元素，结构复杂度就会增加。结构与变化之间存在互相影响的关系：如果结构控制不合理，变化带来的影响就会更强，使得系统更加复杂。&lt;/p&gt;
+&lt;p&gt;认真分析结构和变化对系统复杂度的影响，一个关键是&lt;strong&gt;对依赖的控制&lt;/strong&gt;。当我们对系统进行分解时，&lt;strong&gt;依赖&lt;/strong&gt;会成为我们无法绕开的问题，它是技术债的重要组成部分，是不可避免的。如果没有控制好依赖，系统的架构就会随着时间的推移不可避免地腐化下去，如人不可避免的老去。&lt;/p&gt;
+&lt;p&gt;要合理控制依赖，只有两个可行的思路：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从多到少：减少依赖而非彻底消除依赖，其核心原理是做好职责的合理分配&lt;/li&gt;
+&lt;li&gt;从强到弱：如果依赖不可避免，则要想办法降低依赖，其核心原理是封装与抽象&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="DDDD" scheme="http://zhangyi.xyz/categories/DDDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Architecture" scheme="http://zhangyi.xyz/tags/Architecture/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
   
   <entry>
     <title>《解构领域驱动设计》第二章</title>
@@ -528,30 +558,6 @@
     
     
       <category term="DDD, Writing" scheme="http://zhangyi.xyz/tags/DDD-Writing/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计一个小接口展开的讨论</title>
-    <link href="http://zhangyi.xyz/discuss-about-interface-design/"/>
-    <id>http://zhangyi.xyz/discuss-about-interface-design/</id>
-    <published>2020-12-03T08:44:59.000Z</published>
-    <updated>2020-12-03T08:56:24.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;蔡了戴着耳机一边哼着歌一边晃着头沉浸在自己的音乐世界里。8点45分，距离早会还有半个多小时，放松一下，抽空自娱自乐！&lt;/p&gt;
-&lt;p&gt;“蔡了！”办公室传来中气十足的呼唤声，似乎整个写字楼都回荡着蔡了的名字。&lt;/p&gt;
-&lt;p&gt;“哎，明明就只隔几个工位，还要吼得整栋楼都听得到，不明真相的，还以为我又犯什么错了呢！”蔡了一边腹诽着，一边回应着“来了来了”，丢下耳机就向马大叔的工位跑去——没办法，头儿的呼唤，怎敢不从？&lt;/p&gt;
-&lt;p&gt;“马大叔！什么事啊？不会我的代码又没写好吧？”蔡了看着电脑屏幕的光线投射在马丁花那张老脸上，阴晴不明，心里一紧，说话也变得小心翼翼起来。&lt;/p&gt;
-&lt;p&gt;“没事就不能叫你？”马丁花脸一板，像指挥军队的将军一般将手一挥，说到：“过来，过来！我今早一来就pull了代码，正好看到你提交的代码。”&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="蔡了成长记" scheme="http://zhangyi.xyz/categories/%E8%94%A1%E4%BA%86%E6%88%90%E9%95%BF%E8%AE%B0/"/>
-    
-    
-      <category term="Design, OO" scheme="http://zhangyi.xyz/tags/Design-OO/"/>
     
   </entry>
   

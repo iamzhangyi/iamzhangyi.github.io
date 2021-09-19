@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhangyi.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="我在《解构领域驱动设计》一书中分析了软件复杂度的成因，一曰规模，一曰结构，还有一个则是变化的影响。规模与结构存在一定的矛盾关系：解决规模复杂度的有效方法为“分而治之”，一旦系统被分解为多个更为细小的软件元素，结构复杂度就会增加。结构与变化之间存在互相影响的关系：如果结构控制不合理，变化带来的影响就会更强，使得系统更加复杂。 认真分析结构和变化对系统复杂度的影响，一个关键是对依赖的控制。当我们对系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="领域驱动设计对依赖的控制">
+<meta property="og:url" content="http://zhangyi.xyz/control-dependencies-in-DDD/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="我在《解构领域驱动设计》一书中分析了软件复杂度的成因，一曰规模，一曰结构，还有一个则是变化的影响。规模与结构存在一定的矛盾关系：解决规模复杂度的有效方法为“分而治之”，一旦系统被分解为多个更为细小的软件元素，结构复杂度就会增加。结构与变化之间存在互相影响的关系：如果结构控制不合理，变化带来的影响就会更强，使得系统更加复杂。 认真分析结构和变化对系统复杂度的影响，一个关键是对依赖的控制。当我们对系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-19T02:22:00.000Z">
+<meta property="article:modified_time" content="2021-09-19T04:23:01.814Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Design">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://zhangyi.xyz/control-dependencies-in-DDD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>领域驱动设计对依赖的控制 | 张逸说</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">张逸说</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">出口成张，逸派胡言</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/control-dependencies-in-DDD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          领域驱动设计对依赖的控制
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-19 10:22:00 / 修改时间：12:23:01" itemprop="dateCreated datePublished" datetime="2021-09-19T10:22:00+08:00">2021-09-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDDD/" itemprop="url" rel="index"><span itemprop="name">DDDD</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/control-dependencies-in-DDD/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/control-dependencies-in-DDD/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我在《解构领域驱动设计》一书中分析了软件复杂度的成因，一曰规模，一曰结构，还有一个则是变化的影响。规模与结构存在一定的矛盾关系：解决规模复杂度的有效方法为“分而治之”，一旦系统被分解为多个更为细小的软件元素，结构复杂度就会增加。结构与变化之间存在互相影响的关系：如果结构控制不合理，变化带来的影响就会更强，使得系统更加复杂。</p>
+<p>认真分析结构和变化对系统复杂度的影响，一个关键是<strong>对依赖的控制</strong>。当我们对系统进行分解时，<strong>依赖</strong>会成为我们无法绕开的问题，它是技术债的重要组成部分，是不可避免的。如果没有控制好依赖，系统的架构就会随着时间的推移不可避免地腐化下去，如人不可避免的老去。</p>
+<p>要合理控制依赖，只有两个可行的思路：</p>
+<ul>
+<li>从多到少：减少依赖而非彻底消除依赖，其核心原理是做好职责的合理分配</li>
+<li>从强到弱：如果依赖不可避免，则要想办法降低依赖，其核心原理是封装与抽象</li>
+</ul>
+<span id="more"></span>
+
+
+
+<h2 id="减少依赖数量"><a href="#减少依赖数量" class="headerlink" title="减少依赖数量"></a>减少依赖数量</h2><p>领域驱动设计通过引入限界上下文和聚合，在战略层次和战术层次分别提供了减少依赖的控制手法。</p>
+<h3 id="限界上下文"><a href="#限界上下文" class="headerlink" title="限界上下文"></a>限界上下文</h3><p>我在《解构领域驱动设计》书中总结了限界上下文的两个特征：</p>
+<ul>
+<li>限界上下文是领域模型的知识语境</li>
+<li>限界上下文是业务能力的纵向切分</li>
+</ul>
+<p>此两大特征既充分阐释了限界上下文的本质，又提供了减少依赖的思路。</p>
+<h4 id="领域模型的知识语境"><a href="#领域模型的知识语境" class="headerlink" title="领域模型的知识语境"></a>领域模型的知识语境</h4><p>限界上下文提供了领域概念的知识边界，在特定的<strong>上下文</strong>之下，领域概念体现的是一种局部的全貌。所谓“局部的全貌”听起来颇为矛盾，然而就观察者而言，在你所处的“上下文”边界内，由于你并不关心其他上下文的知识，因而你看到的虽然只是“局部”，却可以理解为这是你需要的“全貌”。</p>
+<p>譬如在一家软件企业，假设一个员工作为我们要了解的全貌，在不同部门看到的却只是各自的局部：</p>
+<ul>
+<li>人力资源部门：教育背景、现有角色、岗位、职务、考勤</li>
+<li>财务部门：薪资、社保</li>
+<li>项目管理部门：技能水平、所属团队、团队角色</li>
+</ul>
+<p>以财务部门为例，我并不需要知道该员工技能水平如何，也不需要知道他在哪一个团队，只需要知道该员工的薪资构成，然后按照企业规章核算工资并按时发放即可。员工薪资与社保等信息就在此时构成了在财务上下文下财务人员关心的全貌。</p>
+<p>这一设计的好处在于引入了领域知识的控制边界，倘若分配合理，就能减少软件元素之间不必要的依赖关系。这也是限界上下文与模块之间的不同之处。</p>
+<p>如果以业务模块对系统进行分解，一种直观的设计方案是单独分解出一个员工模块，然后将该员工的所有属性与行为（构成了领域知识）都分配给员工模块。当财务部门进行工资核算与支付时，需要从员工模块中获取它与薪资、社保相关的领域知识，带来了财务模块与员工模块之间的依赖关系。</p>
+<p>限界上下文则不同，由于员工与财务相关的领域知识都根据<strong>上下文</strong>分配给了需要关注这些领域知识的财务上下文，在核算工资与支付工资时，财务上下文就无需求助于员工上下文了。<strong>这是让依赖减少的最佳模式。</strong></p>
+<h4 id="业务能力的纵向切分"><a href="#业务能力的纵向切分" class="headerlink" title="业务能力的纵向切分"></a>业务能力的纵向切分</h4><p>限界上下文与模块之间的不同之处，还在于限界上下文不止限于封装了领域知识。它是对业务能力的纵向切分，如此切分出来的每一块，都是相对独立而完整的。准确的说法，就是先根据领域维度对整个系统进行纵向切分，然后再到限界上下文内部，根据技术维度对其进行横向切分，将限界上下文的领域层独立出来。</p>
+<p>模块的划分不是这样，业务模块和基础功能模块泾渭分明。业务模块自身不具备支持业务能力的功能，如访问数据库、网络通信或消息队列，于是引入了业务模块与其他基础功能模块之间的依赖。在限界上下文中，这样的依赖（领域与基础设施之间的依赖）虽然依旧存在，但由于系统的划分边界是整个限界上下文，依赖发生在限界上下文内部，从架构层次看，相当于消除了依赖，变相地减少了依赖。</p>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p>聚合在模型粒度与依赖之间引入了平衡。遵循对象建模的思维，建议为每一个领域概念都定义一个领域模型类，哪怕是email、quantity、address这样细小的基础概念，也当如此。Martin Fowler在重构中也提到，编码时要注意规避“基本类型偏执”坏味道。不用基本类型说明这些细小的领域概念，自然就需要定义对应的模型类了。</p>
+<p>一旦为非常细小的领域概念定义了领域模型类，粒度就变得非常小，整个领域模型的类数量就会增加。增加了类的数量，必然也就会增加依赖。这时，聚合引入的边界就起到了很好的控制作用，它要求：</p>
+<ul>
+<li>聚合内的领域模型由实体和值对象组成，形成一棵树</li>
+<li>一棵树只有一个根，只有实体才能作为根</li>
+<li>根实体作为聚合的唯一出口和唯一入口</li>
+<li>跨聚合之间只能通过根实体建立关系</li>
+</ul>
+<p>通过边界的控制，保障根实体之间才能建立关联关系，就去掉了许多非根元素跨聚合之间的关系，减少了领域模型类之间的依赖。根实体体现了对内部领域模型的封装，由它代表整个聚合内的所有领域模型，站在聚合边界之外，就可以认为领域模型类的数量减少了，调用者也无需关心聚合内部的其他实体和值对象。</p>
+<p>限界上下文通过知识语境和业务能力形成的边界控制，减少了战略层面（也就是架构层面）软件元素之间的依赖关系；聚合则通过规定的设计原则与设计约束形成的边界控制，减少了战术层面领域模型类之间的依赖关系。</p>
+<p>正因为如此，我才在《解构领域驱动设计》书中指出：</p>
+<ul>
+<li>限界上下文是架构映射阶段基本的架构单元</li>
+<li>聚合是领域建模阶段基本的设计单元</li>
+</ul>
+<p>要做好领域驱动设计，在架构层面，限界上下文是不可或缺的，在设计层面，聚合才是不可或缺的。</p>
+<h2 id="降低依赖强度"><a href="#降低依赖强度" class="headerlink" title="降低依赖强度"></a>降低依赖强度</h2><p>当依赖不可避免时，需要将强依赖降低为弱依赖，也即所谓的“降低耦合度”。限界上下文作为基本的架构单元，要降低依赖强度，实则就是合理地管理限界上下文之间的协作关系，这是领域驱动设计的<strong>上下文映射</strong>模式所要处理的。防腐层（ACL）与开放主机服务（OHS）都降低了下游对上游的依赖，而发布语言（PL）则作为开放主机模式的补充，引入了对领域模型的封装。</p>
+<p>上下文映射模式降低了限界上下文之间的耦合，强调了对内部领域模型的封装；对于限界上下文内部，则通过分层架构，凸显了领域模型的核心地位，利用层次（Layer）来分离关注点，并适当引入封装和抽象，解除了外部资源对领域模型，以及领域模型对外部资源的依赖。可概括为：</p>
+<ul>
+<li>封装：引入应用服务，隐藏领域模型，包括领域模型中的聚合与领域服务，并保障应用层的轻和薄，严防死守，避免将领域知识泄露出去</li>
+<li>抽象：引入资源库的接口，隔离对数据库的访问，且将资源库接口放到领域层，然后通过依赖注入实现依赖关系的反转</li>
+</ul>
+<p>在《解构领域驱动设计》书中，我通过引入<strong>菱形对称架构</strong>将上述上下文映射模式、分层架构模式，以及应用服务与抽象资源库等内容全部囊括其中。开放主机服务属于北向网关，其中也涵盖了应用服务；防腐层属于南向网关，其中也涵盖了资源库，同时扩大了防腐层的外延，将所有对外部资源的访问都视为南向网关。至于发布语言，则介于外部网关层与内部领域层之间，就其本质而言，仍然属于外部网关层的一部分。</p>
+<h2 id="自治性"><a href="#自治性" class="headerlink" title="自治性"></a>自治性</h2><p>减少依赖数量，降低依赖强度，一言以蔽之，其实就是我们耳熟能详的六字法则“高内聚低耦合”。不管是架构原则还是设计原则，都是知易行难，知道“高内聚低耦合”的原则，并不能确保你做出符合该原则的设计。领域驱动设计通过限界上下文与聚合的核心模式，提供了相对可行的方法。若要解密领域驱动设计，此二者应为解密的钥匙。</p>
+<p>为了更好地解密二者，我总结了它们共同的特性，将其名为“自治性”。要设计好限界上下文与聚合，就需要确保它们的自治性。</p>
+<h3 id="自治的限界上下文"><a href="#自治的限界上下文" class="headerlink" title="自治的限界上下文"></a>自治的限界上下文</h3><p>自治的限界上下文需要具备如下四个特征：</p>
+<ul>
+<li>最小完备：强调了每个限界上下文拥有的领域知识是最小完备的，它体现了限界上下文是领域模型的知识语境这一特征。</li>
+<li>自我履行：强调了限界上下文在拥有了合理领域知识后，能够拥有一定智能，聪明地应对外界的请求，判断哪些该自己做，哪些该求助于别的限界上下文；自我履行的范围不仅限于领域知识，故而它体现了限界上下文是业务能力的纵向切分这一特征。</li>
+<li>稳定空间：就限界上下文内部的领域模型而言，我们希望它是稳定的；在不考虑业务需求自身变化的情况下，要确保它的稳定性，就是要尽可能隔离它对外界的引用，将外界变化产生的影响降到最低；这就需要引入“抽象”，隔离外界，也就是菱形对称架构南向网关要做的事情。</li>
+<li>独立进化：只要业务需求发生了变化，限界上下文内部的领域模型必然发生调整，但我们希望这种调整对于外界而言，可以变得静悄悄，虽然版本发生了进化，外界却可以无感知；其关键在于引入“封装”，不要将领域模型随便暴露在外，这实际上就是菱形对称架构北向网关要做的事情。</li>
+</ul>
+<p>最小完备和自我履行结合起来，可以合理地减少依赖数量；稳定空间与独立进化配合起来，可以有效地降低依赖强度。显然，限界上下文的自治性满足了“高内聚低耦合”的架构原则。</p>
+<h3 id="自治的聚合"><a href="#自治的聚合" class="headerlink" title="自治的聚合"></a>自治的聚合</h3><p>自治的聚合需要具备如下特征：</p>
+<ul>
+<li>完整性：一个设计合理的聚合应该体现为最小单元的完整领域概念</li>
+<li>独立性：每个自治的聚合都是相对独立的，它的生命周期也是独立的</li>
+<li>不变量：聚合内部要维持各个对象之间关系的不变量，从而满足业务规则的约束</li>
+<li>一致性：保持聚合内部各个对象的数据一致性，以及生命周期的一致性</li>
+</ul>
+<p>完整性、不变量与一致性体现了聚合之“合”的一面，它意味着合入到聚合边界的模型对象是“高内聚”的；独立性体现了聚合之“分”的一面，意味着不要将生命周期不一致、数据不一致的模型对象放在同一个聚合里，聚合边界具有一种排斥能力，要将“异质体”推出去，通过聚合根实体来维持彼此之间的关系，保证聚合之间是“低耦合”的。</p>
+<p><strong>说明：</strong>限界上下文与聚合的自治性原则继承和延续了诸多促进优良设计的软件原则，是我个人对这些设计原则的总结和提炼，虽不能说是我的全新创造，但就其表现形式与内容而言，确实由我最早提出，特此声明。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/control-dependencies-in-DDD/" title="领域驱动设计对依赖的控制">http://zhangyi.xyz/control-dependencies-in-DDD/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DDD/" rel="tag"># DDD</a>
+              <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+              <a href="/tags/Design/" rel="tag"># Design</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/chapter-2-of-ddde/" rel="prev" title="《解构领域驱动设计》第二章">
+      <i class="fa fa-chevron-left"></i> 《解构领域驱动设计》第二章
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%8F%E5%B0%91%E4%BE%9D%E8%B5%96%E6%95%B0%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">减少依赖数量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.1.</span> <span class="nav-text">限界上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%86%E5%9F%9F%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%9F%A5%E8%AF%86%E8%AF%AD%E5%A2%83"><span class="nav-number">1.1.1.</span> <span class="nav-text">领域模型的知识语境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E7%9A%84%E7%BA%B5%E5%90%91%E5%88%87%E5%88%86"><span class="nav-number">1.1.2.</span> <span class="nav-text">业务能力的纵向切分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88"><span class="nav-number">1.2.</span> <span class="nav-text">聚合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%8D%E4%BD%8E%E4%BE%9D%E8%B5%96%E5%BC%BA%E5%BA%A6"><span class="nav-number">2.</span> <span class="nav-text">降低依赖强度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%B2%BB%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">自治性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B2%BB%E7%9A%84%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">3.1.</span> <span class="nav-text">自治的限界上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B2%BB%E7%9A%84%E8%81%9A%E5%90%88"><span class="nav-number">3.2.</span> <span class="nav-text">自治的聚合</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">张逸</p>
+  <div class="site-description" itemprop="description">张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agiledon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agiledon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:brucezhang@tom.com" title="E-Mail → mailto:brucezhang@tom.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">396k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:01</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'wPVDNiDMLe1I6wcQzysBwx1G-gzGzoHsz',
+      appKey     : 'xSeNJmSjwgSFbu704F1RNHze',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
