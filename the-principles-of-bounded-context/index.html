@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"zhangyi.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在获得了限界上下文之后，还应该遵循限界上下文的验证原则对边界的合理性进行验证。 正交原则正交性要求：“如果两个或更多事物中的一个发生变化，不会影响其他事物，这些事物就是正交的。”变化的影响主要体现在变化的传递性，即一个事物的变化会传递到另一个事物引起它的变化，但这个变化影响并不包含彼此正交的点。例如，限界上下文之间存在调用关系，当被调用的限界上下文公开的接口发生变化，自然会影响调用方。这一影响是合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="验证限界上下文的原则">
+<meta property="og:url" content="http://zhangyi.xyz/the-principles-of-bounded-context/index.html">
+<meta property="og:site_name" content="张逸说">
+<meta property="og:description" content="在获得了限界上下文之后，还应该遵循限界上下文的验证原则对边界的合理性进行验证。 正交原则正交性要求：“如果两个或更多事物中的一个发生变化，不会影响其他事物，这些事物就是正交的。”变化的影响主要体现在变化的传递性，即一个事物的变化会传递到另一个事物引起它的变化，但这个变化影响并不包含彼此正交的点。例如，限界上下文之间存在调用关系，当被调用的限界上下文公开的接口发生变化，自然会影响调用方。这一影响是合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://zhangyi.xyz/the-principles-of-bounded-context/zhengjiao.png">
+<meta property="og:image" content="http://zhangyi.xyz/the-principles-of-bounded-context/cover.jpg">
+<meta property="article:published_time" content="2021-10-16T13:12:51.000Z">
+<meta property="article:modified_time" content="2021-10-16T13:20:24.709Z">
+<meta property="article:author" content="张逸">
+<meta property="article:tag" content="DDD">
+<meta property="article:tag" content="Writing">
+<meta property="article:tag" content="Design">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://zhangyi.xyz/the-principles-of-bounded-context/zhengjiao.png">
+
+<link rel="canonical" href="http://zhangyi.xyz/the-principles-of-bounded-context/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>验证限界上下文的原则 | 张逸说</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">张逸说</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">出口成张，逸派胡言</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://zhangyi.xyz/the-principles-of-bounded-context/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="张逸">
+      <meta itemprop="description" content="张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="张逸说">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          验证限界上下文的原则
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-16 21:12:51 / 修改时间：21:20:24" itemprop="dateCreated datePublished" datetime="2021-10-16T21:12:51+08:00">2021-10-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/the-principles-of-bounded-context/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/the-principles-of-bounded-context/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在获得了限界上下文之后，还应该遵循限界上下文的验证原则对边界的合理性进行验证。</p>
+<h3 id="正交原则"><a href="#正交原则" class="headerlink" title="正交原则"></a>正交原则</h3><p>正交性要求：“如果两个或更多事物中的一个发生变化，不会影响其他事物，这些事物就是正交的。”变化的影响主要体现在变化的传递性，即一个事物的变化会传递到另一个事物引起它的变化，但这个变化影响并不包含彼此正交的点。例如，限界上下文之间存在调用关系，当被调用的限界上下文公开的接口发生变化，自然会影响调用方。这一影响是合理的，也是软件设计很难避免的依赖。故而限界上下文存在正交性，指的是各自边界封装的业务知识不存在变化的传递性。</p>
+<span id="more"></span>
+
+
+
+<p>要破除变化的传递性，就要保证每个限界上下文对外提供的业务能力不能出现雷同，这就需要保证为完成该业务能力需要的领域知识不能出现交叉；要让领域知识不能出现交叉，就要保证封装了领域知识的领域模型不能出现重叠。业务能力、领域知识、领域模型，三者之间存在层次的递进关系，无论是自顶向下去推演，还是自底向上来概括，都不允许同一层次之间存在非正交的事物，如图所示。</p>
+<img src="/the-principles-of-bounded-context/zhengjiao.png" class="">
+
+<p>领域模型违背了正交性，意味着各自定义的领域模型对象代表的领域概念出现了重复。注意，限界上下文展现的领域概念具有知识语境，不能因为领域概念名称相同就认为领域概念出现了重复。判断领域模型的重复性，必须将限界上下文作为修饰，将二者组合起来共同评判。例如，在供应链系统中，商品限界上下文、运输限界上下文与库存限界上下文的领域模型都定义了Product类，但结合各自的知识语境，这一领域模型类实际代表了不同的领域概念；在保险系统，车险限界上下文、寿险限界上下文的领域模型都定义了Customer类，关注的客户属性也是近似的，属于相同的领域概念，导致领域模型的重复。</p>
+<p>领域知识违背了正交性，代表了业务问题的解决方案出现了重复，通常包含了领域行为与业务规则，例如在电商系统中，运费计算的规则不能同时存在于多个限界上下文，如果在订单上下文和配送上下文都各自实现了运费计算的逻辑，就会使得这一重复蔓延到系统各处，一旦运费计算规则发生变化，就需要同时修改多个限界上下文，修改时，如果遗漏了某个重复的实现，还会引入潜在的缺陷。</p>
+<p>业务能力违背了正交性，意味着业务服务出现的重复。例如，在一个物流系统中，地图上下文提供了地理位置定位的业务服务，结果在导航上下文又定义了这一服务。之所以出现这一结果，可能是因为各个领域特性团队沟通不畅。</p>
+<h3 id="单一抽象层次原则"><a href="#单一抽象层次原则" class="headerlink" title="单一抽象层次原则"></a>单一抽象层次原则</h3><p>单一抽象层次原则（Single Level of Abstraction Principle，SLAP）来自Kent Beck的编码实践，他在组合方法（Composed Method）模式中要求：“保证一个方法中的所有操作都在同一个抽象层次”。不过，这一原则却是由Gleann Vanderburg在理解了这一概念之后提炼出来的。识别限界上下文时，归纳业务知识的过程就是抽象的过程，限界上下文的名称代表一个抽象的概念，因此，我们可以引入该原则作为限界上下文的验证原则。<br>要理解单一抽象层次原则，需要先了解什么是概念的抽象层次。</p>
+<p>抽象这个词的拉丁文为abstractio，原意为排除、抽出。中文对这个词语的翻译也很巧妙，顾名思义，可以理解为抽出具体形象的东西。例如，人是一个抽象的概念，一个具体的人有性别、年龄、身高、相貌、社会关系等具体特征，而抽象的人就是不包含这些具体特征的一个概念。抽象概念指代一类事物，因此，抽象实际上并非真正抽出这些具体特征，而是对一类具有共同特征的事物进行归纳，从而抹掉具体类型之间的差异。</p>
+<p>抽象层次与概念的内涵有关，概念的内涵即事物的特征。内涵越小，意味着抽象的特征越少，抽象的层次就越高，外延也越大，反之亦然。例如，男人和女人有性别特征的具体值，人抽象了性别特征，使得该概念的内涵要少于男人或女人，而外延的范围却更大，抽象层次也就更高。同理，生物的概念层次要高于人，物质的概念层次又要高于生物。</p>
+<p>违背了单一抽象层次原则的限界上下文会导致概念层次的混乱。一个高抽象层次的概念由于内涵更小，使得它的外延更大，就有可能包含低抽象层次的概念，使得位于不同抽象层次的限界上下文存在概念上的包含关系，这实际上也违背了正交原则。例如，在一个集装箱多式联运系统中，商务上下文与合同上下文就不在一个抽象层次上，因为商务的概念实际涵盖了合同、客户、项目等更低抽象层次的概念；运输、堆场、货站限界上下文则遵循了单一抽象层次原则，运输上下文是对运输计划和路线的抽象，堆场上下文是对铁路运输场区概念的抽象，货站上下文则是对公路运输站点工作区域相关概念的抽象，它们关注的业务维度可能并不相同，但不影响它们的抽象层次位于同一条水平线上。</p>
+<p>抽象层次与重要程度无关，不能说提供支撑功能的限界上下文低于提供核心业务能力的限界上下文。仍然是在集装箱多式联运系统，运输、堆场以及货站等限界上下文都需要作业和作业指令，区别在于操作的作业内容不同。提炼出来的作业上下文为运输、堆场以及货站等限界上下文提供了业务功能的支撑，但它们属于同一抽象层次的限界上下文。</p>
+<h3 id="奥卡姆剃刀原理"><a href="#奥卡姆剃刀原理" class="headerlink" title="奥卡姆剃刀原理"></a>奥卡姆剃刀原理</h3><p>限界上下文作为高层的抽象机制，体现了我们在软件构建过程中对领域思考的本质，它是架构映射阶段的核心模式。因此，限界上下文的识别直接影响了领域驱动设计的架构质量。通过分解、归类、归纳到最后的验证之后，如果对识别出来的限界上下文的准确性依然心存疑虑，比较务实的做法是保证限界上下文具备一定的粗粒度。</p>
+<p>这正是奥卡姆剃刀原理的体现，即“切勿浪费较多东西去做用较少的东西同样可以做好的事情”，更文雅的说法就是“如无必要，勿增实体”。遵循该原则，意味着当我们没有寻找到必须切分限界上下文的必要证据时，就不要增加新的限界上下文。倘若觉得功能的边界不好把握分寸，可以考虑将这些模棱两可的功能放在同一个限界上下文中。待到该限界上下文变得越来越庞大，以至于一个领域特性团队无法完成交付目标；又或者违背了限界上下文的自治原则，或者质量属性要求它的边界需要再次切分时，再对该限界上下文进行分解，增加新的限界上下文。这才是设计的实证主义态度。</p>
+<hr>
+<p>本文选择我的著作《解构领域驱动设计》</p>
+<img src="/the-principles-of-bounded-context/cover.jpg" class="">
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>张逸
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhangyi.xyz/the-principles-of-bounded-context/" title="验证限界上下文的原则">http://zhangyi.xyz/the-principles-of-bounded-context/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DDD/" rel="tag"># DDD</a>
+              <a href="/tags/Writing/" rel="tag"># Writing</a>
+              <a href="/tags/Design/" rel="tag"># Design</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/control-dependencies-in-DDD/" rel="prev" title="领域驱动设计对依赖的控制">
+      <i class="fa fa-chevron-left"></i> 领域驱动设计对依赖的控制
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E4%BA%A4%E5%8E%9F%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">正交原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E6%8A%BD%E8%B1%A1%E5%B1%82%E6%AC%A1%E5%8E%9F%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">单一抽象层次原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E5%8E%9F%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">奥卡姆剃刀原理</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">张逸</p>
+  <div class="site-description" itemprop="description">张逸，架构编码实践者，微服务架构设计者，领域驱动设计布道师，大数据平台架构师。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agiledon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agiledon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:brucezhang@tom.com" title="E-Mail → mailto:brucezhang@tom.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张逸</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">398k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'wPVDNiDMLe1I6wcQzysBwx1G-gzGzoHsz',
+      appKey     : 'xSeNJmSjwgSFbu704F1RNHze',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

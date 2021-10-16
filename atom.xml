@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhangyi.xyz/"/>
-  <updated>2021-09-19T04:23:01.814Z</updated>
+  <updated>2021-10-16T13:20:24.709Z</updated>
   <id>http://zhangyi.xyz/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>验证限界上下文的原则</title>
+    <link href="http://zhangyi.xyz/the-principles-of-bounded-context/"/>
+    <id>http://zhangyi.xyz/the-principles-of-bounded-context/</id>
+    <published>2021-10-16T13:12:51.000Z</published>
+    <updated>2021-10-16T13:20:24.709Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在获得了限界上下文之后，还应该遵循限界上下文的验证原则对边界的合理性进行验证。&lt;/p&gt;
+&lt;h3 id=&quot;正交原则&quot;&gt;&lt;a href=&quot;#正交原则&quot; class=&quot;headerlink&quot; title=&quot;正交原则&quot;&gt;&lt;/a&gt;正交原则&lt;/h3&gt;&lt;p&gt;正交性要求：“如果两个或更多事物中的一个发生变化，不会影响其他事物，这些事物就是正交的。”变化的影响主要体现在变化的传递性，即一个事物的变化会传递到另一个事物引起它的变化，但这个变化影响并不包含彼此正交的点。例如，限界上下文之间存在调用关系，当被调用的限界上下文公开的接口发生变化，自然会影响调用方。这一影响是合理的，也是软件设计很难避免的依赖。故而限界上下文存在正交性，指的是各自边界封装的业务知识不存在变化的传递性。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
+    
+    
+      <category term="DDD" scheme="http://zhangyi.xyz/tags/DDD/"/>
+    
+      <category term="Writing" scheme="http://zhangyi.xyz/tags/Writing/"/>
+    
+      <category term="Design" scheme="http://zhangyi.xyz/tags/Design/"/>
+    
+  </entry>
   
   <entry>
     <title>领域驱动设计对依赖的控制</title>
@@ -538,26 +563,6 @@
     
     
       <category term="Design, OO, Design Pattern" scheme="http://zhangyi.xyz/tags/Design-OO-Design-Pattern/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《解构领域驱动设计》篇首语</title>
-    <link href="http://zhangyi.xyz/prologue-of-every-volumn-of-ddd-explained/"/>
-    <id>http://zhangyi.xyz/prologue-of-every-volumn-of-ddd-explained/</id>
-    <published>2020-12-03T15:41:38.000Z</published>
-    <updated>2020-12-03T15:47:51.000Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《解构领域驱动设计》在领域驱动设计统一过程的指导下，将该过程的全部三个阶段作为本书的三个核心篇章：全局分析、架构映射与领域建模，再辅以开篇和融合，共分为五篇二十五章，全面而完整地表达了我对领域驱动设计的全部认知与最佳实践。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="DDD" scheme="http://zhangyi.xyz/categories/DDD/"/>
-    
-    
-      <category term="DDD, Writing" scheme="http://zhangyi.xyz/tags/DDD-Writing/"/>
     
   </entry>
   
